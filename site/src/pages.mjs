@@ -16,8 +16,11 @@ export const IMAGES = {
   portrait: '/assets/img/pinchas-ratzon',
   hero: '/assets/img/hero-room',
   heroPortrait: '/assets/img/hero-room-portrait',
-  quiet: '/assets/img/quiet-band',
   quietPlans: '/assets/img/band-plans',
+  bandKey: '/assets/img/band-key',
+  bandStamp: '/assets/img/band-stamp',
+  bandChairs: '/assets/img/band-chairs',
+  bandStatement: '/assets/img/band-statement',
 };
 
 /* The hero is art-directed rather than merely responsive: the wide frame keeps
@@ -153,7 +156,10 @@ export function home() {
 </section>
 
 <section class="statement" id="statement">
-  <div class="wrap narrow">
+  <div class="statement-figure">
+    ${photo(IMAGES.bandStatement, { alt: '', w: 1920, h: 1072 })}
+  </div>
+  <div class="wrap narrow statement-inner">
     <p class="pull">עסקה במקרקעין נגמרת ברישום.<br>לא בחתימה.</p>
     <div class="statement-body">
       <p>הפער בין החתימה לרישום הוא המקום שבו נופלים תיקים — הצמדה שלא נרשמה, חריגת בנייה שהתגלתה מאוחר מדי, שומת מס שלא נלקחה בחשבון בתמחור. ${YEARS} שנות עבודה בתחום לימדו שרוב הבעיות האלה נמנעות בשלב אחד: לפני שמישהו מתחייב.</p>
@@ -171,11 +177,11 @@ export function home() {
 
 <section class="quiet">
   <div class="quiet-figure">
-    ${photo(IMAGES.quiet, { alt: '', w: 1920, h: 1084 })}
+    ${photo(IMAGES.bandKey, { alt: '', w: 1920, h: 1072 })}
   </div>
   <div class="wrap quiet-inner">
-    <p class="label">הליווי</p>
-    <p class="quiet-line">תיק אחד. עורך דין אחד.<br>מהבדיקה הראשונה ועד הרישום.</p>
+    <p class="label">אודות</p>
+    <h2 class="quiet-line">תיק אחד. עורך דין אחד.<br>מהבדיקה הראשונה ועד המפתח.</h2>
   </div>
 </section>
 
@@ -185,7 +191,6 @@ export function home() {
       ${photo(IMAGES.portrait, { alt: `${BIZ.shortName}, עורך דין מקרקעין ועיזבונות ב${BIZ.city}`, w: 980, h: 1225 })}
     </div>
     <div class="portrait-copy">
-      <p class="label">אודות</p>
       <h2>${esc(BIZ.shortName)}</h2>
       <p class="lead">עורך דין מאז ${esc(BIZ.founded)}, בעיסוק ממוקד אחד: נכסים — העסקה, המס, הרישום והעיזבון שסביבם.</p>
       <p class="portrait-note">בתיק כזה אין ״גורם מטפל נוסף״: מי שעונה לטלפון הוא מי שבודק את הנסח, מנסח את ההסכם ועומד מול הרשויות — עד שהזכויות רשומות.</p>
@@ -196,11 +201,11 @@ export function home() {
 
 <section class="quiet">
   <div class="quiet-figure">
-    ${photo(IMAGES.quietPlans, { alt: '', w: 1920, h: 1080 })}
+    ${photo(IMAGES.bandStamp, { alt: '', w: 1920, h: 1072 })}
   </div>
   <div class="wrap quiet-inner">
-    <p class="label">דרך העבודה</p>
-    <p class="quiet-line">מה שלא בודקים לפני החתימה —<br>מתגלה אחריה.</p>
+    <p class="label">השורה התחתונה</p>
+    <h2 class="quiet-line">בסוף הכול נרשם —<br>שחור על גבי לבן.</h2>
   </div>
 </section>
 
@@ -254,7 +259,7 @@ export function practiceIndex() {
   </div>
   <div class="wrap quiet-inner">
     <p class="label">אותו תיק</p>
-    <p class="quiet-line">תשריט, נסח, שומה וצו —<br>ארבעה מסמכים, לרוב תיק אחד.</p>
+    <h2 class="quiet-line">תשריט, נסח, שומה וצו —<br>ארבעה מסמכים, לרוב תיק אחד.</h2>
   </div>
 </section>
 
@@ -356,7 +361,17 @@ ${p.image ? `<figure class="page-figure">
   </div>
 </div>
 
-${faqBlock(p.faqs, { h2: `שאלות נפוצות — ${p.nav}`, label: 'שאלות נפוצות' })}
+${p.quiet ? `<section class="quiet">
+  <div class="quiet-figure">
+    ${photo(p.quiet.image, { alt: '', w: 1920, h: 1072 })}
+  </div>
+  <div class="wrap quiet-inner">
+    <p class="label">${esc(p.quiet.label)}</p>
+    <h2 class="quiet-line">${esc(p.quiet.line1)}${p.quiet.line2 ? `<br>${esc(p.quiet.line2)}` : ''}</h2>
+  </div>
+</section>
+
+` : ''}${faqBlock(p.faqs, { h2: `שאלות נפוצות — ${p.nav}`, label: 'שאלות נפוצות' })}
 
 ${closing({ h2: 'עדיף לבדוק לפני, לא לתקן אחרי', body: 'שיחה קצרה בדרך כלל מספיקה כדי להבין איפה הדברים עומדים ומה דחוף באמת.' })}`;
 
@@ -538,6 +553,16 @@ export function contact() {
     <p class="label">יצירת קשר</p>
     <h1>לשיחה</h1>
     <p class="lead">אפשר להתקשר ישירות, או להשאיר פרטים ואחזור אליכם.</p>
+  </div>
+</section>
+
+<section class="quiet">
+  <div class="quiet-figure">
+    ${photo(IMAGES.bandChairs, { alt: '', w: 1920, h: 1072 })}
+  </div>
+  <div class="wrap quiet-inner">
+    <p class="label">מתחילים</p>
+    <h2 class="quiet-line">שיחה ראשונה. שאלות, תשובות,<br>ותמונה ברורה.</h2>
   </div>
 </section>
 

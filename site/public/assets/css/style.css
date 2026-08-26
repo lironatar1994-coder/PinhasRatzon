@@ -398,20 +398,39 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .route-arrow { color: var(--on-deep-2); justify-self: center; transition: color .3s var(--ease), transform .35s var(--ease); }
 .route-list a:hover .route-arrow { color: var(--accent-lt); transform: translateX(-6px); }
 
-/* ------------------------------------------------------------ statement */
+/* ------------------------------------------------------------ statement
+   The one section that lives ON a photograph — the site's credo, set over
+   the near-black stone still life the way the canon sets its "אני מאמין".
+   One per site, and every word is measured against the rendered pixels. */
 
-.statement { padding-block: var(--gap-sec); }
+.statement {
+  position: relative; isolation: isolate; overflow: hidden;
+  background: var(--deep); color: var(--on-deep);
+  padding-block: calc(var(--gap-sec) * 1.2);
+}
+.statement-figure { position: absolute; inset: 0; z-index: 0; }
+.statement-figure img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 0% 30%;
+  filter: var(--grade);
+}
+/* A uniform veil, not a gradient — the frame is near-black everywhere and
+   the text column is centered, so the whole surface carries it. */
+.statement-figure::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: rgba(14, 12, 9, .5);
+}
+.statement-inner { position: relative; z-index: 2; }
 .pull {
   font-family: var(--display); font-weight: 600;
   font-size: clamp(1.7rem, 1.15rem + 2.4vw, 3rem);
-  line-height: 1.35; color: var(--ink); margin-block-end: 2.6rem;
+  line-height: 1.35; color: #fff; margin-block-end: 2.6rem;
 }
 .pull::before {
   content: ''; display: block; width: 5.5rem; height: 3px;
   background: var(--accent-lt); margin-block-end: 1.6rem;
 }
 .statement-body { display: grid; gap: 1.5rem; max-width: 40rem; }
-.statement-body p { color: var(--ink-2); }
+.statement-body p { color: var(--on-deep); }
 
 /* ------------------------------------------------------------ index list */
 
@@ -806,6 +825,14 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
      header, so its own z-index resolves inside the header's stacking context —
      a backdrop above 90 paints over the drawer and swallows every nav tap. */
   .nav-backdrop { position: fixed; inset: 0; background: rgba(14,12,9,.55); z-index: 85; border: 0; }
+
+  /* On phones the text spans the full frame, including the lit subject —
+     the scrims deepen so no bright pixel survives under a line. Both boosts
+     are pixel-verified at 375px. */
+  .quiet-figure::after {
+    background: linear-gradient(to left, rgba(14, 12, 9, .8) 0%, rgba(14, 12, 9, .58) 55%, rgba(14, 12, 9, .52) 100%);
+  }
+  .statement-figure::after { background: rgba(14, 12, 9, .64); }
 
   .hero { padding-block: 3.2rem 0; }
   .hero-cue { display: none; }
