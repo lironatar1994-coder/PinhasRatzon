@@ -310,11 +310,13 @@ export function page({
 <meta property="og:site_name" content="${esc(BIZ.name)}">
 <meta property="og:locale" content="he_IL">
 <meta property="og:title" content="${esc(title)}">
-<meta property="og:description" content="${esc(description)}">
+<meta property="og:description" content="${esc(description.replace(/\.\s*$/, ''))}">
 <meta property="og:url" content="${canonical}">
 <meta property="og:image" content="${url('/assets/img/og-default.jpg')}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="${esc(BIZ.name)}">
 <meta name="twitter:card" content="summary_large_image">
 
 <meta name="theme-color" content="#0E0C09">
