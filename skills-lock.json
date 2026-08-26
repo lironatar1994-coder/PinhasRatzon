@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "unlazy": {
+      "source": "Leonxlnx/unlazy",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "1868bc455df98413f6d513022172ecfce9a560760f5bfe0d66074d5a99e9d6de"
+    }
+  }
+}

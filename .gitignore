@@ -1,0 +1,21 @@
+# Build output — the server rebuilds it from source on every deploy.
+site/dist/
+
+# Raw photography and design working files (~100 MB). The frames that are
+# actually used are committed, already processed, under site/public/assets/img.
+Images/
+Images2/
+Images3/
+ratzon-law/
+kling_*.png
+
+# Tooling scratch
+node_modules/
+.impeccable/
+.agents/
+site/.unlazy/
+
+# OS
+Thumbs.db
+desktop.ini
+.DS_Store

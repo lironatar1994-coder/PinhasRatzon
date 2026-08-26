@@ -1,0 +1,789 @@
+/* ============================================================
+   עו״ד פנחס רצון — RTL. The Israeli premium-lawyer canon,
+   played straight: near-black bands, gold, cinematic photos,
+   all-Heebo with an airy light body. Craft bar: mazeh.co.il,
+   minus its defects. No card chrome, no pressure UI — the
+   restraint gates still apply.
+   Every text/background pair is verified against WCAG AA by
+   gates/verify-contrast.mjs, which parses the tokens below.
+   ============================================================ */
+
+:root {
+  /* @contrast-tokens */
+  --ink: #14110c;          /* body text on paper */
+  --ink-2: #3a352c;        /* secondary prose */
+  --muted: #655d4f;        /* meta, captions */
+  --paper: #fbfaf7;
+  --paper-2: #f3efe8;
+  --stone: #ddd5c8;        /* hairlines on light — non-text */
+  --accent: #86641f;       /* gold as TEXT on paper — 5.22:1 on --paper, 4.75:1 on --paper-2 */
+  --accent-lt: #c19b45;    /* bright gold on the deep ground, and the button fill */
+  --deep: #0e0c09;
+  --deep-2: #1a1712;
+  --on-deep: #f0ebe1;
+  --on-deep-2: #aaa295;
+
+  --line-deep: rgba(240, 235, 225, .16);   /* hairlines on dark — non-text */
+  --gold-line: rgba(193, 155, 69, .45);    /* gold hairlines — non-text */
+  --sep-deep: #74706a;                     /* the breadcrumb dash — a glyph, so it has to be SEEN.
+                                              3.97:1 on --deep, gated; deliberately quieter than
+                                              the 7.73:1 crumb links beside it. */
+
+  --wrap: 1180px;
+  --narrow: 760px;
+  --fs: 1;
+
+  /* Hebrew has no capitals and little ascender variety, so the word gap is the
+     only boundary cue the reader gets. A hair of extra word-spacing on running
+     copy — never on the display faces, which are set tight on purpose. */
+  --word-space-he: .05em;
+
+  --display: 'Heebo', 'Segoe UI', Arial, sans-serif;
+  --sans: 'Heebo', 'Segoe UI', Arial, sans-serif;
+
+  --gap-sec: clamp(3.75rem, 2rem + 5.5vw, 7rem);
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-size: calc(100% * var(--fs));
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  accent-color: var(--accent);
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 1.25rem;
+  font-weight: 300;
+  line-height: 2;
+  word-spacing: var(--word-space-he);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  caret-color: var(--accent);
+}
+
+/* The browser surfaces nobody styles still carry the design. */
+::selection { background: var(--accent-lt); color: var(--deep); }
+
+/* The scrollbar, in the world's own materials — square, warm, quiet.
+   Non-text UI: thumb vs track measures 3.1:1. */
+html { scrollbar-color: #8a8175 var(--paper-2); }
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: var(--paper-2); }
+::-webkit-scrollbar-thumb { background: #8a8175; border: 3px solid var(--paper-2); }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+h1, h2, h3, h4 {
+  font-family: var(--display);
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.22;
+  text-wrap: balance;
+}
+/* The display faces are set tight on purpose — they opt out of the body's
+   Hebrew word-spacing and nothing else. Kept as its own rule so it cannot
+   drag the heading block's other declarations onto these elements. */
+h1, h2, h3, h4, .pull, .wm-name, .cb-k, .route-q, .side-tel, .btn, .wordmark {
+  word-spacing: normal;
+}
+h1 { font-size: clamp(2.4rem, 1.2rem + 4.4vw, 4.6rem); font-weight: 700; line-height: 1.12; }
+h2 { font-size: clamp(1.8rem, 1.25rem + 2.1vw, 2.8rem); }
+h3 { font-size: 1.35rem; line-height: 1.4; }
+p { margin: 0; }
+img { max-width: 100%; height: auto; display: block; }
+/* photo() wraps every image in <picture> for the WebP source. Without this the
+   wrapper is an inline box with no dimensions, and every `.x img { height }`
+   rule below resolves against nothing. */
+picture { display: contents; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+dl, dd { margin: 0; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: .35em; text-decoration-color: var(--accent-lt); }
+
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.section-dark :focus-visible, .route :focus-visible, .closing :focus-visible,
+.site-footer :focus-visible, .site-header :focus-visible, .hero :focus-visible,
+.quiet :focus-visible, .creds-band :focus-visible, .page-hero :focus-visible {
+  outline-color: var(--accent-lt);
+}
+
+.wrap { width: min(var(--wrap), 100% - 3rem); margin-inline: auto; }
+.wrap.narrow { width: min(var(--narrow), 100% - 3rem); }
+.ic { flex: none; }
+
+.skip {
+  position: absolute; inset-inline-start: 1.5rem; inset-block-start: -6rem;
+  z-index: 200; background: var(--accent-lt); color: var(--deep);
+  padding: .9rem 1.5rem; font-weight: 600; transition: inset-block-start .2s;
+}
+.skip:focus { inset-block-start: 1.5rem; text-decoration: none; }
+
+/* ------------------------------------------------------------ shared bits */
+
+/* The gold kicker — the canon's signature. Hebrew never gets letter-spacing,
+   so the short gold rule carries the "small caps" signal instead. */
+.label {
+  display: flex; align-items: center; gap: .8rem;
+  font-size: .95rem; font-weight: 600; color: var(--accent);
+  line-height: 1.6; margin-block-end: 1.2rem;
+}
+/* The rule TRAILS the text: the kicker's first letter stays flush with the
+   heading's edge below it, and the dash hangs off the reading column's open
+   side instead of breaking its line. */
+.label::after {
+  content: ''; width: 2.4rem; height: 2px; background: var(--accent-lt); flex: none;
+}
+/* Centered kickers are flanked symmetrically instead. */
+.closing .label::before, .center .label::before {
+  content: ''; width: 2.4rem; height: 2px; background: var(--accent-lt); flex: none;
+}
+
+.sec-head { max-width: 42rem; margin-block-end: clamp(2.2rem, 1.4rem + 2.6vw, 3.6rem); }
+.sec-sub { color: var(--muted); font-size: 1.08rem; line-height: 1.9; margin-block-start: 1rem; }
+
+.section { padding-block: var(--gap-sec); }
+.section-alt { background: var(--paper-2); }
+.section-dark { background: var(--deep); color: var(--on-deep); }
+.section-dark h2, .section-dark h3 { color: var(--on-deep); }
+.section-dark p { color: var(--on-deep-2); }
+.section-dark .label { color: var(--accent-lt); }
+
+.lead {
+  font-size: clamp(1.15rem, 1rem + .55vw, 1.4rem);
+  font-weight: 300; line-height: 1.9; color: var(--ink-2);
+}
+
+.textlink {
+  display: inline-flex; align-items: center; gap: .6rem;
+  font-weight: 500; color: var(--accent);
+}
+.textlink .ic { transition: transform .3s var(--ease); }
+.textlink:hover .ic { transform: translateX(-5px); }
+
+/* The gold button — the canon's one loud object. The restraint gate caps it
+   at two per page and the reading order still puts it after the content. */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 56px; padding: 1rem 3rem; border: 0;
+  background: var(--accent-lt); color: var(--deep);
+  font-family: var(--sans); font-size: 1.05rem; font-weight: 600;
+  cursor: pointer; transition: filter .25s var(--ease), transform .25s var(--ease);
+}
+.btn:hover { filter: brightness(.94); text-decoration: none; transform: translateY(-1px); }
+
+/* ------------------------------------------------------------ header
+   Always the solid dark bar the vertical ships — no transparent state,
+   no scrim dependencies. */
+
+.site-header {
+  position: sticky; inset-block-start: 0; z-index: 90;
+  background: var(--deep);
+  border-block-end: 1px solid var(--gold-line);
+}
+.header-inner { display: flex; align-items: center; gap: 2rem; min-height: 88px; }
+
+.wordmark { display: flex; flex-direction: column; color: var(--on-deep); margin-inline-end: auto; line-height: 1.3; }
+.wordmark:hover { text-decoration: none; }
+.wm-name { font-family: var(--display); font-size: 1.4rem; font-weight: 600; }
+.wm-role { font-size: .8rem; font-weight: 400; color: var(--accent-lt); }
+
+.primary { display: flex; align-items: center; gap: 2.2rem; }
+.primary > ul { display: flex; align-items: center; gap: 2rem; }
+.primary a { color: var(--on-deep); font-size: 1rem; font-weight: 400; }
+.primary a:hover { text-decoration: none; color: var(--accent-lt); }
+.primary a[aria-current] { color: var(--accent-lt); }
+
+/* The phone, boxed in gold — the one element every site in this market
+   carries in the header, kept quiet: a hairline, not a siren. */
+.nav-tel {
+  font-size: 1rem; font-weight: 500; color: var(--accent-lt);
+  border: 1px solid var(--accent-lt); padding: .55rem 1.2rem;
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+.nav-tel:hover { background: var(--accent-lt); color: var(--deep); text-decoration: none; }
+
+.has-sub { position: relative; }
+.sub-toggle { display: none; }
+.sub {
+  position: absolute; inset-block-start: calc(100% + 1.55rem); inset-inline-start: 0;
+  width: max-content; min-width: 15rem; max-width: min(20rem, 80vw);
+  background: var(--deep-2); border: 1px solid var(--gold-line);
+  border-block-start: 2px solid var(--accent-lt); padding: .5rem 0;
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity .25s var(--ease), transform .25s var(--ease), visibility .25s;
+}
+.has-sub:hover .sub, .has-sub:focus-within .sub { opacity: 1; visibility: visible; transform: translateY(0); }
+.sub a { display: block; padding: .7rem 1.4rem; color: var(--on-deep); font-size: .98rem; }
+.sub a:hover { color: var(--accent-lt); text-decoration: none; }
+
+/* The mobile header's call button — visible without opening the drawer, the
+   way this market always ships it. A header affordance, never a floating one. */
+.tel-mini { display: none; }
+
+.burger { display: none; flex-direction: column; gap: 6px; background: none; border: 0; padding: .7rem 0; cursor: pointer; }
+.burger span { display: block; width: 26px; height: 2px; background: var(--on-deep); transition: transform .3s var(--ease), opacity .2s; }
+.burger[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
+.burger[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
+
+/* ------------------------------------------------------------ crumbs */
+
+.crumbs { background: var(--deep); font-size: .88rem; }
+/* No hairline of its own — the header's gold rule directly above already
+   draws this edge, and two stacked lines read as a mistake. */
+.crumbs ol { display: flex; flex-wrap: wrap; gap: .6rem; padding-block: 1rem; color: var(--on-deep-2); }
+.crumbs li + li::before { content: '—'; margin-inline-end: .6rem; color: var(--sep-deep); }
+.crumbs a { color: var(--on-deep-2); }
+.crumbs a:hover { color: var(--accent-lt); }
+.crumbs [aria-current] { color: var(--on-deep); }
+
+/* ------------------------------------------------------------ hero
+   Full-bleed cinema under the solid header. The photograph is composed with
+   the reading column already in it: the subject stands in the left third and
+   the right two-thirds is a dark stone wall. Measured on the source file,
+   every column from 36% rightward clears 4.5:1 against white, so the
+   headline needs no scrim. The site hardcodes dir="rtl", so physical
+   directions here are deliberate — the figure is always the left half. */
+
+.hero {
+  position: relative; isolation: isolate;
+  min-height: min(88vh, 880px);
+  display: flex; flex-direction: column; justify-content: center;
+  background: var(--deep); color: var(--on-deep);
+  padding-block: 6rem; overflow: hidden;
+}
+
+.hero-figure { position: absolute; inset: 0; z-index: 0; }
+.hero-figure img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 50%; }
+.hero-figure .ph { width: 100%; height: 100%; background: var(--deep-2); border: 0; color: var(--on-deep-2); }
+
+.hero-inner { position: relative; z-index: 2; }
+.hero-col { max-width: min(38rem, calc(100vw - min(48vw, 38rem) - 6rem)); }
+/* Champagne gold, not --accent-lt: this line sits on the photograph itself,
+   and the standard gold measures 3.63:1 against the wall's brightest pixels.
+   #dcc186 measures 5.41:1 worst-case — verified against the image's pixels,
+   not the DOM (the pixel sweep in the build notes). */
+.hero-eyebrow {
+  display: flex; align-items: center; gap: .85rem;
+  font-size: .98rem; font-weight: 500; color: #dcc186; margin-block-end: 2rem;
+}
+/* Trailing, like every kicker — the eyebrow's first letter lines up with the
+   headline's edge below it. */
+.hero-eyebrow::after { content: ''; width: 2.6rem; height: 2px; background: currentColor; flex: none; }
+.hero h1 { color: #fff; }
+/* One word in champagne — the same photo-safe gold as the eyebrow (display
+   size needs 3:1; #dcc186 measures 5.4:1 against the wall's brightest pixels). */
+.hero h1 .gold-word { color: #dcc186; }
+/* The gold bar under the headline — jewelry, not text. */
+.hero-rule { width: 5.5rem; height: 3px; background: var(--accent-lt); margin-block-start: 2rem; }
+.hero-sub {
+  margin-block-start: 2rem;
+  font-size: clamp(1.12rem, 1rem + .5vw, 1.35rem); font-weight: 300;
+  color: var(--on-deep-2); line-height: 1.9;
+}
+.hero-cue {
+  position: absolute; inset-block-end: 2rem; inset-inline-start: 50%;
+  transform: translateX(50%); z-index: 3; color: var(--accent-lt);
+  padding: .8rem; transition: color .25s var(--ease);
+  animation: cue-bob 2.8s var(--ease) infinite;
+}
+.hero-cue:hover { color: #fff; text-decoration: none; }
+@keyframes cue-bob {
+  0%, 100% { transform: translateX(50%) translateY(0); }
+  50% { transform: translateX(50%) translateY(7px); }
+}
+
+/* ------------------------------------------------------------ quiet band
+   A full-viewport photograph carrying no words at all — the wordless pause
+   the canon uses between dense bands. The band holds its own height: it has
+   no inline content to prop it open. */
+
+.quiet {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: min(100svh, 950px);
+  background: var(--deep);
+}
+.quiet-figure { position: absolute; inset: 0; z-index: 0; }
+.quiet-figure img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%;
+  /* The pause breathes: a drift too slow to watch, alive in the corner of the
+     eye. Wordless bands only — no text sits on these pixels, so the motion
+     can never break a measured contrast. Killed by reduced-motion. */
+  animation: quiet-drift 26s ease-in-out infinite alternate;
+}
+@keyframes quiet-drift {
+  from { transform: scale(1); }
+  to { transform: scale(1.065); }
+}
+
+/* ------------------------------------------------------------ credentials band
+   Where this vertical puts award medallions: a black band, gold figures.
+   Facts only — every line is on the CV. No rankings, no invented counts. */
+
+.creds-band { background: var(--deep-2); border-block-end: 1px solid var(--gold-line); }
+.creds-band ul {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  padding-block: clamp(2.2rem, 1.5rem + 1.8vw, 3.4rem);
+}
+.creds-band li { padding-inline: clamp(1rem, .6rem + 1.2vw, 2.2rem); }
+.creds-band li + li { border-inline-start: 1px solid var(--line-deep); }
+.creds-band li:first-child { padding-inline-start: 0; }
+.creds-band li:last-child { padding-inline-end: 0; }
+.cb-k {
+  display: block; font-family: var(--display); font-weight: 500;
+  font-size: clamp(1.55rem, 1.1rem + 1.4vw, 2.4rem);
+  line-height: 1.18; color: var(--accent-lt); margin-block-end: .5rem;
+  text-wrap: balance;
+}
+.cb-v { display: block; font-size: .95rem; font-weight: 300; line-height: 1.7; color: var(--on-deep-2); max-width: 24rem; }
+
+/* ------------------------------------------------------------ route
+   "Where are you standing?" — routing by the visitor's own situation rather
+   than by the practice-area taxonomy. The numbered journey, minus urgency. */
+
+.route { padding-block: var(--gap-sec); background: var(--deep); color: var(--on-deep); }
+.route .label { color: var(--accent-lt); }
+.route h2 { color: #fff; }
+.route .sec-sub { color: var(--on-deep-2); }
+.route-list { border-block-start: 1px solid var(--line-deep); }
+.route-list > li { border-block-end: 1px solid var(--line-deep); }
+.route-list a {
+  display: grid; grid-template-columns: 5.5rem minmax(0, 1fr) 2.5rem;
+  align-items: center; gap: 1.75rem;
+  padding-block: clamp(1.6rem, 1.1rem + 1.2vw, 2.4rem);
+  color: var(--on-deep); transition: transform .35s var(--ease);
+}
+.route-list a:hover { text-decoration: none; transform: translateX(-.7rem); }
+.route-n {
+  font-family: var(--display); font-weight: 300;
+  font-size: clamp(2.1rem, 1.6rem + 1.6vw, 3.1rem);
+  line-height: 1; color: var(--accent-lt); opacity: .65;
+  transition: opacity .3s var(--ease);
+}
+.route-list a:hover .route-n { opacity: 1; }
+.route-q { display: block; font-family: var(--display); font-weight: 500; font-size: clamp(1.25rem, 1.05rem + 1vw, 1.8rem); line-height: 1.35; margin-block-end: .5rem; transition: color .3s var(--ease); }
+.route-list a:hover .route-q { color: var(--accent-lt); }
+.route-a { display: block; color: var(--on-deep-2); font-size: 1.02rem; font-weight: 300; line-height: 1.9; max-width: 46rem; }
+.route-arrow { color: var(--on-deep-2); justify-self: center; transition: color .3s var(--ease), transform .35s var(--ease); }
+.route-list a:hover .route-arrow { color: var(--accent-lt); transform: translateX(-6px); }
+
+/* ------------------------------------------------------------ statement */
+
+.statement { padding-block: var(--gap-sec); }
+.pull {
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(1.7rem, 1.15rem + 2.4vw, 3rem);
+  line-height: 1.35; color: var(--ink); margin-block-end: 2.6rem;
+}
+.pull::before {
+  content: ''; display: block; width: 5.5rem; height: 3px;
+  background: var(--accent-lt); margin-block-end: 1.6rem;
+}
+.statement-body { display: grid; gap: 1.5rem; max-width: 40rem; }
+.statement-body p { color: var(--ink-2); }
+
+/* ------------------------------------------------------------ index list */
+
+.index { border-block-start: 1px solid var(--stone); }
+.index > li { border-block-end: 1px solid var(--stone); }
+.index a {
+  display: grid; grid-template-columns: 4.5rem minmax(0, 1fr) 2.5rem;
+  align-items: baseline; gap: 1.5rem;
+  padding-block: clamp(1.5rem, 1.1rem + 1vw, 2.2rem);
+  color: var(--ink); transition: transform .35s var(--ease);
+}
+.index a:hover { text-decoration: none; transform: translateX(-.7rem); }
+.index a:hover h2, .index a:hover h3 { color: var(--accent); }
+.idx-n { font-family: var(--display); font-weight: 600; font-size: .95rem; color: var(--accent); }
+.idx-body { display: block; }
+.index h2, .index h3 {
+  font-size: clamp(1.3rem, 1.1rem + 1vw, 1.85rem); font-weight: 500;
+  transition: color .3s var(--ease); margin-block-end: .5rem;
+}
+.idx-teaser { display: block; color: var(--muted); font-size: 1.02rem; font-weight: 300; line-height: 1.9; max-width: 46rem; }
+.idx-arrow { color: var(--accent-lt); align-self: center; transition: color .3s var(--ease), transform .35s var(--ease); }
+.index a:hover .idx-arrow { color: var(--accent); transform: translateX(-6px); }
+
+/* ------------------------------------------------------------ principles */
+
+.principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(2.2rem, 1.4rem + 2.4vw, 4rem); }
+.principles article { border-block-start: 1px solid var(--accent-lt); padding-block-start: 1.8rem; }
+.principles h3 { margin-block-end: .8rem; }
+.principles p { font-size: 1.02rem; font-weight: 300; line-height: 1.95; color: var(--ink-2); }
+
+/* ------------------------------------------------------------ portrait */
+
+.portrait-sec .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(2.5rem, 1.5rem + 4vw, 6rem); align-items: center; }
+.portrait-media { position: relative; }
+.portrait-media::before {
+  content: ''; position: absolute; z-index: 0;
+  inset-block: 1.6rem -1.6rem; inset-inline: -1.6rem 5rem;
+  border: 1px solid var(--accent-lt);
+}
+.portrait-media img, .portrait-media .ph { position: relative; z-index: 1; }
+.portrait-copy h2 { margin-block-end: 1.5rem; }
+.portrait-copy .lead { margin-block-end: 1.4rem; }
+.portrait-note { color: var(--ink-2); font-size: 1.05rem; line-height: 1.95; max-width: 34rem; margin-block-end: 2rem; }
+
+/* "What happens after you reach out" — the contact column's three steps.
+   Same heading treatment as .sub-sec: hairline plus the short gold bar. */
+.after-call { margin-block: 2.8rem; }
+.after-call h2 {
+  position: relative;
+  font-size: 1.4rem; margin-block-end: 1.2rem;
+  padding-block-end: .8rem; border-block-end: 1px solid var(--stone);
+}
+.after-call h2::after {
+  content: ''; position: absolute; inset-block-end: -1px; inset-inline-start: 0;
+  width: 5.5rem; height: 3px; background: var(--accent-lt);
+}
+
+.creds { display: grid; gap: 1.2rem; margin-block-end: 2rem; }
+.creds > div { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: 1.2rem; padding-block-end: 1.2rem; border-block-end: 1px solid var(--stone); }
+.creds > div:last-child { border-block-end: 0; padding-block-end: 0; }
+.creds dt { font-size: .9rem; font-weight: 600; color: var(--accent); }
+.creds dd { color: var(--ink-2); }
+.creds.wide > div { grid-template-columns: 10rem minmax(0, 1fr); }
+
+/* ------------------------------------------------------------ page hero
+   Every interior page opens on the dark masthead the canon ships: black
+   ground, gold kicker, white display type. */
+
+.page-hero {
+  background: var(--deep); color: var(--on-deep);
+  padding-block: clamp(3.2rem, 1.8rem + 4.4vw, 6rem) clamp(2.8rem, 1.6rem + 3.4vw, 4.6rem);
+  border-block-end: 1px solid var(--gold-line);
+}
+.page-hero .label { color: var(--accent-lt); }
+.page-hero h1 { max-width: 18em; color: #fff; }
+.page-hero .lead { max-width: 44rem; margin-block-start: 1.6rem; color: var(--on-deep-2); }
+
+/* ------------------------------------------------------------ page figure
+   One photograph per practice area, full-bleed and letterboxed short so it
+   sets the subject without taking the page over. */
+
+.page-figure {
+  margin: 0; width: 100%; overflow: hidden;
+  background: var(--deep);
+  aspect-ratio: 21 / 7;
+}
+.page-figure img { width: 100%; height: 100%; object-fit: cover; }
+
+@media (max-width: 860px) {
+  .page-figure { aspect-ratio: 16 / 9; }
+}
+
+/* ------------------------------------------------------------ prose + aside */
+
+.layout-aside { display: grid; grid-template-columns: minmax(0, 1fr) 16rem; gap: clamp(2.5rem, 1.5rem + 4vw, 6rem); align-items: start; }
+.prose > p { color: var(--ink-2); margin-block-end: 1.3rem; max-width: 42rem; }
+.prose > .lead { max-width: 44rem; }
+.sub-sec { margin-block-start: clamp(2.5rem, 1.5rem + 3vw, 4rem); }
+/* A hairline the full measure, with the signature short gold bar over its
+   start — the same language as the hero rule and the pull quote, instead of
+   a heavy solid-gold underline on every heading. */
+.sub-sec > h2 {
+  position: relative;
+  margin-block-end: 1.3rem; padding-block-end: .9rem;
+  border-block-end: 1px solid var(--stone); max-width: 42rem;
+}
+.sub-sec > h2::after {
+  content: ''; position: absolute; inset-block-end: -1px; inset-inline-start: 0;
+  width: 5.5rem; height: 3px; background: var(--accent-lt);
+}
+.sub-intro { color: var(--muted); margin-block-end: 1.8rem; max-width: 42rem; }
+
+.checks { display: grid; gap: 0; max-width: 44rem; border-block-start: 1px solid var(--stone); }
+.checks li { padding-block: .9rem; border-block-end: 1px solid var(--stone); color: var(--ink-2); }
+
+.steps { border-block-start: 1px solid var(--stone); }
+.steps > li { display: grid; grid-template-columns: 4rem minmax(0, 1fr); gap: 1.5rem; padding-block: 1.7rem; border-block-end: 1px solid var(--stone); }
+.steps h3 { margin-block-end: .5rem; }
+.steps p { color: var(--muted); }
+
+.pairs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem 3rem; }
+.pairs article { border-block-start: 1px solid var(--accent-lt); padding-block-start: 1.4rem; }
+.pairs h3 { font-size: 1.22rem; margin-block-end: .6rem; }
+.pairs p { color: var(--muted); font-size: 1rem; }
+
+.side { display: grid; gap: 2.5rem; position: sticky; inset-block-start: 8rem; }
+.side-block .label { margin-block-end: 1rem; }
+.side-links li { border-block-end: 1px solid var(--stone); }
+.side-links a { display: block; padding-block: .8rem; color: var(--ink-2); font-size: .98rem; }
+.side-links a:hover { color: var(--accent); text-decoration: none; }
+.side-portrait { margin-block-end: 1.4rem; max-width: 12rem; }
+.side-portrait img { width: 100%; }
+.side-tel { display: inline-block; font-family: var(--display); font-weight: 600; font-size: 1.5rem; color: var(--ink); }
+.side-tel:hover { color: var(--accent); text-decoration: none; }
+.side-note { color: var(--muted); font-size: .95rem; line-height: 1.8; margin-block-end: .6rem; }
+
+/* ------------------------------------------------------------ faq */
+
+.faq { padding-block: var(--gap-sec); background: var(--paper-2); }
+.faq-list { border-block-start: 1px solid var(--stone); max-width: 52rem; }
+.faq-group { margin-block-end: 3.5rem; }
+.faq-group > h2 { font-size: 1.5rem; margin-block-end: 1rem; }
+.faq-item { border-block-end: 1px solid var(--stone); }
+.faq-item summary {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem;
+  padding-block: 1.4rem; cursor: pointer; list-style: none;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary:hover .faq-q { color: var(--accent); }
+.faq-q { font-family: var(--display); font-weight: 500; font-size: 1.18rem; line-height: 1.55; color: var(--ink); }
+.faq-ic { position: relative; width: 14px; height: 14px; flex: none; margin-block-start: .65rem; }
+.faq-ic::before, .faq-ic::after {
+  content: ''; position: absolute; inset-block-start: 50%; inset-inline-start: 0;
+  width: 14px; height: 2px; background: var(--accent); transition: transform .3s var(--ease);
+}
+.faq-ic::after { transform: rotate(90deg); }
+.faq-item[open] .faq-ic::after { transform: rotate(0deg); }
+.faq-a { padding-block-end: 1.6rem; max-width: 44rem; }
+.faq-a p { color: var(--ink-2); }
+
+/* ------------------------------------------------------------ closing */
+
+.closing { padding-block: var(--gap-sec); background: var(--deep); color: var(--on-deep); text-align: center; }
+.closing .label { justify-content: center; color: var(--accent-lt); }
+.closing h2 { color: #fff; }
+.closing-body { max-width: 34rem; margin: 1.4rem auto 2.4rem; color: var(--on-deep-2); font-weight: 300; }
+.closing .btn { margin-block-end: 2.4rem; }
+.closing-lines { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 1.6rem; }
+.closing-lines a { font-family: var(--display); font-weight: 500; font-size: clamp(1.05rem, .95rem + .5vw, 1.35rem); color: var(--on-deep); }
+.closing-lines a:hover { color: var(--accent-lt); }
+.closing-lines .sep { width: 1px; height: 1.4rem; background: var(--line-deep); }
+
+/* ------------------------------------------------------------ contact */
+
+.contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(2.5rem, 1.5rem + 4vw, 6rem); align-items: start; }
+.form { display: grid; gap: 1.5rem; }
+.field { display: grid; gap: .5rem; }
+.field label { font-size: .92rem; font-weight: 500; color: var(--muted); }
+.field .opt { color: var(--muted); font-weight: 300; }
+.field input, .field select, .field textarea {
+  font-family: var(--sans); font-size: 1.02rem; color: var(--ink);
+  background: transparent; border: 0; border-block-end: 1px solid var(--stone);
+  padding: .7rem 0; min-height: 52px; width: 100%; transition: border-color .25s var(--ease);
+}
+.field textarea { min-height: auto; resize: vertical; }
+/* The field is dir="ltr" so the digits stay in Latin order; `end` keeps them
+   aligned to the same edge as the Hebrew label above, without a physical side. */
+.field input[type="tel"] { text-align: end; }
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible {
+  outline: 0; border-block-end: 2px solid var(--accent-lt);
+}
+.field input:user-invalid { border-block-end-color: #9d3b33; }
+.hp { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.fineprint { font-size: .85rem; color: var(--muted); line-height: 1.75; }
+.err { color: #8f342c; font-size: .88rem; margin: 0; }
+
+/* ------------------------------------------------------------ placeholders */
+
+.ph {
+  display: grid; place-items: center; width: 100%;
+  background: var(--paper-2); border: 1px solid var(--stone);
+  color: var(--muted); font-size: .88rem; text-align: center; padding: 1.5rem;
+}
+.note { border-inline-start: 2px solid var(--accent-lt); padding-block: .2rem; padding-inline: 1.2rem 0; color: var(--muted); }
+.center { text-align: center; }
+.center .label { justify-content: center; }
+.center-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+.center-links li { border-block-end: 0; }
+
+/* ------------------------------------------------------------ footer
+   The dark footer the canon ships: black ground, gold column headings. */
+
+.site-footer { background: var(--deep); color: var(--on-deep); border-block-start: 1px solid var(--gold-line); padding-block: clamp(3rem, 2rem + 3vw, 5rem) 2rem; }
+.foot-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 2.5rem; flex-wrap: wrap; padding-block-end: 3rem; border-block-end: 1px solid var(--line-deep); }
+.wm-foot { margin-inline-end: 0; }
+.wm-foot .wm-name { color: var(--on-deep); }
+.foot-nap { display: grid; gap: .3rem; font-style: normal; text-align: start; color: var(--on-deep-2); font-size: .95rem; }
+.foot-nap a { color: var(--on-deep); }
+.foot-nap a:hover { color: var(--accent-lt); }
+
+.foot-cols { display: flex; gap: clamp(2.5rem, 1.5rem + 4vw, 6rem); flex-wrap: wrap; padding-block: 3rem; }
+.foot-cols h2 { font-size: .9rem; font-family: var(--sans); font-weight: 600; color: var(--accent-lt); margin-block-end: 1.1rem; }
+.foot-cols li + li { margin-block-start: .5rem; }
+.foot-cols a { color: var(--on-deep-2); font-size: .95rem; }
+.foot-cols a:hover { color: var(--accent-lt); }
+
+.foot-bottom { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; padding-block-start: 2rem; border-block-start: 1px solid var(--line-deep); font-size: .84rem; color: var(--on-deep-2); line-height: 1.8; }
+.foot-bottom p:first-child { max-width: 46rem; }
+
+/* ------------------------------------------------------------ a11y widget */
+
+.a11y-btn {
+  position: fixed; inset-block-end: 1.5rem; inset-inline-start: 1.5rem; z-index: 80;
+  width: 42px; height: 42px; display: grid; place-items: center;
+  background: var(--deep); border: 1px solid var(--accent-lt); color: var(--accent-lt);
+  cursor: pointer; opacity: .85; transition: opacity .25s var(--ease);
+}
+.a11y-btn:hover { opacity: 1; }
+.a11y-panel {
+  position: fixed; inset-block-end: 4.6rem; inset-inline-start: 1.5rem; z-index: 81;
+  width: 15rem; background: var(--deep-2); border: 1px solid var(--gold-line);
+  color: var(--on-deep); padding: 1rem; display: grid; gap: .3rem;
+}
+.a11y-panel[hidden] { display: none; }
+.a11y-panel h2 { font-size: .95rem; font-family: var(--sans); font-weight: 600; color: var(--accent-lt); margin-block-end: .4rem; }
+.a11y-panel button {
+  text-align: start; background: none; border: 0; border-block-end: 1px solid var(--line-deep);
+  padding: .7rem .2rem; font-family: var(--sans); font-size: .92rem; color: var(--on-deep);
+  cursor: pointer; min-height: 44px;
+}
+.a11y-panel button:hover { color: var(--accent-lt); }
+.a11y-panel a { font-size: .88rem; color: var(--accent-lt); padding-block-start: .6rem; }
+
+/* ------------------------------------------------------------ reveal */
+
+[data-reveal] { opacity: 0; transform: translateY(14px); }
+[data-reveal].shown { opacity: 1; transform: translateY(0); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+
+/* ------------------------------------------------------------ a11y modes */
+
+html[data-contrast="1"] {
+  --ink: #000; --ink-2: #000; --muted: #1c1c1c; --accent: #5c4526;
+  --paper: #fff; --paper-2: #fff; --stone: #000;
+  --deep: #000; --deep-2: #000;
+  --on-deep: #fff; --on-deep-2: #fff; --accent-lt: #ffd9a0;
+  --line-deep: #fff; --gold-line: #ffd9a0;
+}
+html[data-links="1"] a { text-decoration: underline; }
+html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] *::after {
+  animation: none !important; transition: none !important; scroll-behavior: auto !important;
+}
+html[data-motion="0"] [data-reveal] { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+  [data-reveal] { opacity: 1; transform: none; }
+}
+
+/* ------------------------------------------------------------ responsive */
+
+@media (max-width: 1100px) {
+  /* Below the split the headline stops sharing the frame with the photograph.
+     Type sits on the dark ground, the picture follows it full-bleed. */
+  .hero {
+    min-height: auto; padding-block: 4.5rem 0;
+    justify-content: flex-start;
+  }
+  .hero-inner { order: 1; }
+  .hero-col { max-width: none; }
+  .hero-figure {
+    order: 2; position: static; inset: auto;
+    margin-block-start: 3rem; width: 100%;
+  }
+  .hero-figure img {
+    height: auto; max-height: 62vh; object-fit: cover; object-position: 50% 22%;
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 9%);
+    mask-image: linear-gradient(to top, transparent 0%, #000 9%);
+  }
+  .quiet { min-height: 62svh; }
+}
+
+@media (max-width: 1000px) {
+  .layout-aside { grid-template-columns: 1fr; }
+  .side { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
+  .portrait-sec .wrap { grid-template-columns: 1fr; }
+  .portrait-media { max-width: 26rem; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .principles { grid-template-columns: 1fr; gap: 2.2rem; }
+}
+
+@media (max-width: 860px) {
+  .wrap, .wrap.narrow { width: calc(100% - 2.5rem); }
+  .header-inner { min-height: 72px; gap: 1.1rem; }
+  .burger { display: flex; }
+  .tel-mini {
+    display: grid; place-items: center; width: 44px; height: 44px;
+    border: 1px solid var(--accent-lt); color: var(--accent-lt);
+    transition: background .25s var(--ease), color .25s var(--ease);
+  }
+  .tel-mini:hover, .tel-mini:active { background: var(--accent-lt); color: var(--deep); }
+
+  .primary {
+    position: fixed; inset-block: 0 auto; inset-inline-end: 0;
+    width: min(21rem, 86vw); height: 100dvh; z-index: 95;
+    flex-direction: column; align-items: stretch; justify-content: flex-start; gap: 0;
+    background: var(--deep); padding: 6rem 2rem 2.5rem; overflow-y: auto;
+    border-inline-start: 1px solid var(--gold-line);
+    transform: translateX(-100%); transition: transform .4s var(--ease);
+  }
+  /* translateX(0), never `none` — a transition to `none` is not reliably
+     interpolatable and can strand the drawer at its start position. */
+  .primary.open { transform: translateX(0); }
+  .primary > ul { flex-direction: column; align-items: stretch; gap: 0; width: 100%; }
+  .primary > ul > li { border-block-end: 1px solid var(--line-deep); }
+  .primary a { color: var(--on-deep); display: flex; align-items: center; min-height: 52px; font-size: 1.1rem; }
+  .primary a[aria-current] { color: var(--accent-lt); }
+  .nav-tel {
+    color: var(--accent-lt); border: 0; padding: 0;
+    border-block-start: 1px solid var(--line-deep); margin-block-start: 1.5rem;
+    padding-block-start: 1.5rem; font-family: var(--display); font-weight: 600; font-size: 1.4rem;
+  }
+  .nav-tel:hover { background: transparent; color: var(--accent-lt); }
+  .has-sub { display: grid; grid-template-columns: 1fr auto; align-items: center; }
+  .sub-toggle {
+    display: grid; place-items: center; width: 44px; height: 44px;
+    background: none; border: 0; color: var(--accent-lt); cursor: pointer;
+    transition: transform .3s var(--ease);
+  }
+  .sub-toggle[aria-expanded="true"] { transform: rotate(45deg); }
+  .sub {
+    position: static; grid-column: 1 / -1; width: auto; min-width: 0; max-width: none;
+    background: transparent; border: 0; padding: 0 0 .8rem;
+    opacity: 1; visibility: visible; transform: none; display: none;
+  }
+  .sub.open { display: block; }
+  .sub a { color: var(--on-deep-2); padding: .55rem 1rem; }
+  /* Must stay BELOW .site-header's z-index (90). The drawer lives inside the
+     header, so its own z-index resolves inside the header's stacking context —
+     a backdrop above 90 paints over the drawer and swallows every nav tap. */
+  .nav-backdrop { position: fixed; inset: 0; background: rgba(14,12,9,.55); z-index: 85; border: 0; }
+
+  /* Three facts stack as ruled rows on phones — big gold head, one line under. */
+  .creds-band ul { grid-template-columns: 1fr; row-gap: 0; }
+  .creds-band li, .creds-band li:first-child, .creds-band li:last-child { padding-inline: 0; padding-block: 1.4rem; }
+  .creds-band li:first-child { padding-block-start: 0; }
+  .creds-band li:last-child { padding-block-end: 0; }
+  .creds-band li + li { border-inline-start: 0; border-block-start: 1px solid var(--line-deep); }
+
+  .hero { padding-block: 3.5rem 0; }
+  .hero-cue { display: none; }
+  .hero-figure { margin-block-start: 2rem; }
+  .hero-figure img { max-height: 56vh; }
+  .route-list a { grid-template-columns: 3.4rem minmax(0, 1fr); gap: 1.1rem; align-items: start; }
+  .route-arrow { display: none; }
+  .portrait-media::before { inset-inline: -1rem 3rem; inset-block: 1rem -1rem; }
+  .index a { grid-template-columns: 3rem minmax(0, 1fr); gap: 1rem; }
+  .idx-arrow { display: none; }
+  .creds > div, .creds.wide > div { grid-template-columns: 1fr; gap: .2rem; }
+  .pairs { grid-template-columns: 1fr; gap: 2rem; }
+  .foot-top { flex-direction: column; gap: 1.8rem; }
+  .foot-cols { gap: 2.5rem; }
+}
+
+@media (max-width: 560px) {
+  .side { grid-template-columns: 1fr; }
+  .quiet { min-height: 55svh; }
+  .closing-lines { flex-direction: column; gap: 1rem; }
+  .closing-lines .sep { display: none; }
+  .btn { width: 100%; }
+  .a11y-btn { inset-block-end: 1rem; inset-inline-start: 1rem; }
+  .a11y-panel { inset-block-end: 4rem; inset-inline-start: 1rem; }
+}
+
+@media print {
+  .site-header, .a11y-btn, .a11y-panel, .skip, .hero-cue, .closing, .form { display: none !important; }
+  body { color: #000; background: #fff; }
+  [data-reveal] { opacity: 1; transform: none; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .8em; }
+}
