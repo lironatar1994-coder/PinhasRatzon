@@ -227,7 +227,12 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
    way this market always ships it. A header affordance, never a floating one. */
 .tel-mini { display: none; }
 
-.burger { display: none; flex-direction: column; gap: 6px; background: none; border: 0; padding: .7rem 0; cursor: pointer; }
+/* A real 44px tap target, not just two thin lines. */
+.burger {
+  display: none; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px; width: 44px; height: 44px;
+  background: none; border: 0; padding: 0; cursor: pointer;
+}
 .burger span { display: block; width: 26px; height: 2px; background: var(--on-deep); transition: transform .3s var(--ease), opacity .2s; }
 .burger[aria-expanded="true"] span:first-child { transform: translateY(4px) rotate(45deg); }
 .burger[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
@@ -686,7 +691,10 @@ html[data-motion="0"] [data-reveal] { opacity: 1; transform: none; }
     -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 9%);
     mask-image: linear-gradient(to top, transparent 0%, #000 9%);
   }
-  .quiet { min-height: 62svh; }
+  /* Below the split the full-viewport pause loses its context — neighboring
+     bands are no longer visible around it, and a screen-filling still life
+     reads as a mistake. It becomes a cinematic DIVIDER strip instead. */
+  .quiet { min-height: 44svh; }
 }
 
 @media (max-width: 1000px) {
@@ -756,10 +764,14 @@ html[data-motion="0"] [data-reveal] { opacity: 1; transform: none; }
   .creds-band li:last-child { padding-block-end: 0; }
   .creds-band li + li { border-inline-start: 0; border-block-start: 1px solid var(--line-deep); }
 
-  .hero { padding-block: 3.5rem 0; }
+  .hero { padding-block: 3.2rem 0; }
   .hero-cue { display: none; }
+  .hero-eyebrow { margin-block-end: 1.6rem; }
+  .hero-rule { margin-block-start: 1.6rem; }
+  .hero-sub { margin-block-start: 1.6rem; }
   .hero-figure { margin-block-start: 2rem; }
   .hero-figure img { max-height: 56vh; }
+  .quiet { min-height: 34svh; }
   .route-list a { grid-template-columns: 3.4rem minmax(0, 1fr); gap: 1.1rem; align-items: start; }
   .route-arrow { display: none; }
   .portrait-media::before { inset-inline: -1rem 3rem; inset-block: 1rem -1rem; }
@@ -769,11 +781,14 @@ html[data-motion="0"] [data-reveal] { opacity: 1; transform: none; }
   .pairs { grid-template-columns: 1fr; gap: 2rem; }
   .foot-top { flex-direction: column; gap: 1.8rem; }
   .foot-cols { gap: 2.5rem; }
+  /* Clearance for the fixed accessibility button, which otherwise sits on
+     the disclaimer's last lines at the very end of the page. */
+  .site-footer { padding-block-end: 5rem; }
 }
 
 @media (max-width: 560px) {
   .side { grid-template-columns: 1fr; }
-  .quiet { min-height: 55svh; }
+  .quiet { min-height: 30svh; }
   .closing-lines { flex-direction: column; gap: 1rem; }
   .closing-lines .sep { display: none; }
   .btn { width: 100%; }

@@ -35,8 +35,10 @@
     backdrop.setAttribute('aria-label', 'סגירת תפריט');
     backdrop.addEventListener('click', closeNav);
     document.body.appendChild(backdrop);
-    var first = nav.querySelector('a');
-    if (first) first.focus();
+    // Focus the drawer itself, not its first link — a programmatic focus on
+    // the link paints a stray focus ring the moment the menu opens.
+    nav.setAttribute('tabindex', '-1');
+    nav.focus({ preventScroll: true });
   }
 
   if (burger && nav) {

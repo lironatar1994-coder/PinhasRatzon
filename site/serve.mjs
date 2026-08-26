@@ -5,6 +5,7 @@ import { createServer } from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { join, extname, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { BASE_PATH } from './src/site.mjs';
 
 const DIST = join(dirname(fileURLToPath(import.meta.url)), 'dist');
 const PORT = Number(process.env.PORT) || 4173;
@@ -24,7 +25,11 @@ const TYPES = {
 };
 
 createServer(async (req, res) => {
-  const path = decodeURIComponent(req.url.split('?')[0]);
+  let path = decodeURIComponent(req.url.split('?')[0]);
+  // The build prefixes every URL with BASE_PATH (the live site lives under
+  // lawebs.co.il/PinhasRatzon). Locally we serve dist/ at the root, so the
+  // prefix is stripped — both /x and /PinhasRatzon/x resolve.
+  if (BASE_PATH && path.startsWith(BASE_PATH)) path = path.slice(BASE_PATH.length) || '/';
   const candidates = extname(path)
     ? [join(DIST, path)]
     : [join(DIST, path, 'index.html'), join(DIST, path.replace(/\/$/, '') + '.html')];
