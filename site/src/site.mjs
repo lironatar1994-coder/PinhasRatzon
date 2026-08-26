@@ -24,6 +24,8 @@ export const BIZ = {
   get yearsExperience() { return new Date().getFullYear() - Number(this.founded); },
   phone: '054-2221155',
   phoneE164: '+972542221155',
+  // Derived from the phone so the two can never drift apart.
+  get whatsapp() { return 'https://wa.me/' + this.phoneE164.replace('+', ''); },
   email: 'Ratzon@gmail.com',
   street: 'האר״י הקדוש 20',
   city: 'פתח תקווה',

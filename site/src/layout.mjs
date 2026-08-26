@@ -22,6 +22,8 @@ const ICONS = {
   close: '<path d="M6 6l12 12M18 6 6 18"/>',
   phone:
     '<path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/>',
+  whatsapp:
+    '<path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5z"/><path d="M9.1 8.7c-.3.1-.8.5-.8 1.2 0 2 2.8 4.8 4.8 4.8.7 0 1.1-.5 1.2-.8l.2-.7-1.6-.8-.8.6c-.7-.3-1.8-1.4-2.1-2.1l.6-.8-.8-1.6z"/>',
   plus: '<path d="M12 5v14M5 12h14"/>',
   a11y:
     '<circle cx="12" cy="12" r="9.2"/><circle cx="12" cy="6.6" r="1.3" fill="currentColor" stroke="none"/><path d="M7.4 9.4h9.2M12 9.6v3.2m0 0-2.2 4.6M12 12.8l2.2 4.6"/>',
@@ -135,6 +137,7 @@ export function header(current) {
       <a class="nav-tel" href="${telHref}" dir="ltr">${esc(BIZ.phone)}</a>
     </nav>
     <a class="tel-mini" href="${telHref}" aria-label="חיוג אל ${esc(BIZ.phone)}">${icon('phone', 20)}</a>
+    <a class="wa-mini" href="${BIZ.whatsapp}" target="_blank" rel="noopener" aria-label="שליחת הודעת וואטסאפ">${icon('whatsapp', 20)}</a>
     <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="primaryNav" aria-label="פתיחת תפריט">
       <span></span><span></span>
     </button>
@@ -204,6 +207,8 @@ export function closing({ h2, body }) {
     <div class="closing-lines">
       <a href="${telHref}" dir="ltr">${esc(BIZ.phone)}</a>
       <span class="sep" aria-hidden="true"></span>
+      <a href="${BIZ.whatsapp}" target="_blank" rel="noopener">וואטסאפ</a>
+      <span class="sep" aria-hidden="true"></span>
       <a href="mailto:${esc(BIZ.email)}" dir="ltr">${esc(BIZ.email)}</a>
     </div>
   </div>
@@ -240,6 +245,7 @@ export function footer() {
       ${wordmark('wm-foot')}
       <address class="foot-nap">
         <a href="${telHref}" dir="ltr">${esc(BIZ.phone)}</a>
+        <a href="${BIZ.whatsapp}" target="_blank" rel="noopener">וואטסאפ</a>
         <a href="mailto:${esc(BIZ.email)}" dir="ltr">${esc(BIZ.email)}</a>
         <span>${esc(BIZ.addressHuman)}</span>
         <span>${esc(BIZ.areaHuman)}</span>

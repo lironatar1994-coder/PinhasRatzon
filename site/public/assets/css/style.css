@@ -231,9 +231,10 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .sub a { display: block; padding: .7rem 1.4rem; color: var(--on-deep); font-size: .98rem; }
 .sub a:hover { color: var(--accent-lt); text-decoration: none; }
 
-/* The mobile header's call button — visible without opening the drawer, the
-   way this market always ships it. A header affordance, never a floating one. */
-.tel-mini { display: none; }
+/* The mobile header's call and WhatsApp buttons — visible without opening
+   the drawer, the way this market always ships them. Header affordances,
+   never floating ones. */
+.tel-mini, .wa-mini { display: none; }
 
 /* A real 44px tap target, not just two thin lines. */
 .burger {
@@ -423,6 +424,9 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .principles article { border-block-start: 1px solid var(--accent-lt); padding-block-start: 1.8rem; }
 .principles h3 { margin-block-end: .8rem; }
 .principles p { font-size: 1.02rem; font-weight: 300; line-height: 1.95; color: var(--ink-2); }
+/* Inside the about page's reading column the three principles stack. */
+.prose .principles { grid-template-columns: 1fr; gap: 1.8rem; margin-block-start: 1.6rem; }
+.prose .principles article { padding-block-start: 1.4rem; }
 
 /* ------------------------------------------------------------ portrait */
 
@@ -742,12 +746,12 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .wrap, .wrap.narrow { width: calc(100% - 2.5rem); }
   .header-inner { min-height: 72px; gap: 1.1rem; }
   .burger { display: flex; }
-  .tel-mini {
+  .tel-mini, .wa-mini {
     display: grid; place-items: center; width: 44px; height: 44px;
     border: 1px solid var(--accent-lt); color: var(--accent-lt);
     transition: background .25s var(--ease), color .25s var(--ease);
   }
-  .tel-mini:hover, .tel-mini:active { background: var(--accent-lt); color: var(--deep); }
+  .tel-mini:hover, .tel-mini:active, .wa-mini:hover, .wa-mini:active { background: var(--accent-lt); color: var(--deep); }
 
   .primary {
     position: fixed; inset-block: 0 auto; inset-inline-end: 0;

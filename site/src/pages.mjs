@@ -169,18 +169,6 @@ export function home() {
   </div>
 </section>
 
-<section class="section section-alt">
-  <div class="wrap">
-    ${secHead('דרך העבודה', 'שלושה עקרונות')}
-    <div class="principles">
-      ${PRINCIPLES.map(([h, b]) => `<article>
-        <h3>${esc(h)}</h3>
-        <p>${esc(b)}</p>
-      </article>`).join('\n      ')}
-    </div>
-  </div>
-</section>
-
 <section class="quiet" aria-hidden="true">
   <div class="quiet-figure">
     ${photo(IMAGES.quiet, { alt: '', w: 1920, h: 1084 })}
@@ -395,6 +383,16 @@ export function about() {
       <p>לכן הליווי כאן הוא מקצה לקצה — מהבדיקות הראשונות, דרך ניסוח ההסכם והדיווחים לרשויות, ועד רישום הזכויות. בלי להעביר את התיק לגורם אחר באמצע, ובלי לסיים בחתימה ולהשאיר את הרישום פתוח.</p>
 
       <section class="sub-sec">
+        <h2>דרך העבודה</h2>
+        <div class="principles">
+          ${PRINCIPLES.map(([h, b]) => `<article>
+            <h3>${esc(h)}</h3>
+            <p>${esc(b)}</p>
+          </article>`).join('\n          ')}
+        </div>
+      </section>
+
+      <section class="sub-sec">
         <h2>השכלה והסמכות</h2>
         <dl class="creds wide">
           <div><dt dir="ltr">${esc(BIZ.founded)}</dt><dd>חבר לשכת עורכי הדין בישראל — רישיון בתוקף ברציפות מאז ההסמכה</dd></div>
@@ -536,6 +534,7 @@ export function contact() {
     <div class="contact-details">
       <dl class="creds wide">
         <div><dt>טלפון</dt><dd><a href="${telHref}" dir="ltr">${esc(BIZ.phone)}</a></dd></div>
+        <div><dt>וואטסאפ</dt><dd><a href="${BIZ.whatsapp}" target="_blank" rel="noopener">שליחת הודעה ישירה</a></dd></div>
         <div><dt>דוא״ל</dt><dd><a href="mailto:${esc(BIZ.email)}" dir="ltr">${esc(BIZ.email)}</a></dd></div>
         <div><dt>כתובת</dt><dd>${esc(BIZ.addressHuman)}</dd></div>
         <div><dt>אזור שירות</dt><dd>${esc(BIZ.areaHuman)}</dd></div>
