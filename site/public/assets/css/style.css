@@ -852,6 +852,11 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   }
   .statement-figure::after { background: rgba(14, 12, 9, .64); }
 
+  /* The band subjects live in the LEFT third of each frame; a centered
+     cover-crop on a phone slices them at the edge and fills the screen
+     with the empty right side. Anchor the crop on the subject. */
+  .quiet-figure img { object-position: 20% 62%; }
+
   .hero { padding-block: 3.2rem 0; }
   .hero-cue { display: none; }
   .hero-eyebrow { margin-block-end: 1.6rem; }
