@@ -317,9 +317,9 @@ export function page({
 <meta name="twitter:card" content="summary_large_image">
 
 <meta name="theme-color" content="#0E0C09">
-<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-<link rel="alternate icon" href="/assets/img/favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="icon" href="/assets/img/favicon.svg?v=pr-20260826" type="image/svg+xml">
+<link rel="alternate icon" href="/assets/img/favicon.ico?v=pr-20260826" sizes="any">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=pr-20260826">
 
 ${preloadImage ? (preloadPortrait
   ? `<link rel="preload" as="image" href="${preloadPortrait}.webp" type="image/webp" media="(max-width: 1100px)" fetchpriority="high">
