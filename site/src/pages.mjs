@@ -214,7 +214,6 @@ export function home() {
     ${photo(IMAGES.bandStamp, { alt: '', w: 1920, h: 1072 })}
   </div>
   <div class="wrap quiet-inner">
-    <p class="label">השורה התחתונה</p>
     <h2 class="quiet-line">בסוף הכול נרשם —<br>שחור על גבי לבן.</h2>
   </div>
 </section>
@@ -268,7 +267,6 @@ export function practiceIndex() {
     ${photo(IMAGES.quietPlans, { alt: '', w: 1920, h: 1080 })}
   </div>
   <div class="wrap quiet-inner">
-    <p class="label">אותו תיק</p>
     <h2 class="quiet-line">תשריט, נסח, שומה וצו —<br>ארבעה מסמכים, לרוב תיק אחד.</h2>
   </div>
 </section>
@@ -376,7 +374,6 @@ ${p.quiet ? `<section class="quiet">
     ${photo(p.quiet.image, { alt: '', w: 1920, h: 1072 })}
   </div>
   <div class="wrap quiet-inner">
-    <p class="label">${esc(p.quiet.label)}</p>
     <h2 class="quiet-line">${esc(p.quiet.line1)}${p.quiet.line2 ? `<br>${esc(p.quiet.line2)}` : ''}</h2>
   </div>
 </section>
@@ -571,7 +568,6 @@ export function contact() {
     ${photo(IMAGES.bandChairs, { alt: '', w: 1920, h: 1072 })}
   </div>
   <div class="wrap quiet-inner">
-    <p class="label">מתחילים</p>
     <h2 class="quiet-line">שיחה ראשונה. שאלות, תשובות,<br>ותמונה ברורה.</h2>
   </div>
 </section>
