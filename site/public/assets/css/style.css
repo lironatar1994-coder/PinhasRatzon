@@ -619,10 +619,19 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .closing h2 { color: #fff; }
 .closing-body { max-width: 34rem; margin: 1.4rem auto 2.4rem; color: var(--on-deep-2); font-weight: 300; }
 .closing .btn { margin-block-end: 2.4rem; }
-.closing-lines { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 1.6rem; }
-.closing-lines a { font-family: var(--display); font-weight: 500; font-size: clamp(1.05rem, .95rem + .5vw, 1.35rem); color: var(--on-deep); }
-.closing-lines a:hover { color: var(--accent-lt); }
-.closing-lines .sep { width: 1px; height: 1.4rem; background: var(--line-deep); }
+/* The secondary channels are ACTIONS, not leftover text: hairline chips with
+   a gold icon, real touch height, gold on hover. Quieter than the filled
+   button above, but unmistakably pressable. */
+.closing-lines { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 1rem; }
+.closing-lines a {
+  display: inline-flex; align-items: center; gap: .65rem;
+  min-height: 48px; padding: .6rem 1.4rem;
+  border: 1px solid var(--line-deep);
+  font-size: 1rem; font-weight: 500; color: var(--on-deep);
+  transition: border-color .25s var(--ease), color .25s var(--ease);
+}
+.closing-lines a .ic { color: var(--accent-lt); }
+.closing-lines a:hover { border-color: var(--accent-lt); color: var(--accent-lt); text-decoration: none; }
 
 /* ------------------------------------------------------------ contact */
 
@@ -865,8 +874,8 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
 @media (max-width: 560px) {
   .side { grid-template-columns: 1fr; }
   .quiet { min-height: 42svh; }
-  .closing-lines { flex-direction: column; gap: 1rem; }
-  .closing-lines .sep { display: none; }
+  .closing-lines { flex-direction: column; gap: .8rem; }
+  .closing-lines a { width: min(20rem, 100%); justify-content: center; }
   .btn { width: 100%; }
   .a11y-btn { inset-block-end: 1rem; inset-inline-start: 1rem; }
   .a11y-panel { inset-block-end: 4rem; inset-inline-start: 1rem; }

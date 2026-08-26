@@ -25,6 +25,7 @@ const ICONS = {
   whatsapp:
     '<path d="M12 3.5a8.5 8.5 0 0 0-7.3 12.8L3.5 20.5l4.3-1.1A8.5 8.5 0 1 0 12 3.5z"/><path d="M9.1 8.7c-.3.1-.8.5-.8 1.2 0 2 2.8 4.8 4.8 4.8.7 0 1.1-.5 1.2-.8l.2-.7-1.6-.8-.8.6c-.7-.3-1.8-1.4-2.1-2.1l.6-.8-.8-1.6z"/>',
   plus: '<path d="M12 5v14M5 12h14"/>',
+  mail: '<path d="M3 5.5h18v13H3z"/><path d="m3 7 9 6 9-6"/>',
   a11y:
     '<circle cx="12" cy="12" r="9.2"/><circle cx="12" cy="6.6" r="1.3" fill="currentColor" stroke="none"/><path d="M7.4 9.4h9.2M12 9.6v3.2m0 0-2.2 4.6M12 12.8l2.2 4.6"/>',
 };
@@ -205,11 +206,9 @@ export function closing({ h2, body }) {
     <p class="closing-body">${esc(body)}</p>
     <a class="btn" href="/contact/">השארת פרטים</a>
     <div class="closing-lines">
-      <a href="${telHref}" dir="ltr">${esc(BIZ.phone)}</a>
-      <span class="sep" aria-hidden="true"></span>
-      <a href="${BIZ.whatsapp}" target="_blank" rel="noopener">וואטסאפ</a>
-      <span class="sep" aria-hidden="true"></span>
-      <a href="mailto:${esc(BIZ.email)}" dir="ltr">${esc(BIZ.email)}</a>
+      <a href="${telHref}">${icon('phone', 18)}<bdi dir="ltr">${esc(BIZ.phone)}</bdi></a>
+      <a href="${BIZ.whatsapp}" target="_blank" rel="noopener">${icon('whatsapp', 18)}וואטסאפ</a>
+      <a href="mailto:${esc(BIZ.email)}">${icon('mail', 18)}<bdi dir="ltr">${esc(BIZ.email)}</bdi></a>
     </div>
   </div>
 </section>`;
