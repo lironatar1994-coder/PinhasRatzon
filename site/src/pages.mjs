@@ -71,25 +71,34 @@ const practiceIndexList = (level = 3) => `
 /* The home page routes by the reader's own situation rather than by practice
    area. Each entry still resolves to one practice page, so the taxonomy is
    fully covered and nothing is listed twice on the page. */
+/* Headlines in the client's own voice, answers tuned to the situation —
+   not the practice teasers, which speak the taxonomy this band exists to
+   spare the visitor from. */
 const ROUTE = [
-  ['real-estate-transactions',   'אתם לפני חתימה על עסקה'],
-  ['real-estate-tax',            'המס בעסקה עוד לא נבדק'],
-  ['condominium-registration',   'הזכויות עדיין לא רשומות על שמכם'],
-  ['wills-inheritance',          'צריך לערוך צוואה או להסדיר עיזבון'],
-  ['enduring-power-of-attorney', 'רוצים לקבוע מראש מי יחליט עבורכם'],
-  ['partition-receivership',     'שותפים בנכס ואי אפשר להמשיך יחד'],
+  ['real-estate-transactions',   'אתם לפני חתימה על עסקה',
+   'בדיקות לנכס, להסכם, למיסוי ולרישום — לפני שמתחייבים.'],
+  ['real-estate-tax',            'לא ברור כמה מס תשלמו בעסקה',
+   'תכנון מס, דיווחים, פטורים אפשריים, השגות והחזרי מס.'],
+  ['condominium-registration',   'הנכס עדיין לא רשום על שמכם',
+   'רישום ותיקון צו בית משותף, הצמדות, תקנונים וזיקות הנאה.'],
+  ['wills-inheritance',          'צריך לערוך צוואה או להסדיר עיזבון',
+   'צוואות, צווי ירושה, צווי קיום צוואה והסכמות בין יורשים.'],
+  ['enduring-power-of-attorney', 'רוצים להחליט היום מי יחליט עבורכם בעתיד',
+   'ייפוי כוח מתמשך, הנחיות מקדימות ומסמכי הבעת רצון.'],
+  ['partition-receivership',     'שותפים בנכס ואי אפשר להמשיך יחד',
+   'פירוק שיתוף, כינוס נכסים ומימוש נכסים.'],
 ];
 
 const routeList = () => `
 <ol class="route-list">
-  ${ROUTE.map(([slug, situation], i) => {
+  ${ROUTE.map(([slug, situation, answer], i) => {
     const p = bySlug[slug];
     return `<li>
     <a href="/practice-areas/${p.slug}/">
       <span class="route-n" dir="ltr" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
       <span class="route-body">
         <h3 class="route-q">${esc(situation)}</h3>
-        <span class="route-a">${esc(p.teaser)}</span>
+        <span class="route-a">${esc(answer)}</span>
       </span>
       <span class="route-arrow" aria-hidden="true">${icon('arrow', 20)}</span>
     </a>
@@ -171,7 +180,7 @@ export function home() {
 
 <section class="route" id="practice-areas">
   <div class="wrap">
-    ${secHead('תחומי עיסוק', 'איפה אתם נמצאים כרגע?', 'שישה מצבים שמגיעים לכאן. ברוב התיקים לפחות שניים מהם נכונים באותו זמן.')}
+    ${secHead('איך אפשר לעזור', 'לא צריך לדעת איך קוראים לשירות. צריך לדעת מה קורה עכשיו.', 'בחרו את המצב הקרוב אליכם. בכל עמוד תמצאו מה חשוב לבדוק, מה עלול להשתבש ואיך אפשר להתקדם.')}
     ${routeList()}
   </div>
 </section>
