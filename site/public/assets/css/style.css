@@ -291,8 +291,11 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
    not the DOM (the pixel sweep in the build notes). */
 .hero-eyebrow {
   display: flex; align-items: center; gap: .85rem;
-  font-size: .95rem; font-weight: 500; color: #dcc186; margin-block-end: 2rem;
+  font-size: 1.05rem; font-weight: 400; color: #dcc186; margin-block-end: 2rem;
 }
+/* The name outranks its own metadata: white and weighted, joining the
+   headline's hierarchy, while city and year stay champagne beside it. */
+.hero-eyebrow strong { font-weight: 600; color: #fff; }
 /* Trailing, like every kicker — the eyebrow's first letter lines up with the
    headline's edge below it. */
 .hero-eyebrow::after { content: ''; width: 2.6rem; height: 2px; background: currentColor; flex: none; }

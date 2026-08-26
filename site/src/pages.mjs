@@ -155,7 +155,7 @@ export function home() {
   </div>
   <div class="wrap hero-inner">
     <div class="hero-col">
-      <p class="hero-eyebrow">${esc(BIZ.shortName)} · ${esc(BIZ.city)} · מאז ${esc(BIZ.founded)}</p>
+      <p class="hero-eyebrow"><strong>${esc(BIZ.shortName)}</strong> · ${esc(BIZ.city)} · מאז ${esc(BIZ.founded)}</p>
       <h1>עורך דין <span class="gold-word">מקרקעין</span>,<br>מיסוי וצוואות.</h1>
       <div class="hero-rule" aria-hidden="true"></div>
       <p class="hero-sub">החתימה היא רק אמצע הדרך. אני מלווה אתכם אישית — מהבדיקה הראשונה ועד שהזכויות רשומות על שמכם.</p>
