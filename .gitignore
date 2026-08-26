@@ -19,3 +19,9 @@ site/.unlazy/
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Agent tooling and raw client notes — neither is needed to build or serve the
+# site, and the repository is public.
+.claude/
+New Text Document.txt
+skills-lock.json

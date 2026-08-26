@@ -146,14 +146,27 @@ if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
 }
 
+# Nginx finishes its reload a moment after systemctl returns, so the first
+# request can still land on the old configuration.
 Write-Host "`nVerifying the live site..." -ForegroundColor Gray
-try {
-    $response = Invoke-WebRequest -Uri $SiteUrl -UseBasicParsing -TimeoutSec 25
-    if ($response.StatusCode -ne 200) { throw "HTTP $($response.StatusCode)" }
-    Write-Host "  $SiteUrl -> HTTP 200" -ForegroundColor Gray
+$verified = $false
+foreach ($attempt in 1..5) {
+    try {
+        $response = Invoke-WebRequest -Uri $SiteUrl -UseBasicParsing -TimeoutSec 25
+        if ($response.StatusCode -eq 200) {
+            Write-Host "  $SiteUrl -> HTTP 200" -ForegroundColor Gray
+            $verified = $true
+            break
+        }
+        $lastError = "HTTP $($response.StatusCode)"
+    }
+    catch {
+        $lastError = $_.Exception.Message
+    }
+    Start-Sleep -Seconds 3
 }
-catch {
-    Write-Host "  Could not verify $SiteUrl : $($_.Exception.Message)" -ForegroundColor Yellow
+if (-not $verified) {
+    Write-Host "  Could not verify $SiteUrl after 5 attempts: $lastError" -ForegroundColor Yellow
 }
 
 Write-Host "`n================================================" -ForegroundColor Green
