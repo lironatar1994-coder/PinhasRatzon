@@ -347,6 +347,13 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   line-height: 1.18; color: var(--accent-lt); margin-block-end: .5rem;
   text-wrap: balance;
 }
+/* A dir="ltr" token that renders as a block (or a grid item, which is
+   blockified) left-aligns its own text and zigzags against the RTL column.
+   The Latin/digit run keeps its internal order — it just sits on the same
+   right edge as every Hebrew line around it. */
+.cb-k[dir="ltr"], .creds dt[dir="ltr"], .route-n[dir="ltr"], .idx-n[dir="ltr"] {
+  text-align: right;
+}
 .cb-v { display: block; font-size: .95rem; font-weight: 300; line-height: 1.7; color: var(--on-deep-2); max-width: 24rem; }
 
 /* ------------------------------------------------------------ route
