@@ -320,14 +320,31 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 }
 
 /* ------------------------------------------------------------ quiet band
-   A full-viewport photograph carrying no words at all — the wordless pause
-   the canon uses between dense bands. The band holds its own height: it has
-   no inline content to prop it open. */
+   A full-bleed photograph carrying ONE message — kicker plus a single line.
+   A photo with no words is a wasted band (the client's call, and he is
+   right): the picture sets the mood, the line does the work. */
 
 .quiet {
   position: relative; isolation: isolate; overflow: hidden;
-  min-height: min(100svh, 950px);
-  background: var(--deep);
+  min-height: min(72vh, 700px);
+  display: flex; align-items: center;
+  background: var(--deep); color: var(--on-deep);
+  padding-block: clamp(3.5rem, 2rem + 5vw, 6rem);
+}
+/* The scrim the canon puts under text-on-photo: deepest on the reading side
+   (right, RTL), thinning away. Verified by compositing this exact gradient
+   into the pixel-sampling canvas — the gold kicker measured 2.2:1 without it. */
+.quiet-figure::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to left, rgba(14, 12, 9, .8) 0%, rgba(14, 12, 9, .42) 55%, rgba(14, 12, 9, .1) 100%);
+}
+.quiet-inner { position: relative; z-index: 2; }
+.quiet .label { color: var(--accent-lt); }
+.quiet-line {
+  max-width: 34rem;
+  font-family: var(--display); font-weight: 500;
+  font-size: clamp(1.5rem, 1.1rem + 1.7vw, 2.4rem);
+  line-height: 1.45; color: #fff;
 }
 .quiet-figure { position: absolute; inset: 0; z-index: 0; }
 .quiet-figure img {
@@ -727,10 +744,7 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
     -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 9%);
     mask-image: linear-gradient(to top, transparent 0%, #000 9%);
   }
-  /* Below the split the full-viewport pause loses its context — neighboring
-     bands are no longer visible around it, and a screen-filling still life
-     reads as a mistake. It becomes a cinematic DIVIDER strip instead. */
-  .quiet { min-height: 44svh; }
+  .quiet { min-height: 54svh; }
 }
 
 @media (max-width: 1000px) {
@@ -800,7 +814,7 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .hero-sub { margin-block-start: 1.6rem; }
   .hero-figure { margin-block-start: 2rem; }
   .hero-figure img { max-height: 56vh; }
-  .quiet { min-height: 34svh; }
+  .quiet { min-height: 46svh; }
   .route-list a { grid-template-columns: 3.4rem minmax(0, 1fr); gap: 1.1rem; align-items: start; }
   .route-arrow { display: none; }
   .portrait-media::before { inset-inline: -1rem 3rem; inset-block: 1rem -1rem; }
@@ -817,7 +831,7 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
 
 @media (max-width: 560px) {
   .side { grid-template-columns: 1fr; }
-  .quiet { min-height: 30svh; }
+  .quiet { min-height: 42svh; }
   .closing-lines { flex-direction: column; gap: 1rem; }
   .closing-lines .sep { display: none; }
   .btn { width: 100%; }

@@ -169,9 +169,13 @@ export function home() {
   </div>
 </section>
 
-<section class="quiet" aria-hidden="true">
+<section class="quiet">
   <div class="quiet-figure">
     ${photo(IMAGES.quiet, { alt: '', w: 1920, h: 1084 })}
+  </div>
+  <div class="wrap quiet-inner">
+    <p class="label">הליווי</p>
+    <p class="quiet-line">תיק אחד. עורך דין אחד.<br>מהבדיקה הראשונה ועד הרישום.</p>
   </div>
 </section>
 
@@ -190,9 +194,13 @@ export function home() {
   </div>
 </section>
 
-<section class="quiet" aria-hidden="true">
+<section class="quiet">
   <div class="quiet-figure">
     ${photo(IMAGES.quietPlans, { alt: '', w: 1920, h: 1080 })}
+  </div>
+  <div class="wrap quiet-inner">
+    <p class="label">דרך העבודה</p>
+    <p class="quiet-line">מה שלא בודקים לפני החתימה —<br>מתגלה אחריה.</p>
   </div>
 </section>
 
@@ -240,9 +248,13 @@ export function practiceIndex() {
   </div>
 </section>
 
-<section class="quiet" aria-hidden="true">
+<section class="quiet">
   <div class="quiet-figure">
     ${photo(IMAGES.quietPlans, { alt: '', w: 1920, h: 1080 })}
+  </div>
+  <div class="wrap quiet-inner">
+    <p class="label">אותו תיק</p>
+    <p class="quiet-line">תשריט, נסח, שומה וצו —<br>ארבעה מסמכים, לרוב תיק אחד.</p>
   </div>
 </section>
 
