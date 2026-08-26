@@ -214,7 +214,7 @@ export function home() {
     ${photo(IMAGES.bandStamp, { alt: '', w: 1920, h: 1072 })}
   </div>
   <div class="wrap quiet-inner">
-    <h2 class="quiet-line">בסוף הכול נרשם —<br>שחור על גבי לבן.</h2>
+    <h2 class="quiet-line">את השאלות הנכונות<br>שואלים לפני החותמת.</h2>
   </div>
 </section>
 
