@@ -290,15 +290,20 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
    #dcc186 measures 5.41:1 worst-case — verified against the image's pixels,
    not the DOM (the pixel sweep in the build notes). */
 .hero-eyebrow {
-  display: flex; align-items: center; gap: .85rem;
   font-size: 1.05rem; font-weight: 400; color: #dcc186; margin-block-end: 2rem;
+  line-height: 1.7;
 }
 /* The name outranks its own metadata: white and weighted, joining the
    headline's hierarchy, while city and year stay champagne beside it. */
 .hero-eyebrow strong { font-weight: 600; color: #fff; }
-/* Trailing, like every kicker — the eyebrow's first letter lines up with the
-   headline's edge below it. */
-.hero-eyebrow::after { content: ''; width: 2.6rem; height: 2px; background: currentColor; flex: none; }
+/* Each segment breaks only at the separators, never inside a name or a year. */
+.hero-eyebrow .nb { white-space: nowrap; }
+/* Trailing dash, like every kicker — drawn inside the last segment's nowrap
+   box so it can never wrap onto a line of its own. */
+.hero-eyebrow .nb:last-child::after {
+  content: ''; display: inline-block; width: 2.6rem; height: 2px;
+  background: currentColor; vertical-align: middle; margin-inline-start: .85rem;
+}
 .hero h1 { color: #fff; }
 /* One word in champagne — the same photo-safe gold as the eyebrow (display
    size needs 3:1; #dcc186 measures 5.4:1 against the wall's brightest pixels). */
@@ -859,7 +864,10 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
 
   .hero { padding-block: 3.2rem 0; }
   .hero-cue { display: none; }
-  .hero-eyebrow { margin-block-end: 1.6rem; }
+  /* Fit the whole eyebrow on one line at common phone widths: a touch
+     smaller, and a shorter trailing dash. */
+  .hero-eyebrow { margin-block-end: 1.6rem; font-size: 1rem; }
+  .hero-eyebrow .nb:last-child::after { width: 1.8rem; margin-inline-start: .7rem; }
   .hero-rule { margin-block-start: 1.6rem; }
   .hero-sub { margin-block-start: 1.6rem; }
   .hero-figure { margin-block-start: 2rem; }
@@ -878,6 +886,14 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   /* Clearance for the fixed accessibility button, which otherwise sits on
      the disclaimer's last lines at the very end of the page. */
   .site-footer { padding-block-end: 5rem; }
+}
+
+/* Narrow Androids (Galaxy S8 class, 360px wide): one more notch keeps the
+   whole eyebrow on a single line; below ~340px it wraps cleanly at a
+   separator, the dash glued to the year. */
+@media (max-width: 370px) {
+  .hero-eyebrow { font-size: .95rem; }
+  .hero-eyebrow .nb:last-child::after { width: 1.5rem; margin-inline-start: .6rem; }
 }
 
 @media (max-width: 560px) {
