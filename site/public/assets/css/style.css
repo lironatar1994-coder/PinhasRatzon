@@ -340,11 +340,13 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 }
 .quiet-inner { position: relative; z-index: 2; }
 .quiet .label { color: var(--accent-lt); }
+/* Display scale, not caption scale — the line on a photo band is a
+   statement, and it matches the statement pull's own ramp. */
 .quiet-line {
-  max-width: 34rem;
-  font-family: var(--display); font-weight: 500;
-  font-size: clamp(1.5rem, 1.1rem + 1.7vw, 2.4rem);
-  line-height: 1.45; color: #fff;
+  max-width: 36rem;
+  font-family: var(--display); font-weight: 600;
+  font-size: clamp(1.7rem, 1.15rem + 2.4vw, 3rem);
+  line-height: 1.35; color: #fff;
 }
 .quiet-figure { position: absolute; inset: 0; z-index: 0; }
 .quiet-figure img {
