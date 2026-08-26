@@ -89,7 +89,7 @@ h1, h2, h3, h4 {
 /* The display faces are set tight on purpose — they opt out of the body's
    Hebrew word-spacing and nothing else. Kept as its own rule so it cannot
    drag the heading block's other declarations onto these elements. */
-h1, h2, h3, h4, .pull, .wm-name, .cb-k, .route-q, .side-tel, .btn, .wordmark {
+h1, h2, h3, h4, .pull, .wm-name, .route-q, .side-tel, .btn, .wordmark {
   word-spacing: normal;
 }
 h1 { font-size: clamp(2.4rem, 1.2rem + 4.4vw, 4.6rem); font-weight: 700; line-height: 1.12; }
@@ -110,7 +110,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .section-dark :focus-visible, .route :focus-visible, .closing :focus-visible,
 .site-footer :focus-visible, .site-header :focus-visible, .hero :focus-visible,
-.quiet :focus-visible, .creds-band :focus-visible, .page-hero :focus-visible {
+.quiet :focus-visible, .page-hero :focus-visible {
   outline-color: var(--accent-lt);
 }
 
@@ -327,34 +327,13 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   to { transform: scale(1.065); }
 }
 
-/* ------------------------------------------------------------ credentials band
-   Where this vertical puts award medallions: a black band, gold figures.
-   Facts only — every line is on the CV. No rankings, no invented counts. */
-
-.creds-band { background: var(--deep-2); border-block-end: 1px solid var(--gold-line); }
-.creds-band ul {
-  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: start;
-  padding-block: clamp(2.2rem, 1.5rem + 1.8vw, 3.4rem);
-}
-.creds-band li { padding-inline: clamp(1rem, .6rem + 1.2vw, 2.2rem); }
-.creds-band li + li { border-inline-start: 1px solid var(--line-deep); }
-.creds-band li:first-child { padding-inline-start: 0; }
-.creds-band li:last-child { padding-inline-end: 0; }
-.cb-k {
-  display: block; font-family: var(--display); font-weight: 500;
-  font-size: clamp(1.55rem, 1.1rem + 1.4vw, 2.4rem);
-  line-height: 1.18; color: var(--accent-lt); margin-block-end: .5rem;
-  text-wrap: balance;
-}
 /* A dir="ltr" token that renders as a block (or a grid item, which is
    blockified) left-aligns its own text and zigzags against the RTL column.
    The Latin/digit run keeps its internal order — it just sits on the same
    right edge as every Hebrew line around it. */
-.cb-k[dir="ltr"], .creds dt[dir="ltr"], .route-n[dir="ltr"], .idx-n[dir="ltr"] {
+.creds dt[dir="ltr"], .route-n[dir="ltr"], .idx-n[dir="ltr"] {
   text-align: right;
 }
-.cb-v { display: block; font-size: .95rem; font-weight: 300; line-height: 1.7; color: var(--on-deep-2); max-width: 24rem; }
 
 /* ------------------------------------------------------------ route
    "Where are you standing?" — routing by the visitor's own situation rather
@@ -793,13 +772,6 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
      header, so its own z-index resolves inside the header's stacking context —
      a backdrop above 90 paints over the drawer and swallows every nav tap. */
   .nav-backdrop { position: fixed; inset: 0; background: rgba(14,12,9,.55); z-index: 85; border: 0; }
-
-  /* Three facts stack as ruled rows on phones — big gold head, one line under. */
-  .creds-band ul { grid-template-columns: 1fr; row-gap: 0; }
-  .creds-band li, .creds-band li:first-child, .creds-band li:last-child { padding-inline: 0; padding-block: 1.4rem; }
-  .creds-band li:first-child { padding-block-start: 0; }
-  .creds-band li:last-child { padding-block-end: 0; }
-  .creds-band li + li { border-inline-start: 0; border-block-start: 1px solid var(--line-deep); }
 
   .hero { padding-block: 3.2rem 0; }
   .hero-cue { display: none; }

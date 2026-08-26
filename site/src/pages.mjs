@@ -94,29 +94,12 @@ const routeList = () => `
   }).join('\n  ')}
 </ol>`;
 
-/* The band that this vertical fills with award medallions. Facts only —
-   every line here is on the CV. No rankings, no counts we cannot source.
-   Three cells, three DISTINCT facts: the year count absorbs the bar-admission
-   year (they were two cells saying one thing), and the rare credential — the
-   POA certification most lawyers don't hold — leads with its own name instead
-   of hiding behind a lone "מוסמך". */
-const CREDENTIALS = [
-  [String(YEARS), `שנות עיסוק במקרקעין, מיסוי ועיזבונות — חבר לשכת עורכי הדין מאז ${BIZ.founded}`],
-  ['ייפוי כוח מתמשך', 'מוסמך לעריכתו מטעם האפוטרופוס הכללי ומשרד המשפטים'],
-  ['LL.B', 'תואר במשפטים, הקריה האקדמית אונו'],
-];
-
-const credentialsBand = () => `
-<aside class="creds-band" aria-label="הסמכות והשכלה">
-  <div class="wrap">
-    <ul>
-      ${CREDENTIALS.map(([k, v]) => `<li>
-        <span class="cb-k"${/^[0-9A-Za-z.]+$/.test(k) ? ' dir="ltr"' : ''}>${esc(k)}</span>
-        <span class="cb-v">${esc(v)}</span>
-      </li>`).join('\n      ')}
-    </ul>
-  </div>
-</aside>`;
+/* The credentials band this vertical ships (medallions/stats) was tried here
+   as an honest facts strip and DELETED at the client's call (2026-08-26):
+   every fact it carried already lives elsewhere (hero eyebrow: since 2011;
+   statement: the 15 years; the POA certification: its own page + about;
+   LL.B: about), and it occupied the most valuable scroll position on the
+   page answering a question nobody asked there. */
 
 const PRINCIPLES = [
   ['בדיקה לפני התחייבות',
@@ -168,8 +151,6 @@ export function home() {
   </div>
   <a class="hero-cue" href="#statement" aria-label="המשך לתוכן">${icon('arrowDown', 22)}</a>
 </section>
-
-${credentialsBand()}
 
 <section class="statement" id="statement">
   <div class="wrap narrow">
