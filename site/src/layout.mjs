@@ -201,7 +201,6 @@ export function closing({ h2, body }) {
   return `
 <section class="closing">
   <div class="wrap">
-    <p class="label">יצירת קשר</p>
     <h2>${esc(h2)}</h2>
     <p class="closing-body">${esc(body)}</p>
     <a class="btn" href="/contact/">השארת פרטים</a>
@@ -219,7 +218,7 @@ export function faqBlock(faqs, { h2 = 'שאלות נפוצות', label = 'שאל
 <section class="faq" id="faq">
   <div class="wrap">
     <div class="sec-head">
-      <p class="label">${esc(label)}</p>
+      ${label ? `<p class="label">${esc(label)}</p>` : ''}
       <h2>${esc(h2)}</h2>
     </div>
     <div class="faq-list">

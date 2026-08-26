@@ -149,7 +149,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   content: ''; width: 2.4rem; height: 2px; background: var(--accent-lt); flex: none;
 }
 /* Centered kickers are flanked symmetrically instead. */
-.closing .label::before, .center .label::before {
+.center .label::before {
   content: ''; width: 2.4rem; height: 2px; background: var(--accent-lt); flex: none;
 }
 
