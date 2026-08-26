@@ -506,7 +506,19 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .sub-intro { color: var(--muted); margin-block-end: 1.8rem; max-width: 42rem; }
 
 .checks { display: grid; gap: 0; max-width: 44rem; border-block-start: 1px solid var(--stone); }
-.checks li { padding-block: .9rem; border-block-end: 1px solid var(--stone); color: var(--ink-2); }
+.checks li {
+  position: relative;
+  padding-block: .9rem; padding-inline-start: 1.5rem;
+  border-block-end: 1px solid var(--stone); color: var(--ink-2);
+}
+/* A small gold diamond per covered item — the checklist's own geometry,
+   centered on the first line of text. */
+.checks li::before {
+  content: ''; position: absolute;
+  inset-inline-start: 2px; inset-block-start: calc(.9rem + 1em - 4px);
+  width: 8px; height: 8px; background: var(--accent-lt);
+  transform: rotate(45deg);
+}
 
 .steps { border-block-start: 1px solid var(--stone); }
 .steps > li { display: grid; grid-template-columns: 4rem minmax(0, 1fr); gap: 1.5rem; padding-block: 1.7rem; border-block-end: 1px solid var(--stone); }
@@ -646,10 +658,30 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .a11y-panel button:hover { color: var(--accent-lt); }
 .a11y-panel a { font-size: .88rem; color: var(--accent-lt); padding-block-start: .6rem; }
 
-/* ------------------------------------------------------------ reveal */
+/* ------------------------------------------------------------ entrance
+   One authored opening instead of an identical reveal on every section:
+   the hero reads itself in — identity, headline, the gold rule drawing
+   from its anchor, then the promise — while the photograph settles.
+   Killed wholesale by reduced-motion and the a11y motion toggle. */
 
-[data-reveal] { opacity: 0; transform: translateY(14px); }
-[data-reveal].shown { opacity: 1; transform: translateY(0); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes hero-rule-in {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes hero-settle {
+  from { transform: scale(1.045); }
+  to { transform: scale(1); }
+}
+.hero-eyebrow { animation: hero-in .7s var(--ease) .1s both; }
+.hero h1 { animation: hero-in .8s var(--ease) .28s both; }
+/* origin 100% = the right edge, the RTL anchor — the bar draws outward. */
+.hero-rule { transform-origin: 100% 50%; animation: hero-rule-in .6s var(--ease) .95s both; }
+.hero-sub { animation: hero-in .8s var(--ease) .6s both; }
+.hero-figure img { animation: hero-settle 2.2s var(--ease) both; }
 
 /* ------------------------------------------------------------ a11y modes */
 
@@ -664,11 +696,9 @@ html[data-links="1"] a { text-decoration: underline; }
 html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] *::after {
   animation: none !important; transition: none !important; scroll-behavior: auto !important;
 }
-html[data-motion="0"] [data-reveal] { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
-  [data-reveal] { opacity: 1; transform: none; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
 
 /* ------------------------------------------------------------ responsive */
@@ -799,6 +829,6 @@ html[data-motion="0"] [data-reveal] { opacity: 1; transform: none; }
 @media print {
   .site-header, .a11y-btn, .a11y-panel, .skip, .hero-cue, .closing, .form { display: none !important; }
   body { color: #000; background: #fff; }
-  [data-reveal] { opacity: 1; transform: none; }
+  * { animation: none !important; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .8em; }
 }

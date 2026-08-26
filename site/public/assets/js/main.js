@@ -60,25 +60,6 @@
     });
   });
 
-  /* ------------------------------------------------------ scroll reveal
-     Applied only when motion is allowed. Without IntersectionObserver, or
-     with reduced motion, everything is simply shown. */
-
-  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var targets = document.querySelectorAll('.sec-head, .pull, .statement-body, .index, .principles article, .portrait-media, .portrait-copy, .faq-list, .closing .wrap, .prose > *, .creds');
-
-  if (!reduce && 'IntersectionObserver' in window && !store.get('a11y-motion')) {
-    Array.prototype.forEach.call(targets, function (el) { el.setAttribute('data-reveal', ''); });
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('shown');
-        io.unobserve(entry.target);
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
-    Array.prototype.forEach.call(targets, function (el) { io.observe(el); });
-  }
-
   /* ---------------------------------------------------------- a11y panel */
 
   var a11yBtn = document.getElementById('a11yBtn');
@@ -104,8 +85,6 @@
     else {
       root.setAttribute('data-motion', '0');
       store.set('a11y-motion', '0');
-      // reveal anything still waiting, so nothing stays invisible
-      Array.prototype.forEach.call(document.querySelectorAll('[data-reveal]'), function (el) { el.classList.add('shown'); });
     }
   }
   function resetA11y() {
