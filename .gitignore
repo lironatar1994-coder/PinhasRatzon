@@ -6,8 +6,15 @@ site/dist/
 Images/
 Images2/
 Images3/
+Images4/
 ratzon-law/
 kling_*.png
+
+# Generator source PNGs must never ship with the site (they are 1–3 MB each and
+# have repeatedly been swept into deploys). Only the processed webp/jpg belong
+# in public; the single legitimate PNG is whitelisted below.
+site/public/assets/img/**/*.png
+!site/public/assets/img/apple-touch-icon.png
 
 # Tooling scratch
 node_modules/
