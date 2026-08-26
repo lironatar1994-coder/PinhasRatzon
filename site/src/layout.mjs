@@ -318,6 +318,7 @@ export function page({
 
 <meta name="theme-color" content="#0E0C09">
 <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/assets/img/favicon.ico" sizes="any">
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 
 ${preloadImage ? (preloadPortrait

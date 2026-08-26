@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
-  <rect width="40" height="40" rx="7" fill="#14120F"/>
-  <g fill="none" stroke="#C3A87C" stroke-linecap="round">
-    <path d="M12 30V20.4a8 8 0 0 1 16 0V30" stroke-width="2.2"/>
-    <path d="M7.5 30h25" stroke-width="2.2"/>
-    <path d="M20 21V30" stroke-width="1.5" opacity=".55"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">P R - Pinhas Ratzon Attorney</title>
+  <rect width="64" height="64" rx="14" fill="#12110F"/>
+  <rect x="7" y="7" width="50" height="50" rx="9" fill="none" stroke="#8A713E" stroke-width="1"/>
+  <path d="M32 16V48" stroke="#C6A45D" stroke-width="1"/>
+  <text x="22" y="43" text-anchor="middle" fill="#D0AF69" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="700">P</text>
+  <text x="42" y="43" text-anchor="middle" fill="#D0AF69" font-family="Georgia, 'Times New Roman', serif" font-size="30" font-weight="700">R</text>
 </svg>
