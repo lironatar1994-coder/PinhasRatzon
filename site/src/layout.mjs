@@ -243,9 +243,9 @@ export function footer() {
     <div class="foot-top">
       ${wordmark('wm-foot')}
       <address class="foot-nap">
-        <a href="${telHref}" dir="ltr">${esc(BIZ.phone)}</a>
-        <a href="${BIZ.whatsapp}" target="_blank" rel="noopener">וואטסאפ</a>
-        <a href="mailto:${esc(BIZ.email)}" dir="ltr">${esc(BIZ.email)}</a>
+        <a href="${telHref}">${icon('phone', 16)}<bdi dir="ltr">${esc(BIZ.phone)}</bdi></a>
+        <a href="${BIZ.whatsapp}" target="_blank" rel="noopener">${icon('whatsapp', 16)}וואטסאפ</a>
+        <a href="mailto:${esc(BIZ.email)}">${icon('mail', 16)}<bdi dir="ltr">${esc(BIZ.email)}</bdi></a>
         <span>${esc(BIZ.addressHuman)}</span>
         <span>${esc(BIZ.areaHuman)}</span>
       </address>
