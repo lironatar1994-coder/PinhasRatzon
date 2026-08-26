@@ -21,6 +21,13 @@ OLD_ROOT="/var/www/.${APP_NAME}.old"
 NGINX_SITE="/etc/nginx/sites-available/${DOMAIN}.conf"
 NGINX_SNIPPET="/etc/nginx/snippets/${APP_NAME}-locations.conf"
 
+# The contact form has nowhere to POST to on a static host, so a small Node
+# service handles it. Its secrets live in FORM_ENV, outside the repository.
+FORM_APP="pinhas-ratzon-form"
+FORM_PORT="3108"
+FORM_ENV="/etc/pinhas-ratzon-form.env"
+LEADS_DIR="/var/lib/pinhas-ratzon"
+
 echo "[INFO] Starting ${APP_NAME} deployment..."
 
 if [ ! -f "${SITE_DIR}/build.mjs" ]; then
@@ -90,6 +97,42 @@ fi
 mv "${STAGE_ROOT}" "${WEB_ROOT}"
 rm -rf "${OLD_ROOT}"
 
+echo "[INFO] Starting the contact-form service..."
+mkdir -p "${LEADS_DIR}"
+chmod 750 "${LEADS_DIR}"
+
+if [ ! -f "${FORM_ENV}" ]; then
+  echo "[WARN] ${FORM_ENV} is missing. Submissions will still be stored in"
+  echo "[WARN] ${LEADS_DIR}/leads.jsonl, but no notification email will be sent."
+fi
+
+if ! command -v pm2 >/dev/null 2>&1; then
+  echo "[ERROR] pm2 is not installed; the contact form cannot be served." >&2
+  exit 1
+fi
+
+if pm2 describe "${FORM_APP}" >/dev/null 2>&1; then
+  pm2 restart "${FORM_APP}" --update-env >/dev/null
+else
+  pm2 start "$(pwd)/form-service/server.mjs" --name "${FORM_APP}" --time >/dev/null
+fi
+pm2 save >/dev/null
+
+form_up=""
+for _ in 1 2 3 4 5 6 7 8 9 10; do
+  if curl -fsS "http://127.0.0.1:${FORM_PORT}/health" >/dev/null 2>&1; then
+    form_up=1
+    break
+  fi
+  sleep 1
+done
+if [ -z "${form_up}" ]; then
+  echo "[ERROR] ${FORM_APP} did not answer on 127.0.0.1:${FORM_PORT}." >&2
+  pm2 logs "${FORM_APP}" --lines 20 --nostream || true
+  exit 1
+fi
+echo "[INFO] ${FORM_APP} healthy: $(curl -fsS "http://127.0.0.1:${FORM_PORT}/health")"
+
 echo "[INFO] Writing the Nginx route snippet..."
 cat > "${NGINX_SNIPPET}" <<EOF
 # Managed by deploy_linux.sh in the ${APP_NAME} repository — edits are overwritten.
@@ -104,6 +147,25 @@ location = ${LOWER_ROUTE_BASE} {
 
 location ^~ ${LOWER_ROUTE_BASE}/ {
     return 301 ${ROUTE_BASE}/;
+}
+
+# The one dynamic route on an otherwise static site: the contact form's POST
+# target. An exact-match location wins over the ^~ prefix below regardless of
+# where it sits in the file.
+location = ${ROUTE_BASE}/contact/submit {
+    proxy_pass http://127.0.0.1:${FORM_PORT}/submit;
+    proxy_http_version 1.1;
+    proxy_set_header Host \$host;
+    proxy_set_header X-Real-IP \$remote_addr;
+    proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto \$scheme;
+    client_max_body_size 32k;
+
+    add_header Cache-Control "no-store" always;
+    add_header X-Content-Type-Options "nosniff" always;
+    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header Referrer-Policy "strict-origin-when-cross-origin" always;
+    add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
 }
 
 # Asset filenames are stamped with a content hash (?v=), so they cache forever.

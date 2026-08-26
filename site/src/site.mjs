@@ -60,6 +60,6 @@ export const DISCLAIMER =
 export const FORM_NOTE =
   'הפנייה אינה יוצרת יחסי עורך דין–לקוח ואינה מהווה ייעוץ משפטי.';
 
-// Netlify Forms works with no backend; swap for Formspree/EmailJS/a server
-// handler if hosting elsewhere.
-export const FORM_ACTION = '/thank-you/';
+// Handled by form-service/ — a small Node service behind Nginx that stores the
+// submission and mails a notification, then redirects to /thank-you/.
+export const FORM_ACTION = '/contact/submit';

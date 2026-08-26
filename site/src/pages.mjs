@@ -163,7 +163,7 @@ export function home() {
       <p class="hero-eyebrow">${esc(BIZ.shortName)} · ${esc(BIZ.city)} · מאז ${esc(BIZ.founded)}</p>
       <h1>עורך דין <span class="gold-word">מקרקעין</span>,<br>מיסוי וצוואות.</h1>
       <div class="hero-rule" aria-hidden="true"></div>
-      <p class="hero-sub">אני מלווה אתכם באופן אישי — מהבדיקות שלפני החתימה, דרך המס והדיווחים, ועד שהזכויות רשומות על שמכם.</p>
+      <p class="hero-sub">החתימה היא רק אמצע הדרך. אני מלווה אתכם אישית — מהבדיקה הראשונה ועד שהזכויות רשומות על שמכם.</p>
     </div>
   </div>
   <a class="hero-cue" href="#statement" aria-label="המשך לתוכן">${icon('arrowDown', 22)}</a>

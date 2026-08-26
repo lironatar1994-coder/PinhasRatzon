@@ -163,8 +163,7 @@ export function breadcrumbs(trail) {
 /* A single quiet form, and only where a form belongs — never in a hero. */
 export function contactForm({ id = 'c' } = {}) {
   return `
-<form class="form" action="${FORM_ACTION}" method="post" name="contact" data-netlify="true" novalidate>
-  <input type="hidden" name="form-name" value="contact">
+<form class="form" action="${FORM_ACTION}" method="post" name="contact" novalidate>
   <p class="hp"><label>אל תמלאו שדה זה <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
 
   <div class="field">
