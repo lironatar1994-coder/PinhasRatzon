@@ -841,6 +841,8 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .foot-cols a:hover { color: var(--accent-lt); }
 
 .foot-bottom { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; padding-block-start: 2rem; border-block-start: 1px solid var(--line-deep); font-size: .85rem; color: var(--on-deep-2); line-height: 1.8; }
+.foot-bottom .credit { color: var(--accent-lt); }
+.foot-bottom .credit:hover { text-decoration: underline; }
 .foot-bottom p:first-child { max-width: 46rem; }
 
 /* ------------------------------------------------------------ a11y widget */
@@ -985,6 +987,9 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
     font-family: var(--display); font-weight: 600; font-size: 1.7rem;
   }
   .nav-tel:hover { background: transparent; color: var(--accent-lt); }
+  /* The number is an LTR run inside a flex anchor — without an explicit
+     end-anchor it drifts to the drawer's left edge. */
+  .primary .nav-tel { justify-content: flex-end; }
   .primary .nav-wa {
     display: inline-flex; align-items: center; gap: .6rem;
     margin-block-start: .6rem; min-height: 44px;

@@ -295,7 +295,7 @@ export function footer() {
 
     <div class="foot-bottom">
       <p>${esc(DISCLAIMER)}</p>
-      <p>© ${new Date().getFullYear()} ${esc(BIZ.name)}</p>
+      <p>© ${new Date().getFullYear()} ${esc(BIZ.name)} · נבנה על ידי <a class="credit" href="https://lawebs.co.il" target="_blank" rel="noopener"><bdi dir="ltr">LaWebs</bdi></a></p>
     </div>
   </div>
 </footer>
