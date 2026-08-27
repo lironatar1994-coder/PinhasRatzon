@@ -206,15 +206,17 @@ export function closing({ h2, body }) {
       <img src="/assets/img/band-chairs.jpg" alt="" width="1920" height="1072" loading="lazy" decoding="async">
     </picture>
   </div>
-  <div class="wrap">
-    <h2>${esc(h2)}</h2>
-    <p class="closing-body">${esc(body)}</p>
-    <a class="btn" href="/contact/">השארת פרטים</a>
-    <div class="closing-lines">
-      <a href="${telHref}">${icon('phone', 18)}<bdi dir="ltr">${esc(BIZ.phone)}</bdi></a>
-      <a href="${BIZ.whatsapp}" target="_blank" rel="noopener">${icon('whatsapp', 18)}וואטסאפ</a>
-      <a href="mailto:${esc(BIZ.email)}">${icon('mail', 18)}<bdi dir="ltr">${esc(BIZ.email)}</bdi></a>
+  <div class="wrap closing-grid">
+    <div class="closing-copy">
+      <h2>${esc(h2)}</h2>
+      <p class="closing-body">${esc(body)}</p>
+      <a class="btn" href="/contact/">השארת פרטים</a>
     </div>
+    <ul class="closing-ch">
+      <li><a href="${telHref}">${icon('phone', 20)}<span class="ch-body"><span class="ch-k">טלפון</span><span class="ch-v"><bdi dir="ltr">${esc(BIZ.phone)}</bdi></span></span></a></li>
+      <li><a href="${BIZ.whatsapp}" target="_blank" rel="noopener">${icon('whatsapp', 20)}<span class="ch-body"><span class="ch-k">וואטסאפ</span><span class="ch-v">שליחת הודעה</span></span></a></li>
+      <li><a href="mailto:${esc(BIZ.email)}">${icon('mail', 20)}<span class="ch-body"><span class="ch-k">אימייל</span><span class="ch-v"><bdi dir="ltr">${esc(BIZ.email)}</bdi></span></span></a></li>
+    </ul>
   </div>
 </section>`;
 }

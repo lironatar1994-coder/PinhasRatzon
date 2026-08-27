@@ -626,7 +626,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 
 .closing {
   position: relative; isolation: isolate; overflow: hidden;
-  padding-block: var(--gap-sec); background: var(--deep); color: var(--on-deep); text-align: center;
+  padding-block: var(--gap-sec); background: var(--deep); color: var(--on-deep);
 }
 /* The consultation scene under the invitation to talk — present as
    atmosphere, not as a picture: a heavy uniform veil keeps every measured
@@ -641,23 +641,27 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   background: rgba(14, 12, 9, .66);
 }
 .closing .wrap { position: relative; z-index: 2; }
-.closing .label { justify-content: center; color: var(--accent-lt); }
-.closing h2 { color: #fff; }
-.closing-body { max-width: 34rem; margin: 1.4rem auto 2.4rem; color: var(--on-deep-2); font-weight: 300; }
-.closing .btn { margin-block-end: 2.4rem; }
-/* The secondary channels are ACTIONS, not leftover text: hairline chips with
-   a gold icon, real touch height, gold on hover. Quieter than the filled
-   button above, but unmistakably pressable. */
-.closing-lines { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 1rem; }
-.closing-lines a {
-  display: inline-flex; align-items: center; gap: .65rem;
-  min-height: 48px; padding: .6rem 1.4rem;
-  border: 1px solid var(--line-deep);
-  font-size: 1.1rem; font-weight: 500; color: var(--on-deep);
-  transition: border-color .25s var(--ease), color .25s var(--ease);
+/* Message column against action column — the closing speaks the site's own
+   editorial language instead of the centered-CTA template. */
+.closing-grid {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(2.5rem, 1.5rem + 4vw, 6rem); align-items: center;
 }
-.closing-lines a .ic { color: var(--accent-lt); }
-.closing-lines a:hover { border-color: var(--accent-lt); color: var(--accent-lt); text-decoration: none; }
+.closing h2 { color: #fff; font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem); }
+.closing-body { max-width: 30rem; margin: 1.4rem 0 2.4rem; color: var(--on-deep-2); font-weight: 300; }
+.closing .btn { margin-block-end: 0; }
+/* The channels as hairline rows — the same list language as the router and
+   the index: a gold icon, a small key, the value in full. */
+.closing-ch { border-block-start: 1px solid var(--line-deep); }
+.closing-ch li { border-block-end: 1px solid var(--line-deep); }
+.closing-ch a {
+  display: flex; align-items: center; gap: 1.1rem;
+  padding-block: 1.05rem; min-height: 56px; color: var(--on-deep);
+}
+.closing-ch .ic { color: var(--accent-lt); flex: none; }
+.ch-k { display: block; font-size: .85rem; color: var(--on-deep-2); margin-block-end: .1rem; }
+.ch-v { font-size: 1.1rem; }
+.closing-ch a:hover { color: var(--accent-lt); text-decoration: none; }
 
 /* ------------------------------------------------------------ contact */
 
@@ -873,6 +877,7 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   }
   .statement-figure::after { background: rgba(14, 12, 9, .64); }
   .closing-figure::after { background: rgba(14, 12, 9, .74); }
+  .closing-grid { grid-template-columns: 1fr; gap: 2.6rem; }
 
   /* The band subjects live in the LEFT third of each frame; a centered
      cover-crop on a phone slices them at the edge and fills the screen
@@ -924,8 +929,6 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .quiet { min-height: 36svh; }
   /* Narrow phones get the tighter head-and-shoulders crop. */
   .portrait-media img { aspect-ratio: 5 / 4; object-position: 50% 18%; }
-  .closing-lines { flex-direction: column; gap: .8rem; }
-  .closing-lines a { width: min(20rem, 100%); justify-content: center; }
   .btn { width: 100%; }
   .a11y-btn { inset-block-end: 1rem; inset-inline-start: 1rem; }
   .a11y-panel { inset-block-end: 4rem; inset-inline-start: 1rem; }
