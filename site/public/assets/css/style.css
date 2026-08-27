@@ -556,6 +556,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 /* The key band frame keeps its subject in the lower-left third — anchor
    the crop there or the figure shows only dark wood. */
 .page-hero-figure.figure-key img { object-position: 12% 62%; }
+.page-hero-figure.figure-chairs img { object-position: 28% 58%; }
 /* The text column is fenced to the right 46% — the fence, not an em cap,
    is what guarantees the no-overlap contract. */
 .page-hero.has-figure .wrap { display: grid; grid-template-columns: minmax(0, 46fr) minmax(0, 54fr); }
@@ -768,6 +769,18 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 }
 
 /* ------------------------------------------------------------ contact */
+
+/* The same channel-row language as the closing, on paper: stone hairlines,
+   gold icon, small key over the full value. One control, one look. */
+.contact-ch { border-block-start: 1px solid var(--stone); margin-block-end: 2.4rem; }
+.contact-ch li { border-block-end: 1px solid var(--stone); }
+.contact-ch a {
+  display: flex; align-items: center; gap: 1.1rem;
+  padding-block: 1.05rem; min-height: 56px; color: var(--ink);
+}
+.contact-ch .ic { color: var(--accent); flex: none; }
+.contact-ch .ch-k { color: var(--muted); }
+.contact-ch a:hover { color: var(--accent); text-decoration: none; }
 
 .contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(2.5rem, 1.5rem + 4vw, 6rem); align-items: start; }
 .form { display: grid; gap: 1.5rem; }

@@ -541,30 +541,25 @@ export function contact() {
   ];
 
   const body = `
-<section class="page-hero">
+<section class="page-hero has-figure">
+  <div class="page-hero-figure figure-chairs" aria-hidden="true">
+    ${photo(IMAGES.bandChairs, { alt: '', w: 1920, h: 1072, priority: true })}
+  </div>
   <div class="wrap">
-    <p class="label">יצירת קשר</p>
-    <h1>לשיחה</h1>
+    <h1>שיחה אחת עושה סדר</h1>
     <p class="lead">אפשר להתקשר ישירות, או להשאיר פרטים ואחזור אליכם.</p>
-  </div>
-</section>
-
-<section class="quiet">
-  <div class="quiet-figure">
-    ${photo(IMAGES.bandChairs, { alt: '', w: 1920, h: 1072 })}
-  </div>
-  <div class="wrap quiet-inner">
-    <h2 class="quiet-line">שיחה ראשונה. שאלות, תשובות,<br>ותמונה ברורה.</h2>
   </div>
 </section>
 
 <div class="section">
   <div class="wrap contact-grid">
     <div class="contact-details">
+      <ul class="contact-ch">
+        <li><a href="${telHref}">${icon('phone', 20)}<span class="ch-body"><span class="ch-k">טלפון</span><span class="ch-v"><bdi dir="ltr">${esc(BIZ.phone)}</bdi></span></span></a></li>
+        <li><a href="${BIZ.whatsapp}" target="_blank" rel="noopener">${icon('whatsapp', 20)}<span class="ch-body"><span class="ch-k">וואטסאפ</span><span class="ch-v">שליחת הודעה</span></span></a></li>
+        <li><a href="mailto:${esc(BIZ.email)}">${icon('mail', 20)}<span class="ch-body"><span class="ch-k">אימייל</span><span class="ch-v"><bdi dir="ltr">${esc(BIZ.email)}</bdi></span></span></a></li>
+      </ul>
       <dl class="creds wide">
-        <div><dt>טלפון</dt><dd><a href="${telHref}" dir="ltr">${esc(BIZ.phone)}</a></dd></div>
-        <div><dt>וואטסאפ</dt><dd><a href="${BIZ.whatsapp}" target="_blank" rel="noopener">שליחת הודעה ישירה</a></dd></div>
-        <div><dt>דוא״ל</dt><dd><a href="mailto:${esc(BIZ.email)}" dir="ltr">${esc(BIZ.email)}</a></dd></div>
         <div><dt>כתובת</dt><dd>${esc(BIZ.addressHuman)}</dd></div>
         <div><dt>אזור שירות</dt><dd>${esc(BIZ.areaHuman)}</dd></div>
       </dl>
