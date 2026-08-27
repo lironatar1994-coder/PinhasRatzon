@@ -213,8 +213,8 @@ export function closing({ h2 }) {
   </div>
   <div class="closing-portrait" aria-hidden="true">
     <picture>
-      <source srcset="/assets/img/closing-portrait-left.webp" type="image/webp">
-      <img src="/assets/img/closing-portrait-left.jpg" alt="" width="1000" height="908" loading="lazy" decoding="async">
+      <source srcset="/assets/img/closing-listen.webp" type="image/webp">
+      <img src="/assets/img/closing-listen.jpg" alt="" width="1000" height="879" loading="lazy" decoding="async">
     </picture>
   </div>
   <div class="wrap closing-grid">
