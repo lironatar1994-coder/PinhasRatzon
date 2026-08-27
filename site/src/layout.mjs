@@ -361,7 +361,7 @@ export function page({
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=pr-20260826">
 
 ${preloadImage ? (preloadPortrait
-  ? `<link rel="preload" as="image" href="${preloadPortrait}.webp" type="image/webp" media="(max-width: 1100px)" fetchpriority="high">
+  ? `<link rel="preload" as="image" href="${preloadPortrait}.jpg" type="image/jpeg" media="(max-width: 1100px)" fetchpriority="high">
 <link rel="preload" as="image" href="${preloadImage}.webp" type="image/webp" media="(min-width: 1101px)" fetchpriority="high">
 `
   : `<link rel="preload" as="image" href="${preloadImage}.webp" type="image/webp" fetchpriority="high">

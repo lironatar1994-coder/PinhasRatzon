@@ -15,7 +15,7 @@ const YEARS = BIZ.yearsExperience;
 export const IMAGES = {
   portrait: '/assets/img/pinchas-ratzon',
   hero: '/assets/img/hero-room',
-  heroPortrait: '/assets/img/hero-room-portrait',
+  heroPortrait: '/assets/img/hero-room-mobile-v2',
   quietPlans: '/assets/img/band-plans',
   bandKey: '/assets/img/band-key',
   bandStamp: '/assets/img/band-stamp',
@@ -27,8 +27,7 @@ export const IMAGES = {
    the reading column the photograph was composed around, and below the split
    a portrait crop of the same shot takes over. */
 const heroPhoto = (alt) => `<picture>
-      <source media="(max-width: 1100px)" type="image/webp" srcset="${IMAGES.heroPortrait}.webp">
-      <source media="(max-width: 1100px)" srcset="${IMAGES.heroPortrait}.jpg">
+      <source media="(max-width: 1100px)" type="image/jpeg" srcset="${IMAGES.heroPortrait}.jpg">
       <source type="image/webp" srcset="${IMAGES.hero}.webp">
       <img src="${IMAGES.hero}.jpg" alt="${esc(alt)}" width="1920" height="1084" fetchpriority="high" decoding="async">
     </picture>`;
