@@ -881,7 +881,7 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .hero-sub { margin-block-start: 1.6rem; }
   .hero-figure { margin-block-start: 2rem; }
   .hero-figure img { max-height: 56vh; }
-  .quiet { min-height: 46svh; }
+  .quiet { min-height: 40svh; }
   /* The arrows STAY on phones — this band is the site's main router, and a
      row with no affordance reads as a statement, not a link. */
   .route-list a { grid-template-columns: 3.4rem minmax(0, 1fr) 1.5rem; gap: 1.1rem; align-items: start; }
@@ -907,7 +907,7 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
 
 @media (max-width: 560px) {
   .side { grid-template-columns: 1fr; }
-  .quiet { min-height: 42svh; }
+  .quiet { min-height: 36svh; }
   .closing-lines { flex-direction: column; gap: .8rem; }
   .closing-lines a { width: min(20rem, 100%); justify-content: center; }
   .btn { width: 100%; }
