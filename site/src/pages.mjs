@@ -694,7 +694,7 @@ export function thankYou() {
   <div class="wrap narrow prose center">
     <p class="label">תודה</p>
     <h1>הפנייה נשלחה</h1>
-    <p class="lead">קיבלתי, ואחזור אליכם בהקדם. אם זה דחוף — מתקשרים אליי ישירות לנייד:</p>
+    <p class="lead">קיבלתי, ואחזור אליכם בהקדם. במידה ודחוף ניתן להתקשר ישר לנייד:</p>
     <p><a class="side-tel" href="${telHref}" dir="ltr">${esc(BIZ.phone)}</a></p>
     <p><a class="textlink" href="/">חזרה לעמוד הבית ${icon('arrow', 18)}</a></p>
   </div>
