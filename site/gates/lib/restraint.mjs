@@ -20,7 +20,10 @@ export const BANNED = [
 /** At most this many CTA buttons per page. */
 export const MAX_BUTTONS = 2;
 
-const countButtons = (html) => (html.match(/class="[^"]*\bbtn\b/g) || []).length;
+/* Count the exact class token `btn` — hyphenated names like `a11y-btn`
+   (the accessibility toggle) are chrome, not CTAs, and must not spend the
+   budget. */
+const countButtons = (html) => (html.match(/class="(?:[^"]*\s)?btn(?:\s|")/g) || []).length;
 
 /**
  * @param {Array<{name: string, html: string}>} pages

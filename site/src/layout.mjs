@@ -215,9 +215,18 @@ export function closing({ h2 }) {
         <li><a href="mailto:${esc(BIZ.email)}">${icon('mail', 20)}<span class="ch-body"><span class="ch-k">אימייל</span><span class="ch-v"><bdi dir="ltr">${esc(BIZ.email)}</bdi></span></span></a></li>
       </ul>
       <span class="ch-or">או</span>
-      <a class="btn" href="/contact/">השארת פרטים</a>
+      <a class="btn closing-cta" href="/contact/">השארת פרטים</a>
     </div>
   </div>
+  <dialog class="lead-dialog" aria-label="השארת פרטים">
+    <div class="dlg-body">
+      <div class="dlg-head">
+        <p class="label">השארת פרטים</p>
+        <button type="button" class="dlg-close" aria-label="סגירה">&times;</button>
+      </div>
+      ${contactForm({ id: 'd' })}
+    </div>
+  </dialog>
 </section>`;
 }
 

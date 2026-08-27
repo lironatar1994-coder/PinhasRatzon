@@ -665,6 +665,54 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .ch-v { font-size: 1.1rem; }
 .closing-ch a:hover { color: var(--accent-lt); text-decoration: none; }
 
+/* ------------------------------------------------------- lead dialog
+   "השארת פרטים" opens the form in place: a paper card over the dark page.
+   The choreography is mechanical, not bouncy — the panel is revealed like
+   an aperture opening, the gold rule draws itself, then the fields engage
+   one after another on a fixed cadence. All of it dies under
+   reduced-motion / data-motion="0" like every other animation here. */
+.lead-dialog {
+  border: 0; padding: 0; background: var(--paper); color: var(--ink);
+  width: min(30rem, calc(100vw - 2rem));
+  margin: auto;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, .55);
+}
+.lead-dialog::backdrop { background: rgba(14, 12, 9, .72); }
+.lead-dialog[open] { animation: dlg-aperture .38s cubic-bezier(.3, 0, .15, 1) both; }
+.dlg-body { padding: 1.5rem 1.8rem 2rem; }
+/* The gold engage-bar: draws from the RTL anchor once the panel is open. */
+.dlg-body::before {
+  content: ''; display: block; height: 3px; background: var(--accent-lt);
+  margin: -1.5rem -1.8rem 1.4rem;
+  transform-origin: 100% 50%;
+}
+.lead-dialog[open] .dlg-body::before { animation: hero-rule-in .5s var(--ease) .12s both; }
+.dlg-head { display: flex; align-items: center; justify-content: space-between; margin-block-end: .4rem; }
+.dlg-head .label { margin-block-end: 0; }
+.dlg-close {
+  font-family: var(--sans); font-size: 1.7rem; line-height: 1; color: var(--muted);
+  background: none; border: 0; cursor: pointer;
+  min-width: 44px; min-height: 44px; margin-inline-start: .5rem;
+  transition: color .2s var(--ease), transform .2s var(--ease);
+}
+.dlg-close:hover { color: var(--ink); transform: rotate(90deg); }
+/* Staggered engagement: each row of the form arrives on a fixed cadence. */
+.lead-dialog[open] .form > * { animation: dlg-rise .45s cubic-bezier(.3, 0, .1, 1) both; }
+.lead-dialog[open] .form > *:nth-child(2) { animation-delay: .16s; }
+.lead-dialog[open] .form > *:nth-child(3) { animation-delay: .23s; }
+.lead-dialog[open] .form > *:nth-child(4) { animation-delay: .3s; }
+.lead-dialog[open] .form > *:nth-child(5) { animation-delay: .37s; }
+.lead-dialog[open] .form > *:nth-child(6) { animation-delay: .44s; }
+.lead-dialog[open] .form > *:nth-child(7) { animation-delay: .51s; }
+@keyframes dlg-aperture {
+  from { clip-path: inset(0 0 100% 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@keyframes dlg-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: none; }
+}
+
 /* ------------------------------------------------------------ contact */
 
 .contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(2.5rem, 1.5rem + 4vw, 6rem); align-items: start; }

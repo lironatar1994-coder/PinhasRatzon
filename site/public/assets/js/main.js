@@ -180,4 +180,23 @@
       if (e.target.getAttribute('aria-invalid') === 'true' && e.target.checkValidity()) fieldError(e.target, '');
     });
   });
+
+  /* ------------------------------------------------------- lead dialog */
+  /* "השארת פרטים" opens the form in place; without JS (or without <dialog>
+     support) the link keeps its default trip to the contact page. */
+
+  var leadDialog = document.querySelector('.lead-dialog');
+  if (leadDialog && typeof leadDialog.showModal === 'function') {
+    Array.prototype.forEach.call(document.querySelectorAll('.closing-cta'), function (cta) {
+      cta.addEventListener('click', function (e) {
+        e.preventDefault();
+        leadDialog.showModal();
+      });
+    });
+    leadDialog.addEventListener('click', function (e) {
+      if (e.target === leadDialog) leadDialog.close();
+    });
+    var dlgClose = leadDialog.querySelector('.dlg-close');
+    if (dlgClose) dlgClose.addEventListener('click', function () { leadDialog.close(); });
+  }
 })();
