@@ -694,7 +694,9 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .closing-portrait { display: none; }
 @media (min-width: 861px) {
   .closing-figure { display: none; }
-  .closing-portrait { display: block; position: absolute; inset-block: 0; left: 0; width: 46%; z-index: 0; }
+  /* Starting the figure 9% down scales the whole portrait down with it —
+     the face stops competing with the headline. */
+  .closing-portrait { display: block; position: absolute; inset-block: 9% 0; left: 0; width: 44%; z-index: 0; }
   /* The frame is graded at the source — no extra darkening filter, and the
      dissolves only kiss the edges (the client asked for less shadow; the
      text sits on solid ground either way). */
@@ -709,7 +711,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   }
   .closing-grid { grid-template-columns: minmax(0, 48fr) minmax(0, 52fr); gap: 0; }
   .closing-grid > * { grid-column: 1; }
-  .closing-grid h2 { margin-block-end: 2.2rem; }
+  .closing-copy { margin-block-end: 2.2rem; }
   .closing-act { max-width: 30rem; }
 }
 .closing h2 { color: #fff; font-size: clamp(1.7rem, 1.2rem + 2vw, 2.7rem); max-width: 12em; }
@@ -726,7 +728,11 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   padding-block: 1.05rem; min-height: 56px; color: var(--on-deep);
 }
 .closing-ch .ic { color: var(--accent-lt); flex: none; }
-.ch-k { display: block; font-size: .85rem; color: var(--on-deep-2); margin-block-end: .1rem; }
+/* The channel keys read as the gold wayfinding they are — champagne and a
+   step heavier, not near-invisible beige. */
+.ch-k { display: block; font-size: .85rem; font-weight: 500; color: var(--accent-lt); margin-block-end: .1rem; }
+/* One quiet line under the closing headline — what the call actually buys. */
+.closing-sub { color: var(--on-deep-2); font-weight: 300; margin-block-start: 1rem; max-width: 28rem; }
 .ch-v { font-size: 1.1rem; }
 .closing-ch a:hover { color: var(--accent-lt); text-decoration: none; }
 

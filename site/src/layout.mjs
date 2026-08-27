@@ -218,7 +218,10 @@ export function closing({ h2 }) {
     </picture>
   </div>
   <div class="wrap closing-grid">
-    <h2>${esc(h2)}</h2>
+    <div class="closing-copy">
+      <h2>${esc(h2)}</h2>
+      <p class="closing-sub">שיחה קצרה מספיקה כדי להבין מה נדרש ומה הצעד הבא.</p>
+    </div>
     <div class="closing-act">
       <ul class="closing-ch">
         <li><a href="${telHref}">${icon('phone', 20)}<span class="ch-body"><span class="ch-k">טלפון</span><span class="ch-v"><bdi dir="ltr">${esc(BIZ.phone)}</bdi></span></span></a></li>
@@ -226,7 +229,7 @@ export function closing({ h2 }) {
         <li><a href="mailto:${esc(BIZ.email)}">${icon('mail', 20)}<span class="ch-body"><span class="ch-k">אימייל</span><span class="ch-v"><bdi dir="ltr">${esc(BIZ.email)}</bdi></span></span></a></li>
       </ul>
       <span class="ch-or">או</span>
-      <a class="btn closing-cta" href="/contact/">השארת פרטים</a>
+      <a class="btn closing-cta" href="/contact/">להשארת פרטים</a>
     </div>
   </div>
   <dialog class="lead-dialog" aria-label="השארת פרטים">
