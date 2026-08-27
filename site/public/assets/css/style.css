@@ -235,6 +235,10 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
    the drawer, the way this market always ships them. Header affordances,
    never floating ones. */
 .tel-mini, .wa-mini { display: none; }
+/* On desktop the drawer-call wrapper dissolves so nav-tel keeps its place
+   in the horizontal header; the drawer-only extras stay hidden. */
+.drawer-call { display: contents; }
+.drawer-call .label, .nav-wa, .drawer-note { display: none; }
 
 /* A real 44px tap target, not just two thin lines. */
 .burger {
@@ -966,14 +970,28 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .primary.open { transform: translateX(0); }
   .primary > ul { flex-direction: column; align-items: stretch; gap: 0; width: 100%; }
   .primary > ul > li { border-block-end: 1px solid var(--line-deep); }
-  .primary a { color: var(--on-deep); display: flex; align-items: center; min-height: 52px; font-size: 1.1rem; }
+  /* Drawer items at display scale — a premium menu, not a link list. */
+  .primary a { color: var(--on-deep); display: flex; align-items: center; min-height: 60px; font-size: 1.35rem; font-weight: 500; }
   .primary a[aria-current] { color: var(--accent-lt); }
+  /* The dead space at the drawer's foot becomes the call block, pinned to
+     the bottom: kicker, display-size number, WhatsApp line, identity. */
+  .drawer-call {
+    display: block; margin-block-start: auto;
+    padding-block-start: 1.6rem; border-block-start: 1px solid var(--line-deep);
+  }
+  .drawer-call .label { display: flex; color: var(--accent-lt); margin-block-end: .7rem; }
   .nav-tel {
-    color: var(--accent-lt); border: 0; padding: 0;
-    border-block-start: 1px solid var(--line-deep); margin-block-start: 1.5rem;
-    padding-block-start: 1.5rem; font-family: var(--display); font-weight: 600; font-size: 1.4rem;
+    color: var(--accent-lt); border: 0; padding: 0; margin: 0;
+    font-family: var(--display); font-weight: 600; font-size: 1.7rem;
   }
   .nav-tel:hover { background: transparent; color: var(--accent-lt); }
+  .primary .nav-wa {
+    display: inline-flex; align-items: center; gap: .6rem;
+    margin-block-start: .6rem; min-height: 44px;
+    color: var(--on-deep-2); font-size: 1rem; font-weight: 400;
+  }
+  .nav-wa .ic { color: var(--accent-lt); }
+  .drawer-note { display: block; margin-block-start: 1.6rem; color: var(--on-deep-2); font-size: .9rem; }
   .has-sub { display: grid; grid-template-columns: 1fr auto; align-items: center; }
   .sub-toggle {
     display: grid; place-items: center; width: 44px; height: 44px;
@@ -987,7 +1005,8 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
     opacity: 1; visibility: visible; transform: none; display: none;
   }
   .sub.open { display: block; }
-  .sub a { color: var(--on-deep-2); padding: .55rem 1rem; }
+  /* Children stay a register below their parent item. */
+  .sub a { color: var(--on-deep-2); padding: .55rem 1rem; font-size: 1.05rem; font-weight: 400; min-height: 46px; }
   /* Must stay BELOW .site-header's z-index (90). The drawer lives inside the
      header, so its own z-index resolves inside the header's stacking context —
      a backdrop above 90 paints over the drawer and swallows every nav tap. */

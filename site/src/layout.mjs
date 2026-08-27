@@ -135,7 +135,12 @@ export function header(current) {
       <ul>
         ${navMarkup(current)}
       </ul>
-      <a class="nav-tel" href="${telHref}" dir="ltr">${esc(BIZ.phone)}</a>
+      <div class="drawer-call">
+        <p class="label">לשיחה</p>
+        <a class="nav-tel" href="${telHref}" dir="ltr">${esc(BIZ.phone)}</a>
+        <a class="nav-wa" href="${BIZ.whatsapp}" target="_blank" rel="noopener">${icon('whatsapp', 18)}וואטסאפ — שליחת הודעה</a>
+        <p class="drawer-note">${esc(BIZ.shortName)} · ${esc(BIZ.city)}</p>
+      </div>
     </nav>
     <a class="tel-mini" href="${telHref}" aria-label="חיוג אל ${esc(BIZ.phone)}">${icon('phone', 20)}</a>
     <a class="wa-mini" href="${BIZ.whatsapp}" target="_blank" rel="noopener" aria-label="שליחת הודעת וואטסאפ">${icon('whatsapp', 20)}</a>
