@@ -1036,7 +1036,7 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
      the solid ground, then the photograph full-bleed, emerging from the
      dark with a top dissolve. The brightness comes from the picture, the
      contrast from the token. */
-  .page-hero.has-figure { display: flex; flex-direction: column; padding-block-end: 0; }
+  .page-hero.has-figure { display: flex; flex-direction: column; padding-block: 2.8rem 0; }
   .page-hero.has-figure .wrap { display: block; }
   .page-hero-figure {
     position: relative; inset-block: auto; left: auto; width: 100%; z-index: 0;
@@ -1050,6 +1050,11 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
      paper. */
   .page-hero-figure::after {
     background: linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 32%, rgba(14, 12, 9, 0) 68%, var(--deep) 100%);
+  }
+  /* On a portrait the dissolve may touch only the frame's edges — a 32%
+     reach shades the face. */
+  .page-hero-figure.figure-pinhas::after {
+    background: linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 16%, rgba(14, 12, 9, 0) 80%, var(--deep) 100%);
   }
 
   .hero { padding-block: 3.2rem 0; }
