@@ -185,15 +185,6 @@ export function home() {
   </div>
 </section>
 
-<section class="quiet">
-  <div class="quiet-figure">
-    ${photo(IMAGES.bandKey, { alt: '', w: 1920, h: 1072 })}
-  </div>
-  <div class="wrap quiet-inner">
-    <h2 class="quiet-line">תיק אחד. עורך דין אחד.</h2>
-  </div>
-</section>
-
 <section class="section portrait-sec">
   <div class="wrap">
     <div class="portrait-media">

@@ -879,12 +879,9 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .route-arrow { align-self: center; }
   /* The about beat stacks only below 860px — above that the desktop
      two-column layout holds. Stacked, the portrait fills the wrap (a
-     floating half-width box reads as an accident) and is cropped to
-     head-and-shoulders so the name shares its viewport; it straddles the
-     band's bottom edge so dark and paper read as one unit. */
-  .portrait-sec { padding-block-start: 0; }
+     floating half-width box reads as an accident) and is cropped wide so
+     the name shares its viewport. */
   .portrait-sec .wrap { grid-template-columns: 1fr; }
-  .portrait-media { position: relative; z-index: 2; margin-block-start: -3.2rem; }
   .portrait-media img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; object-position: 50% 20%; }
   .portrait-media::before { inset-inline: -1rem 3rem; inset-block: 1rem -1rem; }
   .index a { grid-template-columns: 3rem minmax(0, 1fr) 1.4rem; gap: 1rem; }
