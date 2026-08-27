@@ -217,7 +217,7 @@ ${closing({ h2: 'שיחה אחת עושה סדר' })}`;
     path: '/',
     title: `עורך דין מקרקעין וצוואות ב${BIZ.city} | ${BIZ.shortName}`,
     description: `עו״ד פנחס רצון — ${BIZ.yearsExperience} שנות ניסיון בעסקאות מקרקעין, מיסוי, רישום בתים משותפים, צוואות וירושות ב${BIZ.city} ובמרכז.`,
-    shareDescription: `${BIZ.yearsExperience} שנות ניסיון במקרקעין, מיסוי, צוואות וירושות — ${BIZ.city} והמרכז`,
+    shareDescription: `ניסיון של ${BIZ.yearsExperience} שנים במקרקעין, מיסוי, צוואות וירושות — ${BIZ.city} והמרכז`,
     body,
     overHero: true,
     preloadImage: IMAGES.hero,
