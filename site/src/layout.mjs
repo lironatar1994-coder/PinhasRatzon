@@ -197,7 +197,7 @@ export function contactForm({ id = 'c' } = {}) {
 
 /* The closing note — one quiet invitation at the end of the reading, not a
    banner shouting mid-page. */
-export function closing({ h2, body }) {
+export function closing({ h2 }) {
   return `
 <section class="closing">
   <div class="closing-figure" aria-hidden="true">
@@ -207,16 +207,16 @@ export function closing({ h2, body }) {
     </picture>
   </div>
   <div class="wrap closing-grid">
-    <div class="closing-copy">
-      <h2>${esc(h2)}</h2>
-      <p class="closing-body">${esc(body)}</p>
+    <h2>${esc(h2)}</h2>
+    <div class="closing-act">
+      <ul class="closing-ch">
+        <li><a href="${telHref}">${icon('phone', 20)}<span class="ch-body"><span class="ch-k">טלפון</span><span class="ch-v"><bdi dir="ltr">${esc(BIZ.phone)}</bdi></span></span></a></li>
+        <li><a href="${BIZ.whatsapp}" target="_blank" rel="noopener">${icon('whatsapp', 20)}<span class="ch-body"><span class="ch-k">וואטסאפ</span><span class="ch-v">שליחת הודעה</span></span></a></li>
+        <li><a href="mailto:${esc(BIZ.email)}">${icon('mail', 20)}<span class="ch-body"><span class="ch-k">אימייל</span><span class="ch-v"><bdi dir="ltr">${esc(BIZ.email)}</bdi></span></span></a></li>
+      </ul>
+      <span class="ch-or">או</span>
       <a class="btn" href="/contact/">השארת פרטים</a>
     </div>
-    <ul class="closing-ch">
-      <li><a href="${telHref}">${icon('phone', 20)}<span class="ch-body"><span class="ch-k">טלפון</span><span class="ch-v"><bdi dir="ltr">${esc(BIZ.phone)}</bdi></span></span></a></li>
-      <li><a href="${BIZ.whatsapp}" target="_blank" rel="noopener">${icon('whatsapp', 20)}<span class="ch-body"><span class="ch-k">וואטסאפ</span><span class="ch-v">שליחת הודעה</span></span></a></li>
-      <li><a href="mailto:${esc(BIZ.email)}">${icon('mail', 20)}<span class="ch-body"><span class="ch-k">אימייל</span><span class="ch-v"><bdi dir="ltr">${esc(BIZ.email)}</bdi></span></span></a></li>
-    </ul>
   </div>
 </section>`;
 }

@@ -211,10 +211,7 @@ export function home() {
 
 ${faqBlock(HOME_FAQS, { h2: 'השאלות שפותחות כמעט כל שיחה' })}
 
-${closing({
-  h2: 'שיחה אחת עושה סדר',
-  body: 'שיחה ראשונה קצרה בדרך כלל מספיקה כדי להבין מה נדרש, מה לוחות הזמנים ואיפה הסיכונים.',
-})}`;
+${closing({ h2: 'שיחה אחת עושה סדר' })}`;
 
   return page({
     path: '/',
@@ -262,7 +259,7 @@ export function practiceIndex() {
   </div>
 </section>
 
-${closing({ h2: 'לא בטוחים לאיזה תחום זה שייך?', body: 'זה טבעי — רוב התיקים נוגעים ביותר מתחום אחד. שיחה קצרה תעשה סדר.' })}`;
+${closing({ h2: 'לא בטוחים לאיזה תחום זה שייך?' })}`;
 
   return page({
     path: '/practice-areas/',
@@ -371,7 +368,7 @@ ${p.quiet ? `<section class="quiet">
 
 ` : ''}${faqBlock(p.faqs, { h2: `שאלות נפוצות — ${p.nav}`, label: '' })}
 
-${closing({ h2: 'עדיף לבדוק לפני, לא לתקן אחרי', body: 'שיחה קצרה בדרך כלל מספיקה כדי להבין איפה הדברים עומדים ומה דחוף באמת.' })}`;
+${closing({ h2: 'עדיף לבדוק לפני, לא לתקן אחרי' })}`;
 
   return page({
     path: `/practice-areas/${p.slug}/`,
@@ -464,7 +461,7 @@ export function about() {
   </div>
 </div>
 
-${closing({ h2: 'שאלה קצרה? פשוט תתקשרו', body: 'ואם נוח לכם יותר בכתב — השאירו פרטים ואחזור אליכם.' })}`;
+${closing({ h2: 'שאלה קצרה? פשוט תתקשרו' })}`;
 
   return page({
     path: '/about/',
@@ -525,7 +522,7 @@ export function faqPage() {
   </div>
 </div>
 
-${closing({ h2: 'לא מצאתם תשובה?', body: 'שאלה שנוגעת לנסיבות שלכם עדיף לברר ישירות.' })}`;
+${closing({ h2: 'לא מצאתם תשובה?' })}`;
 
   return page({
     path: '/faq/',
