@@ -376,9 +376,14 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
    motif, opened into a pale editorial spread. Its photograph was composed
    and pixel-measured for ink on the physical right side, so it needs no
    contrast scrim on wide screens. */
-.quiet-light { background: var(--paper); color: var(--ink); }
+.quiet-light { background: var(--paper); color: var(--ink); border-block: 1px solid var(--stone); }
 .quiet-light .quiet-figure::after { background: none; }
-.quiet-light .label { color: var(--accent); }
+/* Ink over a photograph: no drift (motion is for wordless pixels only) and
+   no darkening grade — this band's whole point is its light. */
+.quiet-light .quiet-figure img { animation: none; filter: none; }
+/* Standard gold measured 4.05:1 against the image's shaded cream — the
+   light band gets a deeper cut of the same gold (pixel-verified 5+). */
+.quiet-light .label { color: #6d5119; }
 .quiet-light .quiet-line { color: var(--ink); }
 @keyframes quiet-drift {
   from { transform: scale(1); }
