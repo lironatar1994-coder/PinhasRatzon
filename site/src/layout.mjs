@@ -295,7 +295,7 @@ export function footer() {
 
     <div class="foot-bottom">
       <p>${esc(DISCLAIMER)}</p>
-      <p>© ${new Date().getFullYear()} ${esc(BIZ.name)} · נבנה ע״י <a class="credit" href="https://lawebs.co.il" target="_blank" rel="noopener"><bdi dir="ltr">LaWebs</bdi></a> · <a class="credit" href="tel:+972508611888"><bdi dir="ltr">050-8611888</bdi></a> <a class="credit credit-wa" href="https://wa.me/972508611888" target="_blank" rel="noopener" aria-label="וואטסאפ אל LaWebs">${icon('whatsapp', 15)}</a></p>
+      <p>© ${new Date().getFullYear()} · נבנה ע״י <a class="credit" href="https://lawebs.co.il" target="_blank" rel="noopener"><bdi dir="ltr">LaWebs</bdi></a> · <a class="credit" href="tel:+972508611888"><bdi dir="ltr">050-8611888</bdi></a> <a class="credit credit-wa" href="https://wa.me/972508611888" target="_blank" rel="noopener" aria-label="וואטסאפ אל LaWebs">${icon('whatsapp', 15)}</a></p>
     </div>
   </div>
 </footer>
