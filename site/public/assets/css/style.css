@@ -993,12 +993,16 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .page-hero.has-figure .wrap { display: block; }
   .page-hero-figure {
     position: relative; inset-block: auto; left: auto; width: 100%; z-index: 0;
-    order: 2; margin-block-start: 2.4rem;
-    aspect-ratio: 16 / 10;
+    order: 2; margin-block-start: 2.2rem;
+    aspect-ratio: 2 / 1;
   }
-  .page-hero-figure img { object-position: 50% 40%; }
+  .page-hero-figure img { object-position: 50% 45%; }
+  /* A glimpse, not a poster: the photograph surfaces out of the dark and
+     sinks back into it, so the opener still ends on the solid ground and
+     the gold hairline keeps the seam — bright photo never meets bright
+     paper. */
   .page-hero-figure::after {
-    background: linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 30%);
+    background: linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 32%, rgba(14, 12, 9, 0) 68%, var(--deep) 100%);
   }
 
   .hero { padding-block: 3.2rem 0; }
