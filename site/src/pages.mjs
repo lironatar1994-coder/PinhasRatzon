@@ -311,17 +311,15 @@ export function practicePage(p) {
   }).join('\n    ');
 
   const body = `
-<section class="page-hero">
+<section class="page-hero${p.image ? ' has-figure' : ''}">
+  ${p.image ? `<div class="page-hero-figure" aria-hidden="true">
+    ${photo(p.image, { alt: '', w: 1600, h: 900, priority: true })}
+  </div>` : ''}
   <div class="wrap">
-    <p class="label">תחום עיסוק</p>
     <h1>${esc(p.h1)}</h1>
     <p class="lead">${esc(p.lead)}</p>
   </div>
 </section>
-
-${p.image ? `<figure class="page-figure">
-  ${photo(p.image, { alt: p.imageAlt || '', w: 1600, h: 900, priority: true })}
-</figure>` : ''}
 
 <div class="section">
   <div class="wrap layout-aside">

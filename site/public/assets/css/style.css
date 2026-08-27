@@ -528,19 +528,35 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .page-hero .lead { max-width: 44rem; margin-block-start: 1.6rem; color: var(--on-deep-2); }
 
 /* ------------------------------------------------------------ page figure
-   One photograph per practice area, full-bleed and letterboxed short so it
-   sets the subject without taking the page over. */
+   The practice photograph is the opener's own ground — one cinematic
+   headline over it, the same scrim recipe as the quiet bands, instead of a
+   flat word-band stacked on a wordless picture. */
 
-.page-figure {
-  margin: 0; width: 100%; overflow: hidden;
-  background: var(--deep);
-  aspect-ratio: 21 / 7;
+.page-hero.has-figure {
+  position: relative; isolation: isolate; overflow: hidden;
+  padding-block: clamp(4rem, 2rem + 5.5vw, 7.5rem) clamp(3.2rem, 1.8rem + 4vw, 5.4rem);
 }
-.page-figure img { width: 100%; height: 100%; object-fit: cover; filter: var(--grade); }
-
-@media (max-width: 860px) {
-  .page-figure { aspect-ratio: 16 / 9; }
+/* These photographs are bright — measured 1.1–2.4:1 under body text through
+   any watchable scrim — so text and picture never overlap: the photo owns
+   the LEFT half at full richness and dissolves into the deep ground before
+   the text column begins. Every glyph sits on the solid token. */
+.page-hero-figure { position: absolute; inset-block: 0; left: 0; width: 52%; z-index: 0; }
+.page-hero-figure img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%;
+  filter: var(--grade);
 }
+/* The dissolve into the ground is an overlay, not a mask — it paints the
+   deep token itself over the photo's right quarter, so the fade is exact
+   on every renderer. */
+.page-hero-figure::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to left, var(--deep) 0%, rgba(14, 12, 9, 0) 26%);
+}
+.page-hero .wrap { position: relative; z-index: 2; }
+/* The text column is fenced to the right 46% — the fence, not an em cap,
+   is what guarantees the no-overlap contract. */
+.page-hero.has-figure .wrap { display: grid; grid-template-columns: minmax(0, 46fr) minmax(0, 54fr); }
+.page-hero.has-figure .wrap > * { grid-column: 1; }
 
 /* ------------------------------------------------------------ prose + aside */
 
@@ -933,6 +949,10 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
      cover-crop on a phone slices them at the edge and fills the screen
      with the empty right side. Anchor the crop on the subject. */
   .quiet-figure img { object-position: 20% 62%; }
+  /* No room for a side panel on phones — the opener returns to the clean
+     solid ground rather than a picture squeezed behind text. */
+  .page-hero-figure { display: none; }
+  .page-hero.has-figure .wrap { display: block; }
 
   .hero { padding-block: 3.2rem 0; }
   .hero-cue { display: none; }
