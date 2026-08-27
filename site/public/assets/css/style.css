@@ -843,6 +843,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .foot-bottom { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; padding-block-start: 2rem; border-block-start: 1px solid var(--line-deep); font-size: .85rem; color: var(--on-deep-2); line-height: 1.8; }
 .foot-bottom .credit { color: var(--accent-lt); }
 .foot-bottom .credit:hover { text-decoration: underline; }
+.foot-bottom .credit-wa .ic { vertical-align: -3px; }
 .foot-bottom p:first-child { max-width: 46rem; }
 
 /* ------------------------------------------------------------ a11y widget */
