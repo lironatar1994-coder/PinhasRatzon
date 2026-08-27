@@ -345,9 +345,6 @@ export function practicePage(p) {
         </ul>
       </div>
       <div class="side-block">
-        <div class="side-portrait">
-          ${photo(IMAGES.portrait, { alt: `${BIZ.shortName}, עורך דין ב${BIZ.city}`, w: 980, h: 1225 })}
-        </div>
         <p class="label">לשיחה</p>
         <a class="side-tel" href="${telHref}" dir="ltr">${esc(BIZ.phone)}</a>
         <p class="side-note">${esc(BIZ.shortName)} · ${esc(BIZ.areaHuman)}</p>

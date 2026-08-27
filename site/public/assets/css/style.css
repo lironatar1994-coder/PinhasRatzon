@@ -599,8 +599,17 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .steps p { color: var(--muted); font-size: 1.1rem; }
 
 .pairs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem 3rem; }
-.pairs article { border-block-start: 1px solid var(--accent-lt); padding-block-start: 1.4rem; }
-.pairs h3 { font-size: 1.22rem; margin-block-end: .6rem; }
+/* Stone hairline + one small gold diamond per item — the checklist's own
+   geometry. Six full-width gold rules in one grid diluted the signature;
+   gold stays jewelry. */
+.pairs article { border-block-start: 1px solid var(--stone); padding-block-start: 1.4rem; }
+.pairs h3 { position: relative; font-size: 1.22rem; margin-block-end: .6rem; padding-inline-start: 1.3rem; }
+.pairs h3::before {
+  content: ''; position: absolute;
+  inset-inline-start: 0; inset-block-start: calc(.61em - 4px);
+  width: 8px; height: 8px; background: var(--accent-lt);
+  transform: rotate(45deg);
+}
 .pairs p { color: var(--muted); font-size: 1.1rem; }
 
 .side { display: grid; gap: 2.5rem; position: sticky; inset-block-start: 8rem; }
