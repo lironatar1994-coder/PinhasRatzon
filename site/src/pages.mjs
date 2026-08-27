@@ -237,9 +237,11 @@ export function practiceIndex() {
     { label: 'תחומי עיסוק', href: '/practice-areas/' },
   ];
   const body = `
-<section class="page-hero">
+<section class="page-hero has-figure">
+  <div class="page-hero-figure figure-key" aria-hidden="true">
+    ${photo(IMAGES.bandKey, { alt: '', w: 1920, h: 1072, priority: true })}
+  </div>
   <div class="wrap">
-    <p class="label">תחומי עיסוק</p>
     <h1>שישה תחומים, לרוב אותו תיק</h1>
     <p class="lead">מקרקעין, מס, רישום וירושה נראים כמו תחומים נפרדים, אבל בפועל הם מושכים זה את זה: עסקה גוררת שאלת מס, ירושה גוררת רישום, ורישום חסר עוצר את שניהם.</p>
   </div>

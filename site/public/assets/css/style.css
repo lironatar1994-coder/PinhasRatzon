@@ -553,6 +553,9 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   background: linear-gradient(to left, var(--deep) 0%, rgba(14, 12, 9, 0) 26%);
 }
 .page-hero .wrap { position: relative; z-index: 2; }
+/* The key band frame keeps its subject in the lower-left third — anchor
+   the crop there or the figure shows only dark wood. */
+.page-hero-figure.figure-key img { object-position: 12% 62%; }
 /* The text column is fenced to the right 46% — the fence, not an em cap,
    is what guarantees the no-overlap contract. */
 .page-hero.has-figure .wrap { display: grid; grid-template-columns: minmax(0, 46fr) minmax(0, 54fr); }
