@@ -793,10 +793,11 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .layout-aside { grid-template-columns: 1fr; }
   .side { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
   .portrait-sec .wrap { grid-template-columns: 1fr; }
-  /* Stacked, the studio portrait is a second face two screens after the hero
-     already showed one, in a different visual world — and the key band above
-     is this section's image. On phones the copy carries the beat alone. */
-  .portrait-media { display: none; }
+  /* Stacked under the quiet band, a full-height second photo would push the
+     name below the fold — crop the portrait to head-and-shoulders so the
+     text arrives in the same viewport. */
+  .portrait-media { max-width: 26rem; }
+  .portrait-media img { aspect-ratio: 5 / 4; object-fit: cover; object-position: 50% 18%; }
   .contact-grid { grid-template-columns: 1fr; }
   .principles { grid-template-columns: 1fr; gap: 2.2rem; }
 }
