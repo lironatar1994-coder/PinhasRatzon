@@ -18,7 +18,7 @@ export const IMAGES = {
   heroPortrait: '/assets/img/hero-room-mobile-v2',
   quietPlans: '/assets/img/band-plans',
   bandKey: '/assets/img/band-key',
-  bandStamp: '/assets/img/band-stamp',
+  bandStampLight: '/assets/img/band-stamp-light-v1',
   bandChairs: '/assets/img/band-chairs',
   bandStatement: '/assets/img/band-statement',
 };
@@ -213,9 +213,9 @@ export function home() {
   </div>
 </section>
 
-<section class="quiet">
+<section class="quiet quiet-light" id="faq-intro">
   <div class="quiet-figure">
-    ${photo(IMAGES.bandStamp, { alt: '', w: 1920, h: 1072 })}
+    ${photo(IMAGES.bandStampLight, { alt: '', w: 1920, h: 1080 })}
   </div>
   <div class="wrap quiet-inner">
     <p class="label">שאלות נפוצות</p>

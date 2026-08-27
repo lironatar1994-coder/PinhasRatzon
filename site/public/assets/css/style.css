@@ -371,6 +371,15 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
      can never break a measured contrast. Killed by reduced-motion. */
   animation: quiet-drift 26s ease-in-out infinite alternate;
 }
+
+/* The FAQ chapter is the page's one daylight interruption: the same stamp
+   motif, opened into a pale editorial spread. Its photograph was composed
+   and pixel-measured for ink on the physical right side, so it needs no
+   contrast scrim on wide screens. */
+.quiet-light { background: var(--paper); color: var(--ink); }
+.quiet-light .quiet-figure::after { background: none; }
+.quiet-light .label { color: var(--accent); }
+.quiet-light .quiet-line { color: var(--ink); }
 @keyframes quiet-drift {
   from { transform: scale(1); }
   to { transform: scale(1.065); }
@@ -965,6 +974,18 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
     mask-image: linear-gradient(to top, transparent 0%, #000 9%);
   }
   .quiet { min-height: 44svh; }
+  /* Once the copy can no longer stay wholly inside the measured right-side
+     field, separate type and photograph. The image remains the chapter's
+     visual beat without ever becoming an unverified text background. */
+  .quiet-light {
+    min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr);
+    align-items: stretch; padding-block: 0;
+  }
+  .quiet-light .quiet-inner { order: 1; padding-block: clamp(3.5rem, 2rem + 5vw, 5rem); }
+  .quiet-light .quiet-figure {
+    position: relative; order: 2; aspect-ratio: 16 / 9;
+  }
+  .quiet-light .quiet-figure img { object-position: 50% 50%; }
 }
 
 @media (max-width: 1000px) {

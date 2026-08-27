@@ -87,7 +87,7 @@ tracking, no cards, no shadows, sharp corners, hairlines instead of chrome.
 - Full-bleed band alternation: warm white / warm off-white / near-black
 - Gold as jewelry: kickers, short rules, numerals, hairlines, and exactly one loud button
 - All-Heebo; heavy short display lines over a 20px / weight-300 / line-height-2 body
-- Cinematic environmental photography, including wordless full-viewport pauses
+- Cinematic environmental photography used as short chapter-opening pauses
 - Flat, sharp-cornered, hairline-divided surfaces — zero radius, zero shadows
 - Restraint by law: pressure-selling UI is banned by a gate, not by convention
 
@@ -190,17 +190,20 @@ properties. Content sits in `.wrap` — min(1180px, 100% − 3rem), centered —
 `--gap-sec: clamp(3.75rem, 2rem + 5.5vw, 7rem)` of block padding per band.
 
 **Band grammar.** Pages are stacks of full-bleed one-idea bands: warm paper, warm off-white
-(`.section-alt`), and near-black (`.section-dark`, `.route`, `.closing`). The home page runs
-hero (dark) → credentials band (dark) → statement (paper) → practice index → quiet pause →
-route (dark) → quiet pause → closing (dark). Every interior page opens on the dark masthead
+(`.section-alt`), and near-black (`.section-dark`, `.route`, `.closing`). The home page also
+uses one deliberate daylight photo band (`.quiet-light`) as the FAQ chapter opener: dark ink
+over a pixel-measured pale field, with its stamp motif confined to the physical left. The home page runs
+hero (dark) → statement (dark) → route (dark) → portrait (paper) → FAQ opener (daylight) →
+FAQ (paper-2) → closing (dark). Every interior page opens on the dark masthead
 (`.page-hero`: black ground, gold kicker, white display type, gold hairline base), followed
 on practice pages by a letterboxed full-bleed photograph (`.page-figure`, 21/7, 16/9 under
 860px). Long pages use `.layout-aside`: prose column plus a 16rem sticky sidebar.
 
-**The quiet band.** A full-viewport photograph carrying no words at all — `min(100svh,
-950px)` tall on desktop, 62svh under 1100px, 55svh under 560px, `aria-hidden`. Two on the
-home page, one on the practice index. This is a load-bearing canon element (the wordless
-pause between dense bands), not decoration; do not fill it with text or captions.
+**The quiet band.** A short cinematic photograph carrying one chapter line — about half a
+viewport on desktop and lower on phones, with the image itself `aria-hidden`. It is a
+load-bearing pause between dense bands, not a second content section. The FAQ opener is its
+one light-ground variant; below 1100px its measured text field no longer fits, so copy and
+photograph stack instead of sharing pixels.
 
 **Hero.** Full-bleed cinema under the solid header, min(88vh, 880px). The photograph is
 composed with the reading column already in it: subject in the left third, dark stone wall
@@ -325,7 +328,7 @@ with a WebP source (`picture { display: contents }` keeps the sizing rules worki
   in `site/gates/lib/contrast.mjs` so they stay verified ≥ 4.5:1.
 - **Do** open every interior page on the dark masthead (gold kicker, white H1, gold
   hairline base) and end pages on the dark closing band with the single button.
-- **Do** keep the wordless full-viewport photo pauses; they are the canon's breathing room.
+- **Do** keep the short photographic chapter pauses; they are the canon's breathing room.
 - **Do** wrap every numeral (years, phone, counts) in `dir="ltr"`.
 - **Do** hang a divider on the side of an element that *faces its neighbour*
   (`border-inline-start` on `li + li`), and check the rects: a rule at the container's own
