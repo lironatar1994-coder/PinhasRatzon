@@ -1086,12 +1086,11 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
      row with no affordance reads as a statement, not a link. */
   .route-list a { grid-template-columns: 3.4rem minmax(0, 1fr) 1.5rem; gap: 1.1rem; align-items: start; }
   .route-arrow { align-self: center; }
-  /* The about beat stacks only below 860px — above that the desktop
-     two-column layout holds. Stacked, the portrait fills the wrap (a
-     floating half-width box reads as an accident) and is cropped wide so
-     the name shares its viewport. */
+  /* The about beat stacks only below 860px. Phones receive a dedicated 4:5
+     portrait, so the suit and breathing room survive instead of collapsing
+     into the oversized-face crop used by the desktop source. */
   .portrait-sec .wrap { grid-template-columns: 1fr; }
-  .portrait-media img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; object-position: 50% 20%; }
+  .portrait-media img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 50%; }
   .portrait-media::before { inset-inline: -1rem 3rem; inset-block: 1rem -1rem; }
   .index a { grid-template-columns: 3rem minmax(0, 1fr) 1.4rem; gap: 1rem; }
   .creds > div, .creds.wide > div { grid-template-columns: 1fr; gap: .2rem; }
@@ -1114,8 +1113,7 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
 @media (max-width: 560px) {
   .side { grid-template-columns: 1fr; }
   .quiet { min-height: 36svh; }
-  /* Narrow phones get the tighter head-and-shoulders crop. */
-  .portrait-media img { aspect-ratio: 5 / 4; object-position: 50% 18%; }
+  .portrait-media img { object-position: 50% 50%; }
   .btn { width: 100%; }
   .a11y-btn { inset-block-end: 1rem; inset-inline-start: 1rem; }
   .a11y-panel { inset-block-end: 4rem; inset-inline-start: 1rem; }

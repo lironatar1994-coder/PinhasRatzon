@@ -33,6 +33,14 @@ const heroPhoto = (alt) => `<picture>
       <img src="${IMAGES.hero}.jpg" alt="${esc(alt)}" width="1920" height="1084" fetchpriority="high" decoding="async">
     </picture>`;
 
+/* The home-page introduction uses a composed portrait on phones rather than
+   forcing the desktop frame through a shallow crop. */
+const portraitPhoto = (alt) => `<picture>
+      <source media="(max-width: 860px)" type="image/jpeg" srcset="/assets/img/about-mobile-portrait-v1.jpg">
+      <source type="image/webp" srcset="${IMAGES.portrait}.webp">
+      <img src="${IMAGES.portrait}.jpg" alt="${esc(alt)}" width="980" height="1225" loading="lazy" decoding="async">
+    </picture>`;
+
 function photo(src, { alt, w, h, cls = '', note = 'תמונה — להוספה', priority = false }) {
   if (!src) {
     return `<div class="ph ${cls}" style="aspect-ratio:${w}/${h}" role="img" aria-label="${esc(alt)}"><span>${esc(note)}</span></div>`;
@@ -188,7 +196,7 @@ export function home() {
 <section class="section portrait-sec">
   <div class="wrap">
     <div class="portrait-media">
-      ${photo(IMAGES.portrait, { alt: `${BIZ.shortName}, עורך דין מקרקעין ועיזבונות ב${BIZ.city}`, w: 980, h: 1225 })}
+      ${portraitPhoto(`${BIZ.shortName}, עורך דין מקרקעין ועיזבונות ב${BIZ.city}`)}
     </div>
     <div class="portrait-copy">
       <p class="label">אודות</p>
