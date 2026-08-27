@@ -979,18 +979,6 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
     mask-image: linear-gradient(to top, transparent 0%, #000 9%);
   }
   .quiet { min-height: 44svh; }
-  /* Once the copy can no longer stay wholly inside the measured right-side
-     field, separate type and photograph. The image remains the chapter's
-     visual beat without ever becoming an unverified text background. */
-  .quiet-light {
-    min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr);
-    align-items: stretch; padding-block: 0;
-  }
-  .quiet-light .quiet-inner { order: 1; padding-block: clamp(3.5rem, 2rem + 5vw, 5rem); }
-  .quiet-light .quiet-figure {
-    position: relative; order: 2; aspect-ratio: 16 / 9;
-  }
-  .quiet-light .quiet-figure img { object-position: 50% 50%; }
 }
 
 @media (max-width: 1000px) {
@@ -1091,6 +1079,15 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
      cover-crop on a phone slices them at the edge and fills the screen
      with the empty right side. Anchor the crop on the subject. */
   .quiet-figure img { object-position: 20% 62%; }
+  /* The light band keeps its text over the photograph on phones too. The
+     narrow crop drags the black ink pad under the headline (measured
+     1.01:1 bare), so phones get the light world's version of a scrim — a
+     paper veil that lifts every dark pixel while the scene stays visible. */
+  .quiet-light .quiet-figure img { object-position: 28% 55%; }
+  .quiet-light { min-height: 44svh; }
+  .quiet-light .quiet-figure::after {
+    background: rgba(251, 250, 247, .55);
+  }
   /* No room for a side panel on phones, and the photos are measured too
      bright to sit behind text — so the opener stacks: headline and lead on
      the solid ground, then the photograph full-bleed, emerging from the
