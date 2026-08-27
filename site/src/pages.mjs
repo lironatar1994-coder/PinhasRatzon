@@ -175,7 +175,13 @@ export function home() {
   <div class="statement-figure">
     ${photo(IMAGES.bandStatement, { alt: '', w: 1920, h: 1072 })}
   </div>
-  <div class="wrap narrow statement-inner">
+  <div class="statement-portrait" aria-hidden="true">
+    <picture>
+      <source srcset="/assets/img/closing-portrait-left.webp" type="image/webp">
+      <img src="/assets/img/closing-portrait-left.jpg" alt="" width="1000" height="908" loading="lazy" decoding="async">
+    </picture>
+  </div>
+  <div class="wrap statement-inner">
     <p class="pull">עסקה במקרקעין נגמרת ברישום.<br>לא בחתימה.</p>
     <div class="statement-body">
       <p>בין החתימה לרישום מתגלים הפרטים שמשנים עסקה שלמה: הצמדה שלא נרשמה, חריגת בנייה שלא נבדקה, או חבות מס שלא תומחרה מראש.</p>
