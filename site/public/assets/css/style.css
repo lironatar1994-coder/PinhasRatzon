@@ -794,17 +794,6 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
 @media (max-width: 1000px) {
   .layout-aside { grid-template-columns: 1fr; }
   .side { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
-  .portrait-sec .wrap { grid-template-columns: 1fr; }
-  /* Stacked under the quiet band, a full-height second photo would push the
-     name below the fold — crop the portrait to head-and-shoulders so the
-     text arrives in the same viewport. */
-  .portrait-media { max-width: 26rem; }
-  .portrait-media img { aspect-ratio: 5 / 4; object-fit: cover; object-position: 50% 18%; }
-  /* Stitch the seam: the framed portrait straddles the band's bottom edge —
-     half on the dark photograph, half on paper — so the about beat reads as
-     one unit instead of a hard cut between grounds. */
-  .portrait-sec { padding-block-start: 0; }
-  .portrait-media { position: relative; z-index: 2; margin-block-start: -3.2rem; }
   .contact-grid { grid-template-columns: 1fr; }
   .principles { grid-template-columns: 1fr; gap: 2.2rem; }
 }
@@ -888,6 +877,15 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
      row with no affordance reads as a statement, not a link. */
   .route-list a { grid-template-columns: 3.4rem minmax(0, 1fr) 1.5rem; gap: 1.1rem; align-items: start; }
   .route-arrow { align-self: center; }
+  /* The about beat stacks only below 860px — above that the desktop
+     two-column layout holds. Stacked, the portrait fills the wrap (a
+     floating half-width box reads as an accident) and is cropped to
+     head-and-shoulders so the name shares its viewport; it straddles the
+     band's bottom edge so dark and paper read as one unit. */
+  .portrait-sec { padding-block-start: 0; }
+  .portrait-sec .wrap { grid-template-columns: 1fr; }
+  .portrait-media { position: relative; z-index: 2; margin-block-start: -3.2rem; }
+  .portrait-media img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; object-position: 50% 20%; }
   .portrait-media::before { inset-inline: -1rem 3rem; inset-block: 1rem -1rem; }
   .index a { grid-template-columns: 3rem minmax(0, 1fr) 1.4rem; gap: 1rem; }
   .creds > div, .creds.wide > div { grid-template-columns: 1fr; gap: .2rem; }
@@ -910,6 +908,8 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
 @media (max-width: 560px) {
   .side { grid-template-columns: 1fr; }
   .quiet { min-height: 36svh; }
+  /* Narrow phones get the tighter head-and-shoulders crop. */
+  .portrait-media img { aspect-ratio: 5 / 4; object-position: 50% 18%; }
   .closing-lines { flex-direction: column; gap: .8rem; }
   .closing-lines a { width: min(20rem, 100%); justify-content: center; }
   .btn { width: 100%; }
