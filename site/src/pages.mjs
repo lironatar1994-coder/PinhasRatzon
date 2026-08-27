@@ -218,11 +218,12 @@ export function home() {
     ${photo(IMAGES.bandStamp, { alt: '', w: 1920, h: 1072 })}
   </div>
   <div class="wrap quiet-inner">
+    <p class="label">שאלות נפוצות</p>
     <h2 class="quiet-line">את השאלות הנכונות<br>שואלים לפני החותמת.</h2>
   </div>
 </section>
 
-${faqBlock(HOME_FAQS, { h2: 'השאלות שפותחות כמעט כל שיחה' })}
+${faqBlock(HOME_FAQS, { h2: '' })}
 
 ${closing({ h2: 'שיחה אחת עושה סדר' })}`;
 

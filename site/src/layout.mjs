@@ -249,10 +249,10 @@ export function faqBlock(faqs, { h2 = 'שאלות נפוצות', label = 'שאל
   return `
 <section class="faq" id="faq">
   <div class="wrap">
-    <div class="sec-head">
+    ${h2 ? `<div class="sec-head">
       ${label ? `<p class="label">${esc(label)}</p>` : ''}
       <h2>${esc(h2)}</h2>
-    </div>
+    </div>` : ''}
     <div class="faq-list">
       ${faqs
         .map(

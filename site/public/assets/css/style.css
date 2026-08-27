@@ -653,6 +653,9 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 
 .faq { padding-block: var(--gap-sec); background: var(--paper-2); }
 .faq-list { border-block-start: 1px solid var(--stone); max-width: 52rem; }
+/* When the stamp band IS the FAQ's header, the list follows it closely —
+   a full section gap after a headline band reads as two strangers. */
+.quiet + .faq { padding-block-start: calc(var(--gap-sec) * .55); }
 .faq-group { margin-block-end: 3.5rem; }
 .faq-group > h2 { font-size: 1.5rem; margin-block-end: 1rem; }
 /* The group heading IS a link to its practice page — say so: gold arrow,
