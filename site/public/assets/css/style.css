@@ -798,6 +798,11 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
      text arrives in the same viewport. */
   .portrait-media { max-width: 26rem; }
   .portrait-media img { aspect-ratio: 5 / 4; object-fit: cover; object-position: 50% 18%; }
+  /* Stitch the seam: the framed portrait straddles the band's bottom edge —
+     half on the dark photograph, half on paper — so the about beat reads as
+     one unit instead of a hard cut between grounds. */
+  .portrait-sec { padding-block-start: 0; }
+  .portrait-media { position: relative; z-index: 2; margin-block-start: -3.2rem; }
   .contact-grid { grid-template-columns: 1fr; }
   .principles { grid-template-columns: 1fr; gap: 2.2rem; }
 }

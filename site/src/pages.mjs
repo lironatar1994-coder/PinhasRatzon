@@ -190,7 +190,6 @@ export function home() {
     ${photo(IMAGES.bandKey, { alt: '', w: 1920, h: 1072 })}
   </div>
   <div class="wrap quiet-inner">
-    <p class="label">אודות</p>
     <h2 class="quiet-line">תיק אחד. עורך דין אחד.</h2>
   </div>
 </section>
@@ -201,6 +200,7 @@ export function home() {
       ${photo(IMAGES.portrait, { alt: `${BIZ.shortName}, עורך דין מקרקעין ועיזבונות ב${BIZ.city}`, w: 980, h: 1225 })}
     </div>
     <div class="portrait-copy">
+      <p class="label">אודות</p>
       <h2>${esc(BIZ.shortName)}</h2>
       <p class="lead">מאז ${esc(BIZ.founded)} אני מלווה קונים, מוכרים ומשפחות — בעסקאות מקרקעין, במיסוי, ברישום ובהעברה הבין־דורית.</p>
       <p class="portrait-note">לא תצטרכו להסביר את התיק מחדש — אני זה שבודק את המסמכים, מנסח את ההסכם ועומד מול הרשויות.</p>
