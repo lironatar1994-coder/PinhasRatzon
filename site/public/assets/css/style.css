@@ -984,10 +984,22 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
      cover-crop on a phone slices them at the edge and fills the screen
      with the empty right side. Anchor the crop on the subject. */
   .quiet-figure img { object-position: 20% 62%; }
-  /* No room for a side panel on phones — the opener returns to the clean
-     solid ground rather than a picture squeezed behind text. */
-  .page-hero-figure { display: none; }
+  /* No room for a side panel on phones, and the photos are measured too
+     bright to sit behind text — so the opener stacks: headline and lead on
+     the solid ground, then the photograph full-bleed, emerging from the
+     dark with a top dissolve. The brightness comes from the picture, the
+     contrast from the token. */
+  .page-hero.has-figure { display: flex; flex-direction: column; padding-block-end: 0; }
   .page-hero.has-figure .wrap { display: block; }
+  .page-hero-figure {
+    position: relative; inset-block: auto; left: auto; width: 100%; z-index: 0;
+    order: 2; margin-block-start: 2.4rem;
+    aspect-ratio: 16 / 10;
+  }
+  .page-hero-figure img { object-position: 50% 40%; }
+  .page-hero-figure::after {
+    background: linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 30%);
+  }
 
   .hero { padding-block: 3.2rem 0; }
   .hero-cue { display: none; }
