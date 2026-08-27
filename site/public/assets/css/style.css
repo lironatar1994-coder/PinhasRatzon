@@ -334,7 +334,9 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 
 .quiet {
   position: relative; isolation: isolate; overflow: hidden;
-  min-height: min(72vh, 700px);
+  /* A statement divider, not a scene: tall enough for cinema, short enough
+     that one line of text never owns a whole desktop viewport. */
+  min-height: min(50vh, 480px);
   display: flex; align-items: center;
   background: var(--deep); color: var(--on-deep);
   padding-block: clamp(3.5rem, 2rem + 5vw, 6rem);
@@ -786,7 +788,7 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
     -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 9%);
     mask-image: linear-gradient(to top, transparent 0%, #000 9%);
   }
-  .quiet { min-height: 54svh; }
+  .quiet { min-height: 44svh; }
 }
 
 @media (max-width: 1000px) {
