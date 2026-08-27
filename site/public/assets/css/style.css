@@ -945,7 +945,13 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
     border: 1px solid var(--accent-lt); color: var(--accent-lt);
     transition: background .25s var(--ease), color .25s var(--ease);
   }
-  .tel-mini:hover, .tel-mini:active, .wa-mini:hover, .wa-mini:active { background: var(--accent-lt); color: var(--deep); }
+  /* Hierarchy, not twins: the phone is this audience's primary action and
+     wears the gold fill; WhatsApp stays a hairline. Both icons step up a
+     size and a stroke weight — 1.25px hairlines vanish at 44px scale. */
+  .tel-mini { background: var(--accent-lt); color: var(--deep); }
+  .tel-mini:hover, .tel-mini:active { background: transparent; color: var(--accent-lt); }
+  .wa-mini:hover, .wa-mini:active { background: var(--accent-lt); color: var(--deep); }
+  .tel-mini .ic, .wa-mini .ic { width: 21px; height: 21px; stroke-width: 1.6; }
 
   .primary {
     position: fixed; inset-block: 0 auto; inset-inline-end: 0;
