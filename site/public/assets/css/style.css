@@ -555,8 +555,9 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .page-hero .wrap { position: relative; z-index: 2; }
 /* The key band frame keeps its subject in the lower-left third — anchor
    the crop there or the figure shows only dark wood. */
-.page-hero-figure.figure-key img { object-position: 12% 62%; }
-.page-hero-figure.figure-chairs img { object-position: 28% 58%; }
+/* The person is the brand: page heroes carry Pinhas himself. His face sits
+   in the crop's upper-left half — anchor there so no box ever beheads him. */
+.page-hero-figure.figure-pinhas img { object-position: 35% 22%; }
 /* The text column is fenced to the right 46% — the fence, not an em cap,
    is what guarantees the no-overlap contract. */
 .page-hero.has-figure .wrap { display: grid; grid-template-columns: minmax(0, 46fr) minmax(0, 54fr); }

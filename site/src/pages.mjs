@@ -238,8 +238,8 @@ export function practiceIndex() {
   ];
   const body = `
 <section class="page-hero has-figure">
-  <div class="page-hero-figure figure-key" aria-hidden="true">
-    ${photo(IMAGES.bandKey, { alt: '', w: 1920, h: 1072, priority: true })}
+  <div class="page-hero-figure figure-pinhas" aria-hidden="true">
+    ${photo('/assets/img/practice-hero', { alt: '', w: 1000, h: 908, priority: true })}
   </div>
   <div class="wrap">
     <h1>שישה תחומים, לרוב אותו תיק</h1>
@@ -314,10 +314,10 @@ export function practicePage(p) {
   }).join('\n    ');
 
   const body = `
-<section class="page-hero${p.image ? ' has-figure' : ''}">
-  ${p.image ? `<div class="page-hero-figure" aria-hidden="true">
-    ${photo(p.image, { alt: '', w: 1600, h: 900, priority: true })}
-  </div>` : ''}
+<section class="page-hero has-figure">
+  <div class="page-hero-figure figure-pinhas" aria-hidden="true">
+    ${photo('/assets/img/practice-hero', { alt: '', w: 1000, h: 908, priority: true })}
+  </div>
   <div class="wrap">
     <h1>${esc(p.h1)}</h1>
     <p class="lead">${esc(p.lead)}</p>
@@ -542,8 +542,8 @@ export function contact() {
 
   const body = `
 <section class="page-hero has-figure">
-  <div class="page-hero-figure figure-chairs" aria-hidden="true">
-    ${photo(IMAGES.bandChairs, { alt: '', w: 1920, h: 1072, priority: true })}
+  <div class="page-hero-figure figure-pinhas" aria-hidden="true">
+    ${photo('/assets/img/contact-hero', { alt: `${BIZ.shortName}`, w: 1000, h: 908, priority: true })}
   </div>
   <div class="wrap">
     <h1>שיחה אחת עושה סדר</h1>
