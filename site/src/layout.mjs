@@ -200,6 +200,12 @@ export function contactForm({ id = 'c' } = {}) {
 export function closing({ h2, body }) {
   return `
 <section class="closing">
+  <div class="closing-figure" aria-hidden="true">
+    <picture>
+      <source srcset="/assets/img/band-chairs.webp" type="image/webp">
+      <img src="/assets/img/band-chairs.jpg" alt="" width="1920" height="1072" loading="lazy" decoding="async">
+    </picture>
+  </div>
   <div class="wrap">
     <h2>${esc(h2)}</h2>
     <p class="closing-body">${esc(body)}</p>

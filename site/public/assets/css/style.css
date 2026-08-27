@@ -624,7 +624,23 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 
 /* ------------------------------------------------------------ closing */
 
-.closing { padding-block: var(--gap-sec); background: var(--deep); color: var(--on-deep); text-align: center; }
+.closing {
+  position: relative; isolation: isolate; overflow: hidden;
+  padding-block: var(--gap-sec); background: var(--deep); color: var(--on-deep); text-align: center;
+}
+/* The consultation scene under the invitation to talk — present as
+   atmosphere, not as a picture: a heavy uniform veil keeps every measured
+   pair intact and the chairs barely-there. */
+.closing-figure { position: absolute; inset: 0; z-index: 0; }
+.closing-figure img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%;
+  filter: var(--grade);
+}
+.closing-figure::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: rgba(14, 12, 9, .66);
+}
+.closing .wrap { position: relative; z-index: 2; }
 .closing .label { justify-content: center; color: var(--accent-lt); }
 .closing h2 { color: #fff; }
 .closing-body { max-width: 34rem; margin: 1.4rem auto 2.4rem; color: var(--on-deep-2); font-weight: 300; }
@@ -856,6 +872,7 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
     background: linear-gradient(to left, rgba(14, 12, 9, .8) 0%, rgba(14, 12, 9, .58) 55%, rgba(14, 12, 9, .52) 100%);
   }
   .statement-figure::after { background: rgba(14, 12, 9, .64); }
+  .closing-figure::after { background: rgba(14, 12, 9, .74); }
 
   /* The band subjects live in the LEFT third of each frame; a centered
      cover-crop on a phone slices them at the edge and fills the screen
