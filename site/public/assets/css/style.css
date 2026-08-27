@@ -638,6 +638,12 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .faq-list { border-block-start: 1px solid var(--stone); max-width: 52rem; }
 .faq-group { margin-block-end: 3.5rem; }
 .faq-group > h2 { font-size: 1.5rem; margin-block-end: 1rem; }
+/* The group heading IS a link to its practice page — say so: gold arrow,
+   nudge on hover, the textlink language. */
+.faq-group > h2 a { display: inline-flex; align-items: center; gap: .6rem; color: var(--ink); }
+.faq-group > h2 a .ic { color: var(--accent); transition: transform .25s var(--ease); }
+.faq-group > h2 a:hover { color: var(--accent); text-decoration: none; }
+.faq-group > h2 a:hover .ic { transform: translateX(-4px); }
 .faq-item { border-block-end: 1px solid var(--stone); }
 .faq-item summary {
   display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem;
@@ -947,18 +953,20 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .wrap, .wrap.narrow { width: calc(100% - 2.5rem); }
   .header-inner { min-height: 72px; gap: 1.1rem; }
   .burger { display: flex; }
+  /* Naked glyphs, no chrome: boxed icons put three competing shapes in the
+     most-seen strip of the site. Bare champagne icons beside the burger
+     keep the header airy and the gold jewelry-rare. Tap targets stay 44px
+     through the transparent hit area. */
+  .header-inner { min-height: 72px; gap: 1.2rem; }
   .tel-mini, .wa-mini {
-    display: grid; place-items: center; width: 44px; height: 44px;
-    border: 1px solid var(--accent-lt); color: var(--accent-lt);
-    transition: background .25s var(--ease), color .25s var(--ease);
+    display: grid; place-items: center; width: 42px; height: 44px;
+    border: 0; background: none; color: var(--accent-lt);
+    transition: color .25s var(--ease);
   }
-  /* Hierarchy, not twins: the phone is this audience's primary action and
-     wears the gold fill; WhatsApp stays a hairline. Both icons step up a
-     size and a stroke weight — 1.25px hairlines vanish at 44px scale. */
-  .tel-mini { background: var(--accent-lt); color: var(--deep); }
-  .tel-mini:hover, .tel-mini:active { background: transparent; color: var(--accent-lt); }
-  .wa-mini:hover, .wa-mini:active { background: var(--accent-lt); color: var(--deep); }
-  .tel-mini .ic, .wa-mini .ic { width: 21px; height: 21px; stroke-width: 1.6; }
+  .tel-mini:hover, .tel-mini:active, .wa-mini:hover, .wa-mini:active { color: #fff; }
+  /* 24px exactly — the icons are drawn on a 24 grid, and any other size
+     lands every coordinate on fractional pixels and smears the strokes. */
+  .tel-mini .ic, .wa-mini .ic { width: 24px; height: 24px; stroke-width: 1.5; }
 
   .primary {
     position: fixed; inset-block: 0 auto; inset-inline-end: 0;

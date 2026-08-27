@@ -388,11 +388,13 @@ export function about() {
   ];
 
   const body = `
-<section class="page-hero">
+<section class="page-hero has-figure">
+  <div class="page-hero-figure figure-pinhas" aria-hidden="true">
+    ${photo('/assets/img/about-hero', { alt: '', w: 1000, h: 973, priority: true })}
+  </div>
   <div class="wrap">
-    <p class="label">אודות</p>
     <h1>${esc(BIZ.shortName)}</h1>
-    <p class="lead">עוסק בעריכת דין מאז ${esc(BIZ.founded)}. כמעט כל תיק שעבר כאן מאז נוגע בנכס: עסקה שצריך לסגור, רישום שצריך להסדיר, מס שצריך לתכנן, או עיזבון שצריך לחלק.</p>
+    <p class="lead">אני עורך דין מאז ${esc(BIZ.founded)}, וכמעט כל תיק שעבר אצלי מאז נוגע בנכס: עסקה שצריך לסגור, רישום שצריך להסדיר, מס שצריך לתכנן, או עיזבון שצריך לחלק.</p>
   </div>
 </section>
 
@@ -400,7 +402,7 @@ export function about() {
   <div class="wrap layout-aside">
     <article class="prose">
       <p>התחומים האלה נראים נפרדים, אבל אצל רוב הלקוחות הם מגיעים כרוכים זה בזה. מכירת דירה שהתקבלה בירושה נוגעת בו זמנית בדיני ירושה, במיסוי מקרקעין וברישום. בית משותף שלא נרשם כראוי מקשה על כל עסקה עתידית בו. ותכנון מס שנעשה אחרי החתימה כבר לא יכול לשנות הרבה.</p>
-      <p>לכן הליווי כאן הוא מקצה לקצה — מהבדיקות הראשונות, דרך ניסוח ההסכם והדיווחים לרשויות, ועד רישום הזכויות. בלי להעביר את התיק לגורם אחר באמצע, ובלי לסיים בחתימה ולהשאיר את הרישום פתוח.</p>
+      <p>לכן אני מלווה מקצה לקצה — מהבדיקות הראשונות, דרך ניסוח ההסכם והדיווחים לרשויות, ועד רישום הזכויות. בלי להעביר את התיק לגורם אחר באמצע, ובלי לסיים בחתימה ולהשאיר את הרישום פתוח.</p>
 
       <section class="sub-sec">
         <h2>דרך העבודה</h2>
@@ -419,11 +421,12 @@ export function about() {
           <div><dt dir="ltr">LL.B</dt><dd>תואר ראשון במשפטים, הקריה האקדמית אונו</dd></div>
           <div><dt>הסמכה</dt><dd>עריכת ייפוי כוח מתמשך — האפוטרופוס הכללי ומשרד המשפטים</dd></div>
           <div><dt>השתלמויות</dt><dd>דיני מקרקעין, מיסוי מקרקעין, רישום בתים משותפים, עסקאות קומבינציה, דיני ירושה וכינוס נכסים</dd></div>
+          <div><dt>שפות</dt><dd>עברית ואנגלית</dd></div>
         </dl>
       </section>
 
       <section class="sub-sec">
-        <h2>מה עובר כאן ביום־יום</h2>
+        <h2>מה עובר אצלי ביום־יום</h2>
         <ul class="checks">
           ${[
             'ניהול עסקאות מקרקעין מורכבות מקצה לקצה',
@@ -438,18 +441,9 @@ export function about() {
         </ul>
       </section>
 
-      <section class="sub-sec">
-        <h2>שפות</h2>
-        <dl class="creds wide">
-          <div><dt>שפות</dt><dd>עברית ואנגלית</dd></div>
-        </dl>
-      </section>
     </article>
 
-    <aside class="side" aria-label="תמונה ופרטי קשר">
-      <div class="side-block">
-        ${photo(IMAGES.portrait, { alt: `${BIZ.shortName}, עורך דין ב${BIZ.city}`, w: 980, h: 1225 })}
-      </div>
+    <aside class="side" aria-label="פרטי קשר">
       <div class="side-block">
         <p class="label">אזור שירות</p>
         <p class="side-note">${esc(BIZ.areaHuman)}</p>
@@ -498,9 +492,11 @@ export function faqPage() {
   const all = PRACTICE.flatMap((p) => p.faqs);
 
   const body = `
-<section class="page-hero">
+<section class="page-hero has-figure">
+  <div class="page-hero-figure figure-pinhas" aria-hidden="true">
+    ${photo('/assets/img/contact-hero', { alt: '', w: 1000, h: 908, priority: true })}
+  </div>
   <div class="wrap">
-    <p class="label">שאלות נפוצות</p>
     <h1>מה שנשאל בשיחה הראשונה</h1>
     <p class="lead">מסודר לפי תחום. שאלה שנוגעת לתיק ספציפי עדיף לשאול בטלפון — זה בדרך כלל לוקח כמה דקות.</p>
   </div>
@@ -509,7 +505,7 @@ export function faqPage() {
 <div class="section">
   <div class="wrap narrow">
     ${PRACTICE.map((p) => `<section class="faq-group">
-      <h2><a href="/practice-areas/${p.slug}/">${esc(p.nav)}</a></h2>
+      <h2><a href="/practice-areas/${p.slug}/">${esc(p.nav)}${icon('arrow', 18)}</a></h2>
       <div class="faq-list">
         ${p.faqs.map((f) => `<details class="faq-item">
           <summary><span class="faq-q">${esc(f.q)}</span><span class="faq-ic" aria-hidden="true"></span></summary>
@@ -692,7 +688,7 @@ export function thankYou() {
   return page({
     path: '/thank-you/',
     title: `הפנייה נשלחה | ${BIZ.shortName}`,
-    description: 'הפנייה נשלחה בהצלחה.',
+    description: 'קיבלתי את הפנייה ואחזור אליכם בהקדם. אם העניין דחוף — אפשר להתקשר ישירות בטלפון.',
     body,
     noindex: true,
   });
@@ -716,7 +712,7 @@ export function notFound() {
   return page({
     path: '/404.html',
     title: 'העמוד לא נמצא | עו״ד פנחס רצון',
-    description: 'העמוד המבוקש לא נמצא באתר של עו״ד פנחס רצון.',
+    description: 'העמוד המבוקש לא נמצא באתר של עו״ד פנחס רצון. אפשר להמשיך לעמוד הבית, לתחומי העיסוק או ליצירת קשר.',
     body,
     noindex: true,
   });
