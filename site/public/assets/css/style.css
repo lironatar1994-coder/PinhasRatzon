@@ -792,7 +792,19 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   transform-origin: 100% 50%;
 }
 .lead-dialog[open] .dlg-body::before { animation: hero-rule-in .5s var(--ease) .12s both; }
-.dlg-head { display: flex; align-items: center; justify-content: space-between; margin-block-end: .4rem; }
+.dlg-head { display: flex; align-items: center; justify-content: space-between; margin-block-end: .2rem; }
+.dlg-sub { color: var(--muted); font-size: .95rem; line-height: 1.7; margin-block-end: 1.2rem; }
+/* Inside the dialog the airy contact-page fields compress to sheet rhythm —
+   half the dead space, same anatomy. */
+.lead-dialog .form { gap: 1.05rem; }
+.lead-dialog .field { gap: .2rem; }
+.lead-dialog .field label { font-size: .9rem; color: var(--muted); }
+.lead-dialog .field input, .lead-dialog .field select, .lead-dialog .field textarea {
+  font-size: 1.05rem; line-height: 1.5; min-height: 46px; padding: .45rem 0;
+}
+.lead-dialog .field textarea { min-height: auto; resize: none; }
+.lead-dialog .form .btn { width: 100%; margin-block-start: .4rem; }
+.lead-dialog .fineprint { font-size: .8rem; margin-block-start: .8rem; }
 .dlg-head .label { margin-block-end: 0; }
 .dlg-close {
   font-family: var(--sans); font-size: 1.7rem; line-height: 1; color: var(--muted);
@@ -1159,6 +1171,9 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .portrait-media img { object-position: 50% 50%; }
   .btn { width: 100%; }
   .a11y-btn { inset-block-end: 1rem; inset-inline-start: 1rem; }
+  /* On phones the lead dialog is a bottom sheet: full width, rising from
+     the bar the thumb already lives on. */
+  .lead-dialog { width: 100vw; max-width: 100vw; margin: auto 0 0; max-height: 92dvh; overflow-y: auto; }
   .a11y-panel { inset-block-end: 4rem; inset-inline-start: 1rem; }
 }
 

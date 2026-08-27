@@ -170,13 +170,13 @@ export function breadcrumbs(trail) {
 }
 
 /* A single quiet form, and only where a form belongs — never in a hero. */
-export function contactForm({ id = 'c' } = {}) {
+export function contactForm({ id = 'c', compact = false } = {}) {
   return `
 <form class="form" action="${FORM_ACTION}" method="post" name="contact" novalidate>
   <p class="hp"><label>אל תמלאו שדה זה <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
 
   <div class="field">
-    <label for="${id}-name">שם מלא</label>
+    <label for="${id}-name">${compact ? 'שם' : 'שם מלא'}</label>
     <input id="${id}-name" name="name" type="text" autocomplete="name" required>
   </div>
   <div class="field">
@@ -184,15 +184,15 @@ export function contactForm({ id = 'c' } = {}) {
     <input id="${id}-phone" name="phone" type="tel" dir="ltr" inputmode="tel" autocomplete="tel"
            pattern="^(\\+?972[- ]?|0)([23489]|5[0-9]|7[2-9])[- ]?[0-9]{3}[- ]?[0-9]{4}$" required>
   </div>
-  <div class="field">
+  ${compact ? '' : `<div class="field">
     <label for="${id}-topic">נושא הפנייה</label>
     <select id="${id}-topic" name="topic">
       ${TOPICS.map((t) => `<option>${esc(t)}</option>`).join('\n      ')}
     </select>
-  </div>
+  </div>`}
   <div class="field">
     <label for="${id}-msg">רקע קצר <span class="opt">(לא חובה)</span></label>
-    <textarea id="${id}-msg" name="message" rows="4"></textarea>
+    <textarea id="${id}-msg" name="message" rows="${compact ? 3 : 4}"></textarea>
   </div>
 
   <button type="submit" class="btn">שליחה</button>
@@ -239,7 +239,8 @@ export function closing({ h2 }) {
         <p class="label">השארת פרטים</p>
         <button type="button" class="dlg-close" aria-label="סגירה">&times;</button>
       </div>
-      ${contactForm({ id: 'd' })}
+      <p class="dlg-sub">כמה פרטים — ואני חוזר אליכם.</p>
+      ${contactForm({ id: 'd', compact: true })}
     </div>
   </dialog>
 </section>`;
