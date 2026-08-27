@@ -206,6 +206,12 @@ export function closing({ h2 }) {
       <img src="/assets/img/band-chairs.jpg" alt="" width="1920" height="1072" loading="lazy" decoding="async">
     </picture>
   </div>
+  <div class="closing-portrait" aria-hidden="true">
+    <picture>
+      <source srcset="/assets/img/closing-portrait.webp" type="image/webp">
+      <img src="/assets/img/closing-portrait.jpg" alt="" width="1000" height="937" loading="lazy" decoding="async">
+    </picture>
+  </div>
   <div class="wrap closing-grid">
     <h2>${esc(h2)}</h2>
     <div class="closing-act">
