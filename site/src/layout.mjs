@@ -314,6 +314,10 @@ export function page({
   path, title, description, body,
   schema = [], trail = null, ogType = 'website', noindex = false, overHero = false,
   preloadImage = null, preloadPortrait = null,
+  /* WhatsApp clamps long descriptions to two lines and drops its RTL
+     ellipsis on the wrong side — a share description short enough to fit
+     whole never triggers the bug. Defaults to the SEO description. */
+  shareDescription = null,
 }) {
   const canonical = url(path);
   const graph = [attorneySchema(), ...schema];
@@ -333,7 +337,7 @@ export function page({
 <meta property="og:site_name" content="${esc(BIZ.name)}">
 <meta property="og:locale" content="he_IL">
 <meta property="og:title" content="${esc(title)}">
-<meta property="og:description" content="${esc(description.replace(/\.\s*$/, ''))}">
+<meta property="og:description" content="${esc((shareDescription || description).replace(/\.\s*$/, ''))}">
 <meta property="og:url" content="${canonical}">
 <meta property="og:image" content="${url('/assets/img/og-default.jpg')}">
 <meta property="og:image:width" content="1200">
