@@ -1,10 +1,9 @@
 // Site-wide configuration. Everything that appears on more than one page lives here.
 
 // Live location. Canonicals, Open Graph, the sitemap and the JSON-LD all
-// derive from it. It may carry a path prefix — the site is currently served
-// under one — and BASE_PATH below is read back out of it so the two can never
-// drift apart.
-export const SITE_URL = 'https://lawebs.co.il/PinhasRatzon';
+// derive from it. It may carry a path prefix, and BASE_PATH below is read back
+// out of it so the two can never drift apart.
+export const SITE_URL = 'https://pinhasratzon.co.il';
 
 // '' when the site sits at a domain root, '/PinhasRatzon' while it does not.
 // Pages are authored with root-relative links; build.mjs prefixes this onto

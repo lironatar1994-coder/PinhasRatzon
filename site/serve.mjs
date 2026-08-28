@@ -26,9 +26,8 @@ const TYPES = {
 
 createServer(async (req, res) => {
   let path = decodeURIComponent(req.url.split('?')[0]);
-  // The build prefixes every URL with BASE_PATH (the live site lives under
-  // lawebs.co.il/PinhasRatzon). Locally we serve dist/ at the root, so the
-  // prefix is stripped — both /x and /PinhasRatzon/x resolve.
+  // When a deployment uses BASE_PATH, the build prefixes every internal URL.
+  // Locally we serve dist/ at the root, so that optional prefix is stripped.
   if (BASE_PATH && path.startsWith(BASE_PATH)) path = path.slice(BASE_PATH.length) || '/';
   const candidates = extname(path)
     ? [join(DIST, path)]

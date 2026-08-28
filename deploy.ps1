@@ -3,7 +3,7 @@
 #
 # Builds and verifies the site locally, pushes to GitHub, then hands over to
 # deploy_linux.sh on the server, which rebuilds from source and publishes to
-# https://lawebs.co.il/PinhasRatzon/
+# https://pinhasratzon.co.il/
 # ==============================================================================
 
 param (
@@ -13,7 +13,7 @@ param (
     [string]$SSHHost = "root@vee-app.co.il",
     [string]$SSHHostName = "vee-app.co.il",
     [string]$RemoteDir = "/root/PinhasRatzon",
-    [string]$SiteUrl = "https://lawebs.co.il/PinhasRatzon/",
+    [string]$SiteUrl = "https://pinhasratzon.co.il/",
     [switch]$SkipVerify
 )
 
@@ -65,14 +65,16 @@ if (-not $SkipVerify) {
         Pop-Location
     }
 
-    # Every internal link must carry the route prefix, or the site 404s against
-    # itself once it is served from a sub-path.
-    $routeName = $expectedSiteUrl.Split('/')[-1]
-    $pages = Get-ChildItem -LiteralPath (Join-Path $SiteDir "dist") -Recurse -Filter *.html
-    $bad = $pages | Select-String -Pattern ('(href|src)="/(?!' + [regex]::Escape($routeName) + ')')
-    if ($bad) {
-        $bad | Select-Object -First 5 | ForEach-Object { Write-Host "  $($_.Filename): $($_.Matches[0].Value)" -ForegroundColor Red }
-        throw "Built pages contain root-relative links without the /$routeName prefix."
+    # A sub-path deployment needs every internal URL to carry that prefix. At a
+    # domain root, root-relative URLs are exactly what we want.
+    $routePath = ([uri]$expectedSiteUrl).AbsolutePath.TrimEnd('/')
+    if ($routePath) {
+        $pages = Get-ChildItem -LiteralPath (Join-Path $SiteDir "dist") -Recurse -Filter *.html
+        $bad = $pages | Select-String -Pattern ('(href|src)="/(?!' + [regex]::Escape($routePath.TrimStart('/')) + ')')
+        if ($bad) {
+            $bad | Select-Object -First 5 | ForEach-Object { Write-Host "  $($_.Filename): $($_.Matches[0].Value)" -ForegroundColor Red }
+            throw "Built pages contain root-relative links without the $routePath prefix."
+        }
     }
 }
 else {
