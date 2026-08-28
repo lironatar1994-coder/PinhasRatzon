@@ -598,6 +598,21 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .page-hero.has-figure .wrap { display: grid; grid-template-columns: minmax(0, 46fr) minmax(0, 54fr); }
 .page-hero.has-figure .wrap > * { grid-column: 1; }
 
+/* Contact is the point at which the site opens up. On wide screens the
+   photograph remains a complete, warmly lit portrait rather than being
+   swallowed by the interior-page black; the response area becomes a calm
+   paper field, exactly as it already reads once the layout stacks on a phone.
+   This is a page-specific variation — FAQ and service pages retain their
+   dark masthead. */
+.contact-hero { background: var(--paper); color: var(--ink); border-block-end-color: var(--stone); }
+.contact-hero h1 { color: var(--ink); }
+.contact-hero .lead { color: var(--ink-2); }
+.contact-hero .page-hero-figure { border-inline-start: 1px solid var(--stone); }
+.contact-hero .page-hero-figure img { filter: var(--grade-portrait); }
+.contact-hero .page-hero-figure::after {
+  background: none;
+}
+
 /* ------------------------------------------------------------ prose + aside */
 
 .layout-aside { display: grid; grid-template-columns: minmax(0, 1fr) 16rem; gap: clamp(2.5rem, 1.5rem + 4vw, 6rem); align-items: start; }
@@ -1107,11 +1122,18 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
      contrast from the token. */
   .page-hero.has-figure { display: flex; flex-direction: column; padding-block: 2.8rem 0; }
   .page-hero.has-figure .wrap { display: block; }
+  /* Preserve the established phone composition: words on the deep ground,
+     then the unboxed portrait. The daylight split is desktop-only, where
+     the two columns need a clear visual handoff. */
+  .contact-hero { background: var(--deep); color: var(--on-deep); border-block-end-color: var(--gold-line); }
+  .contact-hero h1 { color: #fff; }
+  .contact-hero .lead { color: var(--on-deep-2); }
   .page-hero-figure {
     position: relative; inset-block: auto; left: auto; width: 100%; z-index: 0;
     order: 2; margin-block-start: 2.2rem;
     aspect-ratio: 2 / 1;
   }
+  .contact-hero .page-hero-figure { border-inline-start: 0; }
   .page-hero-figure img { object-position: 50% 45%; }
   /* A glimpse, not a poster: the photograph surfaces out of the dark and
      sinks back into it, so the opener still ends on the solid ground and
@@ -1123,6 +1145,9 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   /* On a portrait the dissolve may touch only the frame's edges — a 32%
      reach shades the face. */
   .page-hero-figure.figure-pinhas::after {
+    background: linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 16%, rgba(14, 12, 9, 0) 80%, var(--deep) 100%);
+  }
+  .contact-hero .page-hero-figure::after {
     background: linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 16%, rgba(14, 12, 9, 0) 80%, var(--deep) 100%);
   }
 

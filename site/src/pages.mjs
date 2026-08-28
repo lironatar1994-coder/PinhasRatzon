@@ -551,7 +551,7 @@ export function contact() {
   ];
 
   const body = `
-<section class="page-hero has-figure">
+<section class="page-hero has-figure contact-hero">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
     ${photo('/assets/img/contact-hero', { alt: `${BIZ.shortName}`, w: 1000, h: 908, priority: true })}
   </div>
