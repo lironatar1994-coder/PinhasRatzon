@@ -18,9 +18,11 @@ OLD_ROUTE_BASE="/PinhasRatzon"
 OLD_LOWER_ROUTE_BASE="/pinhasratzon"
 
 SITE_DIR="site"
-WEB_ROOT="/var/www/${APP_NAME}"
-STAGE_ROOT="/var/www/.${APP_NAME}.next"
-OLD_ROOT="/var/www/.${APP_NAME}.old"
+# Keep the official-domain web root separate from the former sub-path root.
+# That separation makes the cut-over reversible until the redirects go live.
+WEB_ROOT="/var/www/${APP_NAME}-domain"
+STAGE_ROOT="/var/www/.${APP_NAME}-domain.next"
+OLD_ROOT="/var/www/.${APP_NAME}-domain.old"
 
 NGINX_SITE="/etc/nginx/sites-available/${DOMAIN}.conf"
 NGINX_ENABLED="/etc/nginx/sites-enabled/${DOMAIN}.conf"
