@@ -91,39 +91,6 @@ if [ -d "${WEB_ROOT}" ]; then mv "${WEB_ROOT}" "${OLD_ROOT}"; fi
 mv "${STAGE_ROOT}" "${WEB_ROOT}"
 rm -rf "${OLD_ROOT}"
 
-echo "[INFO] Starting the contact-form service..."
-mkdir -p "${LEADS_DIR}"
-chmod 750 "${LEADS_DIR}"
-
-if [ ! -f "${FORM_ENV}" ]; then
-  echo "[WARN] ${FORM_ENV} is missing; submissions will be stored but not mailed."
-fi
-if ! command -v pm2 >/dev/null 2>&1; then
-  echo "[ERROR] pm2 is not installed." >&2
-  exit 1
-fi
-if pm2 describe "${FORM_APP}" >/dev/null 2>&1; then
-  pm2 restart "${FORM_APP}" --update-env >/dev/null
-else
-  pm2 start "$(pwd)/form-service/server.mjs" --name "${FORM_APP}" --time >/dev/null
-fi
-pm2 save >/dev/null
-
-form_up=""
-for _ in 1 2 3 4 5 6 7 8 9 10; do
-  if curl -fsS "http://127.0.0.1:${FORM_PORT}/health" >/dev/null 2>&1; then
-    form_up=1
-    break
-  fi
-  sleep 1
-done
-if [ -z "${form_up}" ]; then
-  echo "[ERROR] ${FORM_APP} did not answer on 127.0.0.1:${FORM_PORT}." >&2
-  pm2 logs "${FORM_APP}" --lines 20 --nostream || true
-  exit 1
-fi
-echo "[INFO] ${FORM_APP} healthy: $(curl -fsS "http://127.0.0.1:${FORM_PORT}/health")"
-
 echo "[INFO] Writing the root-domain application routes..."
 cat > "${NGINX_APP_SNIPPET}" <<EOF
 # Managed by deploy_linux.sh in the ${APP_NAME} repository.
@@ -246,6 +213,39 @@ fi
 write_domain_site
 nginx -t
 systemctl reload nginx
+
+echo "[INFO] Starting the contact-form service for the official domain..."
+mkdir -p "${LEADS_DIR}"
+chmod 750 "${LEADS_DIR}"
+
+if [ ! -f "${FORM_ENV}" ]; then
+  echo "[WARN] ${FORM_ENV} is missing; submissions will be stored but not mailed."
+fi
+if ! command -v pm2 >/dev/null 2>&1; then
+  echo "[ERROR] pm2 is not installed." >&2
+  exit 1
+fi
+if pm2 describe "${FORM_APP}" >/dev/null 2>&1; then
+  pm2 restart "${FORM_APP}" --update-env >/dev/null
+else
+  pm2 start "$(pwd)/form-service/server.mjs" --name "${FORM_APP}" --time >/dev/null
+fi
+pm2 save >/dev/null
+
+form_up=""
+for _ in 1 2 3 4 5 6 7 8 9 10; do
+  if curl -fsS "http://127.0.0.1:${FORM_PORT}/health" >/dev/null 2>&1; then
+    form_up=1
+    break
+  fi
+  sleep 1
+done
+if [ -z "${form_up}" ]; then
+  echo "[ERROR] ${FORM_APP} did not answer on 127.0.0.1:${FORM_PORT}." >&2
+  pm2 logs "${FORM_APP}" --lines 20 --nostream || true
+  exit 1
+fi
+echo "[INFO] ${FORM_APP} healthy: $(curl -fsS "http://127.0.0.1:${FORM_PORT}/health")"
 
 echo "[INFO] Replacing the former LaWebs path with permanent redirects..."
 cat > "${OLD_NGINX_SNIPPET}" <<EOF
