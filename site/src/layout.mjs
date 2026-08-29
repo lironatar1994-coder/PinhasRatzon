@@ -246,9 +246,12 @@ export function closing({ h2 }) {
 </section>`;
 }
 
-export function faqBlock(faqs, { h2 = 'שאלות נפוצות', label = 'שאלות נפוצות', open = -1 } = {}) {
+/* `more` adds the one link out of the block — a home-page FAQ that answers five
+   questions and then stops is a dead end, and /faq/ holds the other twenty.
+   `labelledby` names the block when its heading lives in the band above it. */
+export function faqBlock(faqs, { h2 = 'שאלות נפוצות', label = 'שאלות נפוצות', open = -1, more = null, labelledby = '' } = {}) {
   return `
-<section class="faq" id="faq">
+<section class="faq" id="faq"${labelledby ? ` aria-labelledby="${labelledby}"` : ''}>
   <div class="wrap">
     ${h2 ? `<div class="sec-head">
       ${label ? `<p class="label">${esc(label)}</p>` : ''}
@@ -264,6 +267,7 @@ export function faqBlock(faqs, { h2 = 'שאלות נפוצות', label = 'שאל
         )
         .join('\n      ')}
     </div>
+    ${more ? `<p class="faq-more"><a class="textlink" href="${more.href}">${esc(more.label)} ${icon('arrow', 18)}</a></p>` : ''}
   </div>
 </section>`;
 }

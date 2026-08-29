@@ -129,22 +129,54 @@ const PRINCIPLES = [
    'רוב הכסף בעסקה עובר לפני שהזכויות עוברות. התיק נסגר כאן כשהזכויות רשומות על שמכם בטאבו, ברמ״י או בחברה המשכנת.'],
 ];
 
+/* Home-page altitude: the questions that stop someone from picking up the
+   phone — price, time, preparation, distance — not one sample per practice
+   area. The earlier set copied four answers verbatim out of practice.mjs, so
+   the same Q&A shipped as FAQPage markup at three URLs and this block said
+   nothing the rest of the site did not already say.
+
+   Every number here is a market or statutory fact, not this office's price
+   list: the 0.5%–1.5% band is what the Israeli market publishes, the
+   contractor cap is תקנות המכר (דירות) (הגבלת גובה ההוצאות המשפטיות),
+   תשע״ה־2014, and the deadlines are the ones in חוק מיסוי מקרקעין and the
+   Inheritance Registrar's own published turnaround. Ratzon's own fee is
+   deliberately not stated — it is set per file and belongs in the written
+   engagement, not on a marketing page. */
+/* The home page's method band. Deliberately NOT the PRINCIPLES trio the about
+   page carries: same three ideas, written short for a reader who has just
+   chosen their situation and wants to know how the work runs before being
+   asked for anything. It sits between the routing band and the portrait so the
+   page answers "what do you do" before "who are you", and still asks for
+   nothing — the only solicitation on the page stays in the closing. */
+const APPROACH = [
+  ['בודקים לפני שחותמים',
+   'נסח רישום, מצב תכנוני, היתרים וחריגות, שעבודים ועיקולים — נבדקים בזמן שבו עוד אפשר לשנות את תנאי העסקה או לוותר עליה.'],
+  ['המס נכנס לתמונה בהתחלה',
+   'חשיפת מס השבח והרכישה והפטורים שאפשר למצות מחושבים כשעוד ניתן לבנות את העסקה אחרת. אחרי החתימה המס כבר לא מתוכנן.'],
+  ['התיק נסגר ברישום',
+   'לא בחתימה ולא בהעברת הכסף, אלא כשהזכויות רשומות על שמכם — בטאבו, ברמ״י או בחברה המשכנת.'],
+];
+
 const HOME_FAQS = [
   {
+    q: 'כמה עולה ליווי משפטי, ואיך נקבע שכר הטרחה?',
+    a: 'אין בישראל מחירון מחייב לשכר טרחה במקרקעין. מקובל בשוק לגבות אחוז משווי העסקה — בדרך כלל בטווח של כ־0.5% עד 1.5% בתוספת מע״מ — ובעסקאות פשוטות גם סכום קבוע. הסכום המדויק תלוי בסוג העסקה, במורכבות התיק ובהיקף הבדיקות הנדרשות, ונקבע בכתב לפני שמתחילים לעבוד ולא אחרי.',
+  },
+  {
     q: 'אני קונה דירה מקבלן — צריך עורך דין מטעמי?',
-    a: 'כן. עורך הדין של הקבלן מייצג את הקבלן. חוזה מקבלן נכתב לטובת המוכר, וסעיפים מהותיים בו ניתנים לרוב למשא ומתן — מועדי מסירה, פיצוי על איחור, הצמדות, ערבויות חוק המכר ותנאי התשלום.',
+    a: 'כן. עורך הדין שהקבלן מפנה אליו מייצג את הקבלן. התשלום שהוא רשאי לגבות מכם מוגבל בתקנות ל־0.5% ממחיר הדירה או לתקרה קבועה שמתעדכנת מדי שנה — הנמוך מביניהם — והוא משלם על רישום העסקה, לא על ייצוג האינטרסים שלכם. סעיפים מהותיים בחוזה קבלן ניתנים לרוב למשא ומתן: מועדי מסירה, פיצוי על איחור, ערבויות חוק המכר, הצמדות ותנאי תשלום.',
   },
   {
-    q: 'מה ההבדל בין צו ירושה לצו קיום צוואה?',
-    a: 'כשאין צוואה, החלוקה נעשית לפי חוק הירושה ומוגשת בקשה לצו ירושה. כשיש צוואה, מגישים בקשה לצו קיום צוואה שנותן לה תוקף. שתי הבקשות מוגשות לרשם לענייני ירושה, ובמקרים מסוימים מועברות לבית המשפט לענייני משפחה.',
+    q: 'כמה זמן לוקח התהליך?',
+    a: 'תלוי בהליך, ולרוב המועדים קבועים בחוק. דיווח על עסקת מקרקעין מוגש לרשות המסים בתוך 30 יום מיום העסקה, והשגה על שומה — בתוך 30 יום מקבלתה. צו ירושה או צו קיום צוואה מתקבל בדרך כלל תוך כ־45 עד 90 יום כשאין התנגדות. רישום זכויות בדירה יד שנייה נעשה סמוך לסיום העסקה; בדירה מקבלן הרישום ממתין לפרצלציה ולרישום הבית המשותף ועשוי להימשך שנים — ולכן חשוב שההסכם יגן עליכם עד שהוא מושלם.',
   },
   {
-    q: 'מתי כדאי לערוך ייפוי כוח מתמשך?',
-    a: 'כשעדיין אין בעיה. אפשר לערוך אותו רק כל עוד האדם כשיר ומבין את משמעות המסמך. הוא מאפשר לקבוע מראש מי יטפל בענייניכם ואיך — במקום שבית המשפט ימנה אפוטרופוס בדיעבד.',
+    q: 'מה כדאי להביא לשיחה הראשונה?',
+    a: 'מה שכבר נמצא בידיים: נסח רישום או אישור זכויות, טיוטת ההסכם או זכרון הדברים אם נחתם, ודיווחי מס קודמים על הנכס. בענייני ירושה — תעודת פטירה והצוואה אם קיימת. אם אין בידיכם כלום, גם זה בסדר; בשיחה הראשונה אפשר להבין מה חסר, ואת רוב המסמכים אפשר להוציא בהמשך.',
   },
   {
-    q: 'שילמתי מס שבח — אפשר לקבל החזר?',
-    a: 'לעיתים כן. החזרים נובעים בדרך כלל מפטורים שלא נוצלו, מחישוב לינארי, מפריסת מס או מהוצאות מוכרות שלא נכללו בדיווח המקורי. להגשת השגה קבועים בחוק מועדים, ולכן כדאי לבדוק מוקדם.',
+    q: 'אפשר לנהל את הטיפול מרחוק, בלי להגיע למשרד?',
+    a: 'רוב ההתנהלות השוטפת נעשית בטלפון, במייל ובוואטסאפ, והמסמכים עוברים דיגיטלית. חלק מהשלבים עדיין מחייבים פגישה פנים אל פנים — ייפוי כוח מתמשך, למשל, חייב להיערך ולהיחתם מול עורך דין שהוסמך לכך על ידי האפוטרופוס הכללי.',
   },
   {
     q: 'באילו אזורים אתה מטפל?',
@@ -195,6 +227,19 @@ export function home() {
   <div class="wrap">
     ${secHead('איך אפשר לעזור', 'איפה אתם נמצאים כרגע?')}
     ${routeList()}
+    <p class="route-more"><a class="textlink" href="/practice-areas/">כל תחומי העיסוק ${icon('arrow', 18)}</a></p>
+  </div>
+</section>
+
+<section class="section section-alt approach">
+  <div class="wrap">
+    ${secHead('דרך העבודה', 'שלושה דברים שקובעים איך תיק נגמר')}
+    <div class="principles">
+      ${APPROACH.map(([h, b]) => `<article>
+        <h3>${esc(h)}</h3>
+        <p>${esc(b)}</p>
+      </article>`).join('\n      ')}
+    </div>
   </div>
 </section>
 
@@ -219,11 +264,16 @@ export function home() {
   </div>
   <div class="wrap quiet-inner">
     <p class="label">שאלות נפוצות</p>
-    <h2 class="quiet-line">את השאלות הנכונות<br>שואלים לפני החותמת.</h2>
+    <h2 class="quiet-line" id="faq-heading">את השאלות הנכונות<br>שואלים לפני החותמת.</h2>
   </div>
 </section>
 
-${faqBlock(HOME_FAQS, { h2: '' })}
+${faqBlock(HOME_FAQS, {
+  h2: '',
+  open: 0,
+  labelledby: 'faq-heading',
+  more: { href: '/faq/', label: 'כל השאלות הנפוצות' },
+})}
 
 ${closing({ h2: 'שיחה אחת עושה סדר' })}`;
 
