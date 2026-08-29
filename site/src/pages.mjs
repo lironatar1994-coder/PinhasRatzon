@@ -1,3 +1,6 @@
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+
 import { BIZ, DISCLAIMER } from './site.mjs';
 import { PRACTICE, bySlug } from './content/practice.mjs';
 import {
@@ -40,7 +43,33 @@ const portraitPhoto = (alt) => `<picture>
       <img src="${IMAGES.portrait}.jpg" alt="${esc(alt)}" width="980" height="1225" loading="lazy" decoding="async">
     </picture>`;
 
-function photo(src, { alt, w, h, cls = '', note = 'תמונה — להוספה', priority = false }) {
+/* Is a frame actually in public/? Both encodings must be there — a lone .webp
+   would leave the .jpg fallback pointing at nothing. */
+const PUBLIC = fileURLToPath(new URL('../public', import.meta.url));
+const hasAsset = (src) =>
+  existsSync(PUBLIC + src + '.webp') && existsSync(PUBLIC + src + '.jpg');
+
+/* A desktop-only frame, used when one exists.
+   MEASURED 2026-08-29: the interior-page heroes are cut from ~1000px sources.
+   A 2x laptop asks the contact hero for 1496x862 device pixels at 1440 and
+   1994x878 at 1920 — a 1.5x to 2.0x stretch of a 1000x908 file, which is
+   exactly the softness that shows on desktop and not on a phone (390@3x asks
+   for 1.17x, near native). The statement portrait is worse at 1.85x. No CSS
+   fixes this; only pixels do. So `wide` emits a desktop `<source>` for
+   `<name>-wide` — but only once that file is really in public/, so the page is
+   correct both before the frame is shot and after. Drop in
+   contact-hero-wide.webp + .jpg and the next build serves them, no code
+   change. 861px is the width at which the layout stops stacking. */
+const wideSource = (src) => {
+  const wide = src + '-wide';
+  return hasAsset(wide)
+    ? `<source media="(min-width: 861px)" srcset="${wide}.webp" type="image/webp">
+      <source media="(min-width: 861px)" srcset="${wide}.jpg" type="image/jpeg">
+      `
+    : '';
+};
+
+function photo(src, { alt, w, h, cls = '', note = 'תמונה — להוספה', priority = false, wide = false }) {
   if (!src) {
     return `<div class="ph ${cls}" style="aspect-ratio:${w}/${h}" role="img" aria-label="${esc(alt)}"><span>${esc(note)}</span></div>`;
   }
@@ -48,7 +77,7 @@ function photo(src, { alt, w, h, cls = '', note = 'תמונה — להוספה',
     ? 'fetchpriority="high" decoding="async"'
     : 'loading="lazy" decoding="async"';
   return `<picture>
-      <source srcset="${src}.webp" type="image/webp">
+      ${wide ? wideSource(src) : ''}<source srcset="${src}.webp" type="image/webp">
       <img class="${cls}" src="${src}.jpg" alt="${esc(alt)}" width="${w}" height="${h}" ${load}>
     </picture>`;
 }
@@ -209,7 +238,7 @@ export function home() {
   </div>
   <div class="statement-portrait" aria-hidden="true">
     <picture>
-      <source srcset="/assets/img/closing-portrait-left.webp" type="image/webp">
+      ${wideSource('/assets/img/closing-portrait-left')}<source srcset="/assets/img/closing-portrait-left.webp" type="image/webp">
       <img src="/assets/img/closing-portrait-left.jpg" alt="" width="1000" height="908" loading="lazy" decoding="async">
     </picture>
   </div>
@@ -303,7 +332,7 @@ export function practiceIndex() {
   const body = `
 <section class="page-hero has-figure">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
-    ${photo('/assets/img/practice-hero', { alt: '', w: 1000, h: 908, priority: true })}
+    ${photo('/assets/img/practice-hero', { alt: '', w: 1000, h: 908, priority: true, wide: true })}
   </div>
   <div class="wrap">
     <h1>שישה תחומים, לרוב אותו תיק</h1>
@@ -380,7 +409,7 @@ export function practicePage(p) {
   const body = `
 <section class="page-hero has-figure">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
-    ${photo('/assets/img/practice-hero', { alt: '', w: 1000, h: 908, priority: true })}
+    ${photo('/assets/img/practice-hero', { alt: '', w: 1000, h: 908, priority: true, wide: true })}
   </div>
   <div class="wrap">
     <h1>${esc(p.h1)}</h1>
@@ -454,7 +483,7 @@ export function about() {
   const body = `
 <section class="page-hero has-figure">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
-    ${photo('/assets/img/about-hero', { alt: '', w: 1000, h: 973, priority: true })}
+    ${photo('/assets/img/about-hero', { alt: '', w: 1000, h: 973, priority: true, wide: true })}
   </div>
   <div class="wrap">
     <h1>${esc(BIZ.shortName)}</h1>
@@ -558,7 +587,7 @@ export function faqPage() {
   const body = `
 <section class="page-hero has-figure">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
-    ${photo('/assets/img/contact-hero', { alt: '', w: 1000, h: 908, priority: true })}
+    ${photo('/assets/img/contact-hero', { alt: '', w: 1000, h: 908, priority: true, wide: true })}
   </div>
   <div class="wrap">
     <h1>מה שנשאל בשיחה הראשונה</h1>
@@ -603,7 +632,7 @@ export function contact() {
   const body = `
 <section class="page-hero has-figure contact-hero">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
-    ${photo('/assets/img/contact-hero', { alt: `${BIZ.shortName}`, w: 1000, h: 908, priority: true })}
+    ${photo('/assets/img/contact-hero', { alt: `${BIZ.shortName}`, w: 1000, h: 908, priority: true, wide: true })}
   </div>
   <div class="wrap">
     <h1>שיחה אחת עושה סדר</h1>
