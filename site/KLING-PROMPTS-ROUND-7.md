@@ -87,6 +87,37 @@ Cinematic photograph, nearly square 1.1:1, ultra high resolution. [use the attac
 
 ---
 
+## הצד של הטלפון
+
+**הטלפון לא שבור.** במדידה למעלה הוא מבקש 1.17x בלבד — הקובץ הקיים כמעט
+בגודלו הטבעי, ולכן הוא נראה חד. לא חייבים לייצר לו כלום בסבב הזה.
+
+אבל כדאי להכיר את הכלל, כי הוא מה שמחלק את העבודה לשניים:
+
+| רוחב מסך | איזה קובץ מוגש |
+|---|---|
+| 861px ומעלה | `<שם>-wide` — אם קיים |
+| עד 860px | `<שם>` — הקובץ הרגיל |
+
+כלומר `contact-hero.*` הוא **קובץ הטלפון** מרגע שנכנס `contact-hero-wide.*`.
+מי שמחליף אותו מחליף את מה שרואים בנייד.
+
+**גודל פלט לטלפון: 1200×1500 (יחס 4:5, לאורך).** זה מכסה מסך 390 ברזולוציה
+פי שלוש בלי מתיחה. אותו כלל בכל שאר הקבצים לאורך באתר
+(`hero-room-mobile-v2`, `about-mobile-portrait-v1`) — הם כבר 1122×1402,
+קרוב מספיק.
+
+הפרומפט לגרסת הטלפון הוא אותו פרומפט של סעיף 1 עם שני שינויים:
+
+```
+Cinematic photograph, vertical 4:5 portrait format, ultra high resolution. [use the attached reference image for the man's face and likeness]. The same man from the reference — dark navy tailored suit, white shirt, burgundy tie, black kippah — stands beside a tall window in a quiet interior of dark stained wood. Photographed from the waist up, three-quarter view, turned slightly toward the camera with a calm, open, unhurried expression. He fills the CENTRE of the vertical frame, head near the top with a little air above it. Soft warm window light from the side models his face; the background falls into deep near-black shadow. Muted palette: charcoal, deep brown, warm skin tones, navy. Photorealistic, 85mm lens, f/2.8, natural light only, restrained, low-key, sharp focus on the eyes.
+```
+
+ההבדל היחיד מהגרסה הרחבה: **לאורך במקום לרוחב, וחצי גוף במקום חזה ומעלה.**
+זה הכול — אותה סצנה, אותו אור, אותו רגע.
+
+---
+
 ## המרה והכנסה לאתר
 
 לכל תמונה צריך **שני קבצים** — webp ו־jpg. בלי אחד מהם המנגנון לא יופעל
