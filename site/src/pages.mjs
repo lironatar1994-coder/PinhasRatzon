@@ -11,7 +11,8 @@ const YEARS = BIZ.yearsExperience;
 /* ---------------------------------------------------------------- images
    Set a path to swap a placeholder for a real photo. Keep width/height so the
    browser reserves the space and nothing shifts on load. */
-/* Paths carry no extension — photo() pairs each with its .webp and .jpg. */
+/* Paths carry no extension. Manager-managed surfaces use the corresponding
+   JPG so an uploaded file has one clear production target. */
 export const IMAGES = {
   portrait: '/assets/img/pinchas-ratzon',
   hero: '/assets/img/hero-room',
@@ -28,7 +29,6 @@ export const IMAGES = {
    a portrait crop of the same shot takes over. */
 const heroPhoto = (alt) => `<picture>
       <source media="(max-width: 1100px)" type="image/jpeg" srcset="${IMAGES.heroPortrait}.jpg">
-      <source type="image/webp" srcset="${IMAGES.hero}.webp">
       <img src="${IMAGES.hero}.jpg" alt="${esc(alt)}" width="1920" height="1084" fetchpriority="high" decoding="async">
     </picture>`;
 
@@ -36,21 +36,17 @@ const heroPhoto = (alt) => `<picture>
    forcing the desktop frame through a shallow crop. */
 const portraitPhoto = (alt) => `<picture>
       <source media="(max-width: 860px)" type="image/jpeg" srcset="/assets/img/about-mobile-portrait-v1.jpg">
-      <source type="image/webp" srcset="${IMAGES.portrait}.webp">
       <img src="${IMAGES.portrait}.jpg" alt="${esc(alt)}" width="980" height="1225" loading="lazy" decoding="async">
     </picture>`;
 
-function photo(src, { alt, w, h, cls = '', note = 'תמונה — להוספה', priority = false }) {
+function managedPhoto(src, { alt, w, h, cls = '', note = 'תמונה — להוספה', priority = false }) {
   if (!src) {
     return `<div class="ph ${cls}" style="aspect-ratio:${w}/${h}" role="img" aria-label="${esc(alt)}"><span>${esc(note)}</span></div>`;
   }
   const load = priority
     ? 'fetchpriority="high" decoding="async"'
     : 'loading="lazy" decoding="async"';
-  return `<picture>
-      <source srcset="${src}.webp" type="image/webp">
-      <img class="${cls}" src="${src}.jpg" alt="${esc(alt)}" width="${w}" height="${h}" ${load}>
-    </picture>`;
+  return `<img class="${cls}" src="${src}.jpg" alt="${esc(alt)}" width="${w}" height="${h}" ${load}>`;
 }
 
 const secHead = (label, h2, sub = '') => `
@@ -165,7 +161,7 @@ export function home() {
       <p class="hero-eyebrow"><span class="nb"><strong>${esc(BIZ.shortName)}</strong></span> · <span class="nb">${esc(BIZ.city)}</span> · <span class="nb">מאז ${esc(BIZ.founded)}</span></p>
       <h1>עורך דין <span class="gold-word">מקרקעין</span>,<br>מיסוי וצוואות.</h1>
       <div class="hero-rule" aria-hidden="true"></div>
-      <p class="hero-sub">החתימה היא רק אמצע הדרך. אני מלווה אתכם אישית — מהבדיקה הראשונה ועד שהזכויות רשומות על שמכם.</p>
+      <p class="hero-sub" data-manager-text="hero.subtitle">החתימה היא רק אמצע הדרך. אני מלווה אתכם אישית — מהבדיקה הראשונה ועד שהזכויות רשומות על שמכם.</p>
     </div>
   </div>
   <a class="hero-cue" href="#statement" aria-label="המשך לתוכן">${icon('arrowDown', 22)}</a>
@@ -173,7 +169,7 @@ export function home() {
 
 <section class="statement" id="statement">
   <div class="statement-figure">
-    ${photo(IMAGES.bandStatement, { alt: '', w: 1920, h: 1072 })}
+    ${managedPhoto(IMAGES.bandStatement, { alt: '', w: 1920, h: 1072 })}
   </div>
   <div class="statement-portrait" aria-hidden="true">
     <picture>
@@ -182,11 +178,11 @@ export function home() {
     </picture>
   </div>
   <div class="wrap statement-inner">
-    <p class="pull">עסקה במקרקעין נגמרת ברישום.<br>לא בחתימה.</p>
+    <p class="pull" data-manager-text="content.statement.title">עסקה במקרקעין נגמרת ברישום.<br>לא בחתימה.</p>
     <div class="statement-body">
-      <p>בין החתימה לרישום מתגלים הפרטים שמשנים עסקה שלמה: הצמדה שלא נרשמה, חריגת בנייה שלא נבדקה, או חבות מס שלא תומחרה מראש.</p>
-      <p>עוד לפני שמתחייבים, אני בוחן את התמונה המלאה — הזכויות בנכס, תנאי ההסכם, המס והרישום — והכול נשאר באחריות אחת לאורך כל הדרך.</p>
-      <p>המטרה פשוטה: שלא תחתמו מתוך תקווה שהכול יסתדר — אלא מתוך הבנה ברורה של העסקה כולה.</p>
+      <p data-manager-text="content.statement.paragraph1">בין החתימה לרישום מתגלים הפרטים שמשנים עסקה שלמה: הצמדה שלא נרשמה, חריגת בנייה שלא נבדקה, או חבות מס שלא תומחרה מראש.</p>
+      <p data-manager-text="content.statement.paragraph2">עוד לפני שמתחייבים, אני בוחן את התמונה המלאה — הזכויות בנכס, תנאי ההסכם, המס והרישום — והכול נשאר באחריות אחת לאורך כל הדרך.</p>
+      <p data-manager-text="content.statement.paragraph3">המטרה פשוטה: שלא תחתמו מתוך תקווה שהכול יסתדר — אלא מתוך הבנה ברורה של העסקה כולה.</p>
     </div>
   </div>
 </section>
@@ -206,8 +202,8 @@ export function home() {
     <div class="portrait-copy">
       <p class="label">אודות</p>
       <h2>${esc(BIZ.shortName)}</h2>
-      <p class="lead">מאז ${esc(BIZ.founded)} אני מלווה קונים, מוכרים ומשפחות — בעסקאות מקרקעין, במיסוי, ברישום ובהעברה הבין־דורית.</p>
-      <p class="portrait-note">לא תצטרכו להסביר את התיק מחדש — אני זה שבודק את המסמכים, מנסח את ההסכם ועומד מול הרשויות.</p>
+      <p class="lead" data-manager-text="about.home.lead">מאז ${esc(BIZ.founded)} אני מלווה קונים, מוכרים ומשפחות — בעסקאות מקרקעין, במיסוי, ברישום ובהעברה הבין־דורית.</p>
+      <p class="portrait-note" data-manager-text="about.home.note">לא תצטרכו להסביר את התיק מחדש — אני זה שבודק את המסמכים, מנסח את ההסכם ועומד מול הרשויות.</p>
       <a class="textlink" href="/about/">להכיר מקרוב ${icon('arrow', 18)}</a>
     </div>
   </div>
@@ -215,11 +211,11 @@ export function home() {
 
 <section class="quiet quiet-light" id="faq-intro">
   <div class="quiet-figure">
-    ${photo(IMAGES.bandStampLight, { alt: '', w: 1920, h: 1080 })}
+    ${managedPhoto(IMAGES.bandStampLight, { alt: '', w: 1920, h: 1080 })}
   </div>
   <div class="wrap quiet-inner">
     <p class="label">שאלות נפוצות</p>
-    <h2 class="quiet-line">את השאלות הנכונות<br>שואלים לפני החותמת.</h2>
+    <h2 class="quiet-line" data-manager-text="faq.home.title">את השאלות הנכונות<br>שואלים לפני החותמת.</h2>
   </div>
 </section>
 
@@ -253,7 +249,7 @@ export function practiceIndex() {
   const body = `
 <section class="page-hero has-figure">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
-    ${photo('/assets/img/practice-hero', { alt: '', w: 1000, h: 908, priority: true })}
+    ${managedPhoto('/assets/img/practice-hero', { alt: '', w: 1000, h: 908, priority: true })}
   </div>
   <div class="wrap">
     <h1>שישה תחומים, לרוב אותו תיק</h1>
@@ -269,7 +265,7 @@ export function practiceIndex() {
 
 <section class="quiet">
   <div class="quiet-figure">
-    ${photo(IMAGES.quietPlans, { alt: '', w: 1920, h: 1080 })}
+    ${managedPhoto(IMAGES.quietPlans, { alt: '', w: 1920, h: 1080 })}
   </div>
   <div class="wrap quiet-inner">
     <h2 class="quiet-line">תשריט, נסח, שומה וצו —<br>ארבעה מסמכים, לרוב תיק אחד.</h2>
@@ -330,7 +326,7 @@ export function practicePage(p) {
   const body = `
 <section class="page-hero has-figure">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
-    ${photo('/assets/img/practice-hero', { alt: '', w: 1000, h: 908, priority: true })}
+    ${managedPhoto('/assets/img/practice-hero', { alt: '', w: 1000, h: 908, priority: true })}
   </div>
   <div class="wrap">
     <h1>${esc(p.h1)}</h1>
@@ -371,7 +367,7 @@ export function practicePage(p) {
 
 ${p.quiet ? `<section class="quiet">
   <div class="quiet-figure">
-    ${photo(p.quiet.image, { alt: '', w: 1920, h: 1072 })}
+    ${managedPhoto(p.quiet.image, { alt: '', w: 1920, h: 1072 })}
   </div>
   <div class="wrap quiet-inner">
     <h2 class="quiet-line">${esc(p.quiet.line1)}${p.quiet.line2 ? `<br>${esc(p.quiet.line2)}` : ''}</h2>
@@ -404,19 +400,19 @@ export function about() {
   const body = `
 <section class="page-hero has-figure">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
-    ${photo('/assets/img/about-hero', { alt: '', w: 1000, h: 973, priority: true })}
+    ${managedPhoto('/assets/img/about-hero', { alt: '', w: 1000, h: 973, priority: true })}
   </div>
   <div class="wrap">
     <h1>${esc(BIZ.shortName)}</h1>
-    <p class="lead">אני עורך דין מאז ${esc(BIZ.founded)}, וכמעט כל תיק שעבר אצלי מאז נוגע בנכס: עסקה שצריך לסגור, רישום שצריך להסדיר, מס שצריך לתכנן, או עיזבון שצריך לחלק.</p>
+    <p class="lead" data-manager-text="about.page.lead">אני עורך דין מאז ${esc(BIZ.founded)}, וכמעט כל תיק שעבר אצלי מאז נוגע בנכס: עסקה שצריך לסגור, רישום שצריך להסדיר, מס שצריך לתכנן, או עיזבון שצריך לחלק.</p>
   </div>
 </section>
 
 <div class="section">
   <div class="wrap layout-aside">
     <article class="prose">
-      <p>התחומים האלה נראים נפרדים, אבל אצל רוב הלקוחות הם מגיעים כרוכים זה בזה. מכירת דירה שהתקבלה בירושה נוגעת בו זמנית בדיני ירושה, במיסוי מקרקעין וברישום. בית משותף שלא נרשם כראוי מקשה על כל עסקה עתידית בו. ותכנון מס שנעשה אחרי החתימה כבר לא יכול לשנות הרבה.</p>
-      <p>לכן אני מלווה מקצה לקצה — מהבדיקות הראשונות, דרך ניסוח ההסכם והדיווחים לרשויות, ועד רישום הזכויות. בלי להעביר את התיק לגורם אחר באמצע, ובלי לסיים בחתימה ולהשאיר את הרישום פתוח.</p>
+      <p data-manager-text="about.page.paragraph1">התחומים האלה נראים נפרדים, אבל אצל רוב הלקוחות הם מגיעים כרוכים זה בזה. מכירת דירה שהתקבלה בירושה נוגעת בו זמנית בדיני ירושה, במיסוי מקרקעין וברישום. בית משותף שלא נרשם כראוי מקשה על כל עסקה עתידית בו. ותכנון מס שנעשה אחרי החתימה כבר לא יכול לשנות הרבה.</p>
+      <p data-manager-text="about.page.paragraph2">לכן אני מלווה מקצה לקצה — מהבדיקות הראשונות, דרך ניסוח ההסכם והדיווחים לרשויות, ועד רישום הזכויות. בלי להעביר את התיק לגורם אחר באמצע, ובלי לסיים בחתימה ולהשאיר את הרישום פתוח.</p>
 
       <section class="sub-sec">
         <h2>דרך העבודה</h2>
@@ -508,11 +504,11 @@ export function faqPage() {
   const body = `
 <section class="page-hero has-figure">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
-    ${photo('/assets/img/contact-hero', { alt: '', w: 1000, h: 908, priority: true })}
+    ${managedPhoto('/assets/img/contact-hero', { alt: '', w: 1000, h: 908, priority: true })}
   </div>
   <div class="wrap">
     <h1>מה שנשאל בשיחה הראשונה</h1>
-    <p class="lead">מסודר לפי תחום. שאלה שנוגעת לתיק ספציפי עדיף לשאול בטלפון — זה בדרך כלל לוקח כמה דקות.</p>
+    <p class="lead" data-manager-text="faq.page.lead">מסודר לפי תחום. שאלה שנוגעת לתיק ספציפי עדיף לשאול בטלפון — זה בדרך כלל לוקח כמה דקות.</p>
   </div>
 </section>
 
@@ -553,11 +549,11 @@ export function contact() {
   const body = `
 <section class="page-hero has-figure contact-hero">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
-    ${photo('/assets/img/contact-hero', { alt: `${BIZ.shortName}`, w: 1000, h: 908, priority: true })}
+    ${managedPhoto('/assets/img/contact-hero', { alt: `${BIZ.shortName}`, w: 1000, h: 908, priority: true })}
   </div>
   <div class="wrap">
     <h1>שיחה אחת עושה סדר</h1>
-    <p class="lead">אפשר להתקשר ישירות, או להשאיר פרטים ואחזור אליכם.</p>
+    <p class="lead" data-manager-text="contact.page.lead">אפשר להתקשר ישירות, או להשאיר פרטים ואחזור אליכם.</p>
   </div>
 </section>
 

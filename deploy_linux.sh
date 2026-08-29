@@ -35,6 +35,7 @@ FORM_APP="pinhas-ratzon-form"
 FORM_PORT="3108"
 FORM_ENV="/etc/pinhas-ratzon-form.env"
 LEADS_DIR="/var/lib/pinhas-ratzon"
+MANAGER_SITE_CONFIG="/root/Manager_Site/data/clients/pinhas_ratzon/client.config.json"
 
 echo "[INFO] Starting ${APP_NAME} deployment..."
 
@@ -81,6 +82,8 @@ echo "[INFO] Staging the new web root..."
 rm -rf "${STAGE_ROOT}"
 mkdir -p "${STAGE_ROOT}"
 cp -a "${SITE_DIR}/dist/." "${STAGE_ROOT}/"
+node "${SITE_DIR}/apply-manager-content.mjs" "${STAGE_ROOT}" "${WEB_ROOT}" "${MANAGER_SITE_CONFIG}"
+node "${SITE_DIR}/check-manager-content.mjs" "${STAGE_ROOT}" "${MANAGER_SITE_CONFIG}"
 chown -R www-data:www-data "${STAGE_ROOT}"
 find "${STAGE_ROOT}" -type d -exec chmod 755 {} +
 find "${STAGE_ROOT}" -type f -exec chmod 644 {} +
@@ -136,7 +139,7 @@ location / {
 
     add_header Cache-Control "public, max-age=0, must-revalidate" always;
     add_header X-Content-Type-Options "nosniff" always;
-    add_header X-Frame-Options "SAMEORIGIN" always;
+    add_header Content-Security-Policy "frame-ancestors 'self' https://vee-app.co.il" always;
     add_header Referrer-Policy "strict-origin-when-cross-origin" always;
     add_header Strict-Transport-Security "max-age=31536000; includeSubDomains" always;
 }

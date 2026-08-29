@@ -208,13 +208,11 @@ export function closing({ h2 }) {
   <div class="closing-figure" aria-hidden="true">
     <picture>
       <source media="(max-width: 860px)" srcset="/assets/img/closing-consultation-mobile.jpg" type="image/jpeg">
-      <source srcset="/assets/img/band-chairs.webp" type="image/webp">
       <img src="/assets/img/band-chairs.jpg" alt="" width="1920" height="1072" loading="lazy" decoding="async">
     </picture>
   </div>
   <div class="closing-portrait" aria-hidden="true">
     <picture>
-      <source srcset="/assets/img/closing-listen.webp" type="image/webp">
       <img src="/assets/img/closing-listen.jpg" alt="" width="1000" height="879" loading="lazy" decoding="async">
     </picture>
   </div>

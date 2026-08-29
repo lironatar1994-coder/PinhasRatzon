@@ -102,6 +102,14 @@ node ../.agents/skills/unlazy/scripts/gate-check.mjs --approve --reverify GATES.
 
 `dist/` סטטי לגמרי. Netlify, Cloudflare Pages, Vercel, GitHub Pages או אחסון רגיל.
 
+### שימור תוכן מ-Manager Site
+
+סביבת הלקוח בפרודקשן היא `/client/pinhas_ratzon`. קובץ ההרשאות `/root/Manager_Site/data/clients/pinhas_ratzon/client.config.json` מגדיר תמונות JPG ושדות טקסט מסומנים ב-`data-manager-text` שאפשר לעדכן דרך הממשק.
+
+לפני החלפת תיקיית האתר, `apply-manager-content.mjs` מעתיק אל הבנייה החדשה את התמונות המנוהלות מהאתר החי, את ערכי הטקסט הנוכחיים ואת גרסאות ה-cache busting של קישורי התמונות. לאחר מכן `check-manager-content.mjs` מאמת שכל התמונות קיימות ומקושרות ושכל סימון טקסט מופיע פעם אחת בדיוק. אסור להסיר את שני השלבים האלה, אחרת פריסת Git רגילה עלולה למחוק עריכות שביצע הלקוח.
+
+הדומיין מאפשר הטמעה ב-iframe רק מעצמו ומ-`https://vee-app.co.il`, לצורך התצוגה המוגנת של Manager Site במחשב ובטלפון.
+
 `public/_headers` מוגדר ל-Netlify/Cloudflare Pages. בשרת Apache/Nginx להעביר את אותם כללים ל-`.htaccess` או לקונפיג.
 
 **הטופס** מוגדר ל-Netlify Forms. באחסון אחר להחליף את `FORM_ACTION` ב-`src/site.mjs` ולחבר Formspree, EmailJS או סקריפט שרת. יש שדה honeypot נגד ספאם.
