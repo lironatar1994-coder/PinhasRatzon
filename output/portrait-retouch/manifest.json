@@ -1,0 +1,178 @@
+[
+  {
+    "name": "pinchas-ratzon.jpg",
+    "sha256": "e4dbc904755ed285da7921156b05cf810ba5dcbc6805eb75128d37452b5dd1b6",
+    "size": [
+      980,
+      1225
+    ]
+  },
+  {
+    "name": "pinchas-ratzon.webp",
+    "sha256": "2bb11b39ca4d6cd8ad7781c6d969bcb579867046149f02acb299204a2a61453e",
+    "size": [
+      980,
+      1225
+    ]
+  },
+  {
+    "name": "hero-room.jpg",
+    "sha256": "117969a3305bf32b32b15ae00a2c4de81954cba57f55b6f69e60e8bb2a5ebe80",
+    "size": [
+      1920,
+      1084
+    ]
+  },
+  {
+    "name": "hero-room.webp",
+    "sha256": "85bc45bccb7ded9c912d91f6962f894675a2428d9e15eff5c4cfbb4f974a28c9",
+    "size": [
+      1920,
+      1084
+    ]
+  },
+  {
+    "name": "hero-room-mobile-v2.jpg",
+    "sha256": "46ffb88d032728b78bbfef3b7280f25ed9722b471885f8f81f402d30dd7dc3b6",
+    "size": [
+      1122,
+      1402
+    ]
+  },
+  {
+    "name": "hero-room-mobile-v2.webp",
+    "sha256": "9edc99973c74aec36c82472ac284f68fb62ea24693b00791dc663c8ee5f309e9",
+    "size": [
+      1122,
+      1402
+    ]
+  },
+  {
+    "name": "about-mobile-portrait-v1.jpg",
+    "sha256": "980d08f6eec1ed4b6995ed80e319f0234794cf9f329d9fc807bda67ab5727d64",
+    "size": [
+      1122,
+      1402
+    ]
+  },
+  {
+    "name": "about-mobile-portrait-v1.webp",
+    "sha256": "ff560575a6a971cb14e5398f51c12e78cbe5adc0ffe2e1a3786aec1b415543dc",
+    "size": [
+      1122,
+      1402
+    ]
+  },
+  {
+    "name": "about-hero.jpg",
+    "sha256": "e4cac9a9b6f99d4cddfb42c3382d085f2a93eccd0c586898fefc940f10480bfb",
+    "size": [
+      1000,
+      973
+    ]
+  },
+  {
+    "name": "about-hero.webp",
+    "sha256": "5bc7bd3567b27ced1dd5256f757b6673581745548f8d85d162cb6f4c6387470e",
+    "size": [
+      1000,
+      973
+    ]
+  },
+  {
+    "name": "closing-listen.jpg",
+    "sha256": "c83cffcea34aefe1201162f4b92cad95a1e35a47187e5f40d6175c8fc1cfe264",
+    "size": [
+      1000,
+      879
+    ]
+  },
+  {
+    "name": "closing-listen.webp",
+    "sha256": "0758f428a849806d6a8a2e0edd44c8e2bd9420b6c447b93bcf767506d90e5bfd",
+    "size": [
+      1000,
+      879
+    ]
+  },
+  {
+    "name": "closing-portrait-left.jpg",
+    "sha256": "f7f87e39cb8fec3c338917d39c34ad41fc1aa430dd0b4dbfa11e8285f4ccf58f",
+    "size": [
+      1000,
+      908
+    ]
+  },
+  {
+    "name": "closing-portrait-left.webp",
+    "sha256": "e61b7bfc10b5c45725d9e0f870c184ea2cae706a4c208905059ec761bbd63d1c",
+    "size": [
+      1000,
+      908
+    ]
+  },
+  {
+    "name": "practice-hero.jpg",
+    "sha256": "8c6f9c471757342adde81e3e5c0de5b8b43fa0544e89832fa9d48d5c9569df17",
+    "size": [
+      1000,
+      908
+    ]
+  },
+  {
+    "name": "practice-hero.webp",
+    "sha256": "b6bdbab210503329d474a5e731b9c31823066cd1d01f25ec4bf870fe2863a1d7",
+    "size": [
+      1000,
+      908
+    ]
+  },
+  {
+    "name": "closing-consultation-mobile.jpg",
+    "sha256": "509440a88e43ddc9c4b1d37f71bbf44a89b7baa9b9d2832d43e1a7ee6efdddb6",
+    "size": [
+      887,
+      1774
+    ]
+  },
+  {
+    "name": "closing-consultation-mobile.webp",
+    "sha256": "ffc639b90356c7922b80c2cbcb7bd0a423bda6f393ecca05042cd2486c534f97",
+    "size": [
+      887,
+      1774
+    ]
+  },
+  {
+    "name": "og-default.jpg",
+    "sha256": "34e65cd18d6e3aa4a306842bf18678ef06b5c6e959147697f795c183c0a3b901",
+    "size": [
+      1200,
+      630
+    ]
+  },
+  {
+    "name": "og-default.webp",
+    "sha256": "3db891618906584bbf7d666fbd25fcad9c5c61937858ba9b6457dd5cfe2542c1",
+    "size": [
+      1200,
+      630
+    ]
+  },
+  {
+    "name": "contact-hero.jpg",
+    "sha256": "9f784614203eca337458917b100758bb4ad5bc0f91f4a30a1c1cded46d28e1a4",
+    "size": [
+      1000,
+      908
+    ]
+  },
+  {
+    "name": "contact-hero.webp",
+    "sha256": "c7824b6c2a9cbdf2251beef8159607ce9d6059b477b64b2ecb6c99f68aa4e238",
+    "size": [
+      1000,
+      908
+    ]
+  }
+]
