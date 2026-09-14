@@ -336,7 +336,10 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
    size needs 3:1; #dcc186 measures 5.4:1 against the wall's brightest pixels). */
 .hero h1 .gold-word { color: #dcc186; }
 /* The gold bar under the headline — jewelry, not text. */
-.hero-rule { width: 5.5rem; height: 3px; background: var(--accent-lt); margin-block-start: 2rem; }
+/* Champagne, not token gold: this bar sits in the same frame as the kicker
+   and the gold word, both #dcc186. The brighter --accent-lt read brassy
+   beside them — the hero speaks one gold. */
+.hero-rule { width: 5.5rem; height: 3px; background: #dcc186; margin-block-start: 2rem; }
 .hero-sub {
   margin-block-start: 2rem;
   font-size: clamp(1.2rem, 1.08rem + .4vw, 1.35rem); font-weight: 300;
