@@ -36,6 +36,9 @@
      and the pixel sweep re-verifies with the same filter applied. */
   --grade: brightness(.88) contrast(1.09) saturate(.82) sepia(.16);
   --grade-portrait: brightness(.94) contrast(1.05) saturate(.9) sepia(.08);
+  /* The daylight cut for the paper bands' stills: one treatment so the three
+     round-8 photographs read as a single shoot, with the same warm cast. */
+  --grade-day: brightness(1.02) contrast(1.02) saturate(.8) sepia(.14);
 
   --wrap: 1180px;
   --narrow: 760px;
@@ -293,22 +296,42 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
    and the standard gold measures 3.63:1 against the wall's brightest pixels.
    #dcc186 measures 5.41:1 worst-case — verified against the image's pixels,
    not the DOM (the pixel sweep in the build notes). */
-.hero-eyebrow {
-  font-size: 1.05rem; font-weight: 400; color: #dcc186; margin-block-end: 2rem;
-  line-height: 1.7;
+/* The kicker lives INSIDE the h1: the practice keywords stay in the page's
+   one heading for search, while the eye reads a small gold line over a
+   large white promise. Trailing dash like every kicker. */
+.hero-kicker {
+  display: flex; align-items: center; gap: .8rem;
+  font-size: 1.05rem; font-weight: 500; color: #dcc186; line-height: 1.5;
+  margin-block-end: 1.4rem;
 }
-/* The name outranks its own metadata: white and weighted, joining the
-   headline's hierarchy, while city and year stay champagne beside it. */
-.hero-eyebrow strong { font-weight: 600; color: #fff; }
-/* Each segment breaks only at the separators, never inside a name or a year. */
-.hero-eyebrow .nb { white-space: nowrap; }
-/* Trailing dash, like every kicker — drawn inside the last segment's nowrap
-   box so it can never wrap onto a line of its own. */
-.hero-eyebrow .nb:last-child::after {
-  content: ''; display: inline-block; width: 2.6rem; height: 2px;
-  background: currentColor; vertical-align: middle; margin-inline-start: .85rem;
-}
+.hero-kicker::after { content: ''; display: block; flex: none; width: 2.6rem; height: 2px; background: currentColor; }
+.hero-line { display: block; }
 .hero h1 { color: #fff; }
+/* The name sits in the sub line as a signature — white and weighted — instead
+   of repeating the masthead a hand's width below it. */
+.hero-sub strong { font-weight: 500; color: var(--on-deep); }
+/* Phones only: a quiet "how I work" that scrolls to the credo. Not a
+   contact ask — the hero stays free of those by the restraint rule. */
+.hero-more {
+  display: none; align-items: center; gap: .5rem; min-height: 44px;
+  margin-block-start: 1.2rem; color: var(--on-deep-2); font-size: .98rem; font-weight: 400;
+  transition: color .25s var(--ease);
+}
+.hero-more:hover { color: #fff; text-decoration: none; }
+/* Three facts as a hairline strip under the phone cover — the old eyebrow's
+   content, moved where a fact strip belongs. Hidden on wide screens. */
+.hero-facts {
+  display: none; list-style: none; margin: 0; padding: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  background: var(--deep); color: var(--on-deep);
+  border-block-start: 1px solid var(--gold-line);
+}
+.hero-facts li { padding: .95rem .4rem; text-align: center; }
+.hero-facts li + li { border-inline-end: 1px solid var(--gold-line); }
+.hero-facts strong { display: block; font-family: var(--display); font-weight: 600; font-size: 1.15rem; line-height: 1.2; color: #dcc186; }
+.hero-facts span { display: block; margin-block-start: .2rem; font-size: .8rem; color: var(--on-deep-2); }
+/* The daylight still that opens a paper band on phones. Off until 860px. */
+.day-figure { display: none; }
 /* One word in champagne — the same photo-safe gold as the eyebrow (display
    size needs 3:1; #dcc186 measures 5.4:1 against the wall's brightest pixels). */
 .hero h1 .gold-word { color: #dcc186; }
@@ -960,7 +983,8 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   from { transform: scale(1.045); }
   to { transform: scale(1); }
 }
-.hero-eyebrow { animation: hero-in .7s var(--ease) .1s both; }
+.hero-kicker { animation: hero-in .7s var(--ease) .1s both; }
+.hero-more { animation: hero-in .8s var(--ease) .8s both; }
 .hero h1 { animation: hero-in .8s var(--ease) .28s both; }
 /* origin 100% = the right edge, the RTL anchor — the bar draws outward. */
 .hero-rule { transform-origin: 100% 50%; animation: hero-rule-in .6s var(--ease) .95s both; }
@@ -990,21 +1014,29 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
 @media (max-width: 1100px) {
   /* Below the split the headline stops sharing the frame with the photograph.
      Type sits on the dark ground, the picture follows it full-bleed. */
+  /* Below the split the hero becomes a cover: the listening photograph
+     fills the screen under the header, its face in the top third, and the
+     type rises out of the shadowed lower half. The photograph was generated
+     with that shadow in it (round 8), so the dissolve below only finishes
+     what the picture already does. */
   .hero {
-    min-height: auto; padding-block: 4.5rem 0;
-    justify-content: flex-start;
+    min-height: 600px; height: calc(100svh - 88px); max-height: 820px;
+    padding-block: 0; justify-content: flex-end;
   }
-  .hero-inner { order: 1; }
   .hero-col { max-width: none; }
-  .hero-figure {
-    order: 2; position: static; inset: auto;
-    margin-block-start: 3rem; width: 100%;
+  .hero-inner { padding-block-end: 1.6rem; }
+  .hero-figure img { object-position: 50% 0%; }
+  .hero-figure::after {
+    background:
+      linear-gradient(to bottom, rgba(14, 12, 9, .5) 0%, rgba(14, 12, 9, 0) 14%),
+      linear-gradient(to top, var(--deep) 0%, rgba(14, 12, 9, .9) 20%, rgba(14, 12, 9, .55) 38%, rgba(14, 12, 9, 0) 58%);
   }
-  .hero-figure img {
-    height: auto; max-height: 62vh; object-fit: cover; object-position: 50% 22%;
-    -webkit-mask-image: linear-gradient(to top, transparent 0%, #000 9%);
-    mask-image: linear-gradient(to top, transparent 0%, #000 9%);
-  }
+  .hero-kicker { font-size: .95rem; margin-block-end: .9rem; }
+  .hero-kicker::after { width: 1.9rem; }
+  .hero-rule, .hero-cue { display: none; }
+  .hero-sub { margin-block-start: 1rem; font-size: 1.06rem; line-height: 1.65; max-width: 30ch; }
+  .hero-more { display: inline-flex; }
+  .hero-facts { display: grid; }
   .quiet { min-height: 44svh; }
 }
 
@@ -1151,16 +1183,41 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
     background: linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 16%, rgba(14, 12, 9, 0) 80%, var(--deep) 100%);
   }
 
-  .hero { padding-block: 3.2rem 0; }
-  .hero-cue { display: none; }
-  /* Fit the whole eyebrow on one line at common phone widths: a touch
-     smaller, and a shorter trailing dash. */
-  .hero-eyebrow { margin-block-end: 1.6rem; font-size: 1rem; }
-  .hero-eyebrow .nb:last-child::after { width: 1.8rem; margin-inline-start: .7rem; }
-  .hero-rule { margin-block-start: 1.6rem; }
-  .hero-sub { margin-block-start: 1.6rem; }
-  .hero-figure { margin-block-start: 2rem; }
-  .hero-figure img { max-height: 56vh; }
+  .hero { height: calc(100svh - 72px); }
+  /* The fixed accessibility button lives in the bottom start corner; the
+     cover's last line clears it. */
+  .hero-inner { padding-block-end: 4.6rem; }
+  .hero h1 { font-size: 2.55rem; }
+  .hero-kicker { font-size: .92rem; }
+
+  /* Dark frame, light pages. Measured 2026-09-14 across 22 Israeli lawyer
+     sites at phone width: the market opens dark and reads light, and only
+     3 of 22 stay dark throughout. So on phones the two substance bands —
+     the credo and the route — sit on paper, each opened by a daylight
+     still, while the hero and the closing keep the black frame. */
+  .day-figure { display: block; aspect-ratio: 16 / 9; overflow: hidden; margin-block-end: 2.4rem; }
+  .day-figure img { width: 100%; height: 100%; object-fit: cover; filter: var(--grade-day); }
+  .statement { background: var(--paper); color: var(--ink); padding-block: 0 3rem; }
+  .statement-figure { display: none; }
+  .statement .pull { color: var(--ink); }
+  .statement-body p { color: var(--ink-2); }
+  .route { background: var(--paper-2); color: var(--ink); padding-block: 0 var(--gap-sec); }
+  .route .label { color: var(--accent); }
+  .route h2 { color: var(--ink); }
+  .route .sec-sub { color: var(--muted); }
+  .route :focus-visible { outline-color: var(--accent); }
+  .route-list { border-block-start-color: var(--stone); }
+  .route-list > li { border-block-end-color: var(--stone); }
+  .route-list a { color: var(--ink); }
+  .route-list a:active { background: rgba(134, 100, 31, .07); }
+  .route-n { color: var(--accent); opacity: 1; }
+  .route-a { color: var(--muted); }
+  .route-arrow { color: var(--accent); }
+  /* The daylight stamp keeps its empty desk on the image's left; anchor the
+     phone crop there so the line sits on plain wood under the paper veil. */
+  .quiet-light .quiet-figure img { object-position: 0% 50%; }
+  /* The dusk window portrait: face at the top of the frame. */
+  .closing-figure img { object-position: 50% 25%; }
   .quiet { min-height: 40svh; }
   /* The arrows STAY on phones — this band is the site's main router, and a
      row with no affordance reads as a statement, not a link. */
@@ -1186,8 +1243,8 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
    whole eyebrow on a single line; below ~340px it wraps cleanly at a
    separator, the dash glued to the year. */
 @media (max-width: 370px) {
-  .hero-eyebrow { font-size: .95rem; }
-  .hero-eyebrow .nb:last-child::after { width: 1.5rem; margin-inline-start: .6rem; }
+  .hero h1 { font-size: 2.3rem; }
+  .hero-kicker { font-size: .88rem; }
 }
 
 @media (max-width: 560px) {

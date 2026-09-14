@@ -207,12 +207,15 @@ export function closing({ h2 }) {
 <section class="closing">
   <div class="closing-figure" aria-hidden="true">
     <picture>
-      <source media="(max-width: 860px)" srcset="/assets/img/closing-consultation-mobile.jpg" type="image/jpeg">
+      <source media="(max-width: 860px)" srcset="/assets/img/closing-window-mobile.webp" type="image/webp">
+      <source media="(max-width: 860px)" srcset="/assets/img/closing-window-mobile.jpg" type="image/jpeg">
+      <source srcset="/assets/img/band-chairs.webp" type="image/webp">
       <img src="/assets/img/band-chairs.jpg" alt="" width="1920" height="1072" loading="lazy" decoding="async">
     </picture>
   </div>
   <div class="closing-portrait" aria-hidden="true">
     <picture>
+      <source srcset="/assets/img/closing-listen.webp" type="image/webp">
       <img src="/assets/img/closing-listen.jpg" alt="" width="1000" height="879" loading="lazy" decoding="async">
     </picture>
   </div>
@@ -360,7 +363,7 @@ export function page({
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=pr-20260826">
 
 ${preloadImage ? (preloadPortrait
-  ? `<link rel="preload" as="image" href="${preloadPortrait}.jpg" type="image/jpeg" media="(max-width: 1100px)" fetchpriority="high">
+  ? `<link rel="preload" as="image" href="${preloadPortrait}.webp" type="image/webp" media="(max-width: 1100px)" fetchpriority="high">
 <link rel="preload" as="image" href="${preloadImage}.webp" type="image/webp" media="(min-width: 1101px)" fetchpriority="high">
 `
   : `<link rel="preload" as="image" href="${preloadImage}.webp" type="image/webp" fetchpriority="high">
@@ -383,7 +386,11 @@ STORY: A visitor before a transaction/inheritance reads substance first — the
 route band answers "where am I standing" — and meets the ask only at the end.
 FIRST VIEWPORT: Solid black header with gold-boxed phone; full-bleed hero photo,
 subject left third, white display headline over the dark stone wall right,
-gold eyebrow above, gold bar below.
+gold kicker above, gold bar below. On phones the hero is a cover: the
+listening photograph fills the screen, the type rises out of its shadowed
+lower half, and a three-fact strip follows. Below 861px the substance bands
+(statement, route) sit on paper — measured 2026-09-14 across 22 Israeli
+lawyer sites: dark opening screen, light body, is the market's rhythm.
 FORM: Category standard, user-pinned 2026-08-26 ("copy the Israeli market"),
 played straight — no concept roll. FINISH: unreviewed and undocumented is
 unfinished; this build ends with the finish review, the verdict, DESIGN.md,
