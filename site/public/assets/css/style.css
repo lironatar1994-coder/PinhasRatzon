@@ -1134,7 +1134,14 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
     background: linear-gradient(to left, rgba(14, 12, 9, .8) 0%, rgba(14, 12, 9, .58) 55%, rgba(14, 12, 9, .52) 100%);
   }
   .statement-figure::after { background: rgba(14, 12, 9, .64); }
-  .closing-figure::after { background: rgba(14, 12, 9, .74); }
+  /* .80, not .74 — solved numerically against BOTH closing photographs
+     rather than eyeballed. At .74 the round-8 dusk frame put its sunset
+     glow under the sub line (3.96:1) and the round-9 blue-hour frame puts
+     a city light under the channel labels (4.09:1): different elements,
+     same cause. .80 clears every pair on the current image with margin
+     (labels 4.91:1, sub 5.49:1) and the photograph is dark enough that
+     the silhouette survives the deeper veil. */
+  .closing-figure::after { background: rgba(14, 12, 9, .8); }
   .closing-grid { grid-template-columns: 1fr; gap: 2.6rem; }
 
   /* The band subjects live in the LEFT third of each frame; a centered
