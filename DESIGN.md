@@ -210,7 +210,12 @@ opener (daylight) → FAQ (paper-2) → closing (dark). The two daylight stills 
 and a 16:9 full-bleed opener above the words on phones. Every interior page opens on the dark masthead
 (`.page-hero`: black ground, gold kicker, white display type, gold hairline base), followed
 on practice pages by a letterboxed full-bleed photograph (`.page-figure`, 21/7, 16/9 under
-860px). Long pages use `.layout-aside`: prose column plus a 16rem sticky sidebar.
+860px). **Exception — the light masthead (`.light-hero`).** Contact, About and the FAQ open
+on paper on wide screens (≥ 861px): ink H1, Ink-2 lead, the portrait a complete warmly lit
+picture in the left 52% behind a Stone hairline, no dissolve. These are the pages about the
+person and the conversation; the practice pages keep the dark masthead because they are the
+landing pages and echo the home hero. On phones every masthead reverts to the dark opener
+(dark frame, light body). Long pages use `.layout-aside`: prose column plus a 16rem sticky sidebar.
 
 **The quiet band.** A short cinematic photograph carrying one chapter line — about half a
 viewport on desktop and lower on phones, with the image itself `aria-hidden`. It is a

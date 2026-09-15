@@ -427,7 +427,7 @@ export function about() {
   ];
 
   const body = `
-<section class="page-hero has-figure">
+<section class="page-hero has-figure light-hero">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
     ${photo('/assets/img/about-hero', { alt: '', w: 1000, h: 973, priority: true })}
   </div>
@@ -531,7 +531,7 @@ export function faqPage() {
   const all = PRACTICE.flatMap((p) => p.faqs);
 
   const body = `
-<section class="page-hero has-figure">
+<section class="page-hero has-figure light-hero">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
     ${photo('/assets/img/contact-hero', { alt: '', w: 1000, h: 908, priority: true })}
   </div>
@@ -587,7 +587,7 @@ export function contact() {
   ];
 
   const body = `
-<section class="page-hero has-figure contact-hero">
+<section class="page-hero has-figure light-hero">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
     ${photo('/assets/img/contact-hero', { alt: `${BIZ.shortName}`, w: 1000, h: 908, priority: true })}
   </div>
