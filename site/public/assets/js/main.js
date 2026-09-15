@@ -181,6 +181,29 @@
     });
   });
 
+  /* ------------------------------------------------------- faq chapters
+     The FAQ page's sticky chapter list marks the group currently on screen. */
+
+  var faqNav = document.getElementById('faqNav');
+  if (faqNav && 'IntersectionObserver' in window) {
+    var faqLinks = Array.prototype.slice.call(faqNav.querySelectorAll('a[href^="#"]'));
+    var faqGroups = faqLinks.map(function (a) { return document.getElementById(a.getAttribute('href').slice(1)); }).filter(Boolean);
+    var visible = [];
+    function markCurrent() {
+      var top = null;
+      faqGroups.forEach(function (g, i) { if (visible[i] && (top === null || g.offsetTop < top.offsetTop)) top = g; });
+      faqLinks.forEach(function (a) {
+        if (top && a.getAttribute('href') === '#' + top.id) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { visible[faqGroups.indexOf(en.target)] = en.isIntersecting; });
+      markCurrent();
+    }, { rootMargin: '-20% 0px -60% 0px' });
+    faqGroups.forEach(function (g) { io.observe(g); });
+  }
+
   /* ------------------------------------------------------- lead dialog */
   /* "השארת פרטים" opens the form in place; without JS (or without <dialog>
      support) the link keeps its default trip to the contact page. */

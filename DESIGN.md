@@ -155,8 +155,12 @@ leaded display lines (600–700) over an unusually light, airy body — the vert
 tell. The retired faces (Frank Ruhl Libre, Assistant) must never return.
 
 ### Hierarchy
-- **Display / H1** (700, clamp(2.4rem, 1.2rem + 4.4vw, 4.6rem), lh 1.12): hero and page-hero
-  headlines; white (#fff) on the dark mastheads.
+- **Display / H1** (700, clamp(2.4rem, 1.2rem + 4.4vw, 4.6rem), lh 1.12): the home hero
+  headline; white (#fff) on the dark ground.
+- **Masthead / interior H1** (700, clamp(2.2rem, 1.15rem + 3.1vw, 3.6rem), lh 1.12): every
+  `.page-hero` headline — one register below the home hero, so a practice title holds two or
+  three lines inside its fenced half-column instead of four. The masthead names the page; it
+  does not re-announce the site.
 - **Headline / H2** (600, clamp(1.8rem, 1.25rem + 2.1vw, 2.8rem), lh 1.22): band headings.
 - **Title / H3** (600, 1.35rem, lh 1.4): sub-heads inside bands.
 - **Body** (300, 1.25rem = 20px, lh 2): all prose; columns cap near 42–46rem.
@@ -201,7 +205,11 @@ on practice pages by a letterboxed full-bleed photograph (`.page-figure`, 21/7, 
 
 **The quiet band.** A short cinematic photograph carrying one chapter line — about half a
 viewport on desktop and lower on phones, with the image itself `aria-hidden`. It is a
-load-bearing pause between dense bands, not a second content section. The FAQ opener is its
+load-bearing pause between dense bands, not a second content section. Every practice page
+carries one between its prose and its FAQ, each with its own still (house, calculator and
+ledger, envelope, watch, keys; the condominium page shares the index's rolled plans) — the
+object of the chapter under a line in the client's voice, measured against the composited
+pixels at 1440 and 390 (worst pair 4.66:1, the envelope's lit paper). The FAQ opener is its
 one light-ground variant; below 1100px its measured text field no longer fits, so copy and
 photograph stack instead of sharing pixels.
 
@@ -261,7 +269,10 @@ canon's signature and every band heading carries one.
 ### Header & Navigation
 Sticky solid near-black bar (88px; 72px mobile), gold hairline bottom border — never
 transparent, no scrim dependency. Two-line wordmark (name 1.4rem/600, role in Bright Gold
-.8rem). Nav links On-Deep 400, hover/current in Bright Gold, no underline. The phone number
+.8rem). Nav links On-Deep 400, hover/current in Bright Gold, no underline. The one item
+with a submenu carries a 6px drawn chevron (two borders in `currentColor`, not a glyph)
+that turns over while the panel is open — the only hint that "תחומי עיסוק" opens; it is
+removed in the drawer, where the plus toggle does that job. The phone number
 sits in a 1px Bright Gold box ("a hairline, not a siren") that inverts to gold fill on
 hover. Desktop submenu: Deep-2 panel, gold hairline frame, 2px gold top edge, fade/slide in.
 Under 860px the nav becomes a full-height drawer from the inline-end (min(21rem, 86vw),
@@ -276,6 +287,12 @@ question, muted answer, arrow; the whole row slides 0.7rem leftward on hover and
 question turns gold. The index is the light-ground sibling with a small gold index numeral.
 Arrows hide on mobile; the rows keep working.
 
+**The Route Split (≥ 1001px).** The route band is a 4fr / 7fr grid: kicker and H2 sit in
+the start column and stay `position: sticky` (below the 88px header) while the six rows
+scroll past in the end column. A full-measure row put the arrow a viewport away from its
+own question and left the band's left half empty; in the split the arrow lands beside the
+text and the heading keeps the rows company. Below 1001px the band stacks as before.
+
 ### Credentials Band
 The vertical's medallion strip, done honestly: Deep-2 band, 4 columns divided by hairlines
 (2 under 1000px, 1 under 560px), large gold figure (`dir="ltr"`) over a muted caption.
@@ -288,6 +305,8 @@ run together and a stray rule hangs off the band's outer edge (which is what shi
 border). Verify by rect, not by eye: no divider may sit at the `ul`'s own left or right x.
 
 ### Inputs / Fields
+The contact page's form column opens with the gold kicker "השארת פרטים" and one 1.5rem line
+(`.form-h`), so the fields read as an invitation rather than a bare set of underlines.
 Underline fields: transparent background, 1px Stone bottom border only, min-height 52px,
 label above in Muted .92rem. Focus: border thickens to 2px Bright Gold (outline suppressed).
 Invalid: dark-red underline (#9d3b33); error text #8f342c. Honeypot field visually clipped
@@ -296,6 +315,12 @@ Invalid: dark-red underline (#9d3b33); error text #8f342c. Honeypot field visual
 ### FAQ Item
 Native `<details>` rows divided by Stone hairlines; 500-weight question, gold plus-to-minus
 icon drawn with two 2px bars. Answer prose capped at 44rem.
+
+**The FAQ page's chapter list.** `/faq/` uses `.layout-aside`: the six practice groups
+(each `id="faq-<slug>"`, `scroll-margin-block-start: 7.5rem` for the sticky header) beside a
+sticky `.faq-side` with the gold kicker "לפי תחום" and the six chapters as `.side-links`.
+An IntersectionObserver marks the group on screen with `aria-current` (Text Gold, weight
+500). Hidden under 1000px — stacked below the last group it would only point backwards.
 
 ### Closing & Footer
 Closing: centered dark band — gold kicker, white H2, short muted paragraph, the single gold

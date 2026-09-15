@@ -121,6 +121,11 @@ export const PRACTICE = [
   {
     slug: 'condominium-registration',
     image: '/assets/img/practice-condominium',
+    quiet: {
+      image: '/assets/img/band-plans',
+      line1: 'הבניין נגמר בבנייה.',
+      line2: 'הזכויות נגמרות ברישום.',
+    },
     imageAlt: 'עיון בתשריט לצורך רישום בית משותף',
     nav: 'רישום בתים משותפים',
     h1: 'רישום בתים משותפים ותיקון צו רישום',
@@ -193,6 +198,11 @@ export const PRACTICE = [
   {
     slug: 'real-estate-tax',
     image: '/assets/img/practice-tax',
+    quiet: {
+      image: '/assets/img/practice-tax',
+      line1: 'אחרי החתימה המס כבר לא מתוכנן.',
+      line2: 'רק מחושב.',
+    },
     imageAlt: 'מכונת חישוב ומסמכים על שולחן עבודה',
     nav: 'מיסוי מקרקעין',
     h1: 'עורך דין למיסוי מקרקעין — מס שבח ומס רכישה',
@@ -264,6 +274,11 @@ export const PRACTICE = [
   {
     slug: 'wills-inheritance',
     image: '/assets/img/practice-wills',
+    quiet: {
+      image: '/assets/img/practice-wills',
+      line1: 'צוואה ברורה היום,',
+      line2: 'פחות שאלות קשות מחר.',
+    },
     imageAlt: 'מעטפה סגורה ועט על שולחן עבודה',
     nav: 'צוואות, ירושות ועיזבונות',
     h1: 'עורך דין לצוואות וירושות בפתח תקווה',
@@ -439,6 +454,11 @@ export const PRACTICE = [
   {
     slug: 'partition-receivership',
     image: '/assets/img/practice-partition',
+    quiet: {
+      image: '/assets/img/practice-partition',
+      line1: 'גם שותפות שנגמרה',
+      line2: 'אפשר לסיים בהסכם.',
+    },
     imageAlt: 'שני מפתחות מופרדים זה מזה על מסמך',
     nav: 'כינוס נכסים ופירוק שיתוף',
     h1: 'פירוק שיתוף במקרקעין וכינוס נכסים',

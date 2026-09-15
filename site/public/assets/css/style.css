@@ -221,6 +221,16 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .nav-tel:hover { background: var(--accent-lt); color: var(--deep); text-decoration: none; }
 
 .has-sub { position: relative; }
+/* A small drawn chevron says "there is more" — a border, not a glyph, in
+   the link's own colour; it turns over while the panel is open. */
+.has-sub > a { display: inline-flex; align-items: center; gap: .5rem; }
+.has-sub > a::after {
+  content: ''; width: 6px; height: 6px; flex: none;
+  border-inline-end: 1.5px solid currentColor; border-block-end: 1.5px solid currentColor;
+  transform: translateY(-2px) rotate(45deg); opacity: .75;
+  transition: transform .25s var(--ease);
+}
+.has-sub:hover > a::after, .has-sub:focus-within > a::after { transform: translateY(1px) rotate(225deg); }
 .sub-toggle { display: none; }
 .sub {
   position: absolute; inset-block-start: calc(100% + 1.55rem); inset-inline-start: 0;
@@ -456,6 +466,15 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .route-arrow { color: var(--on-deep-2); justify-self: center; transition: color .3s var(--ease), transform .35s var(--ease); }
 .route-list a:hover .route-arrow { color: var(--accent-lt); transform: translateX(-6px); }
 
+/* Desktop: the heading keeps the rows company. Kicker and H2 sit at the
+   reading start and stay put while the six situations scroll past beside
+   them. */
+@media (min-width: 1001px) {
+  .route .wrap { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(2.5rem, 1rem + 4vw, 6rem); align-items: start; }
+  .route .sec-head { position: sticky; inset-block-start: calc(88px + 2.5rem); margin-block-end: 0; }
+  .route-list { margin-block-start: .4rem; }
+}
+
 /* ------------------------------------------------------------ statement
    The one section that lives ON a photograph — the site's credo, set over
    the near-black stone still life the way the canon sets its "אני מאמין".
@@ -585,7 +604,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   border-block-end: 1px solid var(--gold-line);
 }
 .page-hero .label { color: var(--accent-lt); }
-.page-hero h1 { max-width: 18em; color: #fff; }
+.page-hero h1 { max-width: 18em; color: #fff; font-size: clamp(2.2rem, 1.15rem + 3.1vw, 3.6rem); }
 .page-hero .lead { max-width: 44rem; margin-block-start: 1.6rem; color: var(--on-deep-2); }
 
 /* ------------------------------------------------------------ page figure
@@ -711,7 +730,9 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 /* When the stamp band IS the FAQ's header, the list follows it closely —
    a full section gap after a headline band reads as two strangers. */
 .quiet + .faq { padding-block-start: calc(var(--gap-sec) * .55); }
-.faq-group { margin-block-end: 3.5rem; }
+.faq-group { margin-block-end: 3.5rem; scroll-margin-block-start: 7.5rem; }
+.faq-group:last-child { margin-block-end: 0; }
+.side-links a[aria-current] { color: var(--accent); font-weight: 500; }
 .faq-group > h2 { font-size: 1.5rem; margin-block-end: 1rem; }
 /* The group heading IS a link to its practice page — say so: gold arrow,
    nudge on hover, the textlink language. */
@@ -885,6 +906,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .contact-ch .ch-k { color: var(--muted); }
 .contact-ch a:hover { color: var(--accent); text-decoration: none; }
 
+.form-h { font-size: 1.5rem; line-height: 1.35; margin-block-end: 1.8rem; max-width: 20em; }
 .contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(2.5rem, 1.5rem + 4vw, 6rem); align-items: start; }
 .form { display: grid; gap: 1.5rem; }
 .field { display: grid; gap: .5rem; }
@@ -1045,6 +1067,7 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
 
 @media (max-width: 1000px) {
   .layout-aside { grid-template-columns: 1fr; }
+  .faq-side { display: none; }
   .side { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
   .contact-grid { grid-template-columns: 1fr; }
   .principles { grid-template-columns: 1fr; gap: 2.2rem; }
@@ -1108,6 +1131,8 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .nav-wa .ic { color: var(--accent-lt); }
   .drawer-note { display: block; margin-block-start: 1.6rem; color: var(--on-deep-2); font-size: .9rem; }
   .has-sub { display: grid; grid-template-columns: 1fr auto; align-items: center; }
+  .has-sub > a { display: flex; }
+  .has-sub > a::after { content: none; }
   .sub-toggle {
     display: grid; place-items: center; width: 44px; height: 44px;
     background: none; border: 0; color: var(--accent-lt); cursor: pointer;

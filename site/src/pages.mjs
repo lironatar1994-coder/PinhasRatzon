@@ -547,8 +547,9 @@ export function faqPage() {
 </section>
 
 <div class="section">
-  <div class="wrap narrow">
-    ${PRACTICE.map((p) => `<section class="faq-group">
+  <div class="wrap layout-aside">
+    <div class="faq-groups">
+    ${PRACTICE.map((p) => `<section class="faq-group" id="faq-${p.slug}">
       <h2><a href="/practice-areas/${p.slug}/">${esc(p.nav)}${icon('arrow', 18)}</a></h2>
       <div class="faq-list">
         ${p.faqs.map((f) => `<details class="faq-item">
@@ -557,6 +558,16 @@ export function faqPage() {
         </details>`).join('\n        ')}
       </div>
     </section>`).join('\n    ')}
+    </div>
+
+    <aside class="side faq-side" aria-label="ניווט לפי תחום">
+      <nav class="side-block" id="faqNav">
+        <p class="label">לפי תחום</p>
+        <ul class="side-links">
+          ${PRACTICE.map((p) => `<li><a href="#faq-${p.slug}">${esc(p.nav)}</a></li>`).join('\n          ')}
+        </ul>
+      </nav>
+    </aside>
   </div>
 </div>
 
@@ -625,6 +636,8 @@ export function contact() {
       <p class="fineprint">${esc(DISCLAIMER)}</p>
     </div>
     <div class="contact-form">
+      <p class="label">השארת פרטים</p>
+      <h2 class="form-h">כמה פרטים — ואני חוזר אליכם.</h2>
       ${contactForm({ id: 'c' })}
     </div>
   </div>
