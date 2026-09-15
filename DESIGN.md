@@ -207,15 +207,14 @@ The home page runs hero (dark) → statement (paper, daylight plans still beside
 route (paper-2, daylight key still under the sticky heading) → portrait (paper) → FAQ
 opener (daylight) → FAQ (paper-2) → closing (dark). The two daylight stills (`.day-figure`,
 `--grade-day`) are a 4:5 column and a 4:3 window on desktop, a 21:9 letterbox on tablets,
-and a 16:9 full-bleed opener above the words on phones. Every interior page opens on the dark masthead
-(`.page-hero`: black ground, gold kicker, white display type, gold hairline base), followed
-on practice pages by a letterboxed full-bleed photograph (`.page-figure`, 21/7, 16/9 under
-860px). **Exception — the light masthead (`.light-hero`).** Contact, About and the FAQ open
-on paper on wide screens (≥ 861px): ink H1, Ink-2 lead, the portrait a complete warmly lit
-picture in the left 52% behind a Stone hairline, no dissolve. These are the pages about the
-person and the conversation; the practice pages keep the dark masthead because they are the
-landing pages and echo the home hero. On phones every masthead reverts to the dark opener
-(dark frame, light body). Long pages use `.layout-aside`: prose column plus a 16rem sticky sidebar.
+and a 16:9 full-bleed opener above the words on phones. Every interior page opens on the **light masthead** (`.page-hero.light-hero`, round 10):
+paper ground, ink H1, Ink-2 lead, Stone hairline base; where the page carries a portrait it
+is a complete warmly lit picture in the left 52% behind a Stone hairline, no dissolve. On
+phones the words come first and the portrait follows as a 4:3 picture between two Stone
+hairlines. The home hero is the site's one dark opener; above each interior page the header
+and the breadcrumb strip are the dark frame. The dark masthead (`.page-hero` alone: black
+ground, gold kicker, white display type, gold hairline base) remains in the stylesheet for a
+page that wants it, but no page uses it today. Long pages use `.layout-aside`: prose column plus a 16rem sticky sidebar.
 
 **The quiet band.** A short cinematic photograph carrying one chapter line — about half a
 viewport on desktop and lower on phones, with the image itself `aria-hidden`. It is a
@@ -364,8 +363,9 @@ with a WebP source (`picture { display: contents }` keeps the sizing rules worki
 ### Do:
 - **Do** run every token change through the contrast gate; add new fg/bg pairs to `PAIRS`
   in `site/gates/lib/contrast.mjs` so they stay verified ≥ 4.5:1.
-- **Do** open every interior page on the dark masthead (gold kicker, white H1, gold
-  hairline base) and end pages on the dark closing band with the single button.
+- **Do** open every interior page on the light masthead (paper, ink H1, portrait beside the
+  words) and end pages on the dark closing band with the single button — the home hero is
+  the only dark opener.
 - **Do** keep the short photographic chapter pauses; they are the canon's breathing room.
 - **Do** wrap every numeral (years, phone, counts) in `dir="ltr"`.
 - **Do** hang a divider on the side of an element that *faces its neighbour*

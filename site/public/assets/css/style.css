@@ -626,15 +626,16 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .page-hero.has-figure .wrap { display: grid; grid-template-columns: minmax(0, 46fr) minmax(0, 54fr); }
 .page-hero.has-figure .wrap > * { grid-column: 1; }
 
-/* The light masthead (`.light-hero`): contact, about and the FAQ — the
-   pages about the person and the conversation — open on paper on wide
-   screens, the portrait a complete, warmly lit picture beside the words
-   instead of being swallowed by the interior black. The practice pages keep
-   the dark masthead: they are the landing pages, and they echo the home
-   hero. Round 10 extended this from contact to about and FAQ. */
+/* The light masthead (`.light-hero`), round 10: every interior page opens
+   on paper — the home hero is the site's one dark opener, and the header
+   plus crumbs are the dark frame above each interior page. The portrait
+   is a complete, warmly lit picture beside the words instead of being
+   swallowed by the interior black. `.page-hero` without the class is the
+   dark masthead, kept for any page that wants it. */
 .light-hero { background: var(--paper); color: var(--ink); border-block-end-color: var(--stone); }
 .light-hero h1 { color: var(--ink); }
 .light-hero .lead { color: var(--ink-2); }
+.light-hero .label { color: var(--accent); }
 .light-hero .page-hero-figure { border-inline-start: 1px solid var(--stone); }
 .light-hero .page-hero-figure img { filter: var(--grade-portrait); }
 .light-hero .page-hero-figure::after {
@@ -1175,18 +1176,18 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
      contrast from the token. */
   .page-hero.has-figure { display: flex; flex-direction: column; padding-block: 2.8rem 0; }
   .page-hero.has-figure .wrap { display: block; }
-  /* Preserve the established phone composition: words on the deep ground,
-     then the unboxed portrait. The daylight split is desktop-only, where
-     the two columns need a clear visual handoff. */
-  .light-hero { background: var(--deep); color: var(--on-deep); border-block-end-color: var(--gold-line); }
-  .light-hero h1 { color: #fff; }
-  .light-hero .lead { color: var(--on-deep-2); }
+  /* The light masthead stays light on phones too (round 10): the header
+     and the crumbs are the dark frame, then paper. The portrait follows
+     the words as a plain picture between two stone hairlines — no
+     dissolve, because there is no dark ground to dissolve into. */
+  .light-hero { padding-block-end: 0; border-block-end: 0; }
+  .light-hero .page-hero-figure { border-block: 1px solid var(--stone); margin-block-start: 2.4rem; }
   .page-hero-figure {
     position: relative; inset-block: auto; left: auto; width: 100%; z-index: 0;
     order: 2; margin-block-start: 2.2rem;
     aspect-ratio: 2 / 1;
   }
-  .light-hero .page-hero-figure { border-inline-start: 0; }
+  .light-hero .page-hero-figure { border-inline-start: 0; aspect-ratio: 4 / 3; }
   .page-hero-figure img { object-position: 50% 45%; }
   /* A glimpse, not a poster: the photograph surfaces out of the dark and
      sinks back into it, so the opener still ends on the solid ground and
@@ -1200,9 +1201,7 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .page-hero-figure.figure-pinhas::after {
     background: linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 16%, rgba(14, 12, 9, 0) 80%, var(--deep) 100%);
   }
-  .light-hero .page-hero-figure::after {
-    background: linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 16%, rgba(14, 12, 9, 0) 80%, var(--deep) 100%);
-  }
+  .light-hero .page-hero-figure::after { background: none; }
 
   .hero { height: calc(100svh - 72px); }
   /* The fixed accessibility button lives in the bottom start corner; the

@@ -276,7 +276,7 @@ export function practiceIndex() {
     { label: 'תחומי עיסוק', href: '/practice-areas/' },
   ];
   const body = `
-<section class="page-hero has-figure">
+<section class="page-hero has-figure light-hero">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
     ${photo('/assets/img/practice-hero', { alt: '', w: 1000, h: 908, priority: true })}
   </div>
@@ -353,7 +353,7 @@ export function practicePage(p) {
   }).join('\n    ');
 
   const body = `
-<section class="page-hero has-figure">
+<section class="page-hero has-figure light-hero">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
     ${photo('/assets/img/practice-hero', { alt: '', w: 1000, h: 908, priority: true })}
   </div>
@@ -660,7 +660,7 @@ export function accessibility() {
   ];
 
   const body = `
-<section class="page-hero">
+<section class="page-hero light-hero">
   <div class="wrap">
     <p class="label">נגישות</p>
     <h1>הצהרת נגישות</h1>
