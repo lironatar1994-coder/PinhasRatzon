@@ -64,3 +64,28 @@ export const FORM_NOTE =
 // Handled by form-service/ — a small Node service behind Nginx that stores the
 // submission and mails a notification, then redirects to /thank-you/.
 export const FORM_ACTION = '/contact/submit';
+
+// The Manager Site CMS (/client/pinhas_ratzon) lets the client replace these
+// fifteen photographs with a JPG of his own, and deploy_linux.sh preserves the
+// live file over the Git default. A managed image therefore ships as a plain
+// JPG <img> — a WebP <source> beside it would win in every modern browser and
+// silently hide the client's upload. Mirrors imageSlots[].publicPath in
+// /root/Manager_Site/data/clients/pinhas_ratzon/client.config.json.
+export const MANAGED_IMAGES = new Set([
+  "/assets/img/hero-room.jpg",
+  "/assets/img/hero-listening-mobile.jpg",
+  "/assets/img/band-plans-daylight.jpg",
+  "/assets/img/pinchas-ratzon.jpg",
+  "/assets/img/about-mobile-portrait-v1.jpg",
+  "/assets/img/band-stamp-light-v1.jpg",
+  "/assets/img/practice-hero.jpg",
+  "/assets/img/band-plans.jpg",
+  "/assets/img/band-house.jpg",
+  "/assets/img/band-watch.jpg",
+  "/assets/img/about-hero.jpg",
+  "/assets/img/contact-hero.jpg",
+  "/assets/img/band-chairs.jpg",
+  "/assets/img/closing-window-mobile.jpg",
+  "/assets/img/closing-listen.jpg"
+]);
+export const isManaged = (src) => MANAGED_IMAGES.has(`${src}.jpg`);

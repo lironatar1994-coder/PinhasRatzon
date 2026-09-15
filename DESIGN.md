@@ -356,7 +356,12 @@ courts don't use gavels — the AI generator has to be actively fought on this),
 walls, white studio backdrops, stock, or an office/library that implies premises the
 practice doesn't have. AI-generated documents must be angled or defocused: Kling cannot
 render Hebrew, so no legible text may survive in frame. Every image ships as `<picture>`
-with a WebP source (`picture { display: contents }` keeps the sizing rules working).
+with a WebP source (`picture { display: contents }` keeps the sizing rules working) — except
+the fifteen CMS-managed slots listed in `MANAGED_IMAGES` (`site/src/site.mjs`), which ship as
+the JPG alone: the Manager Site lets the client replace them with a JPG, and a WebP source
+beside it would win in every browser and hide his upload. The thirteen `data-manager-text`
+markers in `pages.mjs` are the same contract for copy; `check-manager-content.mjs` fails the
+deploy when a marker or a managed image goes missing.
 
 ## Do's and Don'ts
 

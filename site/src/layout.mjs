@@ -1,4 +1,4 @@
-import { SITE_URL, BIZ, NAV, TOPICS, DISCLAIMER, FORM_NOTE, FORM_ACTION } from './site.mjs';
+import { SITE_URL, BIZ, NAV, TOPICS, DISCLAIMER, FORM_NOTE, FORM_ACTION, isManaged } from './site.mjs';
 import { PRACTICE } from './content/practice.mjs';
 
 export const esc = (s = '') =>
@@ -206,18 +206,14 @@ export function closing({ h2 }) {
   return `
 <section class="closing">
   <div class="closing-figure" aria-hidden="true">
+    <!-- All three closing photographs are CMS-managed JPG slots: no WebP. -->
     <picture>
-      <source media="(max-width: 860px)" srcset="/assets/img/closing-window-mobile.webp" type="image/webp">
       <source media="(max-width: 860px)" srcset="/assets/img/closing-window-mobile.jpg" type="image/jpeg">
-      <source srcset="/assets/img/band-chairs.webp" type="image/webp">
       <img src="/assets/img/band-chairs.jpg" alt="" width="1920" height="1072" loading="lazy" decoding="async">
     </picture>
   </div>
   <div class="closing-portrait" aria-hidden="true">
-    <picture>
-      <source srcset="/assets/img/closing-listen.webp" type="image/webp">
-      <img src="/assets/img/closing-listen.jpg" alt="" width="1000" height="879" loading="lazy" decoding="async">
-    </picture>
+    <img src="/assets/img/closing-listen.jpg" alt="" width="1000" height="879" loading="lazy" decoding="async">
   </div>
   <div class="wrap closing-grid">
     <div class="closing-copy">
@@ -321,6 +317,11 @@ export function footer() {
 
 /* ------------------------------------------------------------------ shell */
 
+/* A preload must name the file the <picture> will actually pick: the JPG for
+   a CMS-managed slot, the WebP otherwise. */
+const ext = (src) => (isManaged(src) ? '.jpg' : '.webp');
+const mime = (src) => (isManaged(src) ? 'image/jpeg' : 'image/webp');
+
 export function page({
   path, title, description, body,
   schema = [], trail = null, ogType = 'website', noindex = false, overHero = false,
@@ -363,10 +364,10 @@ export function page({
 <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=pr-20260826">
 
 ${preloadImage ? (preloadPortrait
-  ? `<link rel="preload" as="image" href="${preloadPortrait}.webp" type="image/webp" media="(max-width: 1100px)" fetchpriority="high">
-<link rel="preload" as="image" href="${preloadImage}.webp" type="image/webp" media="(min-width: 1101px)" fetchpriority="high">
+  ? `<link rel="preload" as="image" href="${preloadPortrait}${ext(preloadPortrait)}" type="${mime(preloadPortrait)}" media="(max-width: 1100px)" fetchpriority="high">
+<link rel="preload" as="image" href="${preloadImage}${ext(preloadImage)}" type="${mime(preloadImage)}" media="(min-width: 1101px)" fetchpriority="high">
 `
-  : `<link rel="preload" as="image" href="${preloadImage}.webp" type="image/webp" fetchpriority="high">
+  : `<link rel="preload" as="image" href="${preloadImage}${ext(preloadImage)}" type="${mime(preloadImage)}" fetchpriority="high">
 `) : ''}<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap">
