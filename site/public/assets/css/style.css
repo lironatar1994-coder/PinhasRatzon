@@ -119,7 +119,7 @@ a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: .35em; text-decoration-color: var(--accent-lt); }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-.section-dark :focus-visible, .route :focus-visible, .closing :focus-visible,
+.section-dark :focus-visible, .closing :focus-visible,
 .site-footer :focus-visible, .site-header :focus-visible, .hero :focus-visible,
 .quiet :focus-visible, .page-hero :focus-visible {
   outline-color: var(--accent-lt);
@@ -341,7 +341,8 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .hero-facts strong { display: block; font-family: var(--display); font-weight: 600; font-size: 1.15rem; line-height: 1.2; color: #dcc186; }
 .hero-facts span { display: block; margin-block-start: .2rem; font-size: .8rem; color: var(--on-deep-2); }
 /* The daylight still that opens a paper band on phones. Off until 860px. */
-.day-figure { display: none; }
+.day-figure { overflow: hidden; }
+.day-figure img { width: 100%; height: 100%; object-fit: cover; filter: var(--grade-day); }
 /* One word in champagne — the same photo-safe gold as the eyebrow (display
    size needs 3:1; #dcc186 measures 5.4:1 against the wall's brightest pixels). */
 .hero h1 .gold-word { color: #dcc186; }
@@ -438,93 +439,75 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
    "Where are you standing?" — routing by the visitor's own situation rather
    than by the practice-area taxonomy. The numbered journey, minus urgency. */
 
-.route { padding-block: var(--gap-sec); background: var(--deep); color: var(--on-deep); }
-.route .label { color: var(--accent-lt); }
-.route h2 { color: #fff; }
-.route .sec-sub { color: var(--on-deep-2); }
-.route-list { border-block-start: 1px solid var(--line-deep); }
-.route-list > li { border-block-end: 1px solid var(--line-deep); }
+/* Round 10: the market's rhythm — dark frame, light body — at every width,
+   not only on phones. The router sits on the off-white paper, and the
+   daylight key still keeps the sticky heading company on desktop. */
+.route { padding-block: var(--gap-sec); background: var(--paper-2); color: var(--ink); }
+.route .label { color: var(--accent); }
+.route h2 { color: var(--ink); }
+.route .sec-sub { color: var(--muted); }
+.route-list { border-block-start: 1px solid var(--stone); }
+.route-list > li { border-block-end: 1px solid var(--stone); }
 .route-list a {
   display: grid; grid-template-columns: 5.5rem minmax(0, 1fr) 2.5rem;
   align-items: center; gap: 1.75rem;
   padding-block: clamp(1.6rem, 1.1rem + 1.2vw, 2.4rem);
-  color: var(--on-deep); transition: transform .35s var(--ease);
+  color: var(--ink); transition: transform .35s var(--ease);
 }
 .route-list a:hover { text-decoration: none; transform: translateX(-.7rem); }
 /* Touch feedback — a breath of gold while the finger is down. */
-.route-list a:active { background: rgba(193, 155, 69, .08); }
+.route-list a:active { background: rgba(134, 100, 31, .07); }
 .route-n {
   font-family: var(--display); font-weight: 300;
   font-size: clamp(2.1rem, 1.6rem + 1.6vw, 3.1rem);
-  line-height: 1; color: var(--accent-lt); opacity: .65;
+  line-height: 1; color: var(--accent); opacity: .8;
   transition: opacity .3s var(--ease);
 }
 .route-list a:hover .route-n { opacity: 1; }
 .route-q { display: block; font-family: var(--display); font-weight: 500; font-size: clamp(1.35rem, 1.15rem + .9vw, 1.8rem); line-height: 1.35; margin-block-end: .5rem; transition: color .3s var(--ease); }
-.route-list a:hover .route-q { color: var(--accent-lt); }
-.route-a { display: block; color: var(--on-deep-2); font-size: 1.1rem; font-weight: 300; line-height: 1.9; max-width: 46rem; }
-.route-arrow { color: var(--on-deep-2); justify-self: center; transition: color .3s var(--ease), transform .35s var(--ease); }
-.route-list a:hover .route-arrow { color: var(--accent-lt); transform: translateX(-6px); }
+.route-list a:hover .route-q { color: var(--accent); }
+.route-a { display: block; color: var(--muted); font-size: 1.1rem; font-weight: 300; line-height: 1.9; max-width: 46rem; }
+.route-arrow { color: var(--accent); justify-self: center; transition: color .3s var(--ease), transform .35s var(--ease); }
+.route-list a:hover .route-arrow { color: var(--accent); transform: translateX(-6px); }
+/* The key still under the heading: a 4:3 window, the keys anchored left. */
+.route-head .day-figure { aspect-ratio: 4 / 3; margin-block-start: 2.4rem; }
+.route-head .day-figure img { object-position: 22% 55%; }
 
 /* Desktop: the heading keeps the rows company. Kicker and H2 sit at the
    reading start and stay put while the six situations scroll past beside
    them. */
 @media (min-width: 1001px) {
   .route .wrap { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(2.5rem, 1rem + 4vw, 6rem); align-items: start; }
-  .route .sec-head { position: sticky; inset-block-start: calc(88px + 2.5rem); margin-block-end: 0; }
+  .route-head { position: sticky; inset-block-start: calc(88px + 2.5rem); }
+  .route .sec-head { margin-block-end: 0; }
   .route-list { margin-block-start: .4rem; }
 }
 
 /* ------------------------------------------------------------ statement
-   The one section that lives ON a photograph — the site's credo, set over
-   the near-black stone still life the way the canon sets its "אני מאמין".
-   One per site, and every word is measured against the rendered pixels. */
+   The site's credo. Round 10 moved it onto paper at every width — the
+   home page now opens dark and reads light, the way the market does — with
+   the daylight plans still beside the words instead of a veiled night
+   frame under them. */
 
-.statement {
-  position: relative; isolation: isolate; overflow: hidden;
-  background: var(--deep); color: var(--on-deep);
-  padding-block: calc(var(--gap-sec) * 1.2);
+.statement { background: var(--paper); color: var(--ink); padding-block: var(--gap-sec); }
+.statement-inner {
+  display: grid; grid-template-columns: minmax(0, 52fr) minmax(0, 48fr);
+  gap: clamp(2.5rem, 1.5rem + 4vw, 6rem); align-items: center;
 }
-.statement-figure { position: absolute; inset: 0; z-index: 0; }
-.statement-figure img {
-  width: 100%; height: 100%; object-fit: cover; object-position: 0% 30%;
-  filter: var(--grade);
-}
-/* A uniform veil, not a gradient — the frame is near-black everywhere and
-   the text column is centered, so the whole surface carries it. */
-.statement-figure::after {
-  content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: rgba(14, 12, 9, .5);
-}
-.statement-inner { position: relative; z-index: 2; max-width: var(--narrow); }
-/* Desktop: the credo joins the split language — the window portrait on the
-   left at full richness, every word on the solid token. The veiled object
-   still life stays as the phone background, where the split has no room. */
-.statement-portrait { display: none; }
-@media (min-width: 861px) {
-  .statement-figure { display: none; }
-  .statement-portrait { display: block; position: absolute; inset-block: 7% 0; left: 0; width: 44%; z-index: 0; }
-  .statement-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 35% 20%; }
-  .statement-portrait::after {
-    content: ''; position: absolute; inset: 0; pointer-events: none;
-    background:
-      linear-gradient(to left, var(--deep) 0%, rgba(14, 12, 9, 0) 18%),
-      linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 10%);
-  }
-  .statement-inner { max-width: none; display: grid; grid-template-columns: minmax(0, 50fr) minmax(0, 50fr); }
-  .statement-inner > * { grid-column: 1; }
-}
+/* The photograph: window light and rolled plans, the plans kept in frame. */
+.statement .day-figure { order: 2; aspect-ratio: 4 / 5; max-height: 40rem; }
+.statement .day-figure img { object-position: 72% 50%; }
 .pull {
   font-family: var(--display); font-weight: 600;
   font-size: clamp(1.7rem, 1.15rem + 2.4vw, 3rem);
-  line-height: 1.35; color: #fff; margin-block-end: 2.6rem;
+  line-height: 1.35; color: var(--ink); margin-block-end: 2.6rem;
 }
 .pull::before {
   content: ''; display: block; width: 5.5rem; height: 3px;
   background: var(--accent-lt); margin-block-end: 1.6rem;
 }
 .statement-body { display: grid; gap: 1.5rem; max-width: 40rem; }
-.statement-body p { color: var(--on-deep); }
+.statement-body p { color: var(--ink-2); }
 
 /* ------------------------------------------------------------ index list */
 
@@ -1068,6 +1051,10 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
 @media (max-width: 1000px) {
   .layout-aside { grid-template-columns: 1fr; }
   .faq-side { display: none; }
+  /* Tablets: the route stacks, so the key still becomes a short letterbox
+     under the heading rather than a 4:3 window the width of the page. */
+  .route-head .day-figure { aspect-ratio: 21 / 9; max-height: 22rem; }
+  .route-head .day-figure img { object-position: 22% 50%; }
   .side { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
   .contact-grid { grid-template-columns: 1fr; }
   .principles { grid-template-columns: 1fr; gap: 2.2rem; }
@@ -1158,7 +1145,6 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .quiet-figure::after {
     background: linear-gradient(to left, rgba(14, 12, 9, .8) 0%, rgba(14, 12, 9, .58) 55%, rgba(14, 12, 9, .52) 100%);
   }
-  .statement-figure::after { background: rgba(14, 12, 9, .64); }
   /* .80, not .74 — solved numerically against BOTH closing photographs
      rather than eyeballed. At .74 the round-8 dusk frame put its sunset
      glow under the sub line (3.96:1) and the round-9 blue-hour frame puts
@@ -1230,24 +1216,18 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
      3 of 22 stay dark throughout. So on phones the two substance bands —
      the credo and the route — sit on paper, each opened by a daylight
      still, while the hero and the closing keep the black frame. */
-  .day-figure { display: block; aspect-ratio: 16 / 9; overflow: hidden; margin-block-end: 2.4rem; }
-  .day-figure img { width: 100%; height: 100%; object-fit: cover; filter: var(--grade-day); }
-  .statement { background: var(--paper); color: var(--ink); padding-block: 0 3rem; }
-  .statement-figure { display: none; }
-  .statement .pull { color: var(--ink); }
-  .statement-body p { color: var(--ink-2); }
-  .route { background: var(--paper-2); color: var(--ink); padding-block: 0 var(--gap-sec); }
-  .route .label { color: var(--accent); }
-  .route h2 { color: var(--ink); }
-  .route .sec-sub { color: var(--muted); }
-  .route :focus-visible { outline-color: var(--accent); }
-  .route-list { border-block-start-color: var(--stone); }
-  .route-list > li { border-block-end-color: var(--stone); }
-  .route-list a { color: var(--ink); }
-  .route-list a:active { background: rgba(134, 100, 31, .07); }
-  .route-n { color: var(--accent); opacity: 1; }
-  .route-a { color: var(--muted); }
-  .route-arrow { color: var(--accent); }
+  /* Phones: the daylight still opens each paper band full-bleed above the
+     words (it bleeds through the wrap's 1.25rem gutters), 16:9. */
+  .statement, .route { padding-block: 0 3rem; }
+  .statement-inner { grid-template-columns: 1fr; gap: 0; }
+  .statement .day-figure { order: 0; }
+  .day-figure, .statement .day-figure, .route-head .day-figure {
+    aspect-ratio: 16 / 9; max-height: none; margin: 0 -1.25rem 2.4rem;
+  }
+  .statement .day-figure img { object-position: 60% 50%; }
+  .route-head { display: flex; flex-direction: column; }
+  .route-head .day-figure { order: -1; margin-block-start: 0; }
+  .route-head .day-figure img { object-position: 50% 50%; }
   /* The daylight stamp keeps its empty desk on the image's left; anchor the
      phone crop there so the line sits on plain wood under the paper veil. */
   .quiet-light .quiet-figure img { object-position: 0% 50%; }

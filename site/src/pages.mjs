@@ -16,8 +16,8 @@ export const IMAGES = {
   portrait: '/assets/img/pinchas-ratzon',
   hero: '/assets/img/hero-room',
   heroPortrait: '/assets/img/hero-listening-mobile',
-  /* Round 8 (2026-09-14): the phone reads as a dark frame around light
-     pages — these daylight stills open the paper bands below 861px. */
+  /* Round 8 (2026-09-14): a dark frame around light pages — these daylight
+     stills open the two paper bands at every width (desktop since round 10). */
   bandPlansDay: '/assets/img/band-plans-daylight',
   bandKeyDay: '/assets/img/band-key-daylight',
   bandStampDay: '/assets/img/band-stamp-daylight',
@@ -46,8 +46,8 @@ const portraitPhoto = (alt) => `<picture>
       <img src="${IMAGES.portrait}.jpg" alt="${esc(alt)}" width="980" height="1225" loading="lazy" decoding="async">
     </picture>`;
 
-/* A daylight still that opens a paper band on phones only: hidden above
-   860px by the stylesheet, and lazy, so a desktop never fetches it. */
+/* A daylight still that opens a paper band: full-bleed above the words on
+   phones, a column beside them on desktop. */
 const dayFigure = (src) => `<div class="day-figure" aria-hidden="true">
     <picture>
       <source srcset="${src}.webp" type="image/webp">
@@ -195,30 +195,25 @@ export function home() {
 </ul>
 
 <section class="statement" id="statement">
-  ${dayFigure(IMAGES.bandPlansDay)}
-  <div class="statement-figure">
-    ${photo(IMAGES.bandStatement, { alt: '', w: 1920, h: 1072 })}
-  </div>
-  <div class="statement-portrait" aria-hidden="true">
-    <picture>
-      <source srcset="/assets/img/closing-portrait-left.webp" type="image/webp">
-      <img src="/assets/img/closing-portrait-left.jpg" alt="" width="1000" height="908" loading="lazy" decoding="async">
-    </picture>
-  </div>
   <div class="wrap statement-inner">
-    <p class="pull">עסקה במקרקעין נגמרת ברישום.<br>לא בחתימה.</p>
-    <div class="statement-body">
-      <p>בין החתימה לרישום מתגלים הפרטים שמשנים עסקה שלמה: הצמדה שלא נרשמה, חריגת בנייה שלא נבדקה, או חבות מס שלא תומחרה מראש.</p>
-      <p>עוד לפני שמתחייבים, אני בוחן את התמונה המלאה — הזכויות בנכס, תנאי ההסכם, המס והרישום — והכול נשאר באחריות אחת לאורך כל הדרך.</p>
-      <p>המטרה פשוטה: שלא תחתמו מתוך תקווה שהכול יסתדר — אלא מתוך הבנה ברורה של העסקה כולה.</p>
+    ${dayFigure(IMAGES.bandPlansDay)}
+    <div class="statement-copy">
+      <p class="pull">עסקה במקרקעין נגמרת ברישום.<br>לא בחתימה.</p>
+      <div class="statement-body">
+        <p>בין החתימה לרישום מתגלים הפרטים שמשנים עסקה שלמה: הצמדה שלא נרשמה, חריגת בנייה שלא נבדקה, או חבות מס שלא תומחרה מראש.</p>
+        <p>עוד לפני שמתחייבים, אני בוחן את התמונה המלאה — הזכויות בנכס, תנאי ההסכם, המס והרישום — והכול נשאר באחריות אחת לאורך כל הדרך.</p>
+        <p>המטרה פשוטה: שלא תחתמו מתוך תקווה שהכול יסתדר — אלא מתוך הבנה ברורה של העסקה כולה.</p>
+      </div>
     </div>
   </div>
 </section>
 
 <section class="route" id="practice-areas">
-  ${dayFigure(IMAGES.bandKeyDay)}
   <div class="wrap">
-    ${secHead('איך אפשר לעזור', 'איפה אתם נמצאים כרגע?')}
+    <div class="route-head">
+      ${secHead('איך אפשר לעזור', 'איפה אתם נמצאים כרגע?')}
+      ${dayFigure(IMAGES.bandKeyDay)}
+    </div>
     ${routeList()}
   </div>
 </section>

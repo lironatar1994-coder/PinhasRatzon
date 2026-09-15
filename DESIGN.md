@@ -194,11 +194,20 @@ properties. Content sits in `.wrap` — min(1180px, 100% − 3rem), centered —
 `--gap-sec: clamp(3.75rem, 2rem + 5.5vw, 7rem)` of block padding per band.
 
 **Band grammar.** Pages are stacks of full-bleed one-idea bands: warm paper, warm off-white
-(`.section-alt`), and near-black (`.section-dark`, `.route`, `.closing`). The home page also
+(`.section-alt`, `.route`), and near-black (`.section-dark`, `.closing`). The home page also
 uses one deliberate daylight photo band (`.quiet-light`) as the FAQ chapter opener: dark ink
-over a pixel-measured pale field, with its stamp motif confined to the physical left. The home page runs
-hero (dark) → statement (dark) → route (dark) → portrait (paper) → FAQ opener (daylight) →
-FAQ (paper-2) → closing (dark). Every interior page opens on the dark masthead
+over a pixel-measured pale field, with its stamp motif confined to the physical left.
+
+**The Dark-Frame Rule (round 10, 2026-09-15).** The page opens dark and reads light: only
+the hero and the closing (plus header and footer) sit on the deep ground; everything between
+them is paper. This is the market's rhythm — measured 2026-09-14 across 22 Israeli lawyer
+sites, only 3 stay dark throughout — and round 8 had already adopted it on phones; round 10
+made it true at every width, so the desktop no longer opens on three consecutive black bands.
+The home page runs hero (dark) → statement (paper, daylight plans still beside the credo) →
+route (paper-2, daylight key still under the sticky heading) → portrait (paper) → FAQ
+opener (daylight) → FAQ (paper-2) → closing (dark). The two daylight stills (`.day-figure`,
+`--grade-day`) are a 4:5 column and a 4:3 window on desktop, a 21:9 letterbox on tablets,
+and a 16:9 full-bleed opener above the words on phones. Every interior page opens on the dark masthead
 (`.page-hero`: black ground, gold kicker, white display type, gold hairline base), followed
 on practice pages by a letterboxed full-bleed photograph (`.page-figure`, 21/7, 16/9 under
 860px). Long pages use `.layout-aside`: prose column plus a 16rem sticky sidebar.
@@ -281,15 +290,14 @@ below the header's z-index 90 (the drawer lives inside the header's stacking con
 Breadcrumbs render on the dark ground with em-dash separators.
 
 ### Route List & Index List
-The two signature list components — bordered rows, no cards. The route ("where are you
-standing?") is the dark version: 5.5rem light-weight gold display numeral, 500-weight
-question, muted answer, arrow; the whole row slides 0.7rem leftward on hover and the
-question turns gold. The index is the light-ground sibling with a small gold index numeral.
-Arrows hide on mobile; the rows keep working.
+The two signature list components — bordered rows, no cards. The route ("where are you standing?") sits on Paper 2: 5.5rem light-weight Text-Gold display
+numeral, 500-weight question, muted answer, gold arrow; the whole row slides 0.7rem leftward
+on hover and the question turns gold. The index is its paper sibling with a small gold
+index numeral. The arrows stay on phones — this band is the site's main router.
 
-**The Route Split (≥ 1001px).** The route band is a 4fr / 7fr grid: kicker and H2 sit in
-the start column and stay `position: sticky` (below the 88px header) while the six rows
-scroll past in the end column. A full-measure row put the arrow a viewport away from its
+**The Route Split (≥ 1001px).** The route band is a 4fr / 7fr grid: kicker, H2 and the
+daylight key still (`.route-head`) sit in the start column and stay `position: sticky`
+(below the 88px header) while the six rows scroll past in the end column. A full-measure row put the arrow a viewport away from its
 own question and left the band's left half empty; in the split the arrow lands beside the
 text and the heading keeps the rows company. Below 1001px the band stacks as before.
 
