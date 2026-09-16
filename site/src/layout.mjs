@@ -217,7 +217,7 @@ export function closing({ h2 }) {
     </picture>
   </div>
   <div class="closing-portrait" aria-hidden="true">
-    <img src="/assets/img/closing-listen.jpg" alt="" width="1000" height="879" loading="lazy" decoding="async">
+    <img src="/assets/img/closing-listen.jpg?v=standing-20260916" alt="" width="1000" height="908" loading="lazy" decoding="async">
   </div>
   <div class="wrap closing-grid">
     <div class="closing-copy">
