@@ -15,6 +15,7 @@ kling_*.png
 # in public; the single legitimate PNG is whitelisted below.
 site/public/assets/img/**/*.png
 !site/public/assets/img/apple-touch-icon.png
+!site/public/assets/img/brand/*.png
 
 # Tooling scratch
 node_modules/

@@ -200,7 +200,9 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 }
 .header-inner { display: flex; align-items: center; gap: 2rem; min-height: 88px; }
 
-.wordmark { display: flex; flex-direction: column; color: var(--on-deep); margin-inline-end: auto; line-height: 1.3; }
+.wordmark { display: flex; align-items: center; gap: .4rem; flex-shrink: 0; color: var(--on-deep); margin-inline-end: auto; line-height: 1.3; }
+.wm-symbol { width: 72px; height: 72px; flex: none; object-fit: contain; }
+.wm-text { display: flex; flex-direction: column; }
 .wordmark:hover { text-decoration: none; }
 .wm-name { font-family: var(--display); font-size: 1.4rem; font-weight: 600; }
 .wm-role { font-size: .85rem; font-weight: 400; color: var(--accent-lt); }
@@ -1064,6 +1066,7 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
 @media (max-width: 860px) {
   .wrap, .wrap.narrow { width: calc(100% - 2.5rem); }
   .header-inner { min-height: 72px; gap: 1.1rem; }
+  .wm-symbol { width: 56px; height: 56px; }
   .burger { display: flex; }
   /* Naked glyphs, no chrome: boxed icons put three competing shapes in the
      most-seen strip of the site. Bare champagne icons beside the burger

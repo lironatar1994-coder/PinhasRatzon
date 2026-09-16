@@ -49,6 +49,7 @@ export function attorneySchema() {
     email: BIZ.email,
     foundingDate: BIZ.founded,
     image: url('/assets/img/og-default.jpg'),
+    logo: url('/assets/img/brand/pr-icon-512.png'),
     // Street address published at the client's instruction. No
     // openingHoursSpecification and no geo — neither has ever been supplied,
     // and both would be invented rather than sourced.
@@ -104,8 +105,11 @@ const telHref = `tel:${BIZ.phoneE164}`;
 
 const wordmark = (cls = '') => `
   <a class="wordmark ${cls}" href="/" aria-label="${esc(BIZ.name)} — לעמוד הבית">
+    <img class="wm-symbol" src="/assets/img/brand/pr-classic-20260916.png" width="256" height="256" alt="" aria-hidden="true">
+    <span class="wm-text">
     <span class="wm-name">פנחס רצון</span>
     <span class="wm-role">עורך דין</span>
+    </span>
   </a>`;
 
 function navMarkup(current) {
@@ -361,9 +365,9 @@ export function page({
 <meta name="twitter:card" content="summary_large_image">
 
 <meta name="theme-color" content="#0E0C09">
-<link rel="icon" href="/assets/img/favicon.svg?v=pr-20260826" type="image/svg+xml">
-<link rel="alternate icon" href="/assets/img/favicon.ico?v=pr-20260826" sizes="any">
-<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png?v=pr-20260826">
+<link rel="icon" href="/assets/img/brand/pr-icon-96.png" type="image/png" sizes="96x96">
+<link rel="icon" href="/assets/img/brand/pr-icon-512.png" type="image/png" sizes="512x512">
+<link rel="apple-touch-icon" href="/assets/img/brand/pr-apple-180.png" sizes="180x180">
 
 ${preloadImage ? (preloadPortrait
   ? `<link rel="preload" as="image" href="${preloadPortrait}${ext(preloadPortrait)}" type="${mime(preloadPortrait)}" media="(max-width: 1100px)" fetchpriority="high">
