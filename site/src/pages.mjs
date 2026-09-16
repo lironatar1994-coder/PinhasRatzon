@@ -375,6 +375,17 @@ export function practicePage(p) {
       </section>
 
       ${sections}
+      ${p.preparation ? `<section class="sub-sec">
+        <h2>${esc(p.preparation.h2)}</h2>
+        <p>${esc(p.preparation.intro)}</p>
+        <ul class="checks">${p.preparation.items.map((item) => `<li>${esc(item)}</li>`).join('')}</ul>
+        <p>אין צורך לשלוח מסמכים אישיים בטופס האתר. בשיחה נברר אילו מסמכים נדרשים ואיך להעביר אותם.</p>
+      </section>` : ''}
+      ${p.resources ? `<section class="sub-sec">
+        <h2>מידע ושירותים ממשלתיים</h2>
+        <ul>${p.resources.map((r) => `<li><a href="${esc(r.href)}">${esc(r.label)}</a></li>`).join('')}</ul>
+        <p class="fineprint">הקישורים מובילים למידע הרשמי של הרשויות. התאמת ההליך למקרה שלכם נבחנת באופן פרטני.</p>
+      </section>` : ''}
     </article>
 
     <aside class="side" aria-label="ניווט ופרטי קשר">
@@ -388,6 +399,8 @@ export function practicePage(p) {
         <p class="label">לשיחה</p>
         <a class="side-tel" href="${telHref}" dir="ltr">${esc(BIZ.phone)}</a>
         <p class="side-note">${esc(BIZ.shortName)} · ${esc(BIZ.areaHuman)}</p>
+        <p class="side-note">${esc(BIZ.addressHuman)} · ${esc(BIZ.reception)}</p>
+        <a href="/about/">על עו״ד פנחס רצון והניסיון המקצועי</a>
       </div>
     </aside>
   </div>
@@ -606,6 +619,7 @@ export function contact() {
       </ul>
       <dl class="creds wide">
         <div><dt>כתובת</dt><dd>${esc(BIZ.addressHuman)}</dd></div>
+        <div><dt>קבלת קהל</dt><dd>${esc(BIZ.reception)}. לתיאום פגישה אפשר להתקשר ישירות.</dd></div>
         <div><dt>אזור שירות</dt><dd>${esc(BIZ.areaHuman)}</dd></div>
       </dl>
 

@@ -273,6 +273,7 @@ export function footer() {
       ${wordmark('wm-foot')}
       <address class="foot-nap">
         <span>${esc(BIZ.addressHuman)}</span>
+        <span>${esc(BIZ.reception)}</span>
         <span>${esc(BIZ.areaHuman)}</span>
       </address>
     </div>
