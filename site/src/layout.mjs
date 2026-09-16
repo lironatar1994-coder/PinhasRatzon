@@ -339,6 +339,7 @@ export function page({
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
+<meta name="google-site-verification" content="hw1-mKjj_gbiIhH_y3KI9t5v6WC3TvqKRTW8E0rSqVQ" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
