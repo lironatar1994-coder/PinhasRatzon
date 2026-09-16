@@ -1030,7 +1030,7 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
     min-height: 640px; height: calc(100svh - 88px); max-height: 900px;
     padding-block: 4rem;
   }
-  .hero-figure { right: auto; width: 58%; max-width: 1080px; }
+  .hero-figure { right: auto; width: 58%; max-width: 1080px; overflow: hidden; }
   .hero-figure img { object-position: 50% 12%; filter: none; }
   .hero-figure::after {
     background:
