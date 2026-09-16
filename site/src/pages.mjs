@@ -30,14 +30,15 @@ export const IMAGES = {
   bandStatement: '/assets/img/band-statement',
 };
 
-/* The hero is art-directed rather than merely responsive: the wide frame keeps
-   the reading column the photograph was composed around, and below the split
-   a portrait crop of the same shot takes over. */
+/* The approved listening portrait now carries both layouts. Desktop gives it
+   a dedicated left-hand frame; mobile keeps its original full-height cover.
+   Keep the legacy wide JPG as the picture fallback for the CMS slot contract. */
 const webpSource = (src, media = '') =>
   isManaged(src) ? '' : `<source${media ? ` media="${media}"` : ''} type="image/webp" srcset="${src}.webp">\n      `;
 
 const heroPhoto = (alt) => `<picture>
       ${webpSource(IMAGES.heroPortrait, '(max-width: 1100px)')}<source media="(max-width: 1100px)" type="image/jpeg" srcset="${IMAGES.heroPortrait}.jpg">
+      <source media="(min-width: 1101px)" type="image/jpeg" srcset="${IMAGES.heroPortrait}.jpg">
       ${webpSource(IMAGES.hero)}<img src="${IMAGES.hero}.jpg" alt="${esc(alt)}" width="1920" height="1084" fetchpriority="high" decoding="async">
     </picture>`;
 
@@ -258,7 +259,7 @@ ${closing({ h2: 'שיחה אחת עושה סדר' })}`;
     shareDescription: `ניסיון של ${BIZ.yearsExperience} שנים במקרקעין, מיסוי, צוואות וירושות — ${BIZ.city} והמרכז`,
     body,
     overHero: true,
-    preloadImage: IMAGES.hero,
+    preloadImage: IMAGES.heroPortrait,
     preloadPortrait: IMAGES.heroPortrait,
     schema: [
       { '@type': 'WebSite', '@id': url('/#website'), url: url('/'), name: BIZ.name, inLanguage: 'he-IL' },

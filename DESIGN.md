@@ -398,6 +398,27 @@ deploy when a marker or a managed image goes missing.
 
 ## Verification
 
+### Desktop portrait alignment — 2026-09-16
+
+At the user's request, the home opening above 1100px now shares the approved
+mobile listening portrait. No new image generation or face retouching: the
+existing JPG remains unchanged. A left-hand frame, top-biased crop and dark
+right-edge dissolve keep the face unobstructed and the text readable. The
+headline, restrained gold rule and quiet scroll link retain the mobile mood.
+The legacy wide image stays the picture fallback for the Manager Site contract;
+the listening-portrait slot now controls the visible hero at both widths.
+
+Browser checks: desktop 1101x800, default approximately 1485x795 and 1920x1080;
+face and kippah stay in frame, copy stays beside the portrait, no horizontal
+overflow. At 390x844, the source image and computed dimensions, crop, filter,
+font sizes, line heights and spacing of the six hero elements match the previous
+production version exactly. All new CSS is scoped to min-width 1101px.
+
+The rightmost portrait dissolve is already at least 90% near-black where the
+desktop reading column overlaps the picture; the rest of the column is on the
+solid dark ground. Existing text tokens remain unchanged apart from the desktop
+subtitle using the brighter on-deep token.
+
 The system is enforced, not aspirational. The workflow after any visual change, from
 `site/`:
 

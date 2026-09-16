@@ -391,9 +391,9 @@ OWN-WORLD: Near-black #0e0c09 bands alternating with warm white #fbfaf7; gold
 button; all-Heebo — display w600-700, body 20px w300 lh2; sharp corners, no cards.
 STORY: A visitor before a transaction/inheritance reads substance first — the
 route band answers "where am I standing" — and meets the ask only at the end.
-FIRST VIEWPORT: Solid black header with gold-boxed phone; full-bleed hero photo,
-subject left third, white display headline over the dark stone wall right,
-gold kicker above, gold bar below. On phones the hero is a cover: the
+FIRST VIEWPORT: Solid black header with gold-boxed phone; the approved listening
+portrait at left dissolves into the dark reading column at right, with a white
+headline and champagne accents. On phones the hero remains a cover: the
 listening photograph fills the screen, the type rises out of its shadowed
 lower half, and a three-fact strip follows. Below 861px the substance bands
 (statement, route) sit on paper — measured 2026-09-14 across 22 Israeli
