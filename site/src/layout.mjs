@@ -104,7 +104,7 @@ export const serviceSchema = (p) => ({
 const telHref = `tel:${BIZ.phoneE164}`;
 
 const wordmark = (cls = '') => `
-  <a class="wordmark ${cls}" href="/" aria-label="${esc(BIZ.name)} — לעמוד הבית">
+  <a class="wordmark ${cls}" href="/" aria-label="${esc(BIZ.name)}, לעמוד הבית">
     <span class="wm-name">פנחס רצון</span>
     <span class="wm-role">עורך דין</span>
   </a>`;
@@ -139,7 +139,7 @@ export function header(current) {
       <div class="drawer-call">
         <p class="label">לשיחה</p>
         <a class="nav-tel" href="${telHref}" dir="ltr">${esc(BIZ.phone)}</a>
-        <a class="nav-wa" href="${BIZ.whatsapp}" target="_blank" rel="noopener">${icon('whatsapp', 18)}וואטסאפ — שליחת הודעה</a>
+        <a class="nav-wa" href="${BIZ.whatsapp}" target="_blank" rel="noopener">${icon('whatsapp', 18)}וואטסאפ, שליחת הודעה</a>
         <p class="drawer-note">${esc(BIZ.shortName)} · ${esc(BIZ.city)}</p>
       </div>
     </nav>

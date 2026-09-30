@@ -60,7 +60,7 @@ export const DISCLAIMER =
   'המידע באתר הוא כללי בלבד ואינו מהווה ייעוץ משפטי, חוות דעת משפטית או תחליף לייעוץ פרטני. כל מקרה נבחן לפי נסיבותיו, הדין החל והמסמכים הרלוונטיים.';
 
 export const FORM_NOTE =
-  'הפנייה אינה יוצרת יחסי עורך דין–לקוח ואינה מהווה ייעוץ משפטי.';
+  'הפנייה אינה יוצרת יחסים בין עורך דין ללקוח ואינה מהווה ייעוץ משפטי.';
 
 // Handled by form-service/ — a small Node service behind Nginx that stores the
 // submission and mails a notification, then redirects to /thank-you/.

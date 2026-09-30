@@ -53,7 +53,7 @@ const dayFigure = (src) => `<div class="day-figure" aria-hidden="true">
     </picture>
   </div>`;
 
-function photo(src, { alt, w, h, cls = '', note = 'תמונה — להוספה', priority = false }) {
+function photo(src, { alt, w, h, cls = '', note = 'תמונה, להוספה', priority = false }) {
   if (!src) {
     return `<div class="ph ${cls}" style="aspect-ratio:${w}/${h}" role="img" aria-label="${esc(alt)}"><span>${esc(note)}</span></div>`;
   }
@@ -134,11 +134,11 @@ const routeList = () => `
 
 const PRINCIPLES = [
   ['בדיקה לפני התחייבות',
-   'נסח רישום, מצב תכנוני, היתרים וחריגות בנייה, שעבודים, עיקולים והערות אזהרה — כולם נבדקים לפני שנחתם מסמך, ולא אחרי שהתגלתה בעיה.'],
+   'לפני החתימה נבדקים הרישום, המצב התכנוני, היתרי הבנייה, השעבודים, העיקולים והערות האזהרה.'],
   ['מס בשלב התכנון',
-   'חשיפת מס השבח ומס הרכישה, והפטורים שאפשר למצות, מחושבים כשעוד ניתן לשנות את מבנה העסקה. אחרי החתימה המס כבר לא מתוכנן — רק מחושב.'],
+   'לפני החתימה נבדקים מס השבח, מס הרכישה והפטורים שעשויים לחול על העסקה.'],
   ['ליווי עד הרישום',
-   'רוב הכסף בעסקה עובר לפני שהזכויות עוברות. התיק נסגר כאן כשהזכויות רשומות על שמכם בטאבו, ברמ״י או בחברה המשכנת.'],
+   'הליווי כולל את רישום הזכויות בטאבו, ברמ״י או בחברה המשכנת, לפי סוג הנכס.'],
 ];
 
 const HOME_FAQS = [
@@ -152,7 +152,7 @@ const HOME_FAQS = [
   },
   {
     q: 'מתי כדאי לערוך ייפוי כוח מתמשך?',
-    a: 'כשעדיין אין בעיה. אפשר לערוך אותו רק כל עוד האדם כשיר ומבין את משמעות המסמך. הוא מאפשר לקבוע מראש מי יטפל בענייניכם ואיך — במקום שבית המשפט ימנה אפוטרופוס בדיעבד.',
+    a: 'אפשר לערוך אותו כל עוד האדם כשיר ומבין את משמעות המסמך. הוא מאפשר לקבוע מראש מי יטפל בענייניכם ואילו הנחיות יחולו.',
   },
   {
     q: 'שילמתי מס שבח. אפשר לקבל החזר?',
@@ -170,7 +170,7 @@ export function home() {
   const body = `
 <section class="hero">
   <div class="hero-figure">
-    ${heroPhoto(`${BIZ.shortName} — עורך דין מקרקעין, מיסוי מקרקעין ועיזבונות ב${BIZ.city}`)}
+    ${heroPhoto(`${BIZ.shortName}, עורך דין מקרקעין, מיסוי מקרקעין ועיזבונות ב${BIZ.city}`)}
   </div>
   <div class="wrap hero-inner">
     <div class="hero-col">
@@ -255,8 +255,8 @@ ${closing({ h2: 'נדבר על המקרה שלכם' })}`;
   return page({
     path: '/',
     title: `עורך דין מקרקעין וצוואות ב${BIZ.city} | ${BIZ.shortName}`,
-    description: `עו״ד פנחס רצון — ${BIZ.yearsExperience} שנות ניסיון בעסקאות מקרקעין, מיסוי, רישום בתים משותפים, צוואות וירושות ב${BIZ.city} ובמרכז.`,
-    shareDescription: `ניסיון של ${BIZ.yearsExperience} שנים במקרקעין, מיסוי, צוואות וירושות — ${BIZ.city} והמרכז`,
+    description: `עו״ד פנחס רצון, ${BIZ.yearsExperience} שנות ניסיון בעסקאות מקרקעין, מיסוי, רישום בתים משותפים, צוואות וירושות ב${BIZ.city} ובמרכז.`,
+    shareDescription: `ניסיון של ${BIZ.yearsExperience} שנים במקרקעין, מיסוי, צוואות וירושות, ${BIZ.city} והמרכז`,
     body,
     overHero: true,
     preloadImage: IMAGES.hero,
@@ -281,7 +281,7 @@ export function practiceIndex() {
     ${photo('/assets/img/practice-hero', { alt: '', w: 1000, h: 908, priority: true })}
   </div>
   <div class="wrap">
-    <h1>שישה תחומים, לרוב אותו תיק</h1>
+    <h1>תחומי העיסוק של המשרד</h1>
     <p class="lead">אני מטפל בעסקאות מקרקעין, במיסוי, ברישום נכסים, בצוואות ובירושות. כשבתיק אחד יש כמה נושאים, אני בודק אותם יחד.</p>
   </div>
 </section>
@@ -416,9 +416,9 @@ ${p.quiet ? `<section class="quiet">
   </div>
 </section>
 
-` : ''}${faqBlock(p.faqs, { h2: `שאלות נפוצות — ${p.nav}`, label: '' })}
+` : ''}${faqBlock(p.faqs, { h2: `שאלות נפוצות בנושא ${p.nav}`, label: '' })}
 
-${closing({ h2: 'עדיף לבדוק לפני, לא לתקן אחרי' })}`;
+${closing({ h2: 'לפנייה בנושא הזה' })}`;
 
   return page({
     path: `/practice-areas/${p.slug}/`,
@@ -469,19 +469,19 @@ export function about() {
       <section class="sub-sec">
         <h2>השכלה והסמכות</h2>
         <dl class="creds wide">
-          <div><dt dir="ltr">${esc(BIZ.founded)}</dt><dd>חבר לשכת עורכי הדין בישראל — רישיון בתוקף ברציפות מאז ההסמכה</dd></div>
+          <div><dt dir="ltr">${esc(BIZ.founded)}</dt><dd>חבר לשכת עורכי הדין בישראל, רישיון בתוקף ברציפות מאז ההסמכה</dd></div>
           <div><dt dir="ltr">LL.B</dt><dd>תואר ראשון במשפטים, הקריה האקדמית אונו</dd></div>
-          <div><dt>הסמכה</dt><dd>עריכת ייפוי כוח מתמשך — האפוטרופוס הכללי ומשרד המשפטים</dd></div>
+          <div><dt>הסמכה</dt><dd>עריכת ייפוי כוח מתמשך, האפוטרופוס הכללי ומשרד המשפטים</dd></div>
           <div><dt>השתלמויות</dt><dd>דיני מקרקעין, מיסוי מקרקעין, רישום בתים משותפים, עסקאות קומבינציה, דיני ירושה וכינוס נכסים</dd></div>
           <div><dt>שפות</dt><dd>עברית ואנגלית</dd></div>
         </dl>
       </section>
 
       <section class="sub-sec">
-        <h2>מה עובר אצלי ביום־יום</h2>
+        <h2>תחומי הטיפול</h2>
         <ul class="checks">
           ${[
-            'ניהול עסקאות מקרקעין מורכבות מקצה לקצה',
+            'ניהול עסקאות מקרקעין מורכבות',
             'רישום ותיקון בתים משותפים וניסוח תקנונים',
             'ייעוץ ותכנון מס ללקוחות פרטיים ועסקיים',
             'ליווי הסכמי קומבינציה ודיווחים לרשויות המס',
@@ -505,7 +505,7 @@ export function about() {
   </div>
 </div>
 
-${closing({ h2: 'שאלה קצרה? פשוט תתקשרו' })}`;
+${closing({ h2: 'לשאלות ולתיאום שיחה' })}`;
 
   return page({
     path: '/about/',
@@ -572,7 +572,7 @@ ${closing({ h2: 'לא מצאתם תשובה?' })}`;
 
   return page({
     path: '/faq/',
-    title: `שאלות נפוצות — מקרקעין, מס וירושות | ${BIZ.shortName}`,
+    title: `שאלות נפוצות בנושא מקרקעין, מס וירושות | ${BIZ.shortName}`,
     description: 'תשובות לשאלות הנפוצות על עסקאות מקרקעין, רישום בתים משותפים, מס שבח ומס רכישה, צוואות, צווי ירושה, ייפוי כוח מתמשך ופירוק שיתוף.',
     body,
     trail,
@@ -618,7 +618,7 @@ export function contact() {
         <ol class="steps">
           <li>
             <span class="idx-n" dir="ltr">01</span>
-            <div><h3>שיחה קצרה</h3><p>כמה דקות כדי להבין מה המצב, מה דחוף, ואילו מסמכים כבר יש בידיים.</p></div>
+            <div><h3>שיחה קצרה</h3><p>נברר מה נדרש, אם יש מועד קרוב לטיפול ואילו מסמכים נמצאים ברשותכם.</p></div>
           </li>
           <li>
             <span class="idx-n" dir="ltr">02</span>
@@ -642,7 +642,7 @@ export function contact() {
   return page({
     path: '/contact/',
     title: `יצירת קשר | ${BIZ.shortName}`,
-    description: `עו״ד פנחס רצון — מקרקעין, מיסוי, צוואות וירושות ב${BIZ.areaHuman}. טלפון ${BIZ.phone}.`,
+    description: `עו״ד פנחס רצון, מקרקעין, מיסוי, צוואות וירושות ב${BIZ.areaHuman}. טלפון ${BIZ.phone}.`,
     body,
     trail,
     schema: [
@@ -694,7 +694,7 @@ export function accessibility() {
 
     <section class="sub-sec">
       <h2>מגבלות ידועות</h2>
-      <p>ייתכנו עמודים או רכיבים שטרם הונגשו במלואם, לרבות תכנים של צד שלישי המוטמעים באתר. אם נתקלתם בקושי — נשמח שתעדכנו אותנו כדי שנוכל לטפל בו.</p>
+      <p>ייתכנו עמודים או רכיבים שטרם הונגשו במלואם, לרבות תכנים של צד שלישי המוטמעים באתר. אם נתקלתם בקושי, אפשר לפנות אלינו כדי שנוכל לטפל בו.</p>
     </section>
 
     <section class="sub-sec">
@@ -709,7 +709,7 @@ export function accessibility() {
     <section class="sub-sec">
       <h2>מקום מתן השירות</h2>
       <p>כתובת המשרד: ${esc(BIZ.addressHuman)}. חלק ניכר מהשירות ניתן בטלפון, בדוא״ל ובאמצעות אתר זה.</p>
-      <p class="note">פרטי הנגישות הפיזית של המקום — דרכי גישה, חניה, מעלית ושירותים — <span dir="ltr">[ להשלמה על ידי הלקוח ]</span>. עד להשלמתם, ניתן לברר מראש בטלפון ${esc(BIZ.phone)} אילו התאמות נדרשות ואפשריות.</p>
+      <p class="note">פרטי הנגישות הפיזית של המקום (דרכי גישה, חניה, מעלית ושירותים): <span dir="ltr">[ להשלמה על ידי הלקוח ]</span>. עד להשלמתם, ניתן לברר מראש בטלפון ${esc(BIZ.phone)} אילו התאמות נדרשות ואפשריות.</p>
     </section>
 
     <p class="fineprint">תאריך עדכון ההצהרה: <span dir="ltr">[ להשלמה ]</span></p>
@@ -733,7 +733,7 @@ export function thankYou() {
   <div class="wrap narrow prose center">
     <p class="label">תודה</p>
     <h1>הפנייה נשלחה</h1>
-    <p class="lead">קיבלתי, ואחזור אליכם בהקדם. במידה ודחוף ניתן להתקשר ישר לנייד:</p>
+    <p class="lead">קיבלתי את הפנייה ואחזור אליכם. אם העניין דחוף, אפשר להתקשר:</p>
     <p><a class="side-tel" href="${telHref}" dir="ltr">${esc(BIZ.phone)}</a></p>
     <p><a class="textlink" href="/">חזרה לעמוד הבית ${icon('arrow', 18)}</a></p>
   </div>
@@ -741,7 +741,7 @@ export function thankYou() {
   return page({
     path: '/thank-you/',
     title: `הפנייה נשלחה | ${BIZ.shortName}`,
-    description: 'קיבלתי את הפנייה ואחזור אליכם בהקדם. אם העניין דחוף — אפשר להתקשר ישירות בטלפון.',
+    description: 'קיבלתי את הפנייה ואחזור אליכם בהקדם. אם העניין דחוף, אפשר להתקשר ישירות בטלפון.',
     body,
     noindex: true,
   });
