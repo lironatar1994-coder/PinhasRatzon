@@ -26,7 +26,11 @@ const today = new Date().toISOString().slice(0, 10);
 const PORTRAIT_VERSION = 'eyes-corrected-20260930';
 function versionPortraits(html) {
   const portraits = /\/assets\/img\/(?:pinchas-ratzon|about-mobile-portrait-v1|hero-listening-mobile|hero-room|about-hero|closing-portrait-left|practice-hero|contact-hero|closing-consultation-mobile|og-default|round7\/contact-consultation-desktop-v2)\.(?:jpg|webp|png)(?:\?v=[^"'\s<>]+)?/g;
-  return html.replace(portraits, (asset) => `${asset.split('?')[0]}?v=${PORTRAIT_VERSION}`);
+  return html.replace(portraits, (asset) => {
+    const version = /\/(?:pinchas-ratzon|about-mobile-portrait-v1)\./.test(asset)
+      ? 'portrait-remake-20260930' : PORTRAIT_VERSION;
+    return `${asset.split('?')[0]}?v=${version}`;
+  });
 }
 
 /** path → { html, priority, changefreq } */
