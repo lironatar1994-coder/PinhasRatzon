@@ -215,7 +215,7 @@ export function closing({ h2 }) {
   <div class="wrap closing-grid">
     <div class="closing-copy">
       <h2>${esc(h2)}</h2>
-      <p class="closing-sub">שיחה קצרה מספיקה כדי להבין מה נדרש ומה הצעד הבא.</p>
+      <p class="closing-sub">אפשר להתקשר אליי או להשאיר פרטים. אחזור אליכם לשיחה על המקרה ועל המסמכים שכדאי להכין.</p>
     </div>
     <div class="closing-act">
       <ul class="closing-ch" aria-label="דרכי יצירת קשר">
@@ -233,7 +233,7 @@ export function closing({ h2 }) {
         <p class="label">השארת פרטים</p>
         <button type="button" class="dlg-close" aria-label="סגירה">&times;</button>
       </div>
-      <p class="dlg-sub">כמה פרטים — ואני חוזר אליכם.</p>
+      <p class="dlg-sub">השאירו שם וטלפון ואחזור אליכם.</p>
       ${contactForm({ id: 'd', compact: true })}
     </div>
   </dialog>

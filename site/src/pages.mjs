@@ -94,18 +94,18 @@ const practiceIndexList = (level = 3) => `
    not the practice teasers, which speak the taxonomy this band exists to
    spare the visitor from. */
 const ROUTE = [
-  ['real-estate-transactions',   'אתם לפני חתימה על עסקה',
-   'בדיקות לנכס, להסכם, למיסוי ולרישום — לפני שמתחייבים.'],
-  ['real-estate-tax',            'לא ברור כמה מס תשלמו בעסקה',
-   'תכנון מס, דיווחים, פטורים אפשריים, השגות והחזרי מס.'],
-  ['condominium-registration',   'הנכס עדיין לא רשום על שמכם',
-   'רישום ותיקון צו בית משותף, הצמדות, תקנונים וזיקות הנאה.'],
-  ['wills-inheritance',          'צריך לערוך צוואה או להסדיר עיזבון',
-   'צוואות, צווי ירושה, צווי קיום צוואה והסכמות בין יורשים.'],
-  ['enduring-power-of-attorney', 'רוצים להחליט היום מי יחליט עבורכם בעתיד',
-   'ייפוי כוח מתמשך, הנחיות מקדימות ומסמכי הבעת רצון.'],
-  ['partition-receivership',     'שותפים בנכס ואי אפשר להמשיך יחד',
-   'פירוק שיתוף, כינוס נכסים ומימוש נכסים.'],
+  ['real-estate-transactions',   'קנייה או מכירה של נכס',
+   'בדיקת הנכס וההסכם, טיפול במיסוי וליווי עד לרישום הזכויות.'],
+  ['real-estate-tax',            'מיסוי מקרקעין',
+   'תכנון מס ודיווח על עסקאות, בדיקת פטורים אפשריים, השגות והחזרי מס.'],
+  ['condominium-registration',   'רישום זכויות בנכס',
+   'רישום ותיקון צו בית משותף, כולל הצמדות, תקנונים וזיקות הנאה.'],
+  ['wills-inheritance',          'צוואות וירושות',
+   'עריכת צוואות, בקשות לצווי ירושה ולצווי קיום צוואה, והסכמות בין יורשים.'],
+  ['enduring-power-of-attorney', 'ייפוי כוח מתמשך',
+   'עריכת ייפוי כוח מתמשך, הנחיות מקדימות ומסמכי הבעת רצון.'],
+  ['partition-receivership',     'פירוק שיתוף וכינוס נכסים',
+   'טיפול בנכסים משותפים, בהליכי פירוק שיתוף, בכינוס נכסים ובמימושם.'],
 ];
 
 const routeList = () => `
@@ -175,11 +175,11 @@ export function home() {
   <div class="wrap hero-inner">
     <div class="hero-col">
       <h1>
-        <span class="hero-kicker">עורך דין מקרקעין, מיסוי וצוואות · ${esc(BIZ.city)}</span>
-        <span class="hero-line">קודם מבינים.<br>אחר כך <span class="gold-word">חותמים</span>.</span>
+        <span class="hero-kicker">מקרקעין, מיסוי, צוואות וירושות · ${esc(BIZ.city)}</span>
+        <span class="hero-line">עו״ד פנחס רצון</span>
       </h1>
       <div class="hero-rule" aria-hidden="true"></div>
-      <p class="hero-sub" data-manager-text="hero.subtitle"><strong>${esc(BIZ.shortName)}</strong> מלווה אתכם אישית — מהבדיקה הראשונה ועד שהזכויות רשומות על שמכם.</p>
+      <p class="hero-sub" data-manager-text="hero.subtitle">אני מלווה קונים ומוכרים לאורך העסקה, מהבדיקות לפני החתימה ועד לרישום הזכויות. אפשר לפנות אליי גם בענייני מיסוי, צוואות וירושות.</p>
       <a class="hero-more" href="#statement">איך אני עובד ${icon('arrowDown', 18)}</a>
     </div>
   </div>
@@ -203,11 +203,11 @@ export function home() {
     </picture>
   </div>
   <div class="wrap statement-inner">
-      <p class="pull" data-manager-text="content.statement.title">עסקה במקרקעין נגמרת ברישום.<br>לא בחתימה.</p>
+      <p class="pull" data-manager-text="content.statement.title">מה בודקים לפני החתימה?</p>
       <div class="statement-body">
-        <p data-manager-text="content.statement.paragraph1">בין החתימה לרישום מתגלים הפרטים שמשנים עסקה שלמה: הצמדה שלא נרשמה, חריגת בנייה שלא נבדקה, או חבות מס שלא תומחרה מראש.</p>
-        <p data-manager-text="content.statement.paragraph2">עוד לפני שמתחייבים, אני בוחן את התמונה המלאה — הזכויות בנכס, תנאי ההסכם, המס והרישום — והכול נשאר באחריות אחת לאורך כל הדרך.</p>
-        <p data-manager-text="content.statement.paragraph3">המטרה פשוטה: שלא תחתמו מתוך תקווה שהכול יסתדר — אלא מתוך הבנה ברורה של העסקה כולה.</p>
+        <p data-manager-text="content.statement.paragraph1">אני מתחיל בבדיקת המסמכים: הזכויות בנכס, המצב התכנוני וההתחייבויות בהסכם.</p>
+        <p data-manager-text="content.statement.paragraph2">בהמשך נבדקים המיסוי ורישום הזכויות. אם יש פרט שצריך לברר או להסדיר, חשוב לטפל בו לפני שמתחייבים לעסקה.</p>
+        <p data-manager-text="content.statement.paragraph3">אני מטפל גם בהסכם ובדיווחים לרשויות, ומלווה את העסקה עד לרישום הזכויות.</p>
       </div>
   </div>
 </section>
@@ -215,7 +215,7 @@ export function home() {
 <section class="route" id="practice-areas">
   ${dayFigure(IMAGES.bandKeyDay)}
   <div class="wrap">
-      ${secHead('איך אפשר לעזור', 'איפה אתם נמצאים כרגע?')}
+      ${secHead('תחומי עיסוק', 'באילו נושאים אני מטפל')}
     ${routeList()}
   </div>
 </section>
@@ -227,7 +227,7 @@ export function home() {
     </div>
     <div class="portrait-copy">
       <h2 id="portrait-heading">${esc(BIZ.shortName)}</h2>
-      <p class="lead" data-manager-text="about.home.lead">אני עורך דין מאז ${esc(BIZ.founded)}. עיקר העבודה שלי הוא בעסקאות מקרקעין, במיסוי מקרקעין, בצוואות ובירושות.</p>
+      <p class="lead" data-manager-text="about.home.lead">אני עורך דין מאז 2011. עיקר העבודה שלי הוא בעסקאות מקרקעין, במיסוי מקרקעין, בצוואות ובירושות.</p>
       <p class="portrait-note" data-manager-text="about.home.note">לאורך הטיפול אפשר לפנות אליי ישירות.</p>
       <a class="textlink" href="/about/">עוד עליי ${icon('arrow', 18)}</a>
     </div>
@@ -250,7 +250,7 @@ export function home() {
 
 ${faqBlock(HOME_FAQS, { h2: '', open: 0, className: 'faq-home', labelledBy: 'faq-heading', more: true })}
 
-${closing({ h2: 'שיחה אחת עושה סדר' })}`;
+${closing({ h2: 'נדבר על המקרה שלכם' })}`;
 
   return page({
     path: '/',
@@ -282,7 +282,7 @@ export function practiceIndex() {
   </div>
   <div class="wrap">
     <h1>שישה תחומים, לרוב אותו תיק</h1>
-    <p class="lead">רוב התיקים שמגיעים אליי נוגעים ביותר מתחום אחד — עסקה פוגשת שאלת מס, ירושה נגמרת ברישום. אצלי הכול מטופל בכתובת אחת, בלי להתרוצץ בין משרדים.</p>
+    <p class="lead">אני מטפל בעסקאות מקרקעין, במיסוי, ברישום נכסים, בצוואות ובירושות. כשבתיק אחד יש כמה נושאים, אני בודק אותם יחד.</p>
   </div>
 </section>
 
@@ -297,7 +297,7 @@ export function practiceIndex() {
     ${photo(IMAGES.quietPlans, { alt: '', w: 1920, h: 1080 })}
   </div>
   <div class="wrap quiet-inner">
-    <h2 class="quiet-line">תשריט, נסח, שומה וצו —<br>ארבעה מסמכים, לרוב תיק אחד.</h2>
+    <h2 class="quiet-line">בדיקת מסמכי הנכס<br>והיבטי המס והרישום.</h2>
   </div>
 </section>
 
@@ -446,15 +446,15 @@ export function about() {
   </div>
   <div class="wrap">
     <h1>${esc(BIZ.shortName)}</h1>
-    <p class="lead" data-manager-text="about.page.lead">אני עורך דין מאז ${esc(BIZ.founded)}, וכמעט כל תיק שעבר אצלי מאז נוגע בנכס: עסקה שצריך לסגור, רישום שצריך להסדיר, מס שצריך לתכנן, או עיזבון שצריך לחלק.</p>
+    <p class="lead" data-manager-text="about.page.lead">אני עורך דין מאז 2011. אני עוסק בעסקאות מקרקעין, במיסוי, ברישום זכויות בנכס ובצוואות וירושות.</p>
   </div>
 </section>
 
 <div class="section">
   <div class="wrap layout-aside">
     <article class="prose">
-      <p data-manager-text="about.page.paragraph1">התחומים האלה נראים נפרדים, אבל אצל רוב הלקוחות הם מגיעים כרוכים זה בזה. מכירת דירה שהתקבלה בירושה נוגעת בו זמנית בדיני ירושה, במיסוי מקרקעין וברישום. בית משותף שלא נרשם כראוי מקשה על כל עסקה עתידית בו. ותכנון מס שנעשה אחרי החתימה כבר לא יכול לשנות הרבה.</p>
-      <p data-manager-text="about.page.paragraph2">לכן אני מלווה מקצה לקצה — מהבדיקות הראשונות, דרך ניסוח ההסכם והדיווחים לרשויות, ועד רישום הזכויות. בלי להעביר את התיק לגורם אחר באמצע, ובלי לסיים בחתימה ולהשאיר את הרישום פתוח.</p>
+      <p data-manager-text="about.page.paragraph1">עסקת מקרקעין יכולה לכלול גם ענייני מס או ירושה. לדוגמה, מכירת דירה שהתקבלה בירושה נוגעת גם לזכויות בנכס, למיסוי ולרישום.</p>
+      <p data-manager-text="about.page.paragraph2">אני מטפל בבדיקות, בהסכם ובדיווחים לרשויות, וממשיך ללוות את העסקה עד לרישום הזכויות.</p>
 
       <section class="sub-sec">
         <h2>דרך העבודה</h2>
@@ -550,7 +550,7 @@ export function faqPage() {
   </div>
   <div class="wrap">
     <h1>מה שנשאל בשיחה הראשונה</h1>
-    <p class="lead" data-manager-text="faq.page.lead">מסודר לפי תחום. שאלה שנוגעת לתיק ספציפי עדיף לשאול בטלפון — זה בדרך כלל לוקח כמה דקות.</p>
+    <p class="lead" data-manager-text="faq.page.lead">התשובות מסודרות לפי תחום. לשאלה על מקרה מסוים אפשר לפנות אליי בטלפון.</p>
   </div>
 </section>
 
@@ -594,8 +594,8 @@ export function contact() {
     ${photo('/assets/img/contact-hero', { alt: `${BIZ.shortName}`, w: 1000, h: 908, priority: true })}
   </div>
   <div class="wrap">
-    <h1>שיחה אחת עושה סדר</h1>
-    <p class="lead" data-manager-text="contact.page.lead">אפשר להתקשר ישירות, או להשאיר פרטים ואחזור אליכם.</p>
+    <h1>יצירת קשר</h1>
+    <p class="lead" data-manager-text="contact.page.lead">אפשר להתקשר למשרד או להשאיר שם וטלפון בטופס. אחזור אליכם לשיחה.</p>
   </div>
 </section>
 
@@ -622,11 +622,11 @@ export function contact() {
           </li>
           <li>
             <span class="idx-n" dir="ltr">02</span>
-            <div><h3>תמונת מצב</h3><p>מה צריך לבדוק, מה סדר הפעולות הנכון, והצעת שכר טרחה מסודרת — לפני שמתחייבים.</p></div>
+            <div><h3>בדיקה והצעת שכר טרחה</h3><p>אברר מה צריך לבדוק ואציג את סדר הפעולות והצעת שכר הטרחה לפני תחילת הטיפול.</p></div>
           </li>
           <li>
             <span class="idx-n" dir="ltr">03</span>
-            <div><h3>טיפול</h3><p>מהבדיקות הראשונות ועד שהתיק סגור — והזכויות רשומות על שמכם.</p></div>
+            <div><h3>טיפול בתיק</h3><p>בעסקת מקרקעין אני מלווה את הבדיקות, ההסכם והרישום. בתיקים אחרים הטיפול נקבע לפי העניין.</p></div>
           </li>
         </ol>
       </section>
