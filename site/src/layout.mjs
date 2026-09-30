@@ -48,7 +48,7 @@ export function attorneySchema() {
     telephone: BIZ.phoneE164,
     email: BIZ.email,
     foundingDate: BIZ.founded,
-    image: url('/assets/img/og-default.jpg'),
+    image: url('/assets/img/og-default.jpg?v=eyes-corrected-20260930'),
     logo: url('/assets/img/brand/pr-icon-512.png'),
     // Street address published at the client's instruction. No
     // openingHoursSpecification and no geo — neither has ever been supplied,
@@ -351,7 +351,7 @@ export function page({
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc((shareDescription || description).replace(/\.\s*$/, ''))}">
 <meta property="og:url" content="${canonical}">
-<meta property="og:image" content="${url('/assets/img/og-default.jpg')}">
+<meta property="og:image" content="${url('/assets/img/og-default.jpg?v=eyes-corrected-20260930')}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:type" content="image/jpeg">
