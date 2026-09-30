@@ -218,10 +218,10 @@ export function closing({ h2 }) {
       <p class="closing-sub">שיחה קצרה מספיקה כדי להבין מה נדרש ומה הצעד הבא.</p>
     </div>
     <div class="closing-act">
-      <ul class="closing-ch">
-        <li><a href="${telHref}">${icon('phone', 20)}<span class="ch-body"><span class="ch-k">טלפון</span><span class="ch-v"><bdi dir="ltr">${esc(BIZ.phone)}</bdi></span></span></a></li>
-        <li><a href="${BIZ.whatsapp}" target="_blank" rel="noopener">${icon('whatsapp', 20)}<span class="ch-body"><span class="ch-k">וואטסאפ</span><span class="ch-v">שליחת הודעה</span></span></a></li>
-        <li><a href="mailto:${esc(BIZ.email)}">${icon('mail', 20)}<span class="ch-body"><span class="ch-k">אימייל</span><span class="ch-v"><bdi dir="ltr">${esc(BIZ.email)}</bdi></span></span></a></li>
+      <ul class="closing-ch" aria-label="דרכי יצירת קשר">
+        <li class="closing-phone"><a href="${telHref}" aria-label="חיוג אל ${esc(BIZ.phone)}">${icon('phone', 20)}<span class="ch-body"><span class="ch-k">טלפון</span><span class="ch-v"><bdi dir="ltr">${esc(BIZ.phone)}</bdi></span></span></a></li>
+        <li class="closing-whatsapp"><a href="${BIZ.whatsapp}" target="_blank" rel="noopener">${icon('whatsapp', 20)}<span class="ch-body"><span class="ch-k">וואטסאפ</span><span class="ch-v">שליחת הודעה</span></span></a></li>
+        <li class="closing-email"><a href="mailto:${esc(BIZ.email)}" aria-label="אימייל אל ${esc(BIZ.email)}">${icon('mail', 20)}<span class="ch-body"><span class="ch-k">אימייל</span><span class="ch-v"><bdi dir="ltr">${esc(BIZ.email)}</bdi></span></span></a></li>
       </ul>
       <span class="ch-or">או</span>
       <a class="btn closing-cta" href="/contact/">להשארת פרטים</a>
