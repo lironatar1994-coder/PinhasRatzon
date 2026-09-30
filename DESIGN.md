@@ -198,23 +198,16 @@ properties. Content sits in `.wrap` — min(1180px, 100% − 3rem), centered —
 uses one deliberate daylight photo band (`.quiet-light`) as the FAQ chapter opener: dark ink
 over a pixel-measured pale field, with its stamp motif confined to the physical left.
 
-**The Dark-Frame Rule (round 10, 2026-09-15).** The page opens dark and reads light: only
-the hero and the closing (plus header and footer) sit on the deep ground; everything between
-them is paper. This is the market's rhythm — measured 2026-09-14 across 22 Israeli lawyer
-sites, only 3 stay dark throughout — and round 8 had already adopted it on phones; round 10
-made it true at every width, so the desktop no longer opens on three consecutive black bands.
-The home page runs hero (dark) → statement (paper, daylight plans still beside the credo) →
-route (paper-2, daylight key still under the sticky heading) → portrait (paper) → FAQ
-opener (daylight) → FAQ (paper-2) → closing (dark). The two daylight stills (`.day-figure`,
-`--grade-day`) are a 4:5 column and a 4:3 window on desktop, a 21:9 letterbox on tablets,
-and a 16:9 full-bleed opener above the words on phones. Every interior page opens on the **light masthead** (`.page-hero.light-hero`, round 10):
-paper ground, ink H1, Ink-2 lead, Stone hairline base; where the page carries a portrait it
-is a complete warmly lit picture in the left 52% behind a Stone hairline, no dissolve. On
-phones the words come first and the portrait follows as a 4:3 picture between two Stone
-hairlines. The home hero is the site's one dark opener; above each interior page the header
-and the breadcrumb strip are the dark frame. The dark masthead (`.page-hero` alone: black
-ground, gold kicker, white display type, gold hairline base) remains in the stylesheet for a
-page that wants it, but no page uses it today. Long pages use `.layout-aside`: prose column plus a 16rem sticky sidebar.
+**Confirmed restoration (2026-09-30).** The client chose the September 14 design
+(`e12bf39`). Desktop again runs hero (dark, wide room photograph) → statement
+(dark, portrait and credo) → route (dark) → portrait (paper) → FAQ opener
+(daylight) → FAQ (paper-2) → closing (dark, seated portrait). Phones retain
+their listening-photo cover and daylight statement and route sections. The
+daylight stills (`.day-figure`) appear only below 861px. Interior pages again
+use the original dark masthead; Contact retains its original `contact-hero`.
+Long pages use `.layout-aside`: prose column plus a 16rem sticky sidebar.
+The text-only wordmark is restored. Search icons and ownership metadata,
+current service information, and Manager Site content support remain intact.
 
 **The quiet band.** A short cinematic photograph carrying one chapter line — about half a
 viewport on desktop and lower on phones, with the image itself `aria-hidden`. It is a
@@ -398,26 +391,13 @@ deploy when a marker or a managed image goes missing.
 
 ## Verification
 
-### Desktop portrait alignment — 2026-09-16
+### September 14 restoration — 2026-09-30
 
-At the user's request, the home opening above 1100px now shares the approved
-mobile listening portrait. No new image generation or face retouching: the
-existing JPG remains unchanged. A left-hand frame, top-biased crop and dark
-right-edge dissolve keep the face unobstructed and the text readable. The
-headline, restrained gold rule and quiet scroll link retain the mobile mood.
-The legacy wide image stays the picture fallback for the Manager Site contract;
-the listening-portrait slot now controls the visible hero at both widths.
-
-Browser checks: desktop 1101x800, default approximately 1485x795 and 1920x1080;
-face and kippah stay in frame, copy stays beside the portrait, no horizontal
-overflow. At 390x844, the source image and computed dimensions, crop, filter,
-font sizes, line heights and spacing of the six hero elements match the previous
-production version exactly. All new CSS is scoped to min-width 1101px.
-
-The rightmost portrait dissolve is already at least 90% near-black where the
-desktop reading column overlaps the picture; the rest of the column is on the
-solid dark ground. Existing text tokens remain unchanged apart from the desktop
-subtitle using the brighter on-deep token.
+The restored stylesheet matches `e12bf39`. Above 1100px the hero uses
+`hero-room.jpg`; below that width it uses `hero-listening-mobile.jpg`.
+CMS-managed slots use JPG so later client uploads remain authoritative.
+The closing returns to the seated September 14 portrait with a fresh cache
+version. See `output/design-restoration-20260930.md` for scope and backup.
 
 The system is enforced, not aspirational. The workflow after any visual change, from
 `site/`:

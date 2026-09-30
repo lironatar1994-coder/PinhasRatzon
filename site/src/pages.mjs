@@ -18,8 +18,7 @@ export const IMAGES = {
   portrait: '/assets/img/pinchas-ratzon',
   hero: '/assets/img/hero-room',
   heroPortrait: '/assets/img/hero-listening-mobile',
-  /* Round 8 (2026-09-14): a dark frame around light pages — these daylight
-     stills open the two paper bands at every width (desktop since round 10). */
+  /* September 14: daylight stills open the paper bands on phones. */
   bandPlansDay: '/assets/img/band-plans-daylight',
   bandKeyDay: '/assets/img/band-key-daylight',
   bandStampDay: '/assets/img/band-stamp-daylight',
@@ -30,15 +29,13 @@ export const IMAGES = {
   bandStatement: '/assets/img/band-statement',
 };
 
-/* The approved listening portrait now carries both layouts. Desktop gives it
-   a dedicated left-hand frame; mobile keeps its original full-height cover.
-   Keep the legacy wide JPG as the picture fallback for the CMS slot contract. */
+/* The wide room photograph opens desktop; phones use the listening cover.
+   Managed slots use JPG so edits in Manager Site remain visible. */
 const webpSource = (src, media = '') =>
   isManaged(src) ? '' : `<source${media ? ` media="${media}"` : ''} type="image/webp" srcset="${src}.webp">\n      `;
 
 const heroPhoto = (alt) => `<picture>
       ${webpSource(IMAGES.heroPortrait, '(max-width: 1100px)')}<source media="(max-width: 1100px)" type="image/jpeg" srcset="${IMAGES.heroPortrait}.jpg">
-      <source media="(min-width: 1101px)" type="image/jpeg" srcset="${IMAGES.heroPortrait}.jpg">
       ${webpSource(IMAGES.hero)}<img src="${IMAGES.hero}.jpg" alt="${esc(alt)}" width="1920" height="1084" fetchpriority="high" decoding="async">
     </picture>`;
 
@@ -49,8 +46,7 @@ const portraitPhoto = (alt) => `<picture>
       ${webpSource(IMAGES.portrait)}<img src="${IMAGES.portrait}.jpg" alt="${esc(alt)}" width="980" height="1225" loading="lazy" decoding="async">
     </picture>`;
 
-/* A daylight still that opens a paper band: full-bleed above the words on
-   phones, a column beside them on desktop. */
+/* A daylight still that opens a paper band on phones. */
 const dayFigure = (src) => `<div class="day-figure" aria-hidden="true">
     <picture>
       ${webpSource(src)}<img src="${src}.jpg" alt="" width="1672" height="941" loading="lazy" decoding="async">
@@ -196,25 +192,30 @@ export function home() {
 </ul>
 
 <section class="statement" id="statement">
+  ${dayFigure(IMAGES.bandPlansDay)}
+  <div class="statement-figure">
+    ${photo(IMAGES.bandStatement, { alt: '', w: 1920, h: 1072 })}
+  </div>
+  <div class="statement-portrait" aria-hidden="true">
+    <picture>
+      <source srcset="/assets/img/closing-portrait-left.webp" type="image/webp">
+      <img src="/assets/img/closing-portrait-left.jpg" alt="" width="1000" height="908" loading="lazy" decoding="async">
+    </picture>
+  </div>
   <div class="wrap statement-inner">
-    ${dayFigure(IMAGES.bandPlansDay)}
-    <div class="statement-copy">
       <p class="pull" data-manager-text="content.statement.title">עסקה במקרקעין נגמרת ברישום.<br>לא בחתימה.</p>
       <div class="statement-body">
         <p data-manager-text="content.statement.paragraph1">בין החתימה לרישום מתגלים הפרטים שמשנים עסקה שלמה: הצמדה שלא נרשמה, חריגת בנייה שלא נבדקה, או חבות מס שלא תומחרה מראש.</p>
         <p data-manager-text="content.statement.paragraph2">עוד לפני שמתחייבים, אני בוחן את התמונה המלאה — הזכויות בנכס, תנאי ההסכם, המס והרישום — והכול נשאר באחריות אחת לאורך כל הדרך.</p>
         <p data-manager-text="content.statement.paragraph3">המטרה פשוטה: שלא תחתמו מתוך תקווה שהכול יסתדר — אלא מתוך הבנה ברורה של העסקה כולה.</p>
       </div>
-    </div>
   </div>
 </section>
 
 <section class="route" id="practice-areas">
+  ${dayFigure(IMAGES.bandKeyDay)}
   <div class="wrap">
-    <div class="route-head">
       ${secHead('איך אפשר לעזור', 'איפה אתם נמצאים כרגע?')}
-      ${dayFigure(IMAGES.bandKeyDay)}
-    </div>
     ${routeList()}
   </div>
 </section>
@@ -259,7 +260,7 @@ ${closing({ h2: 'שיחה אחת עושה סדר' })}`;
     shareDescription: `ניסיון של ${BIZ.yearsExperience} שנים במקרקעין, מיסוי, צוואות וירושות — ${BIZ.city} והמרכז`,
     body,
     overHero: true,
-    preloadImage: IMAGES.heroPortrait,
+    preloadImage: IMAGES.hero,
     preloadPortrait: IMAGES.heroPortrait,
     schema: [
       { '@type': 'WebSite', '@id': url('/#website'), url: url('/'), name: BIZ.name, inLanguage: 'he-IL' },
@@ -276,7 +277,7 @@ export function practiceIndex() {
     { label: 'תחומי עיסוק', href: '/practice-areas/' },
   ];
   const body = `
-<section class="page-hero has-figure light-hero">
+<section class="page-hero has-figure">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
     ${photo('/assets/img/practice-hero', { alt: '', w: 1000, h: 908, priority: true })}
   </div>
@@ -353,7 +354,7 @@ export function practicePage(p) {
   }).join('\n    ');
 
   const body = `
-<section class="page-hero has-figure light-hero">
+<section class="page-hero has-figure">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
     ${photo('/assets/img/practice-hero', { alt: '', w: 1000, h: 908, priority: true })}
   </div>
@@ -440,7 +441,7 @@ export function about() {
   ];
 
   const body = `
-<section class="page-hero has-figure light-hero">
+<section class="page-hero has-figure">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
     ${photo('/assets/img/about-hero', { alt: '', w: 1000, h: 973, priority: true })}
   </div>
@@ -544,7 +545,7 @@ export function faqPage() {
   const all = PRACTICE.flatMap((p) => p.faqs);
 
   const body = `
-<section class="page-hero has-figure light-hero">
+<section class="page-hero has-figure">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
     ${photo('/assets/img/contact-hero', { alt: '', w: 1000, h: 908, priority: true })}
   </div>
@@ -555,9 +556,8 @@ export function faqPage() {
 </section>
 
 <div class="section">
-  <div class="wrap layout-aside">
-    <div class="faq-groups">
-    ${PRACTICE.map((p) => `<section class="faq-group" id="faq-${p.slug}">
+  <div class="wrap narrow">
+    ${PRACTICE.map((p) => `<section class="faq-group">
       <h2><a href="/practice-areas/${p.slug}/">${esc(p.nav)}${icon('arrow', 18)}</a></h2>
       <div class="faq-list">
         ${p.faqs.map((f) => `<details class="faq-item">
@@ -566,16 +566,6 @@ export function faqPage() {
         </details>`).join('\n        ')}
       </div>
     </section>`).join('\n    ')}
-    </div>
-
-    <aside class="side faq-side" aria-label="ניווט לפי תחום">
-      <nav class="side-block" id="faqNav">
-        <p class="label">לפי תחום</p>
-        <ul class="side-links">
-          ${PRACTICE.map((p) => `<li><a href="#faq-${p.slug}">${esc(p.nav)}</a></li>`).join('\n          ')}
-        </ul>
-      </nav>
-    </aside>
   </div>
 </div>
 
@@ -600,7 +590,7 @@ export function contact() {
   ];
 
   const body = `
-<section class="page-hero has-figure light-hero">
+<section class="page-hero has-figure contact-hero">
   <div class="page-hero-figure figure-pinhas" aria-hidden="true">
     ${photo('/assets/img/contact-hero', { alt: `${BIZ.shortName}`, w: 1000, h: 908, priority: true })}
   </div>
@@ -645,8 +635,6 @@ export function contact() {
       <p class="fineprint">${esc(DISCLAIMER)}</p>
     </div>
     <div class="contact-form">
-      <p class="label">השארת פרטים</p>
-      <h2 class="form-h">כמה פרטים — ואני חוזר אליכם.</h2>
       ${contactForm({ id: 'c' })}
     </div>
   </div>
@@ -674,7 +662,7 @@ export function accessibility() {
   ];
 
   const body = `
-<section class="page-hero light-hero">
+<section class="page-hero">
   <div class="wrap">
     <p class="label">נגישות</p>
     <h1>הצהרת נגישות</h1>

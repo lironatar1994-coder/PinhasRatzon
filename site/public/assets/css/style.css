@@ -119,7 +119,7 @@ a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: .35em; text-decoration-color: var(--accent-lt); }
 
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-.section-dark :focus-visible, .closing :focus-visible,
+.section-dark :focus-visible, .route :focus-visible, .closing :focus-visible,
 .site-footer :focus-visible, .site-header :focus-visible, .hero :focus-visible,
 .quiet :focus-visible, .page-hero :focus-visible {
   outline-color: var(--accent-lt);
@@ -200,9 +200,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 }
 .header-inner { display: flex; align-items: center; gap: 2rem; min-height: 88px; }
 
-.wordmark { display: flex; align-items: center; gap: .4rem; flex-shrink: 0; color: var(--on-deep); margin-inline-end: auto; line-height: 1.3; }
-.wm-symbol { width: 72px; height: 72px; flex: none; object-fit: contain; }
-.wm-text { display: flex; flex-direction: column; }
+.wordmark { display: flex; flex-direction: column; color: var(--on-deep); margin-inline-end: auto; line-height: 1.3; }
 .wordmark:hover { text-decoration: none; }
 .wm-name { font-family: var(--display); font-size: 1.4rem; font-weight: 600; }
 .wm-role { font-size: .85rem; font-weight: 400; color: var(--accent-lt); }
@@ -223,16 +221,6 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .nav-tel:hover { background: var(--accent-lt); color: var(--deep); text-decoration: none; }
 
 .has-sub { position: relative; }
-/* A small drawn chevron says "there is more" — a border, not a glyph, in
-   the link's own colour; it turns over while the panel is open. */
-.has-sub > a { display: inline-flex; align-items: center; gap: .5rem; }
-.has-sub > a::after {
-  content: ''; width: 6px; height: 6px; flex: none;
-  border-inline-end: 1.5px solid currentColor; border-block-end: 1.5px solid currentColor;
-  transform: translateY(-2px) rotate(45deg); opacity: .75;
-  transition: transform .25s var(--ease);
-}
-.has-sub:hover > a::after, .has-sub:focus-within > a::after { transform: translateY(1px) rotate(225deg); }
 .sub-toggle { display: none; }
 .sub {
   position: absolute; inset-block-start: calc(100% + 1.55rem); inset-inline-start: 0;
@@ -343,8 +331,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .hero-facts strong { display: block; font-family: var(--display); font-weight: 600; font-size: 1.15rem; line-height: 1.2; color: #dcc186; }
 .hero-facts span { display: block; margin-block-start: .2rem; font-size: .8rem; color: var(--on-deep-2); }
 /* The daylight still that opens a paper band on phones. Off until 860px. */
-.day-figure { overflow: hidden; }
-.day-figure img { width: 100%; height: 100%; object-fit: cover; filter: var(--grade-day); }
+.day-figure { display: none; }
 /* One word in champagne — the same photo-safe gold as the eyebrow (display
    size needs 3:1; #dcc186 measures 5.4:1 against the wall's brightest pixels). */
 .hero h1 .gold-word { color: #dcc186; }
@@ -441,75 +428,84 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
    "Where are you standing?" — routing by the visitor's own situation rather
    than by the practice-area taxonomy. The numbered journey, minus urgency. */
 
-/* Round 10: the market's rhythm — dark frame, light body — at every width,
-   not only on phones. The router sits on the off-white paper, and the
-   daylight key still keeps the sticky heading company on desktop. */
-.route { padding-block: var(--gap-sec); background: var(--paper-2); color: var(--ink); }
-.route .label { color: var(--accent); }
-.route h2 { color: var(--ink); }
-.route .sec-sub { color: var(--muted); }
-.route-list { border-block-start: 1px solid var(--stone); }
-.route-list > li { border-block-end: 1px solid var(--stone); }
+.route { padding-block: var(--gap-sec); background: var(--deep); color: var(--on-deep); }
+.route .label { color: var(--accent-lt); }
+.route h2 { color: #fff; }
+.route .sec-sub { color: var(--on-deep-2); }
+.route-list { border-block-start: 1px solid var(--line-deep); }
+.route-list > li { border-block-end: 1px solid var(--line-deep); }
 .route-list a {
   display: grid; grid-template-columns: 5.5rem minmax(0, 1fr) 2.5rem;
   align-items: center; gap: 1.75rem;
   padding-block: clamp(1.6rem, 1.1rem + 1.2vw, 2.4rem);
-  color: var(--ink); transition: transform .35s var(--ease);
+  color: var(--on-deep); transition: transform .35s var(--ease);
 }
 .route-list a:hover { text-decoration: none; transform: translateX(-.7rem); }
 /* Touch feedback — a breath of gold while the finger is down. */
-.route-list a:active { background: rgba(134, 100, 31, .07); }
+.route-list a:active { background: rgba(193, 155, 69, .08); }
 .route-n {
   font-family: var(--display); font-weight: 300;
   font-size: clamp(2.1rem, 1.6rem + 1.6vw, 3.1rem);
-  line-height: 1; color: var(--accent); opacity: .8;
+  line-height: 1; color: var(--accent-lt); opacity: .65;
   transition: opacity .3s var(--ease);
 }
 .route-list a:hover .route-n { opacity: 1; }
 .route-q { display: block; font-family: var(--display); font-weight: 500; font-size: clamp(1.35rem, 1.15rem + .9vw, 1.8rem); line-height: 1.35; margin-block-end: .5rem; transition: color .3s var(--ease); }
-.route-list a:hover .route-q { color: var(--accent); }
-.route-a { display: block; color: var(--muted); font-size: 1.1rem; font-weight: 300; line-height: 1.9; max-width: 46rem; }
-.route-arrow { color: var(--accent); justify-self: center; transition: color .3s var(--ease), transform .35s var(--ease); }
-.route-list a:hover .route-arrow { color: var(--accent); transform: translateX(-6px); }
-/* The key still under the heading: a 4:3 window, the keys anchored left. */
-.route-head .day-figure { aspect-ratio: 4 / 3; margin-block-start: 2.4rem; }
-.route-head .day-figure img { object-position: 22% 55%; }
-
-/* Desktop: the heading keeps the rows company. Kicker and H2 sit at the
-   reading start and stay put while the six situations scroll past beside
-   them. */
-@media (min-width: 1001px) {
-  .route .wrap { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(2.5rem, 1rem + 4vw, 6rem); align-items: start; }
-  .route-head { position: sticky; inset-block-start: calc(88px + 2.5rem); }
-  .route .sec-head { margin-block-end: 0; }
-  .route-list { margin-block-start: .4rem; }
-}
+.route-list a:hover .route-q { color: var(--accent-lt); }
+.route-a { display: block; color: var(--on-deep-2); font-size: 1.1rem; font-weight: 300; line-height: 1.9; max-width: 46rem; }
+.route-arrow { color: var(--on-deep-2); justify-self: center; transition: color .3s var(--ease), transform .35s var(--ease); }
+.route-list a:hover .route-arrow { color: var(--accent-lt); transform: translateX(-6px); }
 
 /* ------------------------------------------------------------ statement
-   The site's credo. Round 10 moved it onto paper at every width — the
-   home page now opens dark and reads light, the way the market does — with
-   the daylight plans still beside the words instead of a veiled night
-   frame under them. */
+   The one section that lives ON a photograph — the site's credo, set over
+   the near-black stone still life the way the canon sets its "אני מאמין".
+   One per site, and every word is measured against the rendered pixels. */
 
-.statement { background: var(--paper); color: var(--ink); padding-block: var(--gap-sec); }
-.statement-inner {
-  display: grid; grid-template-columns: minmax(0, 52fr) minmax(0, 48fr);
-  gap: clamp(2.5rem, 1.5rem + 4vw, 6rem); align-items: center;
+.statement {
+  position: relative; isolation: isolate; overflow: hidden;
+  background: var(--deep); color: var(--on-deep);
+  padding-block: calc(var(--gap-sec) * 1.2);
 }
-/* The photograph: window light and rolled plans, the plans kept in frame. */
-.statement .day-figure { order: 2; aspect-ratio: 4 / 5; max-height: 40rem; }
-.statement .day-figure img { object-position: 72% 50%; }
+.statement-figure { position: absolute; inset: 0; z-index: 0; }
+.statement-figure img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 0% 30%;
+  filter: var(--grade);
+}
+/* A uniform veil, not a gradient — the frame is near-black everywhere and
+   the text column is centered, so the whole surface carries it. */
+.statement-figure::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: rgba(14, 12, 9, .5);
+}
+.statement-inner { position: relative; z-index: 2; max-width: var(--narrow); }
+/* Desktop: the credo joins the split language — the window portrait on the
+   left at full richness, every word on the solid token. The veiled object
+   still life stays as the phone background, where the split has no room. */
+.statement-portrait { display: none; }
+@media (min-width: 861px) {
+  .statement-figure { display: none; }
+  .statement-portrait { display: block; position: absolute; inset-block: 7% 0; left: 0; width: 44%; z-index: 0; }
+  .statement-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 35% 20%; }
+  .statement-portrait::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background:
+      linear-gradient(to left, var(--deep) 0%, rgba(14, 12, 9, 0) 18%),
+      linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 10%);
+  }
+  .statement-inner { max-width: none; display: grid; grid-template-columns: minmax(0, 50fr) minmax(0, 50fr); }
+  .statement-inner > * { grid-column: 1; }
+}
 .pull {
   font-family: var(--display); font-weight: 600;
   font-size: clamp(1.7rem, 1.15rem + 2.4vw, 3rem);
-  line-height: 1.35; color: var(--ink); margin-block-end: 2.6rem;
+  line-height: 1.35; color: #fff; margin-block-end: 2.6rem;
 }
 .pull::before {
   content: ''; display: block; width: 5.5rem; height: 3px;
   background: var(--accent-lt); margin-block-end: 1.6rem;
 }
 .statement-body { display: grid; gap: 1.5rem; max-width: 40rem; }
-.statement-body p { color: var(--ink-2); }
+.statement-body p { color: var(--on-deep); }
 
 /* ------------------------------------------------------------ index list */
 
@@ -589,7 +585,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   border-block-end: 1px solid var(--gold-line);
 }
 .page-hero .label { color: var(--accent-lt); }
-.page-hero h1 { max-width: 18em; color: #fff; font-size: clamp(2.2rem, 1.15rem + 3.1vw, 3.6rem); }
+.page-hero h1 { max-width: 18em; color: #fff; }
 .page-hero .lead { max-width: 44rem; margin-block-start: 1.6rem; color: var(--on-deep-2); }
 
 /* ------------------------------------------------------------ page figure
@@ -628,19 +624,18 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .page-hero.has-figure .wrap { display: grid; grid-template-columns: minmax(0, 46fr) minmax(0, 54fr); }
 .page-hero.has-figure .wrap > * { grid-column: 1; }
 
-/* The light masthead (`.light-hero`), round 10: every interior page opens
-   on paper — the home hero is the site's one dark opener, and the header
-   plus crumbs are the dark frame above each interior page. The portrait
-   is a complete, warmly lit picture beside the words instead of being
-   swallowed by the interior black. `.page-hero` without the class is the
-   dark masthead, kept for any page that wants it. */
-.light-hero { background: var(--paper); color: var(--ink); border-block-end-color: var(--stone); }
-.light-hero h1 { color: var(--ink); }
-.light-hero .lead { color: var(--ink-2); }
-.light-hero .label { color: var(--accent); }
-.light-hero .page-hero-figure { border-inline-start: 1px solid var(--stone); }
-.light-hero .page-hero-figure img { filter: var(--grade-portrait); }
-.light-hero .page-hero-figure::after {
+/* Contact is the point at which the site opens up. On wide screens the
+   photograph remains a complete, warmly lit portrait rather than being
+   swallowed by the interior-page black; the response area becomes a calm
+   paper field, exactly as it already reads once the layout stacks on a phone.
+   This is a page-specific variation — FAQ and service pages retain their
+   dark masthead. */
+.contact-hero { background: var(--paper); color: var(--ink); border-block-end-color: var(--stone); }
+.contact-hero h1 { color: var(--ink); }
+.contact-hero .lead { color: var(--ink-2); }
+.contact-hero .page-hero-figure { border-inline-start: 1px solid var(--stone); }
+.contact-hero .page-hero-figure img { filter: var(--grade-portrait); }
+.contact-hero .page-hero-figure::after {
   background: none;
 }
 
@@ -716,9 +711,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 /* When the stamp band IS the FAQ's header, the list follows it closely —
    a full section gap after a headline band reads as two strangers. */
 .quiet + .faq { padding-block-start: calc(var(--gap-sec) * .55); }
-.faq-group { margin-block-end: 3.5rem; scroll-margin-block-start: 7.5rem; }
-.faq-group:last-child { margin-block-end: 0; }
-.side-links a[aria-current] { color: var(--accent); font-weight: 500; }
+.faq-group { margin-block-end: 3.5rem; }
 .faq-group > h2 { font-size: 1.5rem; margin-block-end: 1rem; }
 /* The group heading IS a link to its practice page — say so: gold arrow,
    nudge on hover, the textlink language. */
@@ -892,7 +885,6 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .contact-ch .ch-k { color: var(--muted); }
 .contact-ch a:hover { color: var(--accent); text-decoration: none; }
 
-.form-h { font-size: 1.5rem; line-height: 1.35; margin-block-end: 1.8rem; max-width: 20em; }
 .contact-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(2.5rem, 1.5rem + 4vw, 6rem); align-items: start; }
 .form { display: grid; gap: 1.5rem; }
 .field { display: grid; gap: .5rem; }
@@ -1022,30 +1014,6 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
 
 /* ------------------------------------------------------------ responsive */
 
-/* Desktop shares the approved mobile portrait and warm, intimate atmosphere.
-   Keep every adjustment above the existing mobile breakpoint. The portrait
-   stays unretouched; the right edge dissolves before the reading column. */
-@media (min-width: 1101px) {
-  .hero {
-    min-height: 640px; height: calc(100svh - 88px); max-height: 900px;
-    padding-block: 4rem;
-  }
-  .hero-figure { right: auto; width: 58%; max-width: 1080px; overflow: hidden; }
-  .hero-figure img { object-position: 50% 12%; filter: none; }
-  .hero-figure::after {
-    background:
-      linear-gradient(to left, var(--deep) 0%, rgba(14, 12, 9, .92) 7%, rgba(14, 12, 9, .35) 25%, transparent 44%),
-      linear-gradient(to top, var(--deep) 0%, transparent 25%);
-  }
-  .hero-col { width: 46%; max-width: 36rem; }
-  .hero h1 { font-size: clamp(3.3rem, 4.1vw, 4.8rem); line-height: 1.15; }
-  .hero-kicker { font-size: 1rem; margin-block-end: 1.5rem; }
-  .hero-rule { width: 4rem; height: 2px; margin-block-start: 1.7rem; }
-  .hero-sub { max-width: 30ch; color: var(--on-deep); font-size: 1.2rem; line-height: 1.9; }
-  .hero-more { display: inline-flex; margin-block-start: 1.6rem; }
-  .hero-cue { display: none; }
-}
-
 @media (max-width: 1100px) {
   /* Below the split the headline stops sharing the frame with the photograph.
      Type sits on the dark ground, the picture follows it full-bleed. */
@@ -1077,11 +1045,6 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
 
 @media (max-width: 1000px) {
   .layout-aside { grid-template-columns: 1fr; }
-  .faq-side { display: none; }
-  /* Tablets: the route stacks, so the key still becomes a short letterbox
-     under the heading rather than a 4:3 window the width of the page. */
-  .route-head .day-figure { aspect-ratio: 21 / 9; max-height: 22rem; }
-  .route-head .day-figure img { object-position: 22% 50%; }
   .side { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
   .contact-grid { grid-template-columns: 1fr; }
   .principles { grid-template-columns: 1fr; gap: 2.2rem; }
@@ -1090,7 +1053,6 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
 @media (max-width: 860px) {
   .wrap, .wrap.narrow { width: calc(100% - 2.5rem); }
   .header-inner { min-height: 72px; gap: 1.1rem; }
-  .wm-symbol { width: 56px; height: 56px; }
   .burger { display: flex; }
   /* Naked glyphs, no chrome: boxed icons put three competing shapes in the
      most-seen strip of the site. Bare champagne icons beside the burger
@@ -1146,8 +1108,6 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .nav-wa .ic { color: var(--accent-lt); }
   .drawer-note { display: block; margin-block-start: 1.6rem; color: var(--on-deep-2); font-size: .9rem; }
   .has-sub { display: grid; grid-template-columns: 1fr auto; align-items: center; }
-  .has-sub > a { display: flex; }
-  .has-sub > a::after { content: none; }
   .sub-toggle {
     display: grid; place-items: center; width: 44px; height: 44px;
     background: none; border: 0; color: var(--accent-lt); cursor: pointer;
@@ -1173,6 +1133,7 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .quiet-figure::after {
     background: linear-gradient(to left, rgba(14, 12, 9, .8) 0%, rgba(14, 12, 9, .58) 55%, rgba(14, 12, 9, .52) 100%);
   }
+  .statement-figure::after { background: rgba(14, 12, 9, .64); }
   /* .80, not .74 — solved numerically against BOTH closing photographs
      rather than eyeballed. At .74 the round-8 dusk frame put its sunset
      glow under the sub line (3.96:1) and the round-9 blue-hour frame puts
@@ -1203,18 +1164,18 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
      contrast from the token. */
   .page-hero.has-figure { display: flex; flex-direction: column; padding-block: 2.8rem 0; }
   .page-hero.has-figure .wrap { display: block; }
-  /* The light masthead stays light on phones too (round 10): the header
-     and the crumbs are the dark frame, then paper. The portrait follows
-     the words as a plain picture between two stone hairlines — no
-     dissolve, because there is no dark ground to dissolve into. */
-  .light-hero { padding-block-end: 0; border-block-end: 0; }
-  .light-hero .page-hero-figure { border-block: 1px solid var(--stone); margin-block-start: 2.4rem; }
+  /* Preserve the established phone composition: words on the deep ground,
+     then the unboxed portrait. The daylight split is desktop-only, where
+     the two columns need a clear visual handoff. */
+  .contact-hero { background: var(--deep); color: var(--on-deep); border-block-end-color: var(--gold-line); }
+  .contact-hero h1 { color: #fff; }
+  .contact-hero .lead { color: var(--on-deep-2); }
   .page-hero-figure {
     position: relative; inset-block: auto; left: auto; width: 100%; z-index: 0;
     order: 2; margin-block-start: 2.2rem;
     aspect-ratio: 2 / 1;
   }
-  .light-hero .page-hero-figure { border-inline-start: 0; aspect-ratio: 4 / 3; }
+  .contact-hero .page-hero-figure { border-inline-start: 0; }
   .page-hero-figure img { object-position: 50% 45%; }
   /* A glimpse, not a poster: the photograph surfaces out of the dark and
      sinks back into it, so the opener still ends on the solid ground and
@@ -1228,7 +1189,9 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .page-hero-figure.figure-pinhas::after {
     background: linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 16%, rgba(14, 12, 9, 0) 80%, var(--deep) 100%);
   }
-  .light-hero .page-hero-figure::after { background: none; }
+  .contact-hero .page-hero-figure::after {
+    background: linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 16%, rgba(14, 12, 9, 0) 80%, var(--deep) 100%);
+  }
 
   .hero { height: calc(100svh - 72px); }
   /* The fixed accessibility button lives in the bottom start corner; the
@@ -1242,18 +1205,24 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
      3 of 22 stay dark throughout. So on phones the two substance bands —
      the credo and the route — sit on paper, each opened by a daylight
      still, while the hero and the closing keep the black frame. */
-  /* Phones: the daylight still opens each paper band full-bleed above the
-     words (it bleeds through the wrap's 1.25rem gutters), 16:9. */
-  .statement, .route { padding-block: 0 3rem; }
-  .statement-inner { grid-template-columns: 1fr; gap: 0; }
-  .statement .day-figure { order: 0; }
-  .day-figure, .statement .day-figure, .route-head .day-figure {
-    aspect-ratio: 16 / 9; max-height: none; margin: 0 -1.25rem 2.4rem;
-  }
-  .statement .day-figure img { object-position: 60% 50%; }
-  .route-head { display: flex; flex-direction: column; }
-  .route-head .day-figure { order: -1; margin-block-start: 0; }
-  .route-head .day-figure img { object-position: 50% 50%; }
+  .day-figure { display: block; aspect-ratio: 16 / 9; overflow: hidden; margin-block-end: 2.4rem; }
+  .day-figure img { width: 100%; height: 100%; object-fit: cover; filter: var(--grade-day); }
+  .statement { background: var(--paper); color: var(--ink); padding-block: 0 3rem; }
+  .statement-figure { display: none; }
+  .statement .pull { color: var(--ink); }
+  .statement-body p { color: var(--ink-2); }
+  .route { background: var(--paper-2); color: var(--ink); padding-block: 0 var(--gap-sec); }
+  .route .label { color: var(--accent); }
+  .route h2 { color: var(--ink); }
+  .route .sec-sub { color: var(--muted); }
+  .route :focus-visible { outline-color: var(--accent); }
+  .route-list { border-block-start-color: var(--stone); }
+  .route-list > li { border-block-end-color: var(--stone); }
+  .route-list a { color: var(--ink); }
+  .route-list a:active { background: rgba(134, 100, 31, .07); }
+  .route-n { color: var(--accent); opacity: 1; }
+  .route-a { color: var(--muted); }
+  .route-arrow { color: var(--accent); }
   /* The daylight stamp keeps its empty desk on the image's left; anchor the
      phone crop there so the line sits on plain wood under the paper veil. */
   .quiet-light .quiet-figure img { object-position: 0% 50%; }
