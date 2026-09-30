@@ -174,16 +174,14 @@ export function home() {
   </div>
   <div class="wrap hero-inner">
     <div class="hero-col">
-      <h1>
-        <span class="hero-kicker">מקרקעין, מיסוי, צוואות וירושות · ${esc(BIZ.city)}</span>
-        <span class="hero-line">עו״ד פנחס רצון</span>
-      </h1>
-      <div class="hero-rule" aria-hidden="true"></div>
-      <p class="hero-sub" data-manager-text="hero.subtitle">אני מלווה קונים ומוכרים לאורך העסקה, מהבדיקות לפני החתימה ועד לרישום הזכויות. אפשר לפנות אליי גם בענייני מיסוי, צוואות וירושות.</p>
-      <a class="hero-more" href="#statement">איך אני עובד ${icon('arrowDown', 18)}</a>
+      <h1><span class="hero-line">עו״ד פנחס רצון</span></h1>
+      <p class="hero-services">מקרקעין, מיסוי, צוואות וירושות</p>
+      <p class="hero-sub" data-manager-text="hero.subtitle">ליווי אישי בקנייה ובמכירה של נכס,
+מהבדיקות לפני החתימה ועד לרישום הזכויות.</p>
+      <p class="hero-location">${esc(BIZ.city)} והמרכז</p>
+      <a class="hero-more" href="#practice-areas">לתחומי העיסוק ${icon('arrow', 18)}</a>
     </div>
   </div>
-  <a class="hero-cue" href="#statement" aria-label="המשך לתוכן">${icon('arrowDown', 22)}</a>
 </section>
 <ul class="hero-facts" aria-label="על המשרד">
   <li><strong>${esc(BIZ.founded)}</strong><span>משרד עצמאי מאז</span></li>

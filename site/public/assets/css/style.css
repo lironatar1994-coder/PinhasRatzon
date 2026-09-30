@@ -292,32 +292,16 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 
 .hero-inner { position: relative; z-index: 2; }
 .hero-col { max-width: min(38rem, calc(100vw - min(48vw, 38rem) - 6rem)); }
-/* Champagne gold, not --accent-lt: this line sits on the photograph itself,
-   and the standard gold measures 3.63:1 against the wall's brightest pixels.
-   #dcc186 measures 5.41:1 worst-case — verified against the image's pixels,
-   not the DOM (the pixel sweep in the build notes). */
-/* The kicker lives INSIDE the h1: the practice keywords stay in the page's
-   one heading for search, while the eye reads a small gold line over a
-   large white promise. Trailing dash like every kicker. */
-.hero-kicker {
-  display: flex; align-items: center; gap: .8rem;
-  font-size: 1.05rem; font-weight: 500; color: #dcc186; line-height: 1.5;
-  margin-block-end: 1.4rem;
-}
-.hero-kicker::after { content: ''; display: block; flex: none; width: 2.6rem; height: 2px; background: currentColor; }
+.hero .hero-col h1 { color: #fff; font-size: clamp(2.6rem, 4.4vw, 4.1rem); line-height: 1.18; font-weight: 600; }
 .hero-line { display: block; }
-.hero h1 { color: #fff; }
-/* The name sits in the sub line as a signature — white and weighted — instead
-   of repeating the masthead a hand's width below it. */
-.hero-sub strong { font-weight: 500; color: var(--on-deep); }
-/* Phones only: a quiet "how I work" that scrolls to the credo. Not a
-   contact ask — the hero stays free of those by the restraint rule. */
+.hero-services { margin-block-start: .65rem; color: #dcc186; font-size: clamp(1.15rem, 1.8vw, 1.85rem); line-height: 1.5; font-weight: 500; }
+.hero-location { margin-block-start: 2rem; color: var(--on-deep); font-size: 1.15rem; line-height: 1.6; }
 .hero-more {
-  display: none; align-items: center; gap: .5rem; min-height: 44px;
-  margin-block-start: 1.2rem; color: var(--on-deep-2); font-size: .98rem; font-weight: 400;
+  display: inline-flex; align-items: center; gap: .65rem; min-height: 44px;
+  margin-block-start: 2rem; color: #dcc186; font-size: 1.05rem; font-weight: 400;
   transition: color .25s var(--ease);
 }
-.hero-more:hover { color: #fff; text-decoration: none; }
+.hero-more:hover { color: #fff; text-decoration: underline; text-underline-offset: .25em; }
 /* Three facts as a hairline strip under the phone cover — the old eyebrow's
    content, moved where a fact strip belongs. Hidden on wide screens. */
 .hero-facts {
@@ -343,7 +327,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .hero-sub {
   margin-block-start: 2rem;
   font-size: clamp(1.2rem, 1.08rem + .4vw, 1.35rem); font-weight: 300;
-  color: var(--on-deep-2); line-height: 1.9;
+  color: var(--on-deep); line-height: 1.75;
 }
 .hero-cue {
   position: absolute; inset-block-end: 2rem; inset-inline-start: 50%;
@@ -1377,3 +1361,14 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   * { animation: none !important; }
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .8em; }
 }
+
+/* Approved hero mockup: keep the existing mobile photograph and clear text. */
+@media (max-width: 860px) {
+  .hero .hero-col h1 { font-size: clamp(1.95rem, 8vw, 2.55rem); }
+  .hero .hero-services { font-size: 1rem; line-height: 1.5; margin-block-start: .5rem; }
+  .hero .hero-sub { margin-block-start: 1rem; max-width: 30ch; font-size: 1.06rem; line-height: 1.65; }
+  .hero .hero-location { margin-block-start: .85rem; font-size: 1rem; }
+  .hero .hero-more { margin-block-start: .65rem; font-size: 1rem; }
+}
+
+.hero .hero-sub { white-space: pre-line; }
