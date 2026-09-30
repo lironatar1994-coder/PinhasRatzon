@@ -207,14 +207,7 @@ export function closing({ h2 }) {
   return `
 <section class="closing">
   <div class="closing-figure" aria-hidden="true">
-    <!-- All three closing photographs are CMS-managed JPG slots: no WebP. -->
-    <picture>
-      <source media="(max-width: 860px)" srcset="/assets/img/closing-window-mobile.jpg" type="image/jpeg">
-      <img src="/assets/img/band-chairs.jpg" alt="" width="1920" height="1072" loading="lazy" decoding="async">
-    </picture>
-  </div>
-  <div class="closing-portrait" aria-hidden="true">
-    <img src="/assets/img/closing-listen.jpg?v=restored-20260930" alt="" width="1000" height="879" loading="lazy" decoding="async">
+    <img src="/assets/img/round7/contact-consultation-desktop-v2.png" alt="" width="1672" height="941" loading="lazy" decoding="async">
   </div>
   <div class="wrap closing-grid">
     <div class="closing-copy">
