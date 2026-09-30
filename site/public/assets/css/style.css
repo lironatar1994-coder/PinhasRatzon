@@ -274,10 +274,10 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 
 .hero {
   position: relative; isolation: isolate;
-  min-height: min(88vh, 880px);
+  min-height: min(80svh, 780px);
   display: flex; flex-direction: column; justify-content: center;
   background: var(--deep); color: var(--on-deep);
-  padding-block: 6rem; overflow: hidden;
+  padding-block: 5rem; overflow: hidden;
 }
 
 .hero-figure { position: absolute; inset: 0; z-index: 0; }
@@ -292,28 +292,18 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 
 .hero-inner { position: relative; z-index: 2; }
 .hero-col { max-width: min(38rem, calc(100vw - min(48vw, 38rem) - 6rem)); }
-.hero .hero-col h1 { color: #fff; font-size: clamp(2.6rem, 4.4vw, 4.1rem); line-height: 1.18; font-weight: 600; }
+.hero .hero-col h1 { color: #fff; font-size: clamp(2.8rem, 4.4vw, 4.25rem); line-height: 1.18; font-weight: 600; }
 .hero-line { display: block; }
-.hero-services { margin-block-start: .65rem; color: #dcc186; font-size: clamp(1.15rem, 1.8vw, 1.85rem); line-height: 1.5; font-weight: 500; }
-.hero-location { margin-block-start: 2rem; color: var(--on-deep); font-size: 1.15rem; line-height: 1.6; }
+.hero-services { margin-block-start: .75rem; color: #dcc186; font-size: clamp(1.1rem, 1.5vw, 1.35rem); line-height: 1.6; font-weight: 500; }
+.hero-location { margin-block-start: 1rem; color: var(--on-deep-2); font-size: 1rem; line-height: 1.6; }
 .hero-more {
-  display: inline-flex; align-items: center; gap: .65rem; min-height: 44px;
-  margin-block-start: 2rem; color: #dcc186; font-size: 1.05rem; font-weight: 400;
+  display: inline-flex; align-items: center; gap: 1rem; min-height: 48px;
+  margin-block-start: 1.35rem; padding-block: .25rem;
+  border-block-end: 1px solid #dcc186;
+  color: #dcc186; font-size: 1.1rem; font-weight: 500;
   transition: color .25s var(--ease);
 }
-.hero-more:hover { color: #fff; text-decoration: underline; text-underline-offset: .25em; }
-/* Three facts as a hairline strip under the phone cover — the old eyebrow's
-   content, moved where a fact strip belongs. Hidden on wide screens. */
-.hero-facts {
-  display: none; list-style: none; margin: 0; padding: 0;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  background: var(--deep); color: var(--on-deep);
-  border-block-start: 1px solid var(--gold-line);
-}
-.hero-facts li { padding: .95rem .4rem; text-align: center; }
-.hero-facts li + li { border-inline-end: 1px solid var(--gold-line); }
-.hero-facts strong { display: block; font-family: var(--display); font-weight: 600; font-size: 1.15rem; line-height: 1.2; color: #dcc186; }
-.hero-facts span { display: block; margin-block-start: .2rem; font-size: .8rem; color: var(--on-deep-2); }
+.hero-more:hover { color: #fff; border-block-end-color: #fff; text-decoration: none; }
 /* The daylight still that opens a paper band on phones. Off until 860px. */
 .day-figure { display: none; }
 /* One word in champagne — the same photo-safe gold as the eyebrow (display
@@ -325,9 +315,9 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
    beside them — the hero speaks one gold. */
 .hero-rule { width: 5.5rem; height: 3px; background: #dcc186; margin-block-start: 2rem; }
 .hero-sub {
-  margin-block-start: 2rem;
-  font-size: clamp(1.2rem, 1.08rem + .4vw, 1.35rem); font-weight: 300;
-  color: var(--on-deep); line-height: 1.75;
+  margin-block-start: 1.5rem; max-width: 34ch;
+  font-size: clamp(1.1rem, 1rem + .4vw, 1.25rem); font-weight: 300;
+  color: var(--on-deep); line-height: 1.8; white-space: pre-line;
 }
 .hero-cue {
   position: absolute; inset-block-end: 2rem; inset-inline-start: 50%;
@@ -1109,31 +1099,20 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
 /* ------------------------------------------------------------ responsive */
 
 @media (max-width: 1100px) {
-  /* Below the split the headline stops sharing the frame with the photograph.
-     Type sits on the dark ground, the picture follows it full-bleed. */
-  /* Below the split the hero becomes a cover: the listening photograph
-     fills the screen under the header, its face in the top third, and the
-     type rises out of the shadowed lower half. The photograph was generated
-     with that shadow in it (round 8), so the dissolve below only finishes
-     what the picture already does. */
-  .hero {
-    min-height: 600px; height: calc(100svh - 88px); max-height: 820px;
-    padding-block: 0; justify-content: flex-end;
-  }
-  .hero-col { max-width: none; }
-  .hero-inner { padding-block-end: 1.6rem; }
-  .hero-figure img { object-position: 50% 0%; }
+  /* Keep the listening portrait beside the copy on tablets, with the fade
+     confined to its right edge. Phones stack the copy below the face. */
+  .hero { min-height: 620px; }
+  .hero-col { max-width: 43%; }
+  .hero .hero-col h1 { font-size: clamp(2rem, 4.3vw, 2.8rem); }
+  .hero-figure { width: 57%; left: 0; right: auto; }
+  .hero-figure img { object-position: 50% 20%; }
   .hero-figure::after {
-    background:
-      linear-gradient(to bottom, rgba(14, 12, 9, .5) 0%, rgba(14, 12, 9, 0) 14%),
-      linear-gradient(to top, var(--deep) 0%, rgba(14, 12, 9, .9) 20%, rgba(14, 12, 9, .55) 38%, rgba(14, 12, 9, 0) 58%);
+    background: linear-gradient(to left, var(--deep), rgba(14, 12, 9, 0) 25%);
   }
   .hero-kicker { font-size: .95rem; margin-block-end: .9rem; }
   .hero-kicker::after { width: 1.9rem; }
   .hero-rule, .hero-cue { display: none; }
-  .hero-sub { margin-block-start: 1rem; font-size: 1.06rem; line-height: 1.65; max-width: 30ch; }
-  .hero-more { display: inline-flex; }
-  .hero-facts { display: grid; }
+  .hero-sub { font-size: 1.1rem; }
   .quiet { min-height: 44svh; }
 }
 
@@ -1286,13 +1265,6 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
     background: linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 16%, rgba(14, 12, 9, 0) 80%, var(--deep) 100%);
   }
 
-  .hero { height: calc(100svh - 72px); }
-  /* The fixed accessibility button lives in the bottom start corner; the
-     cover's last line clears it. */
-  .hero-inner { padding-block-end: 4.6rem; }
-  .hero h1 { font-size: 2.55rem; }
-  .hero-kicker { font-size: .92rem; }
-
   /* Dark frame, light pages. Measured 2026-09-14 across 22 Israeli lawyer
      sites at phone width: the market opens dark and reads light, and only
      3 of 22 stay dark throughout. So on phones the two substance bands —
@@ -1345,11 +1317,25 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
    whole eyebrow on a single line; below ~340px it wraps cleanly at a
    separator, the dash glued to the year. */
 @media (max-width: 370px) {
-  .hero h1 { font-size: 2.3rem; }
   .hero-kicker { font-size: .88rem; }
 }
 
 @media (max-width: 560px) {
+  /* Let the copy determine the cover height, with room for the portrait
+     above it. Short phones can scroll without pushing text onto his face. */
+  .hero { min-height: 0; padding-block: clamp(20rem, 106vw, 29rem) 2rem; }
+  .hero-col { max-width: none; }
+  .hero .hero-col h1 { font-size: clamp(2rem, 9.6vw, 2.75rem); }
+  .hero-services { margin-block-start: .65rem; font-size: 1rem; }
+  .hero-sub { margin-block-start: 1.1rem; max-width: 30ch; font-size: 1.08rem; line-height: 1.7; }
+  .hero-footer { display: flex; align-items: center; justify-content: space-between; gap: .75rem; margin-block-start: 1.35rem; }
+  .hero-location { margin-block-start: 0; font-size: .9rem; }
+  .hero-more { flex-shrink: 0; margin-block-start: 0; font-size: 1.05rem; gap: .65rem; }
+  .hero-figure { width: 100%; }
+  .hero-figure img { object-position: 50% 0%; }
+  .hero-figure::after {
+    background: linear-gradient(to bottom, transparent 38%, rgba(14, 12, 9, .8) 59%, var(--deep) 78%);
+  }
   .side { grid-template-columns: 1fr; }
   .quiet { min-height: 36svh; }
   .portrait-media img { object-position: 50% 50%; }
@@ -1368,13 +1354,3 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .8em; }
 }
 
-/* Approved hero mockup: keep the existing mobile photograph and clear text. */
-@media (max-width: 860px) {
-  .hero .hero-col h1 { font-size: clamp(1.95rem, 8vw, 2.55rem); }
-  .hero .hero-services { font-size: 1rem; line-height: 1.5; margin-block-start: .5rem; }
-  .hero .hero-sub { margin-block-start: 1rem; max-width: 30ch; font-size: 1.06rem; line-height: 1.65; }
-  .hero .hero-location { margin-block-start: .85rem; font-size: 1rem; }
-  .hero .hero-more { margin-block-start: .65rem; font-size: 1rem; }
-}
-
-.hero .hero-sub { white-space: pre-line; }

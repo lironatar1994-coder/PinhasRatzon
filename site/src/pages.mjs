@@ -178,16 +178,13 @@ export function home() {
       <p class="hero-services">מקרקעין, מיסוי, צוואות וירושות</p>
       <p class="hero-sub" data-manager-text="hero.subtitle">ליווי אישי בקנייה ובמכירה של נכס,
 מהבדיקות לפני החתימה ועד לרישום הזכויות.</p>
-      <p class="hero-location">${esc(BIZ.city)} והמרכז</p>
-      <a class="hero-more" href="#practice-areas">לתחומי העיסוק ${icon('arrow', 18)}</a>
+      <div class="hero-footer">
+        <p class="hero-location">${esc(BIZ.city)} והמרכז</p>
+        <a class="hero-more" href="#practice-areas">לתחומי העיסוק ${icon('arrow', 18)}</a>
+      </div>
     </div>
   </div>
 </section>
-<ul class="hero-facts" aria-label="על המשרד">
-  <li><strong>${esc(BIZ.founded)}</strong><span>משרד עצמאי מאז</span></li>
-  <li><strong>ליווי אישי</strong><span>עו״ד אחד, מתחילה ועד סוף</span></li>
-  <li><strong>${esc(BIZ.city)}</strong><span>וכל גוש דן</span></li>
-</ul>
 
 <section class="statement" id="statement">
   ${dayFigure(IMAGES.bandPlansDay)}
