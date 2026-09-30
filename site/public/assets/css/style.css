@@ -555,6 +555,62 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .portrait-copy .lead { margin-block-end: 1.4rem; }
 .portrait-note { color: var(--ink-2); line-height: 1.95; max-width: 34rem; margin-block-end: 2rem; }
 
+/* Approved About mockup: portrait leads; prose stays on a quiet paper field. */
+.portrait-introduction { padding-block: 2rem; scroll-margin-block-start: 90px; }
+.portrait-sec.portrait-introduction .wrap {
+  width: min(1280px, calc(100% - 4rem));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  gap: clamp(2rem, 4vw, 4rem);
+}
+.portrait-introduction .portrait-media { grid-column: 2; grid-row: 1; }
+.portrait-introduction .portrait-media::before { content: none; }
+.portrait-introduction .portrait-media img {
+  width: 100%; max-width: none; margin: 0;
+  aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 50%;
+  filter: none;
+}
+.portrait-introduction .portrait-copy {
+  grid-column: 1; grid-row: 1; max-width: 30rem;
+  justify-self: start; text-align: start;
+}
+.portrait-introduction .portrait-copy h2 {
+  font-size: clamp(2rem, 2.8vw, 3rem); font-weight: 700;
+  margin-block-end: 2rem;
+}
+.portrait-introduction .lead,
+.portrait-introduction .portrait-note {
+  font-size: clamp(1.125rem, 1rem + .4vw, 1.4rem);
+  font-weight: 400; line-height: 1.8;
+}
+.portrait-introduction .lead { margin-block-end: 2rem; }
+.portrait-introduction .portrait-note { margin-block-end: 2rem; }
+.portrait-introduction .textlink {
+  min-height: 44px; text-decoration: underline;
+  text-underline-offset: .4em; text-decoration-thickness: 1px;
+}
+@media (max-width: 860px) {
+  .portrait-introduction { padding-block: 0; }
+  .portrait-sec.portrait-introduction .wrap {
+    width: 100%; grid-template-columns: minmax(0, 1fr); gap: 0;
+  }
+  .portrait-introduction .portrait-media { grid-column: auto; grid-row: auto; }
+  .portrait-introduction .portrait-media img {
+    aspect-ratio: 4 / 3; object-position: 50% 28%;
+  }
+  .portrait-introduction .portrait-copy {
+    grid-column: auto; grid-row: auto; max-width: none; width: 100%;
+    padding: 2rem 1.5rem 2.5rem;
+  }
+  .portrait-introduction .portrait-copy h2 {
+    font-size: clamp(1.75rem, 4.8vw, 2.25rem); margin-block-end: 1.5rem;
+  }
+  .portrait-introduction .lead { margin-block-end: 1.5rem; }
+  .portrait-introduction .portrait-note { margin-block-end: 1.5rem; }
+}
+@media (max-width: 600px) {
+  .portrait-introduction .portrait-media img { aspect-ratio: 4 / 5; }
+}
+
 /* "What happens after you reach out" — the contact column's three steps.
    Same heading treatment as .sub-sec: hairline plus the short gold bar. */
 .after-call { margin-block: 2.8rem; }

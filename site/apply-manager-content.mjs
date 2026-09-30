@@ -1,5 +1,6 @@
 import { access, copyFile, readFile, readdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const [stageArgument, liveArgument, configArgument] = process.argv.slice(2);
 if (!stageArgument || !liveArgument || !configArgument) {
@@ -81,6 +82,32 @@ for (const livePath of liveHtmlFiles) {
     }
   }
   if (changed) await writeFile(stagePath, stageHtml);
+}
+
+// Approved editorial migrations only replace the known old wording. A newer
+// client edit wins, and subsequent releases leave the approved text in place.
+const updatesPath = fileURLToPath(new URL('./managed-text-updates.json', import.meta.url));
+if (await exists(updatesPath)) {
+  const { updates } = JSON.parse(await readFile(updatesPath, 'utf8'));
+  for (const update of updates) {
+    if (typeof update.from !== 'string' || typeof update.to !== 'string') throw new Error('Invalid managed text update');
+    const slot = config.textSlots.find(slot => (slot.marker || slot.id) === update.marker);
+    if (!slot) throw new Error(`Unknown managed text update: ${update.marker}`);
+    const configuredPath = path.resolve(slot.filePath);
+    if (!isInside(configuredRoot, configuredPath)) throw new Error('Managed text update escapes site root');
+    const target = path.join(stageRoot, path.relative(configuredRoot, configuredPath));
+    if (!isInside(stageRoot, target)) throw new Error('Managed text update escapes staged root');
+    const html = await readFile(target, 'utf8');
+    const matches = markerMatches(html, update.marker);
+    if (matches.length !== 1) throw new Error(`Managed text update marker must be unique: ${update.marker}`);
+    const match = matches[0];
+    if (match[3] === update.from) {
+      await writeFile(target, `${html.slice(0, match.index)}${match[1]}${update.to}${match[4]}${html.slice(match.index + match[0].length)}`);
+      console.log(`[INFO] Applied approved text update: ${update.marker}`);
+    } else if (match[3] !== update.to) {
+      console.log(`[INFO] Retained newer client wording: ${update.marker}`);
+    }
+  }
 }
 
 console.log(`[INFO] Preserved Manager Site content: images=${imageCount}, text=${textCount}, references=${referenceCount}`);

@@ -220,17 +220,16 @@ export function home() {
   </div>
 </section>
 
-<section class="section portrait-sec">
+<section class="section portrait-sec portrait-introduction" id="about-intro" aria-labelledby="portrait-heading">
   <div class="wrap">
     <div class="portrait-media">
       ${portraitPhoto(`${BIZ.shortName}, עורך דין מקרקעין ועיזבונות ב${BIZ.city}`)}
     </div>
     <div class="portrait-copy">
-      <p class="label">אודות</p>
-      <h2>${esc(BIZ.shortName)}</h2>
-      <p class="lead" data-manager-text="about.home.lead">מאז ${esc(BIZ.founded)} אני מלווה קונים, מוכרים ומשפחות — בעסקאות מקרקעין, במיסוי, ברישום ובהעברה הבין־דורית.</p>
-      <p class="portrait-note" data-manager-text="about.home.note">לא תצטרכו להסביר את התיק מחדש — אני זה שבודק את המסמכים, מנסח את ההסכם ועומד מול הרשויות.</p>
-      <a class="textlink" href="/about/">להכיר מקרוב ${icon('arrow', 18)}</a>
+      <h2 id="portrait-heading">${esc(BIZ.shortName)}</h2>
+      <p class="lead" data-manager-text="about.home.lead">אני עורך דין מאז ${esc(BIZ.founded)}. עיקר העבודה שלי הוא בעסקאות מקרקעין, במיסוי מקרקעין, בצוואות ובירושות.</p>
+      <p class="portrait-note" data-manager-text="about.home.note">לאורך הטיפול אפשר לפנות אליי ישירות.</p>
+      <a class="textlink" href="/about/">עוד עליי ${icon('arrow', 18)}</a>
     </div>
   </div>
 </section>
