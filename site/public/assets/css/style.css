@@ -862,32 +862,35 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 }
 @media (max-width: 860px) {
   .closing {
-    min-height: max(50rem, 200vw);
-    padding-block: 3rem 2rem;
+    min-height: max(48rem, 200vw);
+    padding-block: 2rem 3.5rem;
   }
   .closing-figure img { display: block; object-position: 50% center; }
   .closing .closing-grid {
     display: flex; flex-direction: column; justify-content: space-between;
-    min-height: calc(max(50rem, 200vw) - 5rem); gap: 1.25rem;
+    min-height: calc(max(48rem, 200vw) - 5.5rem); gap: 2rem;
   }
-  .closing .closing-copy h2 { font-size: 1.7rem; }
-  .closing .closing-sub { color: var(--on-deep); font-size: 1rem; line-height: 1.75; margin-block-start: .75rem; max-width: 17rem; }
-  .closing .closing-act { margin-block-start: max(20rem, 80vw); }
+  .closing .closing-copy h2 { font-size: clamp(1.4rem, 6vw, 1.7rem); max-width: none; line-height: 1.35; }
+  .closing .closing-sub { color: var(--on-deep); font-size: 1rem; line-height: 1.65; margin-block-start: .65rem; max-width: 27ch; }
+  .closing .closing-act { margin-block-start: 0; }
   /* One clear phone number, then two quiet alternatives. Keep all links
      below the faces instead of drawing rows across the conversation. */
-  .closing .closing-ch { display: grid; grid-template-columns: 1fr 1fr; gap: .25rem 1rem; border: 0; }
+  .closing .closing-ch { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem 1rem; border: 0; }
   .closing .closing-ch li { border: 0; }
   .closing .closing-phone { grid-column: 1 / -1; }
   .closing .closing-ch a { justify-content: center; gap: .65rem; padding-block: .4rem; min-height: 48px; }
   .closing .closing-phone .ch-k { display: none; }
   .closing .closing-phone .ch-v { font-size: 1.7rem; font-weight: 500; line-height: 1.4; }
+  .closing .closing-whatsapp a, .closing .closing-email a {
+    border: 1px solid var(--line-deep); padding-inline: .5rem;
+  }
   .closing .closing-whatsapp .ch-v, .closing .closing-email .ch-v { display: none; }
   .closing .ch-k { color: var(--on-deep); font-size: 1rem; font-weight: 400; margin: 0; }
   .closing .closing-ch .ic { color: var(--on-deep); }
   .closing .ch-or { display: none; }
   .closing .closing-act .closing-cta {
-    width: calc(100% - 3.25rem); margin-inline-start: 3.25rem;
-    margin-block-start: 1.25rem; min-height: 56px; padding: .85rem 1rem;
+    width: 100%; margin-inline-start: 0;
+    margin-block-start: 1rem; min-height: 56px; padding: .85rem 1rem;
   }
 }
 .closing h2 { color: #fff; font-size: clamp(1.7rem, 1.2rem + 2vw, 2.7rem); max-width: 12em; }

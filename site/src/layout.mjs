@@ -215,7 +215,7 @@ export function closing({ h2 }) {
   <div class="wrap closing-grid">
     <div class="closing-copy">
       <h2>${esc(h2)}</h2>
-      <p class="closing-sub">אפשר להתקשר אליי או להשאיר פרטים. אחזור אליכם לשיחה על המקרה ועל המסמכים שכדאי להכין.</p>
+      <p class="closing-sub">אפשר להתקשר אליי או להשאיר פרטים. אחזור אליכם לשיחה.</p>
     </div>
     <div class="closing-act">
       <ul class="closing-ch" aria-label="דרכי יצירת קשר">
