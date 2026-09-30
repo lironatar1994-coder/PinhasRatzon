@@ -208,7 +208,7 @@ export function closing({ h2 }) {
 <section class="closing">
   <div class="closing-figure" aria-hidden="true">
     <picture>
-      <source media="(max-width: 860px)" srcset="/assets/img/closing-consultation-mobile.jpg" type="image/jpeg">
+      <source media="(max-width: 860px)" srcset="/assets/img/closing-consultation-mobile.jpg?v=portrait-fix-20260930" type="image/jpeg">
       <img src="/assets/img/round7/contact-consultation-desktop-v2.png" alt="" width="1672" height="941" loading="lazy" decoding="async">
     </picture>
   </div>
