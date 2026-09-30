@@ -818,9 +818,20 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   .closing .closing-sub { color: var(--on-deep); }
 }
 @media (max-width: 860px) {
-  .closing { padding-block-start: 0; }
-  .closing-figure { position: relative; margin-block-end: 2.6rem; }
-  .closing-figure img { display: block; height: auto; object-fit: contain; }
+  .closing {
+    min-height: max(50rem, 200vw);
+    padding-block: 3rem 2.5rem;
+  }
+  .closing-figure img { display: block; object-position: 50% center; }
+  .closing .closing-grid { gap: 1.25rem; }
+  .closing .closing-copy h2 { font-size: 1.7rem; }
+  .closing .closing-sub { color: var(--on-deep); font-size: 1rem; line-height: 1.75; margin-block-start: .75rem; max-width: 17rem; }
+  .closing .closing-act { margin-block-start: 65vw; }
+  .closing .closing-ch a { padding-block: .4rem; }
+  .closing .ch-v { font-size: 1rem; }
+  .closing .ch-k, .closing .ch-or { color: var(--on-deep); }
+  .closing .closing-ch .ic { color: var(--on-deep); }
+  .closing .ch-or { margin-block: .9rem; }
 }
 .closing h2 { color: #fff; font-size: clamp(1.7rem, 1.2rem + 2vw, 2.7rem); max-width: 12em; }
 /* Channels first, then the formal invitation — a quiet human "או" between
@@ -1259,7 +1270,6 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
      phone crop there so the line sits on plain wood under the paper veil. */
   .quiet-light .quiet-figure img { object-position: 0% 50%; }
   /* The dusk window portrait: face at the top of the frame. */
-  .closing-figure img { object-position: 50% 25%; }
   .quiet { min-height: 40svh; }
   /* The arrows STAY on phones — this band is the site's main router, and a
      row with no affordance reads as a statement, not a link. */

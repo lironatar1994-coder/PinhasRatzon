@@ -207,7 +207,10 @@ export function closing({ h2 }) {
   return `
 <section class="closing">
   <div class="closing-figure" aria-hidden="true">
-    <img src="/assets/img/round7/contact-consultation-desktop-v2.png" alt="" width="1672" height="941" loading="lazy" decoding="async">
+    <picture>
+      <source media="(max-width: 860px)" srcset="/assets/img/closing-consultation-mobile.jpg" type="image/jpeg">
+      <img src="/assets/img/round7/contact-consultation-desktop-v2.png" alt="" width="1672" height="941" loading="lazy" decoding="async">
+    </picture>
   </div>
   <div class="wrap closing-grid">
     <div class="closing-copy">
