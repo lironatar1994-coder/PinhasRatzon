@@ -259,7 +259,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 /* No hairline of its own — the header's gold rule directly above already
    draws this edge, and two stacked lines read as a mistake. */
 .crumbs ol { display: flex; flex-wrap: wrap; gap: .6rem; padding-block: 1rem; color: var(--on-deep-2); }
-.crumbs li + li::before { content: '—'; margin-inline-end: .6rem; color: var(--sep-deep); }
+.crumbs li + li::before { content: '/'; margin-inline-end: .6rem; color: var(--sep-deep); }
 .crumbs a { color: var(--on-deep-2); }
 .crumbs a:hover { color: var(--accent-lt); }
 .crumbs [aria-current] { color: var(--on-deep); }
