@@ -35,7 +35,7 @@
      stays honest. Darkening only ever RAISES text-over-photo contrast,
      and the pixel sweep re-verifies with the same filter applied. */
   --grade: brightness(.88) contrast(1.09) saturate(.82) sepia(.16);
-  --grade-portrait: brightness(.94) contrast(1.05) saturate(.9) sepia(.08);
+  --grade-portrait: none;
   /* The daylight cut for the paper bands' stills: one treatment so the three
      round-8 photographs read as a single shoot, with the same warm cast. */
   --grade-day: brightness(1.02) contrast(1.02) saturate(.8) sepia(.14);
@@ -674,7 +674,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
    the crop there or the figure shows only dark wood. */
 /* The person is the brand: page heroes carry Pinhas himself. His face sits
    in the crop's upper-left half — anchor there so no box ever beheads him. */
-.page-hero-figure.figure-pinhas img { object-position: 35% 22%; }
+.page-hero-figure.figure-pinhas img { object-position: 35% 22%; filter: none; }
 /* The text column is fenced to the right 46% — the fence, not an em cap,
    is what guarantees the no-overlap contract. */
 .page-hero.has-figure .wrap { display: grid; grid-template-columns: minmax(0, 46fr) minmax(0, 54fr); }
@@ -866,6 +866,12 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
     padding-block: 2rem 3.5rem;
   }
   .closing-figure img { display: block; object-position: 50% center; }
+  /* Shade only the contact area below the faces so the phone remains
+     readable over the lawyer's white shirt and the light tabletop. */
+  .closing-figure::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(to top, rgba(14, 12, 9, .78) 0%, rgba(14, 12, 9, .72) 25%, transparent 36%);
+  }
   .closing .closing-grid {
     display: flex; flex-direction: column; justify-content: space-between;
     min-height: calc(max(48rem, 200vw) - 5.5rem); gap: 2rem;

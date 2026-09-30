@@ -21,6 +21,14 @@ const PUBLIC = join(ROOT, 'public');
 const base = SITE_URL.replace(/\/$/, '');
 const today = new Date().toISOString().slice(0, 10);
 
+// Refresh every rendition of the corrected portraits, including preloads,
+// picture sources and the social card, even in browsers with long-lived caches.
+const PORTRAIT_VERSION = 'eyes-corrected-20260930';
+function versionPortraits(html) {
+  const portraits = /\/assets\/img\/(?:pinchas-ratzon|about-mobile-portrait-v1|hero-listening-mobile|hero-room|about-hero|closing-portrait-left|practice-hero|contact-hero|closing-consultation-mobile|og-default|round7\/contact-consultation-desktop-v2)\.(?:jpg|webp|png)(?:\?v=[^"'\s<>]+)?/g;
+  return html.replace(portraits, (asset) => `${asset.split('?')[0]}?v=${PORTRAIT_VERSION}`);
+}
+
 /** path → { html, priority, changefreq } */
 const routes = new Map();
 const unlisted = new Map();
@@ -69,7 +77,7 @@ function withBase(html) {
 async function writePage(route, html) {
   const file = outPathFor(route);
   await mkdir(dirname(file), { recursive: true });
-  await writeFile(file, withBase(html), 'utf8');
+  await writeFile(file, withBase(versionPortraits(html)), 'utf8');
   return file;
 }
 
