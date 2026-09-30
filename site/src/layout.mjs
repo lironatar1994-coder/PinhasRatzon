@@ -240,9 +240,9 @@ export function closing({ h2 }) {
 </section>`;
 }
 
-export function faqBlock(faqs, { h2 = 'שאלות נפוצות', label = 'שאלות נפוצות', open = -1 } = {}) {
+export function faqBlock(faqs, { h2 = 'שאלות נפוצות', label = 'שאלות נפוצות', open = -1, className = '', labelledBy = '', more = false } = {}) {
   return `
-<section class="faq" id="faq">
+<section class="faq${className ? ` ${esc(className)}` : ''}" id="faq"${labelledBy ? ` aria-labelledby="${esc(labelledBy)}"` : ''}>
   <div class="wrap">
     ${h2 ? `<div class="sec-head">
       ${label ? `<p class="label">${esc(label)}</p>` : ''}
@@ -253,11 +253,12 @@ export function faqBlock(faqs, { h2 = 'שאלות נפוצות', label = 'שאל
         .map(
           (f, i) => `<details class="faq-item"${i === open ? ' open' : ''}>
         <summary><span class="faq-q">${esc(f.q)}</span><span class="faq-ic" aria-hidden="true"></span></summary>
-        <div class="faq-a"><p>${esc(f.a)}</p></div>
+        <div class="faq-a">${f.a.split(/\n\s*\n/).map(paragraph => `<p>${esc(paragraph)}</p>`).join('')}</div>
       </details>`
         )
         .join('\n      ')}
     </div>
+    ${more ? '<a class="faq-more textlink" href="/faq/">לכל השאלות</a>' : ''}
   </div>
 </section>`;
 }

@@ -792,6 +792,49 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .faq-item[open] .faq-ic::after { transform: rotate(0deg); }
 .faq-a { padding-block-end: 1.6rem; max-width: 44rem; }
 .faq-a p { color: var(--ink-2); }
+/* Approved home FAQ: a single reading sequence, with the first answer open. */
+.quiet.faq-introduction {
+  min-height: 0; padding-block: clamp(2.25rem, 4vw, 4rem) 0;
+  background: var(--paper); color: var(--ink); border: 0;
+  scroll-margin-block-start: 90px;
+}
+/* Retain the existing managed photo reference while this text-only layout
+   gives the questions priority over background imagery. */
+.faq-introduction .quiet-figure { display: none; }
+.faq-introduction .quiet-inner {
+  width: min(52rem, calc(100% - 3rem)); padding-block: 0;
+}
+.faq-introduction h2 {
+  font-size: clamp(2rem, 1.5rem + 1.5vw, 2.75rem); font-weight: 700;
+}
+.faq-introduction .faq-description {
+  font-size: clamp(1rem, .9rem + .4vw, 1.25rem);
+  font-weight: 400; line-height: 1.75; color: var(--ink-2);
+  margin-block-start: .75rem;
+}
+.faq.faq-home {
+  background: var(--paper); padding-block: 2rem clamp(3rem, 5vw, 5rem);
+}
+.faq-home .wrap { width: min(52rem, calc(100% - 3rem)); }
+.faq-home .faq-item summary { align-items: start; gap: 1rem; padding-block: 1.5rem; }
+.faq-home .faq-q {
+  font-size: clamp(1.25rem, 1.1rem + .5vw, 1.5rem);
+  font-weight: 600; line-height: 1.45; white-space: pre-line;
+}
+.faq-home .faq-ic { width: 44px; height: 44px; margin-block-start: -.5rem; }
+.faq-home .faq-ic::before,
+.faq-home .faq-ic::after { width: 16px; inset-inline-start: 14px; }
+.faq-home .faq-a {
+  max-width: none; padding-inline-end: 3.75rem; padding-block-end: 1.5rem;
+  font-size: clamp(1.0625rem, .95rem + .4vw, 1.25rem);
+  font-weight: 400; line-height: 1.75;
+}
+.faq-home .faq-a p + p { margin-block-start: 1rem; }
+.faq-home .faq-more {
+  min-height: 44px; margin-block-start: 1.5rem;
+  text-decoration: underline; text-underline-offset: .4em;
+  text-decoration-thickness: 1px;
+}
 
 /* ------------------------------------------------------------ closing */
 

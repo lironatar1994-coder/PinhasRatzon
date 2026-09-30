@@ -143,8 +143,8 @@ const PRINCIPLES = [
 
 const HOME_FAQS = [
   {
-    q: 'אני קונה דירה מקבלן — צריך עורך דין מטעמי?',
-    a: 'כן. עורך הדין של הקבלן מייצג את הקבלן. חוזה מקבלן נכתב לטובת המוכר, וסעיפים מהותיים בו ניתנים לרוב למשא ומתן — מועדי מסירה, פיצוי על איחור, הצמדות, ערבויות חוק המכר ותנאי התשלום.',
+    q: 'אני קונה דירה מקבלן.\nצריך עורך דין מטעמי?',
+    a: 'כן. עורך הדין של הקבלן מייצג את הקבלן.\n\nחשוב לבדוק את תנאי ההסכם, מועדי המסירה, הערבויות ותנאי התשלום.',
   },
   {
     q: 'מה ההבדל בין צו ירושה לצו קיום צוואה?',
@@ -155,7 +155,7 @@ const HOME_FAQS = [
     a: 'כשעדיין אין בעיה. אפשר לערוך אותו רק כל עוד האדם כשיר ומבין את משמעות המסמך. הוא מאפשר לקבוע מראש מי יטפל בענייניכם ואיך — במקום שבית המשפט ימנה אפוטרופוס בדיעבד.',
   },
   {
-    q: 'שילמתי מס שבח — אפשר לקבל החזר?',
+    q: 'שילמתי מס שבח. אפשר לקבל החזר?',
     a: 'לעיתים כן. החזרים נובעים בדרך כלל מפטורים שלא נוצלו, מחישוב לינארי, מפריסת מס או מהוצאות מוכרות שלא נכללו בדיווח המקורי. להגשת השגה קבועים בחוק מועדים, ולכן כדאי לבדוק מוקדם.',
   },
   {
@@ -234,7 +234,7 @@ export function home() {
   </div>
 </section>
 
-<section class="quiet quiet-light" id="faq-intro">
+<section class="quiet quiet-light faq-introduction" id="faq-intro">
   <div class="quiet-figure">
     <picture>
       <source media="(max-width: 860px)" srcset="${IMAGES.bandStampDay}.webp" type="image/webp">
@@ -243,12 +243,12 @@ export function home() {
     </picture>
   </div>
   <div class="wrap quiet-inner">
-    <p class="label">שאלות נפוצות</p>
-    <h2 class="quiet-line" data-manager-text="faq.home.title">את השאלות הנכונות<br>שואלים לפני החותמת.</h2>
+    <h2 id="faq-heading">שאלות נפוצות</h2>
+    <p class="faq-description" data-manager-text="faq.home.title">על קניית דירה, מיסוי, צוואות וירושות.</p>
   </div>
 </section>
 
-${faqBlock(HOME_FAQS, { h2: '' })}
+${faqBlock(HOME_FAQS, { h2: '', open: 0, className: 'faq-home', labelledBy: 'faq-heading', more: true })}
 
 ${closing({ h2: 'שיחה אחת עושה סדר' })}`;
 
