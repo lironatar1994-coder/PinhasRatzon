@@ -18,26 +18,34 @@ export const IMAGES = {
   portrait: '/assets/img/pinchas-ratzon',
   hero: '/assets/img/hero-room',
   heroPortrait: '/assets/img/hero-listening-mobile',
-  /* September 14: daylight stills open the paper bands on phones. */
   bandPlansDay: '/assets/img/band-plans-daylight',
-  bandKeyDay: '/assets/img/band-key-daylight',
   bandStampDay: '/assets/img/band-stamp-daylight',
   quietPlans: '/assets/img/band-plans',
   bandKey: '/assets/img/band-key',
   bandStampLight: '/assets/img/band-stamp-light-v1',
   bandChairs: '/assets/img/band-chairs',
-  bandStatement: '/assets/img/band-statement',
+  bandStamp: '/assets/img/band-stamp',
 };
 
-/* The wide room photograph opens desktop; phones use the listening cover.
-   Managed slots use JPG so edits in Manager Site remain visible. */
+/* Managed slots use JPG so edits in Manager Site remain visible. */
 const webpSource = (src, media = '') =>
   isManaged(src) ? '' : `<source${media ? ` media="${media}"` : ''} type="image/webp" srcset="${src}.webp">\n      `;
 
+/* October 12: one hero photograph at every width, so the phone opens on the
+   same window portrait as desktop. The CSS crops it to the subject. */
 const heroPhoto = (alt) => `<picture>
-      ${webpSource(IMAGES.heroPortrait, '(max-width: 1100px)')}<source media="(max-width: 1100px)" type="image/jpeg" srcset="${IMAGES.heroPortrait}.jpg">
       ${webpSource(IMAGES.hero)}<img src="${IMAGES.hero}.jpg" alt="${esc(alt)}" width="1920" height="1084" fetchpriority="high" decoding="async">
     </picture>`;
+
+/* Manager Site slots this layout no longer shows. check-manager-content.mjs
+   requires every slot path in the generated HTML, and a <template> keeps the
+   references inert: nothing inside it is rendered or fetched. */
+const retiredSlots = () => `<template class="managed-retired">
+  <img src="${IMAGES.heroPortrait}.jpg" alt="">
+  <img src="${IMAGES.bandPlansDay}.jpg" alt="">
+  <img src="/assets/img/round7/contact-consultation-desktop-v2.png" alt="">
+  <img src="/assets/img/closing-consultation-mobile.jpg" alt="">
+</template>`;
 
 /* The home-page introduction uses a composed portrait on phones rather than
    forcing the desktop frame through a shallow crop. */
@@ -45,13 +53,6 @@ const portraitPhoto = (alt) => `<picture>
       <source media="(max-width: 860px)" type="image/jpeg" srcset="/assets/img/about-mobile-portrait-v1.jpg">
       ${webpSource(IMAGES.portrait)}<img src="${IMAGES.portrait}.jpg" alt="${esc(alt)}" width="980" height="1225" loading="lazy" decoding="async">
     </picture>`;
-
-/* A daylight still that opens a paper band on phones. */
-const dayFigure = (src) => `<div class="day-figure" aria-hidden="true">
-    <picture>
-      ${webpSource(src)}<img src="${src}.jpg" alt="" width="1672" height="941" loading="lazy" decoding="async">
-    </picture>
-  </div>`;
 
 function photo(src, { alt, w, h, cls = '', note = 'תמונה, להוספה', priority = false }) {
   if (!src) {
@@ -187,15 +188,8 @@ export function home() {
 </section>
 
 <section class="statement" id="statement">
-  ${dayFigure(IMAGES.bandPlansDay)}
-  <div class="statement-figure">
-    ${photo(IMAGES.bandStatement, { alt: '', w: 1920, h: 1072 })}
-  </div>
-  <div class="statement-portrait" aria-hidden="true">
-    <picture>
-      <source srcset="/assets/img/closing-portrait-left.webp" type="image/webp">
-      <img src="/assets/img/closing-portrait-left.jpg" alt="" width="1000" height="908" loading="lazy" decoding="async">
-    </picture>
+  <div class="statement-media" aria-hidden="true">
+    ${photo(IMAGES.bandStamp, { alt: '', w: 1672, h: 941 })}
   </div>
   <div class="wrap statement-inner">
       <p class="pull" data-manager-text="content.statement.title">מה בודקים לפני החתימה?</p>
@@ -208,7 +202,6 @@ export function home() {
 </section>
 
 <section class="route" id="practice-areas">
-  ${dayFigure(IMAGES.bandKeyDay)}
   <div class="wrap">
       ${secHead('תחומי עיסוק', 'באילו נושאים אני מטפל')}
     ${routeList()}
@@ -245,7 +238,9 @@ export function home() {
 
 ${faqBlock(HOME_FAQS, { h2: '', open: 0, className: 'faq-home', labelledBy: 'faq-heading', more: true })}
 
-${closing({ h2: 'נדבר על המקרה שלכם' })}`;
+${closing({ h2: 'נדבר על המקרה שלכם' })}
+
+${retiredSlots()}`;
 
   return page({
     path: '/',
@@ -255,7 +250,6 @@ ${closing({ h2: 'נדבר על המקרה שלכם' })}`;
     body,
     overHero: true,
     preloadImage: IMAGES.hero,
-    preloadPortrait: IMAGES.heroPortrait,
     schema: [
       { '@type': 'WebSite', '@id': url('/#website'), url: url('/'), name: BIZ.name, inLanguage: 'he-IL' },
       faqSchema(HOME_FAQS),

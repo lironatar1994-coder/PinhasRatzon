@@ -207,10 +207,7 @@ export function closing({ h2 }) {
   return `
 <section class="closing">
   <div class="closing-figure" aria-hidden="true">
-    <picture>
-      <source media="(max-width: 860px)" srcset="/assets/img/closing-consultation-mobile.jpg?v=portrait-fix-20260930" type="image/jpeg">
-      <img src="/assets/img/round7/contact-consultation-desktop-v2.png" alt="" width="1672" height="941" loading="lazy" decoding="async">
-    </picture>
+    <img src="/assets/img/band-chairs.jpg" alt="" width="1672" height="941" loading="lazy" decoding="async">
   </div>
   <div class="wrap closing-grid">
     <div class="closing-copy">
@@ -332,6 +329,10 @@ export function page({
 }) {
   const canonical = url(path);
   const graph = [attorneySchema(), ...schema];
+  for (const node of graph) if (['WebPage','AboutPage'].includes(node['@type'])) {
+    node.inLanguage = 'he-IL';
+    node.primaryImageOfPage = {'@type':'ImageObject', url:'https://lawebs.co.il/images/portfolio-shares-20261008/pinhas.png'};
+  }
   const jsonld = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
 
   return `<!doctype html>
@@ -351,10 +352,10 @@ export function page({
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc((shareDescription || description).replace(/\.\s*$/, ''))}">
 <meta property="og:url" content="${canonical}">
-<meta property="og:image" content="${url('/assets/img/og-default.jpg?v=eyes-corrected-20260930')}">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image" content="https://lawebs.co.il/images/portfolio-shares-20261008/pinhas.png">
+<meta property="og:image:width" content="1254">
+<meta property="og:image:height" content="1254">
+<meta property="og:image:type" content="image/png">
 <meta property="og:image:alt" content="${esc(BIZ.name)}">
 <meta name="twitter:card" content="summary_large_image">
 

@@ -36,9 +36,6 @@
      and the pixel sweep re-verifies with the same filter applied. */
   --grade: brightness(.88) contrast(1.09) saturate(.82) sepia(.16);
   --grade-portrait: none;
-  /* The daylight cut for the paper bands' stills: one treatment so the three
-     round-8 photographs read as a single shoot, with the same warm cast. */
-  --grade-day: brightness(1.02) contrast(1.02) saturate(.8) sepia(.14);
 
   --wrap: 1180px;
   --narrow: 760px;
@@ -304,8 +301,6 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   transition: color .25s var(--ease);
 }
 .hero-more:hover { color: #fff; border-block-end-color: #fff; text-decoration: none; }
-/* The daylight still that opens a paper band on phones. Off until 860px. */
-.day-figure { display: none; }
 /* One word in champagne — the same photo-safe gold as the eyebrow (display
    size needs 3:1; #dcc186 measures 5.4:1 against the wall's brightest pixels). */
 .hero h1 .gold-word { color: #dcc186; }
@@ -431,44 +426,34 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .route-list a:hover .route-arrow { color: var(--accent-lt); transform: translateX(-6px); }
 
 /* ------------------------------------------------------------ statement
-   The one section that lives ON a photograph — the site's credo, set over
-   the near-black stone still life the way the canon sets its "אני מאמין".
-   One per site, and every word is measured against the rendered pixels. */
+   The credo on the near-black ground, beside a still life of the moment it
+   is about: the stamp and the paper before signing. October 12: an object,
+   not a portrait, so the hero and the About beat stay the only two frames
+   of Pinhas on the page, and phones keep the same dark band as desktop. */
 
 .statement {
   position: relative; isolation: isolate; overflow: hidden;
   background: var(--deep); color: var(--on-deep);
   padding-block: calc(var(--gap-sec) * 1.2);
 }
-.statement-figure { position: absolute; inset: 0; z-index: 0; }
-.statement-figure img {
-  width: 100%; height: 100%; object-fit: cover; object-position: 0% 30%;
+.statement-media { position: absolute; inset-block: 0; left: 0; width: 46%; z-index: 0; }
+.statement-media img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 16% 50%;
   filter: var(--grade);
 }
-/* A uniform veil, not a gradient — the frame is near-black everywhere and
-   the text column is centered, so the whole surface carries it. */
-.statement-figure::after {
+/* Every word sits on the solid token; the photograph only dissolves into
+   it, toward the text column and at the band's top and bottom edges. */
+.statement-media::after {
   content: ''; position: absolute; inset: 0; pointer-events: none;
-  background: rgba(14, 12, 9, .5);
+  background:
+    linear-gradient(to left, var(--deep) 0%, rgba(14, 12, 9, 0) 34%),
+    linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 16%, rgba(14, 12, 9, 0) 84%, var(--deep) 100%);
 }
-.statement-inner { position: relative; z-index: 2; max-width: var(--narrow); }
-/* Desktop: the credo joins the split language — the window portrait on the
-   left at full richness, every word on the solid token. The veiled object
-   still life stays as the phone background, where the split has no room. */
-.statement-portrait { display: none; }
-@media (min-width: 861px) {
-  .statement-figure { display: none; }
-  .statement-portrait { display: block; position: absolute; inset-block: 7% 0; left: 0; width: 44%; z-index: 0; }
-  .statement-portrait img { width: 100%; height: 100%; object-fit: cover; object-position: 35% 20%; }
-  .statement-portrait::after {
-    content: ''; position: absolute; inset: 0; pointer-events: none;
-    background:
-      linear-gradient(to left, var(--deep) 0%, rgba(14, 12, 9, 0) 18%),
-      linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 10%);
-  }
-  .statement-inner { max-width: none; display: grid; grid-template-columns: minmax(0, 50fr) minmax(0, 50fr); }
-  .statement-inner > * { grid-column: 1; }
+.statement-inner {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: minmax(0, 50fr) minmax(0, 50fr);
 }
+.statement-inner > * { grid-column: 1; }
 .pull {
   font-family: var(--display); font-weight: 600;
   font-size: clamp(1.7rem, 1.15rem + 2.4vw, 3rem);
@@ -816,39 +801,42 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   position: relative; isolation: isolate; overflow: hidden;
   padding-block: var(--gap-sec); background: var(--deep); color: var(--on-deep);
 }
-/* Full-width consultation: keep both people visible, with the contact
-   details on the dark wall between them. No photographic veil or fade. */
+/* October 12: the meeting corner — two armchairs and a lamp — instead of a
+   third close-up of Pinhas. The chairs hold the left of the frame and the
+   contact column sits on the plain wall at the reading side. */
 .closing-figure { position: absolute; inset: 0; z-index: 0; }
 .closing-figure img {
-  width: 100%; height: 100%; object-fit: cover; object-position: center;
+  width: 100%; height: 100%; object-fit: cover; object-position: 18% 62%;
+  filter: var(--grade);
+}
+.closing-figure::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to left, rgba(14, 12, 9, .86) 0%, rgba(14, 12, 9, .62) 36%, rgba(14, 12, 9, 0) 64%);
 }
 .closing .wrap { position: relative; z-index: 2; }
 .closing-grid { display: grid; gap: 2.2rem; }
 .closing-act { width: 100%; }
 .closing-copy { min-width: 0; }
 @media (min-width: 861px) {
-  .closing { min-height: max(46rem, 56.28vw); display: grid; align-items: center; }
+  .closing { min-height: clamp(36rem, 46vw, 48rem); display: grid; align-items: center; }
   .closing .closing-grid {
-    width: 28%; max-width: 30rem; padding-inline: 0;
-    margin-inline-start: 19%; margin-inline-end: auto;
+    width: min(30rem, 38%); padding-inline: 0;
+    margin-inline-start: max(1.5rem, calc((100% - var(--wrap)) / 2)); margin-inline-end: auto;
   }
   .closing .closing-sub { color: var(--on-deep); }
 }
 @media (max-width: 860px) {
-  .closing {
-    min-height: max(48rem, 200vw);
-    padding-block: 2rem 3.5rem;
-  }
-  .closing-figure img { display: block; object-position: 50% center; }
-  /* Shade only the contact area below the faces so the phone remains
-     readable over the lawyer's white shirt and the light tabletop. */
+  /* Phones: the same photograph opens the band and dissolves into the
+     ground; every contact control sits below it on the solid token. */
+  .closing { padding-block: 0 3.5rem; }
+  .closing-figure { position: relative; inset: auto; aspect-ratio: 4 / 3; }
+  .closing-figure img { object-position: 20% 70%; }
   .closing-figure::after {
-    content: ''; position: absolute; inset: 0; pointer-events: none;
-    background: linear-gradient(to top, rgba(14, 12, 9, .78) 0%, rgba(14, 12, 9, .72) 25%, transparent 36%);
+    background: linear-gradient(to bottom, rgba(14, 12, 9, 0) 52%, var(--deep) 100%);
   }
   .closing .closing-grid {
-    display: flex; flex-direction: column; justify-content: space-between;
-    min-height: calc(max(48rem, 200vw) - 5.5rem); gap: 2rem;
+    display: flex; flex-direction: column; gap: 2rem;
+    margin-block-start: -.5rem;
   }
   .closing .closing-copy h2 { font-size: clamp(1.4rem, 6vw, 1.7rem); max-width: none; line-height: 1.35; }
   .closing .closing-sub { color: var(--on-deep); font-size: 1rem; line-height: 1.65; margin-block-start: .65rem; max-width: 27ch; }
@@ -1099,13 +1087,14 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
 /* ------------------------------------------------------------ responsive */
 
 @media (max-width: 1100px) {
-  /* Keep the listening portrait beside the copy on tablets, with the fade
-     confined to its right edge. Phones stack the copy below the face. */
+  /* Keep the window portrait beside the copy on tablets, cropped to the man
+     at the window, with the fade confined to its right edge. Phones stack
+     the copy below him. */
   .hero { min-height: 620px; }
   .hero-col { max-width: 43%; }
   .hero .hero-col h1 { font-size: clamp(2rem, 4.3vw, 2.8rem); }
   .hero-figure { width: 57%; left: 0; right: auto; }
-  .hero-figure img { object-position: 50% 20%; }
+  .hero-figure img { object-position: 4% 30%; }
   .hero-figure::after {
     background: linear-gradient(to left, var(--deep), rgba(14, 12, 9, 0) 25%);
   }
@@ -1206,14 +1195,15 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .quiet-figure::after {
     background: linear-gradient(to left, rgba(14, 12, 9, .8) 0%, rgba(14, 12, 9, .58) 55%, rgba(14, 12, 9, .52) 100%);
   }
-  .statement-figure::after { background: rgba(14, 12, 9, .64); }
-  /* .80, not .74 — solved numerically against BOTH closing photographs
-     rather than eyeballed. At .74 the round-8 dusk frame put its sunset
-     glow under the sub line (3.96:1) and the round-9 blue-hour frame puts
-     a city light under the channel labels (4.09:1): different elements,
-     same cause. .80 clears every pair on the current image with margin
-     (labels 4.91:1, sub 5.49:1) and the photograph is dark enough that
-     the silhouette survives the deeper veil. */
+  /* The credo keeps its dark band on phones: the still life opens it and
+     dissolves into the ground the text sits on. */
+  .statement { padding-block: 0 3.5rem; }
+  .statement-media { position: relative; width: 100%; aspect-ratio: 16 / 10; margin-block-end: 1.25rem; }
+  .statement-media img { object-position: 22% 50%; }
+  .statement-media::after {
+    background: linear-gradient(to bottom, rgba(14, 12, 9, 0) 50%, var(--deep) 100%);
+  }
+  .statement-inner { display: block; }
   .closing-grid { grid-template-columns: 1fr; gap: 2.6rem; }
 
   /* The band subjects live in the LEFT third of each frame; a centered
@@ -1265,29 +1255,10 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
     background: linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 16%, rgba(14, 12, 9, 0) 80%, var(--deep) 100%);
   }
 
-  /* Dark frame, light pages. Measured 2026-09-14 across 22 Israeli lawyer
-     sites at phone width: the market opens dark and reads light, and only
-     3 of 22 stay dark throughout. So on phones the two substance bands —
-     the credo and the route — sit on paper, each opened by a daylight
-     still, while the hero and the closing keep the black frame. */
-  .day-figure { display: block; aspect-ratio: 16 / 9; overflow: hidden; margin-block-end: 2.4rem; }
-  .day-figure img { width: 100%; height: 100%; object-fit: cover; filter: var(--grade-day); }
-  .statement { background: var(--paper); color: var(--ink); padding-block: 0 3rem; }
-  .statement-figure { display: none; }
-  .statement .pull { color: var(--ink); }
-  .statement-body p { color: var(--ink-2); }
-  .route { background: var(--paper-2); color: var(--ink); padding-block: 0 var(--gap-sec); }
-  .route .label { color: var(--accent); }
-  .route h2 { color: var(--ink); }
-  .route .sec-sub { color: var(--muted); }
-  .route :focus-visible { outline-color: var(--accent); }
-  .route-list { border-block-start-color: var(--stone); }
-  .route-list > li { border-block-end-color: var(--stone); }
-  .route-list a { color: var(--ink); }
-  .route-list a:active { background: rgba(134, 100, 31, .07); }
-  .route-n { color: var(--accent); opacity: 1; }
-  .route-a { color: var(--muted); }
-  .route-arrow { color: var(--accent); }
+  /* October 12: phones follow the desktop page band for band. The credo and
+     the route stay on the dark ground (the September 14 paper versions are
+     gone), so the two widths read as one site. */
+  .route-n { opacity: 1; }
   /* The daylight stamp keeps its empty desk on the image's left; anchor the
      phone crop there so the line sits on plain wood under the paper veil. */
   .quiet-light .quiet-figure img { object-position: 0% 50%; }
@@ -1321,9 +1292,13 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
 }
 
 @media (max-width: 560px) {
-  /* Let the copy determine the cover height, with room for the portrait
-     above it. Short phones can scroll without pushing text onto his face. */
-  .hero { min-height: 0; padding-block: clamp(20rem, 106vw, 29rem) 2rem; }
+  /* The desktop window portrait, cropped to the man at the window, fills
+     the top of the cover and dissolves into the ground under the name. The
+     copy determines the cover height, so short phones simply scroll. */
+  .hero {
+    --hero-photo: clamp(22rem, 122vw, 32rem);
+    min-height: 0; padding-block: calc(var(--hero-photo) - 4.5rem) 2rem;
+  }
   .hero-col { max-width: none; }
   .hero .hero-col h1 { font-size: clamp(2rem, 9.6vw, 2.75rem); }
   .hero-services { margin-block-start: .65rem; font-size: 1rem; }
@@ -1331,10 +1306,10 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .hero-footer { display: flex; align-items: center; justify-content: space-between; gap: .75rem; margin-block-start: 1.35rem; }
   .hero-location { margin-block-start: 0; font-size: .9rem; }
   .hero-more { flex-shrink: 0; margin-block-start: 0; font-size: 1.05rem; gap: .65rem; }
-  .hero-figure { width: 100%; }
-  .hero-figure img { object-position: 50% 0%; }
+  .hero-figure { width: 100%; inset-block-end: auto; height: var(--hero-photo); }
+  .hero-figure img { object-position: 6% 0%; }
   .hero-figure::after {
-    background: linear-gradient(to bottom, transparent 38%, rgba(14, 12, 9, .8) 59%, var(--deep) 78%);
+    background: linear-gradient(to bottom, transparent 52%, rgba(14, 12, 9, .78) 84%, var(--deep) 100%);
   }
   .side { grid-template-columns: 1fr; }
   .quiet { min-height: 36svh; }
