@@ -794,7 +794,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 }
 .faq-item summary::-webkit-details-marker { display: none; }
 .faq-item summary:hover .faq-q { color: var(--accent); }
-.faq-q { font-family: var(--display); font-weight: 500; font-size: 1.22rem; line-height: 1.55; color: var(--ink); }
+.faq-q { font-family: var(--display); font-weight: 500; font-size: 1.22rem; line-height: 1.55; color: var(--ink); text-wrap: balance; }
 .faq-ic { position: relative; width: 14px; height: 14px; flex: none; margin-block-start: .65rem; }
 .faq-ic::before, .faq-ic::after {
   content: ''; position: absolute; inset-block-start: 50%; inset-inline-start: 0;
@@ -901,6 +901,8 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   .closing .closing-ch { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem 1rem; border: 0; }
   .closing .closing-ch li { border: 0; }
   .closing .closing-phone { grid-column: 1 / -1; }
+  /* The number keeps the reading edge of the headline above it. */
+  .closing .closing-ch .closing-phone a { justify-content: flex-start; }
   .closing .closing-ch a { justify-content: center; gap: .65rem; padding-block: .4rem; min-height: 48px; }
   .closing .closing-phone .ch-k { display: none; }
   .closing .closing-phone .ch-v { font-size: 1.7rem; font-weight: 500; line-height: 1.4; }
@@ -1066,8 +1068,10 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .foot-nap { display: grid; gap: .45rem; margin-block-start: 1.5rem; font-style: normal; text-align: start; color: var(--on-deep-2); font-size: .95rem; }
 
 .foot-grid nav h2 { font-size: .95rem; font-family: var(--sans); font-weight: 600; color: var(--accent-lt); margin-block-end: 1.1rem; }
-.foot-grid nav li + li { margin-block-start: .5rem; }
-.foot-grid nav a { color: var(--on-deep-2); font-size: .95rem; }
+/* Each link carries its own padding so the tap target is the row, not the
+   22px line of text. */
+.foot-grid nav li + li { margin-block-start: .1rem; }
+.foot-grid nav a { display: inline-block; padding-block: .45rem; color: var(--on-deep-2); font-size: .95rem; }
 .foot-grid nav a:hover { color: var(--accent-lt); }
 
 .foot-bottom { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; padding-block-start: 2rem; border-block-start: 1px solid var(--line-deep); font-size: .85rem; color: var(--on-deep-2); line-height: 1.8; }
@@ -1407,9 +1411,21 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   /* The dusk window portrait: face at the top of the frame. */
   .quiet { min-height: 40svh; }
   /* The arrows STAY on phones — this band is the site's main router, and a
-     row with no affordance reads as a statement, not a link. */
-  .route-list a { grid-template-columns: 3.4rem minmax(0, 1fr) 1.5rem; gap: 1.1rem; align-items: start; }
-  .route-arrow { align-self: center; }
+     row with no affordance reads as a statement, not a link. October 12:
+     number, title and arrow share the first line and the description runs
+     the full width beneath the title, so most rows read in two lines
+     instead of three and the arrow sits beside the name it belongs to. */
+  .route-list a {
+    grid-template-columns: 2.6rem minmax(0, 1fr) 1.25rem;
+    grid-template-areas: "n q arrow" "n a a";
+    column-gap: .9rem; row-gap: .35rem; align-items: baseline;
+    padding-block: 1.5rem;
+  }
+  .route-body { display: contents; }
+  .route-n { grid-area: n; font-size: 1.75rem; }
+  .route-q { grid-area: q; margin: 0; }
+  .route-a { grid-area: a; }
+  .route-arrow { grid-area: arrow; align-self: center; }
   /* The about beat stacks only below 860px. Phones receive a dedicated 4:5
      portrait, so the suit and breathing room survive instead of collapsing
      into the oversized-face crop used by the desktop source. */
@@ -1427,6 +1443,21 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   /* Clearance for the fixed accessibility button, which otherwise sits on
      the disclaimer's last lines at the very end of the page. */
   .site-footer { padding-block-end: 5rem; }
+  /* Hebrew lines start at the right edge, so a button parked there covers
+     the first words of whatever scrolls under it. The left edge is where
+     RTL lines end ragged. */
+  .a11y-btn { inset-block-end: 1rem; inset-inline-start: auto; inset-inline-end: 1rem; }
+  .a11y-panel { inset-block-end: 4rem; inset-inline-start: auto; inset-inline-end: 1rem; }
+  /* The open drawer covers the header's left side, burger included; lift
+     the burger above it so its X is always there to close the menu. */
+  .burger { position: relative; z-index: 96; }
+  /* Phone reading measure for the credo: the desktop body size and double
+     leading turned three short paragraphs into a full screen of air. */
+  .statement .pull { margin-block-end: 1.8rem; }
+  .statement-body { gap: 1.1rem; }
+  .statement-body p { font-size: 1.125rem; line-height: 1.85; }
+  .faq-home .faq-q { font-size: 1.2rem; }
+  .faq-home .faq-a { padding-inline-end: 0; }
 }
 
 /* Narrow Androids (Galaxy S8 class, 360px wide): one more notch keeps the
@@ -1447,7 +1478,7 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .hero-col { max-width: none; }
   .hero .hero-col h1 { font-size: clamp(2rem, 9.6vw, 2.75rem); }
   .hero-services { margin-block-start: .65rem; font-size: 1rem; }
-  .hero-sub { margin-block-start: 1.1rem; max-width: 30ch; font-size: 1.08rem; line-height: 1.7; }
+  .hero-sub { margin-block-start: 1.1rem; max-width: none; font-size: 1.08rem; line-height: 1.7; text-wrap: pretty; }
   .hero-footer { display: flex; align-items: center; justify-content: space-between; gap: .75rem; margin-block-start: 1.35rem; }
   .hero-location { margin-block-start: 0; font-size: .9rem; }
   .hero-more { flex-shrink: 0; margin-block-start: 0; font-size: 1.05rem; gap: .65rem; }
@@ -1460,11 +1491,9 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .quiet { min-height: 36svh; }
   .portrait-media img { object-position: 50% 50%; }
   .btn { width: 100%; }
-  .a11y-btn { inset-block-end: 1rem; inset-inline-start: 1rem; }
   /* On phones the lead dialog is a bottom sheet: full width, rising from
      the bar the thumb already lives on. */
   .lead-dialog { width: 100vw; max-width: 100vw; margin: auto 0 0; max-height: 92dvh; overflow-y: auto; }
-  .a11y-panel { inset-block-end: 4rem; inset-inline-start: 1rem; }
 }
 
 @media print {
