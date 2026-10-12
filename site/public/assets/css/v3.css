@@ -1,0 +1,433 @@
+/* ============================================================
+   Home-page study V3 — the canon, executed at its best.
+   Everything is scoped to body.v3 and built on style.css's tokens
+   (--deep, --paper, --paper-2, --accent, --accent-lt, --on-deep,
+   --stone, --line-deep, --gold-line, --gap-sec, --ease).
+   Rhythm: hero dark · situations paper · method dark · about paper
+   · FAQ paper-2 · closing dark. Running text is weight 400 at every
+   ground, never under 18px on dark. Hebrew is never tracked.
+   ============================================================ */
+
+body.v3 {
+  font-weight: 400;
+  /* One extra tone for running copy on the deep ground: a step under
+     --on-deep so white headings still lead. 12.9:1 on --deep. */
+  --v3-body-deep: #e2dcd0;
+  /* Hairline on --paper-2, where --stone nearly vanishes (non-text). */
+  --v3-line-2: rgba(20, 17, 12, .14);
+}
+/* No single-word last lines in running copy, wherever it is set. */
+body.v3 main :is(p, .v3-item-l, .v3-creds li, figcaption) { text-wrap: pretty; }
+body.v3 .v3-nb { white-space: nowrap; }
+body.v3 .v3-method :focus-visible { outline-color: var(--accent-lt); }
+
+/* Shared section head: the canon's gold kicker over a heavy display H2. */
+body.v3 .v3-head { max-width: 44rem; margin-block-end: clamp(2.5rem, 1.6rem + 2.8vw, 4rem); }
+body.v3 :is(.v3-situations, .v3-method, .v3-about, .v3-faq) h2 {
+  font-size: clamp(2.05rem, 1.35rem + 2.3vw, 3.15rem);
+  font-weight: 700; line-height: 1.18;
+}
+body.v3 :is(#situations, #method, #about, #faq, #contact) { scroll-margin-block-start: 88px; }
+
+/* Text links on paper: underlined, a full 44px row to hit. */
+body.v3 .v3-link {
+  min-height: 44px; font-size: 1.125rem;
+  text-decoration: underline; text-underline-offset: .45em;
+  text-decoration-thickness: 1px; text-decoration-color: var(--accent-lt);
+}
+body.v3 .v3-link:hover { color: var(--ink); text-decoration-color: var(--accent); }
+
+/* ------------------------------------------------------------ hero
+   The live composition, kept. Two changes: the subtitle reads at weight
+   400 on one line per clause, and the blown-out window is pulled down. A
+   `darken` blend caps only the pixels brighter than a warm parchment
+   tone, so the white window falls to a soft warm haze while his face,
+   the suit and the dark wall (all darker) are left exactly as shot. A
+   shallow gradient then settles the window's outer edge and top. */
+
+/* The cap itself falls off like window light: brightest beside him, a
+   deeper parchment toward the frame's corners. */
+body.v3 .v3-hero .hero-figure::before {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(70% 90% at 19% 48%, #e2d6c0 0%, #cdbfa5 45%, #a99a80 100%);
+  mix-blend-mode: darken;
+}
+/* The gold bar under the services line (a span here, so it needs a box). */
+@media (min-width: 1101px) {
+  body.v3 .v3-hero-rule { display: block; margin-block-start: 1.6rem; }
+}
+body.v3 .v3-hero .hero-figure::after {
+  z-index: 1;
+  background:
+    linear-gradient(to right, rgba(14, 12, 9, .5) 0%, rgba(14, 12, 9, .16) 9%, rgba(14, 12, 9, 0) 20%),
+    linear-gradient(to bottom, rgba(14, 12, 9, .42) 0%, rgba(14, 12, 9, 0) 22%),
+    radial-gradient(130% 100% at 62% 38%, transparent 52%, rgba(14, 12, 9, .5) 100%);
+}
+body.v3 .v3-hero .hero-sub {
+  max-width: 40rem; font-weight: 400;
+  font-size: clamp(1.15rem, 1rem + .45vw, 1.35rem); line-height: 1.75;
+}
+body.v3 .v3-hero .hero-location { font-size: 1.05rem; font-weight: 400; }
+body.v3 .v3-hero .hero-more { font-size: 1.15rem; }
+body.v3 .v3-hero .hero-more .ic { transition: transform .3s var(--ease); }
+body.v3 .v3-hero .hero-more:hover .ic { transform: translateY(3px); }
+
+/* ------------------------------------------------------------ situations
+   Paper. Two life moments side by side; the family column carries the
+   "together" line under its two items, so both columns end level. */
+
+body.v3 .v3-situations { background: var(--paper); color: var(--ink); padding-block: var(--gap-sec); }
+body.v3 .v3-groups { display: grid; gap: clamp(3rem, 2rem + 3vw, 4.5rem); }
+
+body.v3 .v3-group-head { margin-block-end: 1.5rem; }
+body.v3 .v3-group-head h3 {
+  font-size: clamp(1.75rem, 1.3rem + 1.4vw, 2.4rem); font-weight: 600; line-height: 1.2;
+}
+body.v3 .v3-group-note { margin-block-start: .5rem; color: var(--muted); font-size: 1.125rem; line-height: 1.6; }
+
+body.v3 .v3-items { border-block-start: 1px solid var(--stone); }
+body.v3 .v3-items > li { position: relative; }
+/* The row hairline is drawn, not bordered, so it can draw itself in. */
+body.v3 .v3-items > li::after {
+  content: ''; position: absolute; inset-inline: 0; inset-block-end: 0;
+  height: 1px; background: var(--stone); transform-origin: 100% 50%;
+}
+/* The arrow rides the title's first line, beside the name it belongs to. */
+body.v3 .v3-items a {
+  display: grid; grid-template-columns: minmax(0, 1fr) 1.5rem;
+  align-items: start; gap: 1.25rem;
+  padding-block: clamp(1.25rem, 1rem + .7vw, 1.6rem);
+  color: var(--ink);
+}
+body.v3 .v3-items a:hover { text-decoration: none; }
+body.v3 .v3-items a:active { background: rgba(134, 100, 31, .06); }
+body.v3 .v3-item-t {
+  font-size: clamp(1.25rem, 1.1rem + .45vw, 1.45rem); font-weight: 600; line-height: 1.4;
+  margin-block-end: .3rem; color: var(--ink); transition: color .3s var(--ease);
+}
+body.v3 .v3-item-l { display: block; color: var(--ink-2); font-size: 1.125rem; line-height: 1.75; }
+body.v3 .v3-item-arrow {
+  display: grid; height: calc(clamp(1.25rem, 1.1rem + .45vw, 1.45rem) * 1.4); align-items: center;
+  color: var(--accent); transition: transform .35s var(--ease);
+}
+body.v3 .v3-items a:hover .v3-item-t { color: var(--accent); }
+body.v3 .v3-items a:hover .v3-item-arrow { transform: translateX(-6px); }
+
+/* The pull line: the client's own reason for one lawyer across both. */
+body.v3 .v3-together {
+  max-width: 34rem;
+  font-family: var(--display); font-weight: 500; word-spacing: normal;
+  font-size: clamp(1.3rem, 1.1rem + .7vw, 1.65rem); line-height: 1.65; color: var(--ink);
+  text-wrap: balance;
+}
+body.v3 .v3-together::before {
+  content: ''; display: block; width: 5.5rem; height: 3px;
+  background: var(--accent-lt); margin-block-end: 1.4rem; transform-origin: 100% 50%;
+}
+
+@media (min-width: 900px) {
+  body.v3 .v3-groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas: "g1 g2" "g1 t";
+    grid-template-rows: auto 1fr;
+    column-gap: clamp(3rem, 1rem + 5vw, 6.5rem); row-gap: 0;
+  }
+  body.v3 .v3-group-1 { grid-area: g1; }
+  body.v3 .v3-group-2 { grid-area: g2; }
+  body.v3 .v3-together { grid-area: t; align-self: start; margin-block-start: clamp(2.5rem, 1.5rem + 2vw, 3.5rem); }
+}
+
+/* ------------------------------------------------------------ method
+   Dark. The stamp still life is the band's stage; the managed question
+   sits on the dark wood as the section's H2; three titled steps follow
+   on the solid token, each under a short gold bar. */
+
+body.v3 .v3-method {
+  position: relative; isolation: isolate; overflow: hidden;
+  background: var(--deep); color: var(--on-deep);
+  padding-block-end: var(--gap-sec);
+}
+body.v3 .v3-method-stage {
+  position: relative;
+  min-height: clamp(26rem, 36vw, 34rem);
+  display: flex; align-items: flex-end;
+  padding-block: var(--gap-sec) clamp(2.5rem, 1.5rem + 2.5vw, 4rem);
+}
+body.v3 .v3-method-figure { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
+body.v3 .v3-method-figure img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 8% 58%;
+  filter: var(--grade); transform-origin: 22% 55%;
+}
+/* Every glyph sits on near-solid ground: the right side (the reading
+   side) is held at 90%+ of --deep, and the band's top and bottom
+   dissolve into the token. */
+body.v3 .v3-method-figure::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    linear-gradient(to left, rgba(14, 12, 9, .94) 0%, rgba(14, 12, 9, .86) 36%, rgba(14, 12, 9, 0) 64%),
+    linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 20%, rgba(14, 12, 9, 0) 60%, var(--deep) 100%);
+}
+body.v3 .v3-method-head { position: relative; z-index: 2; }
+body.v3 .v3-method-head > * { max-width: 36rem; }
+body.v3 .v3-method .label { color: var(--accent-lt); }
+body.v3 .v3-method h2 { color: #fff; font-size: clamp(2.2rem, 1.3rem + 3vw, 3.6rem); }
+
+body.v3 .v3-steps {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(2rem, 1rem + 3vw, 4rem);
+}
+body.v3 .v3-steps > li { position: relative; padding-block-start: 1.75rem; border-block-start: 1px solid var(--line-deep); }
+body.v3 .v3-steps > li::before {
+  content: ''; position: absolute; inset-block-start: -1px; inset-inline-start: 0;
+  width: 3rem; height: 2px; background: var(--accent-lt); transform-origin: 100% 50%;
+}
+body.v3 .v3-steps h3 {
+  color: #fff; font-size: clamp(1.3rem, 1.15rem + .5vw, 1.55rem); font-weight: 600;
+  margin-block-end: .75rem;
+}
+body.v3 .v3-steps p { color: var(--v3-body-deep); font-size: 1.15rem; line-height: 1.85; }
+
+/* ------------------------------------------------------------ about
+   Paper. The portrait leads on the reading side (the page zigzags: hero
+   and method put their subject left, so this one goes right), the copy
+   carries the lead, the note, the credentials as a quiet list, the
+   office line and the way on. */
+
+body.v3 .v3-about { background: var(--paper); color: var(--ink); padding-block: var(--gap-sec); }
+body.v3 .v3-about-grid {
+  display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1fr);
+  gap: clamp(2.5rem, 1rem + 5vw, 6.5rem); align-items: center;
+}
+body.v3 .v3-about-figure { margin: 0; }
+body.v3 .v3-about-figure img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; }
+body.v3 .v3-about-figure figcaption {
+  display: flex; align-items: center; gap: .9rem;
+  margin-block-start: 1rem; color: var(--muted); font-size: 1rem; line-height: 1.6;
+}
+body.v3 .v3-about-figure figcaption::before { content: ''; width: 2.4rem; height: 2px; background: var(--accent-lt); flex: none; }
+body.v3 .v3-about-copy { max-width: 36rem; }
+body.v3 .v3-about h2 { color: var(--ink); margin-block-end: 1.6rem; }
+body.v3 .v3-lead {
+  font-size: clamp(1.25rem, 1.1rem + .55vw, 1.5rem); line-height: 1.75;
+  color: var(--ink); margin-block-end: 1rem;
+}
+body.v3 .v3-note { font-size: 1.15rem; line-height: 1.85; color: var(--ink-2); margin-block-end: 2rem; }
+body.v3 .v3-creds { border-block-start: 1px solid var(--stone); margin-block-end: 1.6rem; }
+body.v3 .v3-creds li {
+  position: relative;
+  padding-block: .8rem; padding-inline-start: 1.6rem;
+  border-block-end: 1px solid var(--stone);
+  color: var(--ink-2); font-size: 1.125rem; line-height: 1.7;
+}
+/* The checklist's own geometry: one small gold diamond per fact. */
+body.v3 .v3-creds li::before {
+  content: ''; position: absolute;
+  inset-inline-start: 2px; inset-block-start: calc(.8rem + .85em - 3px);
+  width: 7px; height: 7px; background: var(--accent-lt); transform: rotate(45deg);
+}
+body.v3 .v3-office { color: var(--muted); font-size: 1.05rem; line-height: 1.7; margin-block-end: 1rem; }
+
+/* ------------------------------------------------------------ faq
+   Paper-2. Heading column on the reading side, the questions beside it. */
+
+body.v3 .v3-faq { background: var(--paper-2); color: var(--ink); padding-block: var(--gap-sec); }
+body.v3 .v3-faq-grid {
+  display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.1fr);
+  gap: clamp(2rem, 1rem + 4vw, 5.5rem); align-items: start;
+}
+body.v3 .v3-faq h2 { color: var(--ink); }
+body.v3 .v3-faq-desc { margin-block-start: 1rem; color: var(--ink-2); font-size: 1.15rem; line-height: 1.75; max-width: 22rem; }
+body.v3 .v3-faq-list { max-width: none; border-block-start-color: var(--v3-line-2); margin-block-end: 1.5rem; }
+body.v3 .v3-faq .faq-item { border-block-end-color: var(--v3-line-2); }
+body.v3 .v3-faq .faq-item summary { align-items: start; gap: 1rem; padding-block: 1.4rem; }
+body.v3 .v3-faq .faq-q {
+  font-size: clamp(1.22rem, 1.1rem + .4vw, 1.4rem); font-weight: 600; line-height: 1.5;
+  white-space: pre-line; transition: color .25s var(--ease);
+}
+/* A 44px target around the plus, which still sits on the question's
+   first line. */
+body.v3 .v3-faq .faq-ic { width: 44px; height: 44px; margin-block-start: -.45rem; }
+body.v3 .v3-faq .faq-ic::before,
+body.v3 .v3-faq .faq-ic::after { width: 16px; inset-inline-start: 14px; }
+body.v3 .v3-faq .faq-a { max-width: 44rem; padding-inline-end: 3.75rem; padding-block-end: 1.6rem; }
+body.v3 .v3-faq .faq-a p { color: var(--ink-2); font-size: 1.15rem; line-height: 1.85; }
+body.v3 .v3-faq .faq-a p + p { margin-block-start: .9rem; }
+
+/* ------------------------------------------------------------ closing
+   Dark. .closing keeps the armchairs, the lamp glow and the room warming
+   on arrival from style.css. V3 adds the three steps between the
+   invitation and the channels: reassurance first, then the ask. */
+
+body.v3 .v3-closing h2 { color: #fff; font-size: clamp(2.05rem, 1.35rem + 2.3vw, 3.15rem); font-weight: 700; max-width: 14em; }
+body.v3 .v3-closing .closing-sub {
+  color: var(--v3-body-deep); font-weight: 400; font-size: 1.2rem; line-height: 1.75; max-width: 36rem;
+}
+body.v3 .v3-after h3 {
+  display: flex; align-items: center; gap: .8rem;
+  font-family: var(--sans); font-size: 1.125rem; font-weight: 600; line-height: 1.6;
+  color: var(--accent-lt); margin-block-end: 1rem;
+}
+body.v3 .v3-after h3::after { content: ''; width: 2.4rem; height: 2px; background: var(--accent-lt); flex: none; }
+body.v3 .v3-after-list { counter-reset: v3-step; border-block-start: 1px solid var(--line-deep); }
+body.v3 .v3-after-list > li {
+  counter-increment: v3-step;
+  display: grid; grid-template-columns: 2rem minmax(0, 1fr); column-gap: .9rem;
+  padding-block: 1.15rem; border-block-end: 1px solid var(--line-deep);
+}
+/* The sequence carries information here (this happens, then this), so the
+   steps keep their order marks — small, gold, on the first line. */
+body.v3 .v3-after-list > li::before {
+  content: counter(v3-step); grid-row: 1 / span 2;
+  font-family: var(--display); font-weight: 500; font-size: 1.3rem; line-height: 1.45;
+  color: var(--accent-lt);
+}
+body.v3 .v3-after-list h4 { font-size: 1.22rem; font-weight: 600; line-height: 1.45; color: #fff; margin-block-end: .25rem; }
+body.v3 .v3-after-list p { font-size: 1.125rem; line-height: 1.75; color: var(--v3-body-deep); }
+
+body.v3 .v3-closing .ch-v { font-size: 1.15rem; font-weight: 500; }
+body.v3 .v3-closing .closing-cta { margin-block-start: 1.6rem; }
+body.v3 .v3-close-office { margin-block-start: 1.2rem; color: var(--on-deep-2); font-size: 1.125rem; line-height: 1.7; }
+
+@media (min-width: 861px) {
+  body.v3 .v3-closing { min-height: 0; display: block; padding-block: calc(var(--gap-sec) * 1.05); }
+  /* The photograph holds the left half and dissolves into the ground
+     before the text column; the lamp glow follows it (its arithmetic
+     runs on the figure's own box). */
+  /* The frame is also capped in height and centred, so the photograph is
+     not blown up by a tall text column: the armchairs stay whole and stop
+     short of the copy instead of running under it. */
+  body.v3 .v3-closing .closing-figure {
+    right: auto; width: 56%;
+    height: min(100%, 48vw); margin-block: auto;
+  }
+  body.v3 .v3-closing .closing-figure::after {
+    background:
+      linear-gradient(to left, var(--deep) 0%, rgba(14, 12, 9, .55) 20%, rgba(14, 12, 9, 0) 46%),
+      linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 14%, rgba(14, 12, 9, 0) 86%, var(--deep) 100%);
+  }
+  body.v3 .v3-closing .closing-grid {
+    width: min(44rem, 52%);
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas: "copy copy" "after act";
+    column-gap: clamp(2rem, 1rem + 2.5vw, 3.5rem); row-gap: 2.6rem;
+    align-items: start;
+  }
+  body.v3 .v3-closing .closing-copy { grid-area: copy; }
+  body.v3 .v3-closing .v3-after { grid-area: after; }
+  body.v3 .v3-closing .closing-act { grid-area: act; padding-block-start: calc(1rem * 1.6 + 1rem); }
+}
+@media (min-width: 861px) and (max-width: 1180px) {
+  body.v3 .v3-closing .closing-figure { width: 44%; }
+  body.v3 .v3-closing .closing-grid { width: min(40rem, 58%); grid-template-columns: minmax(0, 1fr); grid-template-areas: "copy" "after" "act"; }
+  /* Stacked: the steps' closing hairline already draws this edge. */
+  body.v3 .v3-closing .closing-act { padding-block-start: 0; margin-block-start: -1.4rem; }
+  body.v3 .v3-closing .closing-act .closing-ch { border-block-start: 0; }
+}
+
+/* ------------------------------------------------------------ footer
+   The shared footer, read at weight 400 like the rest of this page. */
+body.v3 .site-footer :is(.foot-nap, .foot-grid nav a, .foot-bottom) { font-weight: 400; }
+
+/* ------------------------------------------------------------ tablet + phone */
+
+@media (max-width: 1100px) {
+  /* The figure is the left 57% and fades into the ground on its right
+     edge; the window glare is now most of it, so the top settles too. */
+  body.v3 .v3-hero .hero-figure::after {
+    background:
+      linear-gradient(to left, var(--deep), rgba(14, 12, 9, 0) 25%),
+      linear-gradient(to bottom, rgba(14, 12, 9, .4) 0%, rgba(14, 12, 9, 0) 24%);
+  }
+  body.v3 .v3-hero .hero-sub { font-size: 1.15rem; }
+}
+
+@media (max-width: 899px) {
+  body.v3 .v3-together { margin-block-start: -.5rem; }
+}
+
+@media (max-width: 860px) {
+  body.v3 .v3-method-stage { display: block; min-height: 0; padding: 0; }
+  body.v3 .v3-method-figure { position: relative; inset: auto; aspect-ratio: 16 / 10; }
+  body.v3 .v3-method-figure img { object-position: 14% 55%; }
+  body.v3 .v3-method-figure::after {
+    background: linear-gradient(to bottom, rgba(14, 12, 9, 0) 45%, var(--deep) 100%);
+  }
+  body.v3 .v3-method-head { margin-block-start: -1.5rem; margin-block-end: 2.25rem; }
+  body.v3 .v3-steps { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
+  body.v3 .v3-steps p { font-size: 1.125rem; line-height: 1.8; }
+
+  body.v3 .v3-about { padding-block-start: 0; }
+  body.v3 .v3-about-grid { grid-template-columns: minmax(0, 1fr); width: 100%; gap: 0; }
+  body.v3 .v3-about-figure img { aspect-ratio: 4 / 5; object-position: 50% 28%; }
+  body.v3 .v3-about-figure figcaption { padding-inline: 1.25rem; }
+  body.v3 .v3-about-copy { max-width: none; padding: 2.25rem 1.25rem 0; }
+
+  body.v3 .v3-faq-grid { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
+  body.v3 .v3-faq .faq-a { padding-inline-end: 0; }
+
+  body.v3 .v3-closing .closing-grid { gap: 2.25rem; }
+  body.v3 .v3-closing h2 { font-size: clamp(1.75rem, 7vw, 2.2rem); line-height: 1.25; }
+  body.v3 .v3-closing .closing-sub { font-size: 1.125rem; line-height: 1.7; max-width: none; }
+  body.v3 .v3-closing .closing-act .closing-cta { margin-block-start: 1.25rem; }
+}
+
+@media (max-width: 600px) {
+  body.v3 .v3-about-figure img { aspect-ratio: 4 / 5; }
+}
+
+@media (max-width: 560px) {
+  /* Phones: the window portrait is cropped to the man at the window, so
+     the frame is mostly window. The darken cap holds the haze; the top
+     settles a little more and the bottom dissolves into the name. */
+  body.v3 .v3-hero .hero-figure::before {
+    background: radial-gradient(80% 70% at 32% 40%, #e2d6c0 0%, #cdbfa5 45%, #a99a80 100%);
+  }
+  body.v3 .v3-hero .hero-figure::after {
+    background:
+      linear-gradient(to bottom, rgba(14, 12, 9, .38) 0%, rgba(14, 12, 9, 0) 20%, rgba(14, 12, 9, 0) 52%, rgba(14, 12, 9, .78) 84%, var(--deep) 100%);
+  }
+  body.v3 .v3-hero .hero-services { font-size: 1.125rem; }
+  body.v3 .v3-hero .hero-sub { font-size: 1.125rem; line-height: 1.7; }
+  body.v3 .v3-hero .hero-location { font-size: 1rem; }
+  body.v3 .v3-hero .hero-more { font-size: 1.125rem; }
+  body.v3 .v3-items a { gap: .9rem; }
+}
+
+/* ------------------------------------------------------------ motion
+   Three authored moments, all on main.js's reveal hook. Hidden starting
+   states exist only under html.reveal-on (motion allowed, JS running),
+   only on screens, and never under the a11y motion toggle.
+   - Situation rows rise in order while their hairlines draw from the
+     RTL edge; the pull line's gold bar draws after them.
+   - The method: kicker and question rise, the steps follow, each gold
+     bar drawing, while the stamp settles a touch closer.
+   - The closing: style.css switches the lamp on and warms the room;
+     the steps arrive between the invitation and the channels. */
+
+@media screen {
+  html.reveal-on:not([data-motion="0"]) body.v3 .v3-items > li:not(.is-in),
+  html.reveal-on:not([data-motion="0"]) body.v3 .v3-together:not(.is-in),
+  html.reveal-on:not([data-motion="0"]) body.v3 .v3-method:not(.is-in) :is(.v3-method-head > *, .v3-steps > li),
+  html.reveal-on:not([data-motion="0"]) body.v3 .v3-closing:not(.is-in) .v3-after { opacity: 0; }
+  html.reveal-on:not([data-motion="0"]) body.v3 .v3-items > li:not(.is-in)::after,
+  html.reveal-on:not([data-motion="0"]) body.v3 .v3-together:not(.is-in)::before,
+  html.reveal-on:not([data-motion="0"]) body.v3 .v3-method:not(.is-in) .v3-steps > li::before { transform: scaleX(0); }
+
+  html.reveal-on body.v3 .v3-items > li.is-in { animation: reveal-rise .75s var(--ease) var(--reveal-delay, 0ms) both; }
+  html.reveal-on body.v3 .v3-items > li.is-in::after { animation: reveal-draw .9s var(--ease) calc(var(--reveal-delay, 0ms) + .1s) both; }
+  html.reveal-on body.v3 .v3-together.is-in { animation: reveal-rise .8s var(--ease) both; }
+  html.reveal-on body.v3 .v3-together.is-in::before { animation: reveal-draw .8s var(--ease) .25s both; }
+
+  html.reveal-on body.v3 .v3-method.is-in .v3-method-head > * { animation: reveal-rise .8s var(--ease) both; }
+  html.reveal-on body.v3 .v3-method.is-in .v3-method-head h2 { animation-delay: .12s; }
+  html.reveal-on body.v3 .v3-method.is-in .v3-steps > li { animation: reveal-rise .8s var(--ease) .35s both; }
+  html.reveal-on body.v3 .v3-method.is-in .v3-steps > li:nth-child(2) { animation-delay: .5s; }
+  html.reveal-on body.v3 .v3-method.is-in .v3-steps > li:nth-child(3) { animation-delay: .65s; }
+  html.reveal-on body.v3 .v3-method.is-in .v3-steps > li::before { animation: reveal-draw .7s var(--ease) .55s both; }
+  html.reveal-on body.v3 .v3-method.is-in .v3-steps > li:nth-child(2)::before { animation-delay: .7s; }
+  html.reveal-on body.v3 .v3-method.is-in .v3-steps > li:nth-child(3)::before { animation-delay: .85s; }
+  html.reveal-on body.v3 .v3-method.is-in .v3-method-figure img { animation: stamp-closer 7s cubic-bezier(.2, .6, .2, 1) both; }
+
+  html.reveal-on body.v3 .v3-closing.is-in .v3-after { animation: reveal-rise .8s var(--ease) .45s both; }
+}

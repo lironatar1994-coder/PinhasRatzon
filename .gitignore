@@ -33,3 +33,6 @@ desktop.ini
 .claude/
 New Text Document.txt
 skills-lock.json
+
+# Parallel builds of the home-page studies
+dist-*/

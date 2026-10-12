@@ -133,7 +133,7 @@ const routeList = () => `
    LL.B: about), and it occupied the most valuable scroll position on the
    page answering a question nobody asked there. */
 
-const PRINCIPLES = [
+export const PRINCIPLES = [
   ['בדיקה לפני התחייבות',
    'לפני החתימה נבדקים הרישום, המצב התכנוני, היתרי הבנייה, השעבודים, העיקולים והערות האזהרה.'],
   ['מס בשלב התכנון',
@@ -142,7 +142,7 @@ const PRINCIPLES = [
    'הליווי כולל את רישום הזכויות בטאבו, ברמ״י או בחברה המשכנת, לפי סוג הנכס.'],
 ];
 
-const HOME_FAQS = [
+export const HOME_FAQS = [
   {
     q: 'אני קונה דירה מקבלן.\nצריך עורך דין מטעמי?',
     a: 'כן. עורך הדין של הקבלן מייצג את הקבלן.\n\nחשוב לבדוק את תנאי ההסכם, מועדי המסירה, הערבויות ותנאי התשלום.',

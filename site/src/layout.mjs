@@ -203,6 +203,20 @@ export function contactForm({ id = 'c', compact = false } = {}) {
 
 /* The closing note — one quiet invitation at the end of the reading, not a
    banner shouting mid-page. */
+/* The lead form in a dialog. main.js opens it from any .closing-cta link. */
+export function leadDialog() {
+  return `<dialog class="lead-dialog" aria-label="השארת פרטים">
+    <div class="dlg-body">
+      <div class="dlg-head">
+        <p class="label">השארת פרטים</p>
+        <button type="button" class="dlg-close" aria-label="סגירה">&times;</button>
+      </div>
+      <p class="dlg-sub">השאירו שם וטלפון ואחזור אליכם.</p>
+      ${contactForm({ id: 'd', compact: true })}
+    </div>
+  </dialog>`;
+}
+
 export function closing({ h2 }) {
   return `
 <section class="closing" data-reveal>
@@ -224,16 +238,7 @@ export function closing({ h2 }) {
       <a class="btn closing-cta" href="/contact/">להשארת פרטים</a>
     </div>
   </div>
-  <dialog class="lead-dialog" aria-label="השארת פרטים">
-    <div class="dlg-body">
-      <div class="dlg-head">
-        <p class="label">השארת פרטים</p>
-        <button type="button" class="dlg-close" aria-label="סגירה">&times;</button>
-      </div>
-      <p class="dlg-sub">השאירו שם וטלפון ואחזור אליכם.</p>
-      ${contactForm({ id: 'd', compact: true })}
-    </div>
-  </dialog>
+  ${leadDialog()}
 </section>`;
 }
 
@@ -317,6 +322,28 @@ export function footer() {
 const ext = (src) => (isManaged(src) ? '.jpg' : '.webp');
 const mime = (src) => (isManaged(src) ? 'image/jpeg' : 'image/webp');
 
+const CANON_CONTRACT = `<!--
+THESIS: The Israeli premium-lawyer canon — black, gold, cinematic photography —
+executed at the vertical's craft ceiling (mazeh.co.il) with none of its defects.
+It refuses the category's plugin clutter, never its glamour.
+OWN-WORLD: Near-black #0e0c09 bands alternating with warm white #fbfaf7; gold
+#c19b45 on dark / #86641f on light carrying kickers, rules, numerals and the one
+button; all-Heebo — display w600-700, body 20px w300 lh2; sharp corners, no cards.
+STORY: A visitor before a transaction/inheritance reads substance first — the
+route band answers "where am I standing" — and meets the ask only at the end.
+FIRST VIEWPORT: Solid black header with gold-boxed phone; full-bleed hero photo,
+subject left third, white display headline over the dark stone wall right,
+gold kicker above, gold bar below. On phones the hero is a cover: the
+listening photograph fills the screen, the type rises out of its shadowed
+lower half, and a three-fact strip follows. Below 861px the substance bands
+(statement, route) sit on paper — measured 2026-09-14 across 22 Israeli
+lawyer sites: dark opening screen, light body, is the market's rhythm.
+FORM: Category standard, user-pinned 2026-08-26 ("copy the Israeli market"),
+played straight — no concept roll. FINISH: unreviewed and undocumented is
+unfinished; this build ends with the finish review, the verdict, DESIGN.md,
+and every shipping raster carrying its provenance.
+-->`;
+
 export function page({
   path, title, description, body,
   schema = [], trail = null, ogType = 'website', noindex = false, overHero = false,
@@ -325,6 +352,10 @@ export function page({
      ellipsis on the wrong side — a share description short enough to fit
      whole never triggers the bug. Defaults to the SEO description. */
   shareDescription = null,
+  /* Home-page studies (/v1/ /v2/ /v3/): their own stylesheet and fonts after
+     the shared one, a body class to scope it, and their direction contract in
+     place of the canon's. */
+  extraHead = '', bodyClass = '', contract = null, themeColor = '#0E0C09',
 }) {
   const canonical = url(path);
   const graph = [attorneySchema(), ...schema];
@@ -360,7 +391,7 @@ export function page({
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://lawebs.co.il/images/portfolio-shares-20261008/pinhas.png">
 
-<meta name="theme-color" content="#0E0C09">
+<meta name="theme-color" content="${themeColor}">
 <link rel="icon" href="/assets/img/brand/pr-icon-96.png" type="image/png" sizes="96x96">
 <link rel="icon" href="/assets/img/brand/pr-icon-512.png" type="image/png" sizes="512x512">
 <link rel="apple-touch-icon" href="/assets/img/brand/pr-apple-180.png" sizes="180x180">
@@ -374,31 +405,13 @@ ${preloadImage ? (preloadPortrait
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700&display=swap">
 <link rel="stylesheet" href="/assets/css/style.css?v=${ASSET_V}">
-
+${extraHead.replaceAll('{v}', ASSET_V)}
 <script type="application/ld+json">${jsonld}</script>
 </head>
-<body>
-<!--
-THESIS: The Israeli premium-lawyer canon — black, gold, cinematic photography —
-executed at the vertical's craft ceiling (mazeh.co.il) with none of its defects.
-It refuses the category's plugin clutter, never its glamour.
-OWN-WORLD: Near-black #0e0c09 bands alternating with warm white #fbfaf7; gold
-#c19b45 on dark / #86641f on light carrying kickers, rules, numerals and the one
-button; all-Heebo — display w600-700, body 20px w300 lh2; sharp corners, no cards.
-STORY: A visitor before a transaction/inheritance reads substance first — the
-route band answers "where am I standing" — and meets the ask only at the end.
-FIRST VIEWPORT: Solid black header with gold-boxed phone; full-bleed hero photo,
-subject left third, white display headline over the dark stone wall right,
-gold kicker above, gold bar below. On phones the hero is a cover: the
-listening photograph fills the screen, the type rises out of its shadowed
-lower half, and a three-fact strip follows. Below 861px the substance bands
-(statement, route) sit on paper — measured 2026-09-14 across 22 Israeli
-lawyer sites: dark opening screen, light body, is the market's rhythm.
-FORM: Category standard, user-pinned 2026-08-26 ("copy the Israeli market"),
-played straight — no concept roll. FINISH: unreviewed and undocumented is
-unfinished; this build ends with the finish review, the verdict, DESIGN.md,
-and every shipping raster carrying its provenance.
--->
+<body${bodyClass ? ` class="${bodyClass}"` : ''}>
+${contract ? `<!--
+${contract}
+-->` : CANON_CONTRACT}
 ${header(path)}
 ${trail ? breadcrumbs(trail) : ''}
 <main id="main">

@@ -7,7 +7,7 @@ import { join, extname, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { BASE_PATH } from './src/site.mjs';
 
-const DIST = join(dirname(fileURLToPath(import.meta.url)), 'dist');
+const DIST = join(dirname(fileURLToPath(import.meta.url)), process.env.DIST_DIR || 'dist');
 const PORT = Number(process.env.PORT) || 4173;
 
 const TYPES = {

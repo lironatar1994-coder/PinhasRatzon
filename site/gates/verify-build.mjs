@@ -32,7 +32,8 @@ const indexable = [
   '/', '/practice-areas/', '/about/', '/faq/', '/contact/', '/accessibility/',
   ...PRACTICE.map((p) => `/practice-areas/${p.slug}/`),
 ];
-const unlisted = ['/thank-you/', '/404.html'];
+// The October 12 home-page studies are live for comparison, noindex.
+const unlisted = ['/thank-you/', '/404.html', '/v1/', '/v2/', '/v3/'];
 
 for (const route of [...indexable, ...unlisted]) {
   const f = route.endsWith('.html') ? join(DIST, route.slice(1)) : join(DIST, route.slice(1), 'index.html');
@@ -50,7 +51,7 @@ if (!(await exists(join(DIST, 'robots.txt')))) fail('robots.txt missing');
 const sm = await readFile(join(DIST, 'sitemap.xml'), 'utf8');
 const locs = [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
 if (locs.length !== indexable.length) fail(`sitemap lists ${locs.length} urls, expected ${indexable.length}`);
-for (const u of locs) if (/thank-you|404/.test(u)) fail('sitemap lists a noindex url: ' + u);
+for (const u of locs) if (/thank-you|404|\/v[123]\//.test(u)) fail('sitemap lists a noindex url: ' + u);
 for (const route of indexable) {
   if (!locs.some((u) => u.endsWith(route))) fail('sitemap is missing route ' + route);
 }

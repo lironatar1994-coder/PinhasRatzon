@@ -1,7 +1,7 @@
 // Static site build. No dependencies — run with `node build.mjs`.
 // Output goes to dist/ and is deployable as-is to any static host.
 
-import { mkdir, writeFile, rm, cp, stat, readFile } from 'node:fs/promises';
+import { mkdir, writeFile, rm, cp, stat, readFile, readdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -13,9 +13,13 @@ import {
   home, practiceIndex, practicePage, about, faqPage, contact,
   accessibility, thankYou, notFound,
 } from './src/pages.mjs';
+import { homeV1 } from './src/versions/v1.mjs';
+import { homeV2 } from './src/versions/v2.mjs';
+import { homeV3 } from './src/versions/v3.mjs';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
-const DIST = join(ROOT, 'dist');
+// DIST_DIR lets parallel builds (the /v1/ /v2/ /v3/ studies) write side by side.
+const DIST = process.env.DIST_DIR ? join(ROOT, process.env.DIST_DIR) : join(ROOT, 'dist');
 const PUBLIC = join(ROOT, 'public');
 
 const base = SITE_URL.replace(/\/$/, '');
@@ -54,6 +58,11 @@ function buildRoutes() {
   // Not in the sitemap and marked noindex.
   unlisted.set('/thank-you/', thankYou());
   unlisted.set('/404.html', notFound());
+  // October 12 home-page studies, live for comparison, noindex and out of
+  // the sitemap. The chosen one replaces home() once picked.
+  unlisted.set('/v1/', homeV1());
+  unlisted.set('/v2/', homeV2());
+  unlisted.set('/v3/', homeV3());
 }
 
 /* ------------------------------------------------------------------ write */
@@ -124,7 +133,10 @@ async function main() {
     await cp(PUBLIC, DIST, { recursive: true });
   }
 
-  const css = await readFile(join(PUBLIC, 'assets/css/style.css'), 'utf8');
+  // Every stylesheet feeds the stamp, so a version study's CSS busts the cache too.
+  const cssDir = join(PUBLIC, 'assets/css');
+  const css = (await Promise.all((await readdir(cssDir)).filter((f) => f.endsWith('.css')).sort()
+    .map((f) => readFile(join(cssDir, f), 'utf8')))).join('\n');
   const js = await readFile(join(PUBLIC, 'assets/js/main.js'), 'utf8');
   const v = createHash('sha1').update(css + js).digest('hex').slice(0, 8);
   setAssetVersion(v);
