@@ -1,13 +1,33 @@
-/* Shared content for the October 12 home-page studies (/v1/ /v2/ /v3/).
-   Every study renders exactly this copy, so the comparison is between visual
-   worlds, not between texts. Everything here already exists elsewhere on the
+/* Home page content (October 12 restructure). Everything here already exists elsewhere on the
    site in the client's own words, or is a fact from the About page; nothing
    is invented. Fields marked `managed` are Manager Site slots on the live
    home page: keep their data-manager-text marker on the element that holds
    that text, exactly once per page. */
 
 import { BIZ } from '../site.mjs';
-import { HOME_FAQS } from '../pages.mjs';
+
+const HOME_FAQS = [
+  {
+    q: 'אני קונה דירה מקבלן.\nצריך עורך דין מטעמי?',
+    a: 'כן. עורך הדין של הקבלן מייצג את הקבלן.\n\nחשוב לבדוק את תנאי ההסכם, מועדי המסירה, הערבויות ותנאי התשלום.',
+  },
+  {
+    q: 'מה ההבדל בין צו ירושה לצו קיום צוואה?',
+    a: 'כשאין צוואה, החלוקה נעשית לפי חוק הירושה ומוגשת בקשה לצו ירושה. כשיש צוואה, מגישים בקשה לצו קיום צוואה שנותן לה תוקף. שתי הבקשות מוגשות לרשם לענייני ירושה, ובמקרים מסוימים מועברות לבית המשפט לענייני משפחה.',
+  },
+  {
+    q: 'מתי כדאי לערוך ייפוי כוח מתמשך?',
+    a: 'אפשר לערוך אותו כל עוד האדם כשיר ומבין את משמעות המסמך. הוא מאפשר לקבוע מראש מי יטפל בענייניכם ואילו הנחיות יחולו.',
+  },
+  {
+    q: 'שילמתי מס שבח. אפשר לקבל החזר?',
+    a: 'לעיתים כן. החזרים נובעים בדרך כלל מפטורים שלא נוצלו, מחישוב לינארי, מפריסת מס או מהוצאות מוכרות שלא נכללו בדיווח המקורי. להגשת השגה קבועים בחוק מועדים, ולכן כדאי לבדוק מוקדם.',
+  },
+  {
+    q: 'באילו אזורים אתה מטפל?',
+    a: `${BIZ.areaServed.slice(0, 6).join(', ')} ויתר אזור גוש דן והמרכז. חלק ניכר מהעבודה ממילא מתנהל מול לשכות רישום, רשות המסים ורשם הירושות, ולכן המרחק פחות קריטי ממה שנדמה.`,
+  },
+];
 
 export const HERO = {
   name: 'עו״ד פנחס רצון',

@@ -13,12 +13,9 @@ import {
   home, practiceIndex, practicePage, about, faqPage, contact,
   accessibility, thankYou, notFound,
 } from './src/pages.mjs';
-import { homeV1 } from './src/versions/v1.mjs';
-import { homeV2 } from './src/versions/v2.mjs';
-import { homeV3 } from './src/versions/v3.mjs';
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
-// DIST_DIR lets parallel builds (the /v1/ /v2/ /v3/ studies) write side by side.
+// DIST_DIR lets parallel builds write side by side (used for the 2026-10-12 studies).
 const DIST = process.env.DIST_DIR ? join(ROOT, process.env.DIST_DIR) : join(ROOT, 'dist');
 const PUBLIC = join(ROOT, 'public');
 
@@ -58,11 +55,6 @@ function buildRoutes() {
   // Not in the sitemap and marked noindex.
   unlisted.set('/thank-you/', thankYou());
   unlisted.set('/404.html', notFound());
-  // October 12 home-page studies, live for comparison, noindex and out of
-  // the sitemap. The chosen one replaces home() once picked.
-  unlisted.set('/v1/', homeV1());
-  unlisted.set('/v2/', homeV2());
-  unlisted.set('/v3/', homeV3());
 }
 
 /* ------------------------------------------------------------------ write */
@@ -133,7 +125,7 @@ async function main() {
     await cp(PUBLIC, DIST, { recursive: true });
   }
 
-  // Every stylesheet feeds the stamp, so a version study's CSS busts the cache too.
+  // Every stylesheet feeds the stamp, so a page-specific sheet (home.css) busts the cache too.
   const cssDir = join(PUBLIC, 'assets/css');
   const css = (await Promise.all((await readdir(cssDir)).filter((f) => f.endsWith('.css')).sort()
     .map((f) => readFile(join(cssDir, f), 'utf8')))).join('\n');

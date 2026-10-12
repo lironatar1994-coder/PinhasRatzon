@@ -15,44 +15,12 @@ const YEARS = BIZ.yearsExperience;
    except the CMS-managed slots (site.mjs MANAGED_IMAGES), which ship as the
    JPG alone so a client upload is what the browser shows. */
 export const IMAGES = {
-  portrait: '/assets/img/pinchas-ratzon',
-  hero: '/assets/img/hero-room',
-  heroPortrait: '/assets/img/hero-listening-mobile',
-  bandPlansDay: '/assets/img/band-plans-daylight',
-  bandStampDay: '/assets/img/band-stamp-daylight',
   quietPlans: '/assets/img/band-plans',
-  bandKey: '/assets/img/band-key',
-  bandStampLight: '/assets/img/band-stamp-light-v1',
-  bandChairs: '/assets/img/band-chairs',
-  bandStamp: '/assets/img/band-stamp',
 };
 
 /* Managed slots use JPG so edits in Manager Site remain visible. */
 const webpSource = (src, media = '') =>
   isManaged(src) ? '' : `<source${media ? ` media="${media}"` : ''} type="image/webp" srcset="${src}.webp">\n      `;
-
-/* October 12: one hero photograph at every width, so the phone opens on the
-   same window portrait as desktop. The CSS crops it to the subject. */
-const heroPhoto = (alt) => `<picture>
-      ${webpSource(IMAGES.hero)}<img src="${IMAGES.hero}.jpg" alt="${esc(alt)}" width="1920" height="1084" fetchpriority="high" decoding="async">
-    </picture>`;
-
-/* Manager Site slots this layout no longer shows. check-manager-content.mjs
-   requires every slot path in the generated HTML, and a <template> keeps the
-   references inert: nothing inside it is rendered or fetched. */
-const retiredSlots = () => `<template class="managed-retired">
-  <img src="${IMAGES.heroPortrait}.jpg" alt="">
-  <img src="${IMAGES.bandPlansDay}.jpg" alt="">
-  <img src="/assets/img/round7/contact-consultation-desktop-v2.png" alt="">
-  <img src="/assets/img/closing-consultation-mobile.jpg" alt="">
-</template>`;
-
-/* The home-page introduction uses a composed portrait on phones rather than
-   forcing the desktop frame through a shallow crop. */
-const portraitPhoto = (alt) => `<picture>
-      <source media="(max-width: 860px)" type="image/jpeg" srcset="/assets/img/about-mobile-portrait-v1.jpg">
-      ${webpSource(IMAGES.portrait)}<img src="${IMAGES.portrait}.jpg" alt="${esc(alt)}" width="980" height="1225" loading="lazy" decoding="async">
-    </picture>`;
 
 function photo(src, { alt, w, h, cls = '', note = 'תמונה, להוספה', priority = false }) {
   if (!src) {
@@ -65,13 +33,6 @@ function photo(src, { alt, w, h, cls = '', note = 'תמונה, להוספה', pr
       ${webpSource(src)}<img class="${cls}" src="${src}.jpg" alt="${esc(alt)}" width="${w}" height="${h}" ${load}>
     </picture>`;
 }
-
-const secHead = (label, h2, sub = '') => `
-<div class="sec-head">
-  <p class="label">${esc(label)}</p>
-  <h2>${esc(h2)}</h2>
-  ${sub ? `<p class="sec-sub">${esc(sub)}</p>` : ''}
-</div>`;
 
 /* An editorial index, not a card grid: number, name, one line, hairline. */
 const practiceIndexList = (level = 3) => `
@@ -88,51 +49,6 @@ const practiceIndexList = (level = 3) => `
   </li>`).join('\n  ')}
 </ol>`;
 
-/* The home page routes by the reader's own situation rather than by practice
-   area. Each entry still resolves to one practice page, so the taxonomy is
-   fully covered and nothing is listed twice on the page. */
-/* Headlines in the client's own voice, answers tuned to the situation —
-   not the practice teasers, which speak the taxonomy this band exists to
-   spare the visitor from. */
-const ROUTE = [
-  ['real-estate-transactions',   'קנייה או מכירה של נכס',
-   'בדיקת הנכס וההסכם, טיפול במיסוי וליווי עד לרישום הזכויות.'],
-  ['real-estate-tax',            'מיסוי מקרקעין',
-   'תכנון מס ודיווח על עסקאות, בדיקת פטורים אפשריים, השגות והחזרי מס.'],
-  ['condominium-registration',   'רישום זכויות בנכס',
-   'רישום ותיקון צו בית משותף, כולל הצמדות, תקנונים וזיקות הנאה.'],
-  ['wills-inheritance',          'צוואות וירושות',
-   'עריכת צוואות, בקשות לצווי ירושה ולצווי קיום צוואה, והסכמות בין יורשים.'],
-  ['enduring-power-of-attorney', 'ייפוי כוח מתמשך',
-   'עריכת ייפוי כוח מתמשך, הנחיות מקדימות ומסמכי הבעת רצון.'],
-  ['partition-receivership',     'פירוק שיתוף וכינוס נכסים',
-   'טיפול בנכסים משותפים, בהליכי פירוק שיתוף, בכינוס נכסים ובמימושם.'],
-];
-
-const routeList = () => `
-<ol class="route-list">
-  ${ROUTE.map(([slug, situation, answer], i) => {
-    const p = bySlug[slug];
-    return `<li data-reveal>
-    <a href="/practice-areas/${p.slug}/">
-      <span class="route-n" dir="ltr" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
-      <span class="route-body">
-        <h3 class="route-q">${esc(situation)}</h3>
-        <span class="route-a">${esc(answer)}</span>
-      </span>
-      <span class="route-arrow" aria-hidden="true">${icon('arrow', 20)}</span>
-    </a>
-  </li>`;
-  }).join('\n  ')}
-</ol>`;
-
-/* The credentials band this vertical ships (medallions/stats) was tried here
-   as an honest facts strip and DELETED at the client's call (2026-08-26):
-   every fact it carried already lives elsewhere (hero eyebrow: since 2011;
-   statement: the 15 years; the POA certification: its own page + about;
-   LL.B: about), and it occupied the most valuable scroll position on the
-   page answering a question nobody asked there. */
-
 export const PRINCIPLES = [
   ['בדיקה לפני התחייבות',
    'לפני החתימה נבדקים הרישום, המצב התכנוני, היתרי הבנייה, השעבודים, העיקולים והערות האזהרה.'],
@@ -142,125 +58,8 @@ export const PRINCIPLES = [
    'הליווי כולל את רישום הזכויות בטאבו, ברמ״י או בחברה המשכנת, לפי סוג הנכס.'],
 ];
 
-export const HOME_FAQS = [
-  {
-    q: 'אני קונה דירה מקבלן.\nצריך עורך דין מטעמי?',
-    a: 'כן. עורך הדין של הקבלן מייצג את הקבלן.\n\nחשוב לבדוק את תנאי ההסכם, מועדי המסירה, הערבויות ותנאי התשלום.',
-  },
-  {
-    q: 'מה ההבדל בין צו ירושה לצו קיום צוואה?',
-    a: 'כשאין צוואה, החלוקה נעשית לפי חוק הירושה ומוגשת בקשה לצו ירושה. כשיש צוואה, מגישים בקשה לצו קיום צוואה שנותן לה תוקף. שתי הבקשות מוגשות לרשם לענייני ירושה, ובמקרים מסוימים מועברות לבית המשפט לענייני משפחה.',
-  },
-  {
-    q: 'מתי כדאי לערוך ייפוי כוח מתמשך?',
-    a: 'אפשר לערוך אותו כל עוד האדם כשיר ומבין את משמעות המסמך. הוא מאפשר לקבוע מראש מי יטפל בענייניכם ואילו הנחיות יחולו.',
-  },
-  {
-    q: 'שילמתי מס שבח. אפשר לקבל החזר?',
-    a: 'לעיתים כן. החזרים נובעים בדרך כלל מפטורים שלא נוצלו, מחישוב לינארי, מפריסת מס או מהוצאות מוכרות שלא נכללו בדיווח המקורי. להגשת השגה קבועים בחוק מועדים, ולכן כדאי לבדוק מוקדם.',
-  },
-  {
-    q: 'באילו אזורים אתה מטפל?',
-    a: `${BIZ.areaServed.slice(0, 6).join(', ')} ויתר אזור גוש דן והמרכז. חלק ניכר מהעבודה ממילא מתנהל מול לשכות רישום, רשות המסים ורשם הירושות, ולכן המרחק פחות קריטי ממה שנדמה.`,
-  },
-];
-
-/* ---------------------------------------------------------------- home */
-
-export function home() {
-  const body = `
-<section class="hero">
-  <div class="hero-figure">
-    ${heroPhoto(`${BIZ.shortName}, עורך דין מקרקעין, מיסוי מקרקעין ועיזבונות ב${BIZ.city}`)}
-  </div>
-  <div class="wrap hero-inner">
-    <div class="hero-col">
-      <h1><span class="hero-line">עו״ד פנחס רצון</span></h1>
-      <p class="hero-services">מקרקעין, מיסוי, צוואות וירושות</p>
-      <p class="hero-sub" data-manager-text="hero.subtitle">ליווי אישי בקנייה ובמכירה של נכס,
-מהבדיקות לפני החתימה ועד לרישום הזכויות.</p>
-      <div class="hero-footer">
-        <p class="hero-location">${esc(BIZ.city)} והמרכז</p>
-        <a class="hero-more" href="#practice-areas">לתחומי העיסוק ${icon('arrow', 18)}</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="statement" id="statement" data-reveal>
-  <div class="statement-media" aria-hidden="true">
-    ${photo(IMAGES.bandStamp, { alt: '', w: 1672, h: 941 })}
-  </div>
-  <div class="wrap statement-inner">
-      <p class="pull" data-manager-text="content.statement.title">מה בודקים לפני החתימה?</p>
-      <div class="statement-body">
-        <p data-manager-text="content.statement.paragraph1">אני מתחיל בבדיקת המסמכים: הזכויות בנכס, המצב התכנוני וההתחייבויות בהסכם.</p>
-        <p data-manager-text="content.statement.paragraph2">בהמשך נבדקים המיסוי ורישום הזכויות. אם יש פרט שצריך לברר או להסדיר, חשוב לטפל בו לפני שמתחייבים לעסקה.</p>
-        <p data-manager-text="content.statement.paragraph3">אני מטפל גם בהסכם ובדיווחים לרשויות, ומלווה את העסקה עד לרישום הזכויות.</p>
-      </div>
-  </div>
-</section>
-
-<section class="route" id="practice-areas">
-  <div class="wrap">
-      ${secHead('תחומי עיסוק', 'באילו נושאים אני מטפל')}
-    ${routeList()}
-  </div>
-</section>
-
-<section class="section portrait-sec portrait-introduction" id="about-intro" aria-labelledby="portrait-heading">
-  <div class="wrap">
-    <div class="portrait-media">
-      ${portraitPhoto(`${BIZ.shortName}, עורך דין מקרקעין ועיזבונות ב${BIZ.city}`)}
-    </div>
-    <div class="portrait-copy">
-      <h2 id="portrait-heading">${esc(BIZ.shortName)}</h2>
-      <p class="lead" data-manager-text="about.home.lead">אני עורך דין מאז 2011. עיקר העבודה שלי הוא בעסקאות מקרקעין, במיסוי מקרקעין, בצוואות ובירושות.</p>
-      <p class="portrait-note" data-manager-text="about.home.note">לאורך הטיפול אפשר לפנות אליי ישירות.</p>
-      <a class="textlink" href="/about/">עוד עליי ${icon('arrow', 18)}</a>
-    </div>
-  </div>
-</section>
-
-<section class="quiet quiet-light faq-introduction" id="faq-intro">
-  <div class="quiet-figure">
-    <picture>
-      <source media="(max-width: 860px)" srcset="${IMAGES.bandStampDay}.webp" type="image/webp">
-      <source media="(max-width: 860px)" srcset="${IMAGES.bandStampDay}.jpg" type="image/jpeg">
-      ${webpSource(IMAGES.bandStampLight)}<img src="${IMAGES.bandStampLight}.jpg" alt="" width="1920" height="1080" loading="lazy" decoding="async">
-    </picture>
-  </div>
-  <div class="wrap quiet-inner">
-    <h2 id="faq-heading">שאלות נפוצות</h2>
-    <p class="faq-description" data-manager-text="faq.home.title">על קניית דירה, מיסוי, צוואות וירושות.</p>
-  </div>
-</section>
-
-${faqBlock(HOME_FAQS, { h2: '', open: 0, className: 'faq-home', labelledBy: 'faq-heading', more: true })}
-
-${closing({ h2: 'נדבר על המקרה שלכם' })}
-
-${retiredSlots()}`;
-
-  const title = `עורך דין מקרקעין וצוואות ב${BIZ.city} | ${BIZ.shortName}`;
-  const description = `עו״ד פנחס רצון, ${BIZ.yearsExperience} שנות ניסיון בעסקאות מקרקעין, מיסוי, רישום בתים משותפים, צוואות וירושות ב${BIZ.city} ובמרכז.`;
-  return page({
-    path: '/',
-    title,
-    description,
-    shareDescription: `ניסיון של ${BIZ.yearsExperience} שנים במקרקעין, מיסוי, צוואות וירושות, ${BIZ.city} והמרכז`,
-    body,
-    overHero: true,
-    preloadImage: IMAGES.hero,
-    schema: [
-      { '@type': 'WebSite', '@id': url('/#website'), url: url('/'), name: BIZ.name, inLanguage: 'he-IL' },
-      /* Formerly injected by nginx (fleet SEO, 2026-10-09); page() adds the
-         language and primary image to every WebPage node. */
-      { '@type': 'WebPage', '@id': url('/#page'), url: url('/'), name: title, description },
-      faqSchema(HOME_FAQS),
-    ],
-  });
-}
+/* The home page lives in home.mjs. */
+export { home } from './home.mjs';
 
 /* ---------------------------------------------------------------- practice index */
 
