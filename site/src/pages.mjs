@@ -113,7 +113,7 @@ const routeList = () => `
 <ol class="route-list">
   ${ROUTE.map(([slug, situation, answer], i) => {
     const p = bySlug[slug];
-    return `<li>
+    return `<li data-reveal>
     <a href="/practice-areas/${p.slug}/">
       <span class="route-n" dir="ltr" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
       <span class="route-body">
@@ -187,7 +187,7 @@ export function home() {
   </div>
 </section>
 
-<section class="statement" id="statement">
+<section class="statement" id="statement" data-reveal>
   <div class="statement-media" aria-hidden="true">
     ${photo(IMAGES.bandStamp, { alt: '', w: 1672, h: 941 })}
   </div>

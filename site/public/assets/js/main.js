@@ -204,6 +204,30 @@
     faqGroups.forEach(function (g) { io.observe(g); });
   }
 
+  /* ------------------------------------------------------- reveals
+     Three authored moments past the hero: the statement, the practice rows
+     and the closing lamp. Their hidden starting states exist only under
+     html.reveal-on, so without JS, under reduced motion, or with the a11y
+     motion toggle every element simply shows. */
+
+  var revealables = document.querySelectorAll('[data-reveal]');
+  var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (revealables.length && 'IntersectionObserver' in window && !calm) {
+    root.classList.add('reveal-on');
+    var revealIO = new IntersectionObserver(function (entries) {
+      entries
+        .filter(function (en) { return en.isIntersecting; })
+        .sort(function (a, b) { return a.boundingClientRect.top - b.boundingClientRect.top; })
+        .forEach(function (en, k) {
+          // Rows that arrive together still read in order, top to bottom.
+          en.target.style.setProperty('--reveal-delay', Math.min(k, 5) * 110 + 'ms');
+          en.target.classList.add('is-in');
+          revealIO.unobserve(en.target);
+        });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.2 });
+    Array.prototype.forEach.call(revealables, function (el) { revealIO.observe(el); });
+  }
+
   /* ------------------------------------------------------- lead dialog */
   /* "השארת פרטים" opens the form in place; without JS (or without <dialog>
      support) the link keeps its default trip to the contact page. */

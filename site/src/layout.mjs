@@ -205,7 +205,7 @@ export function contactForm({ id = 'c', compact = false } = {}) {
    banner shouting mid-page. */
 export function closing({ h2 }) {
   return `
-<section class="closing">
+<section class="closing" data-reveal>
   <div class="closing-figure" aria-hidden="true">
     <img src="/assets/img/band-chairs.jpg" alt="" width="1672" height="941" loading="lazy" decoding="async">
   </div>

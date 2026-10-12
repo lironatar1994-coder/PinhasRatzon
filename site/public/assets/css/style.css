@@ -436,7 +436,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   background: var(--deep); color: var(--on-deep);
   padding-block: calc(var(--gap-sec) * 1.2);
 }
-.statement-media { position: absolute; inset-block: 0; left: 0; width: 46%; z-index: 0; }
+.statement-media { position: absolute; inset-block: 0; left: 0; width: 46%; z-index: 0; overflow: hidden; }
 .statement-media img {
   width: 100%; height: 100%; object-fit: cover; object-position: 16% 50%;
   filter: var(--grade);
@@ -804,9 +804,12 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 /* October 12: the meeting corner — two armchairs and a lamp — instead of a
    third close-up of Pinhas. The chairs hold the left of the frame and the
    contact column sits on the plain wall at the reading side. */
-.closing-figure { position: absolute; inset: 0; z-index: 0; }
+/* --fx/--fy are the crop anchor as fractions, shared by the photograph and
+   the lamp glow below so the glow always lands on the lamp. */
+.closing-figure { position: absolute; inset: 0; z-index: 0; --fx: .18; --fy: .62; }
 .closing-figure img {
-  width: 100%; height: 100%; object-fit: cover; object-position: 18% 62%;
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: calc(var(--fx) * 100%) calc(var(--fy) * 100%);
   filter: var(--grade);
 }
 .closing-figure::after {
@@ -829,8 +832,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   /* Phones: the same photograph opens the band and dissolves into the
      ground; every contact control sits below it on the solid token. */
   .closing { padding-block: 0 3.5rem; }
-  .closing-figure { position: relative; inset: auto; aspect-ratio: 4 / 3; }
-  .closing-figure img { object-position: 20% 70%; }
+  .closing-figure { position: relative; inset: auto; aspect-ratio: 4 / 3; --fx: .2; --fy: .7; }
   .closing-figure::after {
     background: linear-gradient(to bottom, rgba(14, 12, 9, 0) 52%, var(--deep) 100%);
   }
@@ -1065,6 +1067,98 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .hero-rule { transform-origin: 100% 50%; animation: hero-rule-in .6s var(--ease) .95s both; }
 .hero-sub { animation: hero-in .8s var(--ease) .6s both; }
 .hero-figure img { animation: hero-settle 2.2s var(--ease) both; }
+
+/* ------------------------------------------------------------ reveals
+   October 12: three authored moments past the hero, each acting out what
+   its band says instead of one generic fade on every section.
+   - The statement reads like a checklist: the gold bar draws, the question
+     rises, the three paragraphs follow in order, the stamp drifts closer.
+   - The practice rows arrive in order, each hairline drawing from the RTL
+     anchor.
+   - The closing lamp switches on, then the room warms around it.
+   main.js adds html.reveal-on (only when motion is allowed) and marks each
+   [data-reveal] element .is-in once it is on screen. Every hidden starting
+   state is scoped to that class, to screens, and off under the a11y motion
+   toggle, so no setting can strand content invisible. */
+
+@keyframes reveal-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes reveal-draw {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+@keyframes stamp-closer {
+  from { transform: scale(1); }
+  to { transform: scale(1.06); }
+}
+/* A warm bulb, not a fluorescent tube: one catch, then a steady glow. */
+@keyframes lamp-on {
+  0% { opacity: 0; }
+  5% { opacity: .55; }
+  9% { opacity: .18; }
+  30% { opacity: .5; }
+  100% { opacity: .5; }
+}
+@keyframes room-warms {
+  from { filter: var(--grade) brightness(.3) saturate(.7); }
+  to { filter: var(--grade) brightness(1) saturate(1); }
+}
+
+/* The lamp's own light, always present at rest. Its box is placed on the
+   lamp through the same cover-crop arithmetic the photograph uses: --u is
+   one source pixel (1672x941 frame) at the rendered scale, and the shade
+   sits at source pixel (300, 225). */
+@supports (width: 1cqw) {
+  .closing-figure { container-type: size; }
+  .closing-figure::before {
+    --u: max(100cqw / 1672, 100cqh / 941);
+    content: ''; position: absolute; z-index: 1; pointer-events: none;
+    width: calc(760 * var(--u)); aspect-ratio: 1;
+    left: calc((100cqw - 1672 * var(--u)) * var(--fx) + 300 * var(--u));
+    top: calc((100cqh - 941 * var(--u)) * var(--fy) + 225 * var(--u));
+    translate: -50% -50%;
+    background: radial-gradient(closest-side, rgba(255, 198, 122, .6), rgba(255, 172, 92, .22) 45%, rgba(255, 160, 80, 0) 100%);
+    mix-blend-mode: screen;
+    opacity: .5;
+  }
+}
+
+.route-list > li { position: relative; }
+.statement .pull::before { transform-origin: 100% 50%; }
+.statement-media img { transform-origin: 22% 55%; }
+
+@media screen {
+  html.reveal-on .route-list > li { border-block-end-color: transparent; }
+  html.reveal-on .route-list > li::after {
+    content: ''; position: absolute; inset-inline: 0; inset-block-end: -1px;
+    height: 1px; background: var(--line-deep); transform-origin: 100% 50%;
+  }
+
+  html.reveal-on:not([data-motion="0"]) .statement:not(.is-in) :is(.pull, .statement-body p),
+  html.reveal-on:not([data-motion="0"]) .route-list > li:not(.is-in),
+  html.reveal-on:not([data-motion="0"]) .closing:not(.is-in) :is(.closing-copy, .closing-act),
+  html.reveal-on:not([data-motion="0"]) .closing:not(.is-in) .closing-figure::before { opacity: 0; }
+  html.reveal-on:not([data-motion="0"]) .statement:not(.is-in) .pull::before,
+  html.reveal-on:not([data-motion="0"]) .route-list > li:not(.is-in)::after { transform: scaleX(0); }
+  html.reveal-on:not([data-motion="0"]) .closing:not(.is-in) .closing-figure img { filter: var(--grade) brightness(.3) saturate(.7); }
+
+  html.reveal-on .statement.is-in .pull { animation: reveal-rise .8s var(--ease) both; }
+  html.reveal-on .statement.is-in .pull::before { animation: reveal-draw .7s var(--ease) .2s both; }
+  html.reveal-on .statement.is-in .statement-body p { animation: reveal-rise .8s var(--ease) .4s both; }
+  html.reveal-on .statement.is-in .statement-body p:nth-child(2) { animation-delay: .6s; }
+  html.reveal-on .statement.is-in .statement-body p:nth-child(3) { animation-delay: .8s; }
+  html.reveal-on .statement.is-in .statement-media img { animation: stamp-closer 7s cubic-bezier(.2, .6, .2, 1) both; }
+
+  html.reveal-on .route-list > li.is-in { animation: reveal-rise .75s var(--ease) var(--reveal-delay, 0ms) both; }
+  html.reveal-on .route-list > li.is-in::after { animation: reveal-draw .9s var(--ease) calc(var(--reveal-delay, 0ms) + .1s) both; }
+
+  html.reveal-on .closing.is-in .closing-figure::before { animation: lamp-on 2.8s linear .25s both; }
+  html.reveal-on .closing.is-in .closing-figure img { animation: room-warms 2.4s var(--ease) .45s both; }
+  html.reveal-on .closing.is-in .closing-copy { animation: reveal-rise .8s var(--ease) .35s both; }
+  html.reveal-on .closing.is-in .closing-act { animation: reveal-rise .8s var(--ease) .5s both; }
+}
 
 /* ------------------------------------------------------------ a11y modes */
 
