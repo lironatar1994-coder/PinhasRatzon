@@ -242,16 +242,21 @@ ${closing({ h2: 'נדבר על המקרה שלכם' })}
 
 ${retiredSlots()}`;
 
+  const title = `עורך דין מקרקעין וצוואות ב${BIZ.city} | ${BIZ.shortName}`;
+  const description = `עו״ד פנחס רצון, ${BIZ.yearsExperience} שנות ניסיון בעסקאות מקרקעין, מיסוי, רישום בתים משותפים, צוואות וירושות ב${BIZ.city} ובמרכז.`;
   return page({
     path: '/',
-    title: `עורך דין מקרקעין וצוואות ב${BIZ.city} | ${BIZ.shortName}`,
-    description: `עו״ד פנחס רצון, ${BIZ.yearsExperience} שנות ניסיון בעסקאות מקרקעין, מיסוי, רישום בתים משותפים, צוואות וירושות ב${BIZ.city} ובמרכז.`,
+    title,
+    description,
     shareDescription: `ניסיון של ${BIZ.yearsExperience} שנים במקרקעין, מיסוי, צוואות וירושות, ${BIZ.city} והמרכז`,
     body,
     overHero: true,
     preloadImage: IMAGES.hero,
     schema: [
       { '@type': 'WebSite', '@id': url('/#website'), url: url('/'), name: BIZ.name, inLanguage: 'he-IL' },
+      /* Formerly injected by nginx (fleet SEO, 2026-10-09); page() adds the
+         language and primary image to every WebPage node. */
+      { '@type': 'WebPage', '@id': url('/#page'), url: url('/'), name: title, description },
       faqSchema(HOME_FAQS),
     ],
   });

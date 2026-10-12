@@ -353,11 +353,13 @@ export function page({
 <meta property="og:description" content="${esc((shareDescription || description).replace(/\.\s*$/, ''))}">
 <meta property="og:url" content="${canonical}">
 <meta property="og:image" content="https://lawebs.co.il/images/portfolio-shares-20261008/pinhas.png">
+<meta property="og:image:secure_url" content="https://lawebs.co.il/images/portfolio-shares-20261008/pinhas.png">
 <meta property="og:image:width" content="1254">
 <meta property="og:image:height" content="1254">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:alt" content="${esc(BIZ.name)}">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://lawebs.co.il/images/portfolio-shares-20261008/pinhas.png">
 
 <meta name="theme-color" content="#0E0C09">
 <link rel="icon" href="/assets/img/brand/pr-icon-96.png" type="image/png" sizes="96x96">
