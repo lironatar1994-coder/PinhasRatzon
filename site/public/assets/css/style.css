@@ -424,6 +424,23 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .route-a { display: block; color: var(--on-deep-2); font-size: 1.1rem; font-weight: 300; line-height: 1.9; max-width: 46rem; }
 .route-arrow { color: var(--on-deep-2); justify-self: center; transition: color .3s var(--ease), transform .35s var(--ease); }
 .route-list a:hover .route-arrow { color: var(--accent-lt); transform: translateX(-6px); }
+/* October 12: on wide screens the six areas sit in two columns, read
+   right to left in pairs. One full-width row each stretched a short line
+   across 1180px and made the band 1300px tall. */
+@media (min-width: 861px) {
+  .route-list {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(2.5rem, 1rem + 4vw, 5rem); border-block-start: 0;
+  }
+  .route-list > li:nth-child(-n + 2) { border-block-start: 1px solid var(--line-deep); }
+  .route-list a {
+    grid-template-columns: 4.2rem minmax(0, 1fr) 1.5rem; gap: 1.25rem;
+    align-items: start; height: 100%;
+    padding-block: clamp(1.8rem, 1.2rem + 1vw, 2.4rem);
+  }
+  .route-n { font-size: clamp(2rem, 1.5rem + 1.2vw, 2.6rem); padding-block-start: .15rem; }
+  .route-arrow { align-self: center; }
+}
 
 /* ------------------------------------------------------------ statement
    The credo on the near-black ground, beside a still life of the moment it
@@ -488,16 +505,6 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .idx-teaser { display: block; color: var(--muted); font-size: 1.1rem; font-weight: 300; line-height: 1.9; max-width: 46rem; }
 .idx-arrow { color: var(--accent-lt); align-self: center; transition: color .3s var(--ease), transform .35s var(--ease); }
 .index a:hover .idx-arrow { color: var(--accent); transform: translateX(-6px); }
-
-/* ------------------------------------------------------------ principles */
-
-.principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(2.2rem, 1.4rem + 2.4vw, 4rem); }
-.principles article { border-block-start: 1px solid var(--accent-lt); padding-block-start: 1.8rem; }
-.principles h3 { margin-block-end: .8rem; }
-.principles p { font-size: 1.1rem; font-weight: 300; line-height: 1.95; color: var(--ink-2); }
-/* Inside the about page's reading column the three principles stack. */
-.prose .principles { grid-template-columns: 1fr; gap: 1.8rem; margin-block-start: 1.6rem; }
-.prose .principles article { padding-block-start: 1.4rem; }
 
 /* ------------------------------------------------------------ portrait */
 
@@ -639,25 +646,71 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 .page-hero.has-figure .wrap { display: grid; grid-template-columns: minmax(0, 46fr) minmax(0, 54fr); }
 .page-hero.has-figure .wrap > * { grid-column: 1; }
 
-/* Contact is the point at which the site opens up. On wide screens the
-   photograph remains a complete, warmly lit portrait rather than being
-   swallowed by the interior-page black; the response area becomes a calm
-   paper field, exactly as it already reads once the layout stacks on a phone.
-   This is a page-specific variation — FAQ and service pages retain their
-   dark masthead. */
-.contact-hero { background: var(--paper); color: var(--ink); border-block-end-color: var(--stone); }
-.contact-hero h1 { color: var(--ink); }
-.contact-hero .lead { color: var(--ink-2); }
-.contact-hero .page-hero-figure { border-inline-start: 1px solid var(--stone); }
-.contact-hero .page-hero-figure img { filter: var(--grade-portrait); }
-.contact-hero .page-hero-figure::after {
-  background: none;
-}
+/* October 12: Contact keeps the dark masthead of every other interior page
+   at every width (it used to turn into a paper split on desktop only). */
 
 /* ------------------------------------------------------------ prose + aside */
 
 .layout-aside { display: grid; grid-template-columns: minmax(0, 1fr) 16rem; gap: clamp(2.5rem, 1.5rem + 4vw, 6rem); align-items: start; }
 .prose > p { color: var(--ink-2); margin-block-end: 1.3rem; max-width: 42rem; }
+/* The first paragraph under a practice masthead is the page's answer in
+   one breath, so it reads a register up from the body that follows. */
+.prose > .intro-lead {
+  font-size: clamp(1.3rem, 1.1rem + .6vw, 1.55rem); font-weight: 400;
+  line-height: 1.8; color: var(--ink); margin-block-end: 1.6rem;
+}
+
+/* ------------------------------------------------------------ about page
+   October 12 rework: an editorial sequence instead of one text column with
+   an almost empty aside. The client's own two paragraphs open as a large
+   statement, the working method gets a dark band of its own, and the
+   credentials sit beside the areas of work. */
+
+.about-intro { padding-block: var(--gap-sec) calc(var(--gap-sec) * .8); background: var(--paper); }
+.about-intro .wrap {
+  display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: clamp(2rem, 1rem + 4vw, 6rem); align-items: start;
+}
+.about-lede {
+  font-family: var(--display); font-weight: 500; word-spacing: normal;
+  font-size: clamp(1.45rem, 1.05rem + 1.5vw, 2.25rem); line-height: 1.55; color: var(--ink);
+}
+.about-lede::before {
+  content: ''; display: block; width: 5.5rem; height: 3px;
+  background: var(--accent-lt); margin-block-end: 1.6rem;
+}
+.about-follow {
+  color: var(--ink-2); font-size: clamp(1.15rem, 1rem + .4vw, 1.3rem); line-height: 1.9;
+  padding-block-start: calc(1.6rem + 3px);
+}
+
+.about-method { padding-block: var(--gap-sec); background: var(--deep); color: var(--on-deep); }
+.about-method .label { color: var(--accent-lt); }
+.about-method h2 { color: #fff; }
+.about-method :focus-visible { outline-color: var(--accent-lt); }
+.method { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(2rem, 1rem + 3vw, 4rem); }
+.method > li { position: relative; border-block-start: 1px solid var(--line-deep); padding-block-start: 1.9rem; }
+.method > li::before {
+  content: ''; position: absolute; inset-block-start: -1px; inset-inline-start: 0;
+  width: 3rem; height: 2px; background: var(--accent-lt);
+}
+.method-n {
+  display: block; margin-block-end: 1.1rem;
+  font-family: var(--display); font-weight: 300; line-height: 1;
+  font-size: clamp(2.2rem, 1.6rem + 1.6vw, 3rem); color: var(--accent-lt);
+}
+.method-n[dir="ltr"] { text-align: right; }
+.method h3 { color: #fff; font-size: clamp(1.3rem, 1.15rem + .5vw, 1.55rem); margin-block-end: .8rem; }
+.method p { color: var(--on-deep-2); font-size: 1.1rem; line-height: 1.9; }
+
+.about-facts .wrap {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2.5rem, 1rem + 5vw, 6rem); align-items: start;
+}
+.about-facts .sub-sec { margin-block-start: 0; }
+@media (min-width: 861px) {
+  .about-facts .creds.wide > div { grid-template-columns: 7.5rem minmax(0, 1fr); }
+}
 .prose > .lead { max-width: 44rem; }
 .sub-sec { margin-block-start: clamp(2.5rem, 1.5rem + 3vw, 4rem); }
 /* A hairline the full measure, with the signature short gold bar over its
@@ -998,19 +1051,24 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
    The dark footer the canon ships: black ground, gold column headings. */
 
 .site-footer { background: var(--deep); color: var(--on-deep); border-block-start: 1px solid var(--gold-line); padding-block: clamp(3rem, 2rem + 3vw, 5rem) 2rem; }
-.foot-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 2.5rem; flex-wrap: wrap; padding-block-end: 3rem; border-block-end: 1px solid var(--line-deep); }
+/* October 12: one aligned row (identity, practice areas, information)
+   instead of the wordmark and the address pulled to opposite edges above
+   two loose link columns. */
+.foot-grid {
+  display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, .7fr);
+  gap: clamp(2.5rem, 1rem + 4vw, 6rem); align-items: start; padding-block-end: 3rem;
+}
 .wm-foot { margin-inline-end: 0; }
 .wm-foot .wm-name { color: var(--on-deep); }
 /* Identity only — the channels live in the header (always visible) and in
    the closing chips directly above; repeating them here said it twice in
    two adjacent dark bands. */
-.foot-nap { display: grid; gap: .45rem; font-style: normal; text-align: start; color: var(--on-deep-2); font-size: .95rem; }
+.foot-nap { display: grid; gap: .45rem; margin-block-start: 1.5rem; font-style: normal; text-align: start; color: var(--on-deep-2); font-size: .95rem; }
 
-.foot-cols { display: flex; gap: clamp(2.5rem, 1.5rem + 4vw, 6rem); flex-wrap: wrap; padding-block: 3rem; }
-.foot-cols h2 { font-size: .95rem; font-family: var(--sans); font-weight: 600; color: var(--accent-lt); margin-block-end: 1.1rem; }
-.foot-cols li + li { margin-block-start: .5rem; }
-.foot-cols a { color: var(--on-deep-2); font-size: .95rem; }
-.foot-cols a:hover { color: var(--accent-lt); }
+.foot-grid nav h2 { font-size: .95rem; font-family: var(--sans); font-weight: 600; color: var(--accent-lt); margin-block-end: 1.1rem; }
+.foot-grid nav li + li { margin-block-start: .5rem; }
+.foot-grid nav a { color: var(--on-deep-2); font-size: .95rem; }
+.foot-grid nav a:hover { color: var(--accent-lt); }
 
 .foot-bottom { display: flex; justify-content: space-between; gap: 2rem; flex-wrap: wrap; padding-block-start: 2rem; border-block-start: 1px solid var(--line-deep); font-size: .85rem; color: var(--on-deep-2); line-height: 1.8; }
 .foot-bottom .credit { color: var(--accent-lt); }
@@ -1138,6 +1196,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
 
   html.reveal-on:not([data-motion="0"]) .statement:not(.is-in) :is(.pull, .statement-body p),
   html.reveal-on:not([data-motion="0"]) .route-list > li:not(.is-in),
+  html.reveal-on:not([data-motion="0"]) .method > li:not(.is-in),
   html.reveal-on:not([data-motion="0"]) .closing:not(.is-in) :is(.closing-copy, .closing-act),
   html.reveal-on:not([data-motion="0"]) .closing:not(.is-in) .closing-figure::before { opacity: 0; }
   html.reveal-on:not([data-motion="0"]) .statement:not(.is-in) .pull::before,
@@ -1151,7 +1210,7 @@ a:hover { text-decoration: underline; text-underline-offset: .35em; text-decorat
   html.reveal-on .statement.is-in .statement-body p:nth-child(3) { animation-delay: .8s; }
   html.reveal-on .statement.is-in .statement-media img { animation: stamp-closer 7s cubic-bezier(.2, .6, .2, 1) both; }
 
-  html.reveal-on .route-list > li.is-in { animation: reveal-rise .75s var(--ease) var(--reveal-delay, 0ms) both; }
+  html.reveal-on :is(.route-list, .method) > li.is-in { animation: reveal-rise .75s var(--ease) var(--reveal-delay, 0ms) both; }
   html.reveal-on .route-list > li.is-in::after { animation: reveal-draw .9s var(--ease) calc(var(--reveal-delay, 0ms) + .1s) both; }
 
   html.reveal-on .closing.is-in .closing-figure::before { animation: lamp-on 2.8s linear .25s both; }
@@ -1203,7 +1262,6 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .layout-aside { grid-template-columns: 1fr; }
   .side { position: static; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem; }
   .contact-grid { grid-template-columns: 1fr; }
-  .principles { grid-template-columns: 1fr; gap: 2.2rem; }
 }
 
 @media (max-width: 860px) {
@@ -1320,18 +1378,11 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
      contrast from the token. */
   .page-hero.has-figure { display: flex; flex-direction: column; padding-block: 2.8rem 0; }
   .page-hero.has-figure .wrap { display: block; }
-  /* Preserve the established phone composition: words on the deep ground,
-     then the unboxed portrait. The daylight split is desktop-only, where
-     the two columns need a clear visual handoff. */
-  .contact-hero { background: var(--deep); color: var(--on-deep); border-block-end-color: var(--gold-line); }
-  .contact-hero h1 { color: #fff; }
-  .contact-hero .lead { color: var(--on-deep-2); }
   .page-hero-figure {
     position: relative; inset-block: auto; left: auto; width: 100%; z-index: 0;
     order: 2; margin-block-start: 2.2rem;
     aspect-ratio: 2 / 1;
   }
-  .contact-hero .page-hero-figure { border-inline-start: 0; }
   .page-hero-figure img { object-position: 50% 45%; }
   /* A glimpse, not a poster: the photograph surfaces out of the dark and
      sinks back into it, so the opener still ends on the solid ground and
@@ -1343,9 +1394,6 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   /* On a portrait the dissolve may touch only the frame's edges — a 32%
      reach shades the face. */
   .page-hero-figure.figure-pinhas::after {
-    background: linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 16%, rgba(14, 12, 9, 0) 80%, var(--deep) 100%);
-  }
-  .contact-hero .page-hero-figure::after {
     background: linear-gradient(to bottom, var(--deep) 0%, rgba(14, 12, 9, 0) 16%, rgba(14, 12, 9, 0) 80%, var(--deep) 100%);
   }
 
@@ -1371,8 +1419,11 @@ html[data-motion="0"] *, html[data-motion="0"] *::before, html[data-motion="0"] 
   .index a { grid-template-columns: 3rem minmax(0, 1fr) 1.4rem; gap: 1rem; }
   .creds > div, .creds.wide > div { grid-template-columns: 1fr; gap: .2rem; }
   .pairs { grid-template-columns: 1fr; gap: 2rem; }
-  .foot-top { flex-direction: column; gap: 1.8rem; }
-  .foot-cols { gap: 2.5rem; }
+  .foot-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2.5rem 1.5rem; }
+  .foot-brand { grid-column: 1 / -1; }
+  .about-intro .wrap, .method, .about-facts .wrap { grid-template-columns: minmax(0, 1fr); }
+  .about-follow { padding-block-start: 0; }
+  .method { gap: 2.4rem; }
   /* Clearance for the fixed accessibility button, which otherwise sits on
      the disclaimer's last lines at the very end of the page. */
   .site-footer { padding-block-end: 5rem; }

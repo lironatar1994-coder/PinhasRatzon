@@ -264,16 +264,15 @@ export function footer() {
   return `
 <footer class="site-footer">
   <div class="wrap">
-    <div class="foot-top">
-      ${wordmark('wm-foot')}
-      <address class="foot-nap">
-        <span>${esc(BIZ.addressHuman)}</span>
-        <span>${esc(BIZ.reception)}</span>
-        <span>${esc(BIZ.areaHuman)}</span>
-      </address>
-    </div>
-
-    <div class="foot-cols">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        ${wordmark('wm-foot')}
+        <address class="foot-nap">
+          <span>${esc(BIZ.addressHuman)}</span>
+          <span>${esc(BIZ.reception)}</span>
+          <span>${esc(BIZ.areaHuman)}</span>
+        </address>
+      </div>
       <nav aria-label="תחומי עיסוק">
         <h2>תחומי עיסוק</h2>
         <ul>

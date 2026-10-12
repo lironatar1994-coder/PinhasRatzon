@@ -360,7 +360,7 @@ export function practicePage(p) {
 <div class="section">
   <div class="wrap layout-aside">
     <article class="prose">
-      ${p.intro.map((t) => `<p>${esc(t)}</p>`).join('\n      ')}
+      ${p.intro.map((t, i) => `<p${i === 0 ? ' class="intro-lead"' : ''}>${esc(t)}</p>`).join('\n      ')}
 
       <section class="sub-sec">
         <h2>${esc(p.checklist.h2)}</h2>
@@ -444,58 +444,57 @@ export function about() {
   </div>
 </section>
 
-<div class="section">
-  <div class="wrap layout-aside">
-    <article class="prose">
-      <p data-manager-text="about.page.paragraph1">עסקת מקרקעין יכולה לכלול גם ענייני מס או ירושה. לדוגמה, מכירת דירה שהתקבלה בירושה נוגעת גם לזכויות בנכס, למיסוי ולרישום.</p>
-      <p data-manager-text="about.page.paragraph2">אני מטפל בבדיקות, בהסכם ובדיווחים לרשויות, וממשיך ללוות את העסקה עד לרישום הזכויות.</p>
+<section class="about-intro">
+  <div class="wrap">
+    <p class="about-lede" data-manager-text="about.page.paragraph1">עסקת מקרקעין יכולה לכלול גם ענייני מס או ירושה. לדוגמה, מכירת דירה שהתקבלה בירושה נוגעת גם לזכויות בנכס, למיסוי ולרישום.</p>
+    <p class="about-follow" data-manager-text="about.page.paragraph2">אני מטפל בבדיקות, בהסכם ובדיווחים לרשויות, וממשיך ללוות את העסקה עד לרישום הזכויות.</p>
+  </div>
+</section>
 
-      <section class="sub-sec">
-        <h2>דרך העבודה</h2>
-        <div class="principles">
-          ${PRINCIPLES.map(([h, b]) => `<article>
-            <h3>${esc(h)}</h3>
-            <p>${esc(b)}</p>
-          </article>`).join('\n          ')}
-        </div>
-      </section>
+<section class="about-method" aria-labelledby="method-heading">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="label">דרך העבודה</p>
+      <h2 id="method-heading">מהבדיקה הראשונה ועד הרישום</h2>
+    </div>
+    <ol class="method">
+      ${PRINCIPLES.map(([h, b], i) => `<li data-reveal>
+        <span class="method-n" dir="ltr" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
+        <h3>${esc(h)}</h3>
+        <p>${esc(b)}</p>
+      </li>`).join('\n      ')}
+    </ol>
+  </div>
+</section>
 
-      <section class="sub-sec">
-        <h2>השכלה והסמכות</h2>
-        <dl class="creds wide">
-          <div><dt dir="ltr">${esc(BIZ.founded)}</dt><dd>חבר לשכת עורכי הדין בישראל, רישיון בתוקף ברציפות מאז ההסמכה</dd></div>
-          <div><dt dir="ltr">LL.B</dt><dd>תואר ראשון במשפטים, הקריה האקדמית אונו</dd></div>
-          <div><dt>הסמכה</dt><dd>עריכת ייפוי כוח מתמשך, האפוטרופוס הכללי ומשרד המשפטים</dd></div>
-          <div><dt>השתלמויות</dt><dd>דיני מקרקעין, מיסוי מקרקעין, רישום בתים משותפים, עסקאות קומבינציה, דיני ירושה וכינוס נכסים</dd></div>
-          <div><dt>שפות</dt><dd>עברית ואנגלית</dd></div>
-        </dl>
-      </section>
+<div class="section about-facts">
+  <div class="wrap">
+    <section class="sub-sec">
+      <h2>השכלה והסמכות</h2>
+      <dl class="creds wide">
+        <div><dt dir="ltr">${esc(BIZ.founded)}</dt><dd>חבר לשכת עורכי הדין בישראל, רישיון בתוקף ברציפות מאז ההסמכה</dd></div>
+        <div><dt dir="ltr">LL.B</dt><dd>תואר ראשון במשפטים, הקריה האקדמית אונו</dd></div>
+        <div><dt>הסמכה</dt><dd>עריכת ייפוי כוח מתמשך, האפוטרופוס הכללי ומשרד המשפטים</dd></div>
+        <div><dt>השתלמויות</dt><dd>דיני מקרקעין, מיסוי מקרקעין, רישום בתים משותפים, עסקאות קומבינציה, דיני ירושה וכינוס נכסים</dd></div>
+        <div><dt>שפות</dt><dd>עברית ואנגלית</dd></div>
+      </dl>
+    </section>
 
-      <section class="sub-sec">
-        <h2>תחומי הטיפול</h2>
-        <ul class="checks">
-          ${[
-            'ניהול עסקאות מקרקעין מורכבות',
-            'רישום ותיקון בתים משותפים וניסוח תקנונים',
-            'ייעוץ ותכנון מס ללקוחות פרטיים ועסקיים',
-            'ליווי הסכמי קומבינציה ודיווחים לרשויות המס',
-            'תיקי עיזבונות, צוואות וייצוג מול רשם הירושות',
-            'יישוב סכסוכים בין יורשים והסכמי חלוקה',
-            'עריכת ייפויי כוח מתמשכים והנחיות מקדימות',
-            'הליכי כינוס נכסים ומימוש נכסים',
-          ].map((i) => `<li>${esc(i)}</li>`).join('\n          ')}
-        </ul>
-      </section>
-
-    </article>
-
-    <aside class="side" aria-label="פרטי קשר">
-      <div class="side-block">
-        <p class="label">אזור שירות</p>
-        <p class="side-note">${esc(BIZ.areaHuman)}</p>
-        <a class="side-tel" href="${telHref}" dir="ltr">${esc(BIZ.phone)}</a>
-      </div>
-    </aside>
+    <section class="sub-sec">
+      <h2>תחומי הטיפול</h2>
+      <ul class="checks">
+        ${[
+          'ניהול עסקאות מקרקעין מורכבות',
+          'רישום ותיקון בתים משותפים וניסוח תקנונים',
+          'ייעוץ ותכנון מס ללקוחות פרטיים ועסקיים',
+          'ליווי הסכמי קומבינציה ודיווחים לרשויות המס',
+          'תיקי עיזבונות, צוואות וייצוג מול רשם הירושות',
+          'יישוב סכסוכים בין יורשים והסכמי חלוקה',
+          'עריכת ייפויי כוח מתמשכים והנחיות מקדימות',
+          'הליכי כינוס נכסים ומימוש נכסים',
+        ].map((i) => `<li>${esc(i)}</li>`).join('\n          ')}
+      </ul>
+    </section>
   </div>
 </div>
 
