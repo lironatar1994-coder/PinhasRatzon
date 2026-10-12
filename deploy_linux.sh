@@ -145,6 +145,17 @@ location / {
 }
 EOF
 
+# The server monitor injects its visitor and growth tags through nginx
+# snippets that live outside this repository. Keep including them whenever
+# they exist; otherwise every deploy silently drops the site from monitoring.
+MONITOR_INCLUDES=""
+for snippet in "/etc/nginx/snippets/monitor-navigation-${DOMAIN}.conf" "/etc/nginx/snippets/monitor-growth-${DOMAIN}.conf"; do
+  if [ -f "${snippet}" ]; then
+    MONITOR_INCLUDES="${MONITOR_INCLUDES}    include ${snippet};
+"
+  fi
+done
+
 write_domain_site() {
   if [ -f "${CERT_DIR}/fullchain.pem" ] && [ -f "${CERT_DIR}/privkey.pem" ]; then
     cat > "${NGINX_SITE}" <<EOF
@@ -177,7 +188,7 @@ server {
     include /etc/letsencrypt/options-ssl-nginx.conf;
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
     include ${NGINX_APP_SNIPPET};
-}
+${MONITOR_INCLUDES}}
 EOF
   else
     cat > "${NGINX_SITE}" <<EOF
