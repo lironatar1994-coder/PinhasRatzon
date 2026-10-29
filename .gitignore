@@ -36,3 +36,6 @@ skills-lock.json
 
 # Parallel builds of the home-page studies
 dist-*/
+
+# Local deployment experiments and generated review output
+/output/
